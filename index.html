@@ -294,6 +294,7 @@
         <div class="nav-group">
             <span class="nav-label">Informations Générale</span>
             <div class="nav-link active" onclick="switchTab(event, 'guide')">🚀 <span>Présentation</span></div>
+            <div class="nav-link active" onclick="switchTab(event, 'tuto')">🚀 <span>Guide du débutant</span></div>
         </div>
 
         <div class="nav-group">
@@ -335,8 +336,12 @@
                     <a href="https://discord.gg/TKC6TpAmQW" target="_blank" style="color: #7289da;">https://discord.gg/TKC6TpAmQW</a>
                 </b>
                 <hr class="separator">
+                <b>Votre avis compte ! N'hésitez pas à faire des suggestion pour améliorer d'avantage le serveur dans le discord, toute proposition est étudié sérieusement !</b>
+                <hr class="separator">
                 <b>Voir la dernière <span class="highlight-link" onclick="linkTo('last-update')">Mise à jour.</span></b>
             </div>
+            <hr class="separator">
+            <h3>Nouveau sur le serveur ? N'hésitez pas à lire notre <span class="highlight-link" onclick="linkTo('tuto')">Guide du débutant.</span></h3>
             <div class="section-card">
                 <h3>Premiers Pas</h3>
                 <ul>
@@ -358,6 +363,7 @@
                     <li><b>Système de forgemagie avec des limites complètement opérationnel !</b></li>
                     <li><b>Une Intelligence Artificiel retravaillé pour toujours plus de défi !</b></li>
                     <li><b>Des succès score retravaillé pour obtenir des récompenses uniques !</b></li>
+                    <li><b>Des ajouts de skin/monstres et bien d'autres des version supérieur ! (Max 2.73)</b></li>
                 </ul>
             </div>
             <div class="section-card">
@@ -378,7 +384,7 @@
 
         <div id="last-update" class="panel">
             <div class="header-box">
-                <h2>Notes de Mise à Jour - 28/01/2026</h2>
+                <h2>Notes de Mise à Jour - 31/01/2026</h2>
             </div>
 
             <div class="section-card">
@@ -386,6 +392,8 @@
                 <ul>
                     <li><b>Ajout de 6 slots de dofus.</li>
                     <li><b>Ajout de 1 slot d'artefact.</li>
+                    <li><b>Ajout de 19 familier d'apparât.</li>
+                    <li><b>Ajout de la panoplie <b>Torkélonia</b>.</li>
                     <li><b>Refonte visuel des slots dofus et artefact.</li>
                 </ul>
             </div>
@@ -643,7 +651,7 @@
                 <h3>Manuscrit Ancien</h3>
                 <ul>
                     <li><b>Obtention :</b> Niveau 200 requis ainsi que la <span class="highlight-link" onclick="linkTo('trans')">Transcendance</span> de niveau 1.</li>
-                    <li><b>Gain :</b> Gain de 1 Manuscrit Ancien par monstre niveau 100 et supérieur.</li>
+                    <li><b>Gain :</b> Gain aléatoire de 1 à 5 par combat PvM remporté.</li>
                 </ul>
                 <hr class="separator">
                 <h3>Reflet Onirique</h3>
@@ -754,9 +762,12 @@
                 <ul>
                     <li>Dés l'activation de la transcendance, vous débloquer le drop des <b><span class="highlight-link" onclick="linkTo('money')">Manuscrit Ancien</span></b>.</li>
                     <li>Chaque niveau de transcendance requier un montant de Manuscrit Ancien.</li>
-                    <li>Le montant est plus élevé à mesure que la transcendance augmente.</li>
-                    <li>Nouveau passif possible aux pallier transcendance 3 et transcendance 5</li>
+                    <li>Le montant pour procéder au rang supérieur est plus élevé à mesure que la transcendance augmente.</li>
+                    <li>Nouveau passif possible aux pallier transcendance 3(2e passif) et transcendance 5(3e passif)</li>
                 </ul>
+                <div class="warning-box">
+                    <b>Important :</b> Une fois transcendance 5, vous pouvez continuer le farm pour faire des version différente de vos passif.
+                </div>
                 <hr class="separator">
                 <h3>Comment sa fonctionne ?</h3>
                 <p>Il suffit d'équiper votre <span class="highlight-link" onclick="linkTo('passifs')">passif</span> et d'en posséder un dans l'inventaire, la fusion sera effectué via le pnj <b><span class="highlight-link" onclick="linkTo('amelioration-passif')">Transcendance / Evolution</span></b>.</p>
@@ -905,6 +916,35 @@
                     <li>Combat de 8 monstres dont 3 boss à chaque fois.</li>
                     <li>Aucun gain d'experience.</li>
                     <li>Une seule récompense : <span class="highlight-link" onclick="linkTo('money')">Reflets Onirique</span>.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="tuto" class="panel">
+            <div class="header-box"><h2>Guide du débutant</h2></div>
+            <div class="section-card">
+                <h3>Le création</h3>
+                <ul>
+                    <li>Dés la création de votre personnage vous obtenez une panoplie aventurier dans l'inventaire ainsi qu'un familier sagesse/dommages.</li>
+                    <li>Vous connaissez deux sorts : Maîtrise d'arme ainsi que flamiche (meilleur élément en vol de vie).</li>
+                    <li><b>Joris</b> est présent sur la map de départ pour vous expliquer comment obtenir des équipements/sorts n'hésitez pas à lui parler !</li>
+                    <li>Si vous souhaitez une mort permanente en PvM, le pnj <b>Le Pactisant des Ténèbres</b>(Présent aussi en map <b>.start</b>) est présent sur la carte pour activer le mode.</li>
+                </ul>
+                <hr class="separator">
+                <h3>Conseil</h3>
+                <ul>
+                    <li>De nombreux succès vous donne des <span class="highlight-link" onclick="linkTo('sorts')">jeton de sort</span> ainsi que des Artefact qui augmente vos statistiques n'hésitez pas à en faire un maximum !</li>
+                    <li>Les Clefs de donjon s'achètent en map <b>.start</b> et sont aussi en drop dans les monstres de la zone associé au donjon.</li>
+                    <li>N'hésitez pas à faire un tour a la Milice d'Incarnam, une surprise vous y attend à l'étage !</li>
+                </ul>
+                <hr class="separator">
+                <h3>Comment s'optimiser ?</h3>
+                <ul>
+                    <li>Pour améliorer votre personnage, le serveur vous met plusieurs fonction à disposition, voici la listes des améliorations possible :</li>
+                    <li><span class="highlight-link" onclick="linkTo('item-upgrade')">Améliorer son équipement</span>.</li>
+                    <li><span class="highlight-link" onclick="linkTo('larmes')">Améliorer ses dofus</span>.</li>
+                    <li><span class="highlight-link" onclick="linkTo('prestige')">Aller au delà du niveau 200</span>.</li>
+                    <li><span class="highlight-link" onclick="linkTo('trans')">Améliorer son passif</span>.</li>
                 </ul>
             </div>
         </div>
