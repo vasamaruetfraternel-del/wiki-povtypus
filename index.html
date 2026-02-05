@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guide Officiel Pov'Typus</title>
+    <title>ULTRA-WIKI | Guide Officiel Pov'Typus</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -339,6 +339,8 @@
                 <b>Votre avis compte ! N'hésitez pas à faire des suggestion pour améliorer d'avantage le serveur dans le discord, toute proposition est étudié sérieusement !</b>
                 <hr class="separator">
                 <b>Voir la dernière <span class="highlight-link" onclick="linkTo('last-update')">Mise à jour.</span></b>
+                <hr class="separator">
+                <b>Prochainement : Pour voir les futurs ajout ça se passe sur cette page : <span class="highlight-link" onclick="linkTo('next-time')">.</span></b>
             </div>
             <hr class="separator">
             <h3>Nouveau sur le serveur ? N'hésitez pas à lire notre <span class="highlight-link" onclick="linkTo('tuto')">Guide du débutant.</span></h3>
@@ -399,6 +401,31 @@
             </div>
         </div>
 
+        <div id="next-time" class="panel">
+            <div class="header-box">
+                <h2>Listes des ajouts prévue dans les prochaines semaine</h2>
+            </div>
+
+            <div class="section-card">
+                <h3>Inventaire et Equipement</h3>
+                <ul>
+                    <li>Ajout d'un dernier slot dans l'inventaire : la spécialisation.</li>
+                </ul>
+                <h3>Monstre et Panoplie (version 2.73 maximum)</h3>
+                <ul>
+                    <li>Ajout progressif des derniers boss.</li>
+                    <li>Ajout progressif des dernières panoplie.</li>
+                    <li>Ajout des apparâts manquant.</li>
+                </ul>
+                <h3>Contenu Late-Game</h3>
+                <ul>
+                    <li>Les <span class="highlight-link" onclick="linkTo('songe')">Songes Infini</span> revisité sur 100 étages maximum.</li>
+                    <li>Zone niveau 200 - 300</li>
+                    <li>Item niveau 200 - 300</li>
+                    <li>Sanctification d'un item, cette dernière ligne n'est pas encore fixé j'ignore quel item recevra ce dernier bonus.</li>
+                </ul>
+            </div>
+        </div>
         <div id="passifs" class="panel">
             <div class="header-box"><h2>Passifs de Classe (19)</h2></div>
             <div class="section-card">
@@ -608,7 +635,7 @@
                     <li><span class="cmd">.kwa [monstre]</span> : Voir le butin d'un mob.</li>
                     <li><span class="cmd">.pano [pano]</span> : Affichage la liste des monstres qui possèdent la panoplie en drop.</li>
                     <li><span class="cmd">.start / .fm / .craft</span> : Téléportations rapides.</li>
-                    <li><span class="cmd">.groupe</span> : Gestion de team (follow/combat).</li>
+                    <li><span class="cmd">.groupe</span> : Invitation automatique du compte secondaire, ipdrop actif, autofollow actif, entrer en donjon avec le main.</li>
                     <li><span class="cmd">.k</span> : Centraliser les kamas.</li>
                     <li><span class="cmd">.what</span> : Affiche les informations détaillé d'un sort de classe au rang 1 du sort.</li>
                     <li><span class="cmd">.bug</span> : Téléporte sur une cellule ou le joueur peux se mouvoir s'il est bloqué.</li>
@@ -902,7 +929,7 @@
         <div id="songe" class="panel">
             <div class="header-box"><h2>Explication des songes infini</h2></div>
             <div class="section-card">
-                <h3><b>Date de sortie :</b> Entre le 01 février 2026 et le 05 février 2026.</h3>
+                <h3><b>Date de sortie :</b> Février 2026.</h3>
                 <h3>A venir..</h3>
                 <ul>
                     <li>Le système des songes est en cours de refonte, celui-ci n'est plus adapté au format du serveur.</li>
@@ -915,6 +942,7 @@
                     <li>Le niveau d'optimisation demander sera élevé (Niveau SS+ minimum) -> voir votre puissance avec la commande .<span class="highlight-link" onclick="linkTo('cmds')">power</span></li>
                     <li>Combat de 8 monstres dont 3 boss à chaque fois.</li>
                     <li>Aucun gain d'experience.</li>
+                    <li>Nombre d'étage fixe de 100.'</li>
                     <li>Une seule récompense : <span class="highlight-link" onclick="linkTo('money')">Reflets Onirique</span>.</li>
                 </ul>
             </div>
@@ -968,4 +996,3 @@
     </script>
 </body>
 </html>
-
