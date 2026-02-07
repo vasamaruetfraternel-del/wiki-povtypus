@@ -270,7 +270,7 @@
             color: #fff;
         }
 
-/*        @media (max-width: 1000px) {
+        /*        @media (max-width: 1000px) {
             .sidebar {
                 width: 70px;
             }
@@ -496,17 +496,30 @@
 
         <div id="last-update" class="panel">
             <div class="header-box">
-                <h2>Notes de Mise à Jour - 31/01/2026</h2>
+                <h2>Notes de Mise à Jour - 07/02/2026</h2>
             </div>
 
             <div class="section-card">
-                <h3>Inventaire et Equipement</h3>
+                <h3>Correction</h3>
                 <ul>
-                    <li><b>Ajout de 6 slots de dofus.</li>
-                    <li><b>Ajout de 1 slot d'artefact.</li>
-                    <li><b>Ajout de 19 familier d'apparât.</li>
-                    <li><b>Ajout de la panoplie <b>Torkélonia</b>.</li>
-                    <li><b>Refonte visuel des slots dofus et artefact.</li>
+                    <li>Le fait d'attirer dans un portail ne fera plus déconnecter l'utilisateur.</li>
+                    <li>En cas de changement de classe, un passif ne sera plus donner si l'utilisateur n'est pas au moins niveau 200 et possède un passif.</li>
+                    <li>En cas de changement de classe, si un passif est évolué celui-ci ne sera plus supprimer pour faciliter la transition entre les classes.</li>
+                    <li>Le pnj dans le donjon givrefoux propose bien le choix entre le Tengu seul et le Tengu + Fuji.</li>
+                    <li>La fuji givrefoux nourricière est maintenant dans le donjon givrefoux rendant ses succès réalisable.</li>
+                    <li>La gonflable joue correctement ses tours de jeu.</li>
+                    <li>Correction d'une faille qui causer une fin prématuré dans les combats de dimension.</li>
+                    <li>Correction du challenge économe, il ne sera plus échoué en cas de sort de zone.</li>
+                </ul>
+                <h3>Equilibrage</h3>
+                <ul>
+                    <li>Les bonus de souffrance positive du sacrieur ont été ré-ajuster pour correspondre aux autres classes.</li>
+                </ul>
+                <h3>Divers</h3>
+                <ul>
+                    <li>Ajout du <b>Ticket de loterie</b> sur le pnj prêtre à 2.500.000 Kamas l'unité.</li>
+                    <li>Ajout des jetons de sort achetable en orichor sur le pnj Passif Amélioration.</li>
+                    <li>Equilibrage du dofus légendaire : 100 Vitalité -> 300 Vitalité, 0 Invocation -> 2 Invocations</li>
                 </ul>
             </div>
         </div>
@@ -1089,46 +1102,43 @@
     </div>
 
     <script>
-    // Mobile menu functions
-    function toggleMobileMenu() {
-        const sidebar = document.querySelector('.sidebar');
-        const overlay = document.querySelector('.mobile-overlay');
-        sidebar.classList.toggle('mobile-open');
-        overlay.classList.toggle('active');
-    }
-
-    function closeMobileMenu() {
-        const sidebar = document.querySelector('.sidebar');
-        const overlay = document.querySelector('.mobile-overlay');
-        sidebar.classList.remove('mobile-open');
-        overlay.classList.remove('active');
-    }
-
-    function switchTab(event, tabId) {
-        document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-        document.getElementById(tabId).classList.add('active');
-        if (event) {
-            event.currentTarget.classList.add('active');
-        } else {
-            const btn = Array.from(document.querySelectorAll('.nav-link'))
-                .find(l => l.getAttribute('onclick').includes(tabId));
-            if (btn) btn.classList.add('active');
+        // Mobile menu functions
+        function toggleMobileMenu() {
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.querySelector('.mobile-overlay');
+            sidebar.classList.toggle('mobile-open');
+            overlay.classList.toggle('active');
         }
-        window.scrollTo(0, 0);
-        
-        // Ferme le menu mobile après sélection d'un onglet
-        if (window.innerWidth <= 768) {
-            closeMobileMenu();
+
+        function closeMobileMenu() {
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.querySelector('.mobile-overlay');
+            sidebar.classList.remove('mobile-open');
+            overlay.classList.remove('active');
         }
-    }
-    
-    function linkTo(tabId) { 
-        switchTab(null, tabId); 
-    }
-</script>
+
+        function switchTab(event, tabId) {
+            document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            if (event) {
+                event.currentTarget.classList.add('active');
+            } else {
+                const btn = Array.from(document.querySelectorAll('.nav-link'))
+                    .find(l => l.getAttribute('onclick').includes(tabId));
+                if (btn) btn.classList.add('active');
+            }
+            window.scrollTo(0, 0);
+
+            // Ferme le menu mobile après sélection d'un onglet
+            if (window.innerWidth <= 768) {
+                closeMobileMenu();
+            }
+        }
+
+        function linkTo(tabId) {
+            switchTab(null, tabId);
+        }
+    </script>
 </body>
 </html>
-
-
-
