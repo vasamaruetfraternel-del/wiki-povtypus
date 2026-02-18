@@ -420,7 +420,7 @@
         <div class="nav-group">
             <span class="nav-label">Économie / Drop</span>
             <div class="nav-link" onclick="switchTab(event, 'money')">💰 <span>Monnaies</span></div>
-            <div class="nav-link" onclick="switchTab(event, 'drops')">🥚 <span>Drops des dofus</span></div>
+            <div class="nav-link" onclick="switchTab(event, 'drops')">🥚 <span>Drop Rare</span></div>
         </div>
 
         <div class="nav-group">
@@ -496,30 +496,55 @@
 
         <div id="last-update" class="panel">
             <div class="header-box">
-                <h2>Notes de Mise à Jour - 07/02/2026</h2>
+                <h2>Notes de Mise à Jour - 17/02/2025 et 18/02/2025</h2>
             </div>
 
             <div class="section-card">
-                <h3>Correction</h3>
+                <h3>Passif Maîtrisé</h3>
                 <ul>
-                    <li>Le fait d'attirer dans un portail ne fera plus déconnecter l'utilisateur.</li>
-                    <li>En cas de changement de classe, un passif ne sera plus donner si l'utilisateur n'est pas au moins niveau 200 et possède un passif.</li>
-                    <li>En cas de changement de classe, si un passif est évolué celui-ci ne sera plus supprimer pour faciliter la transition entre les classes.</li>
-                    <li>Le pnj dans le donjon givrefoux propose bien le choix entre le Tengu seul et le Tengu + Fuji.</li>
-                    <li>La fuji givrefoux nourricière est maintenant dans le donjon givrefoux rendant ses succès réalisable.</li>
-                    <li>La gonflable joue correctement ses tours de jeu.</li>
-                    <li>Correction d'une faille qui causer une fin prématuré dans les combats de dimension.</li>
-                    <li>Correction du challenge économe, il ne sera plus échoué en cas de sort de zone.</li>
+                    <li>Correction du mauvais calcul dans le bonus ajouté lors d'une rune Rata sur un artefact : celui-ci ne doublera plus la valeur actuelle.</li>
                 </ul>
-                <h3>Equilibrage</h3>
+                <hr class="separator">
+                <h3>Passif</h3>
                 <ul>
-                    <li>Les bonus de souffrance positive du sacrieur ont été ré-ajuster pour correspondre aux autres classes.</li>
+                    <li>Le passif du Roublard change : 30% dommages finaux tour impair, -30% dommages finaux tour pair.</li>
                 </ul>
+                <hr class="separator">
+                <h3>Donjon</h3>
+                <ul>
+                    <li>Remplacement des mauvais Craqueleurs dans le donjon Pitons Rocheux des Craqueleurs.</li>
+                    <li>Ajout de l'Antre difficulté Impossible pour clôturer le chapitre des Antres Pov'Typus. Une icône est désormais visible sur la carte pour connaître sa position.</li>
+                </ul>
+                <hr class="separator">
+                <h3>Succès</h3>
+                <ul>
+                    <li>Les monstres non-boss ne peuvent plus afficher des succès en donjon (ex : le Bouftou n'affichera plus ceux du Bouftou Royal).</li>
+                    <li>Les Antres ne peuvent plus déverrouiller de succès spécial boss.</li>
+                    <li>Ajout des succès des donjons suivants : Anerice la Shushess, Belvédère d'Ilyzaelle, Tour de Solar, Tour de Bethel, Brasserie du roi Dazak.</li>
+                </ul>
+                <hr class="separator">
+                <h3>Monstre</h3>
+                <ul>
+                    <li>Les Tynrils possèdent désormais les bonnes résistances.</li>
+                    <li>Le Peki a perdu 10% de résistance dans tous les éléments.</li>
+                </ul>
+                <hr class="separator">
+                <h3>Sorts</h3>
+                <ul>
+                    <li>Rembobinage fonctionne correctement.</li>
+                </ul>
+                <hr class="separator">
+                <h3>PNJ</h3>
+                <ul>
+                    <li>Ajout de la Clef Pov'Typus (impossible) sur le vendeur de clef.</li>
+                    <li>Ajout du parchemin de sort Necronyx sur le PNJ Prêtre.</li>
+                    <li>Ness Laye change de nom et devient "Recyclage d'Item".</li>
+                </ul>
+                <hr class="separator">
                 <h3>Divers</h3>
                 <ul>
-                    <li>Ajout du <b>Ticket de loterie</b> sur le pnj prêtre à 2.500.000 Kamas l'unité.</li>
-                    <li>Ajout des jetons de sort achetable en orichor sur le pnj Passif Amélioration.</li>
-                    <li>Equilibrage du dofus légendaire : 100 Vitalité -> 300 Vitalité, 0 Invocation -> 2 Invocations</li>
+                    <li>Le taux de pièces d'or est doublé dans les donjons.</li>
+                    <li>Le ticket de loterie n'est plus détruit par le PNJ Recyclage d'Item.</li>
                 </ul>
             </div>
         </div>
@@ -530,19 +555,14 @@
             </div>
 
             <div class="section-card">
-                <h3>Inventaire et Equipement</h3>
-                <ul>
-                    <li>Ajout d'un dernier slot dans l'inventaire : la spécialisation.</li>
-                </ul>
                 <h3>Monstre et Panoplie (version 2.73 maximum)</h3>
                 <ul>
                     <li>Ajout progressif des derniers boss.</li>
                     <li>Ajout progressif des dernières panoplie.</li>
-                    <li>Ajout des apparâts manquant.</li>
                 </ul>
                 <h3>Contenu Late-Game</h3>
                 <ul>
-                    <li>Les <span class="highlight-link" onclick="linkTo('songe')">Songes Infini</span> revisité sur 100 étages maximum.</li>
+                    <li>Les <span class="highlight-link" onclick="linkTo('songe')">Songes Infini</span> revisité sur 50 étages maximum.</li>
                     <li>Zone niveau 200 - 300</li>
                     <li>Item niveau 200 - 300</li>
                     <li>Sanctification d'un item, cette dernière ligne n'est pas encore fixé j'ignore quel item recevra ce dernier bonus.</li>
@@ -568,7 +588,7 @@
                     <div class="info-card"><strong>Enutrof</strong> +15% Dommages Armes</div>
                     <div class="info-card"><strong>Feca</strong> -15% Dommages Subis</div>
                     <div class="info-card"><strong>Pandawa</strong> État Intaclable permanent</div>
-                    <div class="info-card"><strong>Roublard</strong> +20% Dmg Finaux (si retrait PA/PM subi)</div>
+                    <div class="info-card"><strong>Roublard</strong> +30% Dmg Finaux tour pair, -30% Dmg Finaux tour impair</div>
                     <div class="info-card"><strong>Zobal</strong> +25% Boucliers Reçus</div>
                     <div class="info-card"><strong>Steamer</strong> +1 PM en début de tour (Max. 2)</div>
                     <div class="info-card"><strong>Eliotrope</strong> +10% Dmg Finaux par entité déplacée</div>
@@ -895,6 +915,52 @@
                     </tbody>
                 </table>
             </div>
+
+            <hr class="separator">
+
+            <div class="section-card">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Artefact</th>
+                            <th>Boss</th>
+                            <th>Taux</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Carapace du Titan</td>
+                            <td>Grollum</td>
+                            <td>3%</td>
+                        </tr>
+                        <tr>
+                            <td>Sagesse Infini</td>
+                            <td>Phossile</td>
+                            <td>3%</td>
+                        </tr>
+                        <tr>
+                            <td>Poursuite de l'ombre</td>
+                            <td>Haute Truche</td>
+                            <td>3%</td>
+                        </tr>
+                        <tr>
+                            <td>Prisme fragmenté</td>
+                            <td>Bworkette</td>
+                            <td>3%</td>
+                        </tr>
+                        <tr>
+                            <td>Pierre de l'Equité</td>
+                            <td>Nelween</td>
+                            <td>3%</td>
+                        </tr>
+                        <tr>
+                            <td>Furher du Ravageur</td>
+                            <td>Fuji Givrefoux Nourricière</td>
+                            <td>3%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
         <div id="trans" class="panel">
@@ -1142,3 +1208,4 @@
     </script>
 </body>
 </html>
+
