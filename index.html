@@ -489,7 +489,7 @@
                     <div class="info-card"><strong>Passif Améliorable</strong> Améliorer vos passif pour un end-game toujours plus opti ! <span class="highlight-link" onclick="linkTo('amelioration-passif')">Evolution</span></div>
                     <div class="info-card"><strong>Transcendance, au delà du prestige</strong> Repousser les limittes de votre personnage en possédant jusqu'à 3 passifs via la <span class="highlight-link" onclick="linkTo('trans')">Transcendance</span> !</div>
                     <div class="info-card"><strong>Items évolutif</strong> Repousser les limittes de votre stuff grâce aux différentes <span class="highlight-link" onclick="linkTo('item-upgrade')">Amélioration</span> disponible !</div>
-                    <div class="info-card"><strong>Recyclage des objets inutiles rapide</strong> Convertisser les items que vous ne voulez plus en kamas/orichor via <b><span class="highlight-link" onclick="linkTo('recycling')">Ness Laye</span></b> au zaap d'Astrub !</div>
+                    <div class="info-card"><strong>Recyclage des objets inutiles rapide</strong> Convertisser les items que vous ne voulez plus en kamas/orichor via <b><span class="highlight-link" onclick="linkTo('recycling')">Recyclage d'Item</span></b> au zaap d'Astrub !</div>
                     <div class="info-card"><strong>Songe Infini, apogée de votre puissance</strong> Soyez prêts pour relever les monstres dans des combats contre 8 monstres différent à chaque tentative !</div>
                     <div class="info-card"><strong>Mise à jour régulière !</strong> Des ajouts et correctifs sont constamment fait, rester à l'affût des dernières <span class="highlight-link" onclick="linkTo('last-update')">Mise à jour</span> !</div>
                 </div>
@@ -784,6 +784,13 @@
                     <li><b>Kamas :</b> Achat de parchottage, pierres d'âmes, cosmétiques et clefs de donjon auprès des PNJ au Zaap d'Astrub.</li>
                 </ul>
                 <hr class="separator">
+                <h3>Pièce d'Or</h3>
+                <ul>
+                    <li>Vous obtenez une pièce d'or par monstre tuer.</li>
+                    <li>Ce taux est doublé en donjon.</li>
+                    <li>Ce taux est encore doublé si vous équipez un multiman (compagnon).</li>
+                </ul>
+                <hr class="separator">
                 <h3>Obtention des Orichors</h3>
                 <p><b>Utilisation :</b> Dépenser les auprès du PNJ (Passif Amélioration) dans la Milice d'Astrub en [5,-19] pour améliorer vos <span class="highlight-link" onclick="linkTo('passifs')">Artefact</span> !</p>
                 <table>
@@ -952,6 +959,33 @@
             </div>
         </div>
 
+                    <hr class="separator">
+
+            <div class="section-card">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Familier Légendaire</th>
+                            <th>Boss</th>
+                            <th>Taux</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Bouftou Royal</td>
+                            <td>Bouftou Royal</td>
+                            <td>1%</td>
+                        </tr>
+                        <tr>
+                            <td>Meulou</td>
+                            <td>Meulou</td>
+                            <td>1%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
         <div id="trans" class="panel">
             <div class="header-box"><h2>La Transcendance</h2></div>
             <div class="section-card">
@@ -1009,17 +1043,20 @@
                 <hr class="separator">
                 <h3>Roulette du Zaap d'Astrub</h3>
                 <p>Séléction de 3 sorts important pour chacune des 18 classes. La roulette contient des objet <b>Inédit</b>.</p>
-                <p>Le coût d'une roulette classique est de : <b>200.000 Kamas et 10 parchemin de sorts !</b></p>
+                <p>La roulette contient deux format différent :</p>
+                <ul>
+                    <li><b>200.000 Kamas et 10 Parchemin de Sort.</li>
+                    <li><b>1 Ticket de Loterie (Lot spécial garanti + deux lots unique !).</li>
+                </ul>
             </div>
         </div>
 
         <div id="recycling" class="panel">
             <div class="header-box"><h2>Recyclage des items</h2></div>
             <div class="section-card">
-                <h3>Ness Laye</h3>
+                <h3>Recyclage d'Item</h3>
                 <p>La vente des objets est automatique. Le prix calculé est égal au <b>niveau multiplié par 10.</b></p>
                 <p>Vous obtenez un orichor par vague de 100 items vendu en <b>simultannés</b>.</p>
-                <hr class="separator">
                 <h3>Exclusion de la vente</h3>
                 <ul>
                     <li>Tout items objet vivant / apparâts est exclue de la vente.</li>
@@ -1027,6 +1064,12 @@
                     <li>Tout items objet familier / montilier / certificat est exclue de la vente.</li>
                     <li>Signez votre item via la <span class="highlight-link" onclick="linkTo('item-upgrade')">Forgemagie</span> pour qu'il ne soit pas brisé !</li>
                 </ul>
+            </div>
+            <hr class="separator">
+             <div class="section-card">
+                <h3>Recyclage de Sort</h3>
+                <p>Situé aussi sur la map Start, ce pnj vous achète vos parchemins de sort inutile de façon automatique.</p>
+                 <p>Le taux de conversion est de 1 parchemin pour 3 <span class="highlight-link" onclick="linkTo('money')">pièce d'or</span>.</p>
             </div>
         </div>
 
@@ -1119,6 +1162,8 @@
                         <ul>
                             <li>Les deux items doivent appartenir à la <b>même catégorie</b> (ex: deux capes).</li>
                             <li>Les items doivent être <b>différents</b> (ex: Voile d'Encre + Cape de l'Obsidiantre).</li>
+                            <li>Les items doivent avoir au maximum 25 niveau d'écart.</li>
+                            <li>Un item déjà fusionner ne peux plus servir pour une prochaine fusion.</li>
                             <li><b>Pré-requis :</b> Les deux items doivent avoir été préalablement améliorés via le <b>Tavernier Feubuk</b>.</li>
                         </ul>
                     </li>
@@ -1220,4 +1265,5 @@
     </script>
 </body>
 </html>
+
 
