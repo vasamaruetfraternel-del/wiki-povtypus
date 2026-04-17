@@ -1,894 +1,870 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guide Officiel Pov'Typus</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --dofus-bg: #12140f;
-            --dofus-dark: #1b1c17;
-            --dofus-gold: #deab1a;
-            --dofus-green: #5c8200;
-            --dofus-border: #4a4535;
-            --text-main: #f1ebd1;
-            --text-muted: #9d9576;
-            --accent-red: #bb281e;
-            --cyan: #00ccaa;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pov'Typus Wiki</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;scroll-behavior:smooth}
+:root{
+  --bg:#0e100b;--surface:#161810;--surface2:#1e2119;--surface3:#252820;
+  --gold:#d4a017;--gold-dim:#a07a10;--gold-bg:rgba(212,160,23,0.08);
+  --green:#6aaa00;--green-dim:#4a7a00;--green-bg:rgba(106,170,0,0.1);
+  --red:#c0392b;--red-bg:rgba(192,57,43,0.12);--red-border:#8b2a1e;
+  --blue:#3b82f6;--blue-bg:rgba(59,130,246,0.1);
+  --amber:#f59e0b;--amber-bg:rgba(245,158,11,0.1);
+  --text:#e8e0c4;--text-muted:#8a8270;--text-dim:#5a5445;
+  --border:#2e2e24;--border-gold:rgba(212,160,23,0.3);
+  --topnav-h: 60px;
+  --radius:8px;--radius-lg:12px;
+  --transition:0.18s ease;
+}
+body{font-family:"Trebuchet MS",Arial,sans-serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column;min-height:100vh;font-size:14.5px;line-height:1.6}
 
-            /* Parchemin */
-            --parch-bg: #f5e9c9;
-            --parch-dark: #e8d5a3;
-            --parch-border: #c8a96e;
-            --parch-text: #3b2a14;
-            --parch-muted: #7a5c30;
-            --parch-red-bg: rgba(139,30,20,0.12);
-            --parch-red-border: #8b3a2a;
-        }
+/* ── TOP NAV (HORIZONTAL) ── */
+.topnav {
+  width: 100%;
+  height: var(--topnav-h);
+  background: var(--surface);
+  border-bottom: 1px solid var(--border-gold);
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+.topnav::-webkit-scrollbar { height: 4px; }
+.topnav::-webkit-scrollbar-thumb { background: var(--border); }
 
-        * { box-sizing: border-box; scroll-behavior: smooth; }
+.logo {
+  padding: 0 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.logo-title { font-size: 1rem; font-weight: 700; color: var(--gold); letter-spacing: 0.5px; }
+.logo-sub { font-size: 0.72rem; color: var(--text-muted); margin-top: 2px; }
 
-        body {
-            background-color: var(--dofus-bg);
-            color: var(--text-main);
-            font-family: "Trebuchet MS", "Lucida Grande", Arial, sans-serif;
-            margin: 0;
-            display: flex;
-            min-height: 100vh;
-        }
+.nav-section {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  border-right: 1px solid var(--border);
+}
+.nav-label { display: none; /* Masqué pour plus de clarté en horizontal */ }
 
-        /* --- SIDEBAR (reste sombre/or) --- */
-        .sidebar {
-            width: 280px;
-            background: var(--dofus-dark);
-            border-right: 3px solid var(--dofus-gold);
-            display: flex;
-            flex-direction: column;
-            padding: 20px 0;
-            position: fixed;
-            height: 100vh;
-            z-index: 100;
-            overflow-y: auto;
-            box-shadow: 4px 0 10px rgba(0,0,0,0.5);
-        }
-        .sidebar h1 {
-            font-size: 1.3rem;
-            color: var(--dofus-gold);
-            text-align: center;
-            padding: 10px;
-            margin: 0 10px 30px 10px;
-            border-bottom: 2px solid var(--dofus-gold);
-            text-shadow: 2px 2px 0px #000;
-        }
-        .nav-group { margin-bottom: 20px; }
-        .nav-label {
-            font-size: 0.75rem;
-            color: var(--dofus-gold);
-            text-transform: uppercase;
-            padding-left: 20px;
-            margin-bottom: 10px;
-            display: block;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-        .nav-link {
-            padding: 12px 20px;
-            cursor: pointer;
-            color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            transition: 0.2s;
-            border-left: 4px solid transparent;
-        }
-        .nav-link:hover { background: rgba(222,171,26,0.1); color: #fff; }
-        .nav-link.active {
-            background: rgba(222,171,26,0.2);
-            color: var(--dofus-gold);
-            border-left: 4px solid var(--dofus-gold);
-            font-weight: bold;
-        }
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px;
+  height: 100%;
+  cursor: pointer;
+  color: var(--text-muted);
+  border-bottom: 3px solid transparent;
+  transition: var(--transition);
+  font-size: 0.85rem;
+  user-select: none;
+  white-space: nowrap;
+}
+.nav-item:hover { background: var(--gold-bg); color: var(--text); border-bottom-color: var(--gold-dim); }
+.nav-item.active { background: var(--gold-bg); color: var(--gold); border-bottom-color: var(--gold); font-weight: 700; }
+.nav-item .nav-icon { width: 16px; height: 16px; opacity: 0.7; flex-shrink: 0; font-size: 13px; display: flex; align-items: center; justify-content: center; }
+.nav-item.active .nav-icon { opacity: 1; }
 
-        /* --- MAIN CONTENT : fond parchemin --- */
-        .main-content {
-            margin-left: 280px;
-            padding: 40px;
-            width: calc(100% - 280px);
-            max-width: 1400px;
-            background-color: var(--parch-bg);
-            background-image:
-                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
-            min-height: 100vh;
-            color: var(--parch-text);
-        }
+/* ── MAIN (PLEINE LARGEUR) ── */
+.main {
+  flex: 1;
+  padding: 36px 44px;
+  width: 100%;
+  max-width: 100%; /* Prend tout l'espace disponible */
+}
+.panel{display:none;animation:fadeIn 0.25s ease}
+.panel.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 
-        .panel { display: none; animation: fadeIn 0.4s ease-out; }
-        .panel.active { display: block; }
-        @keyframes fadeIn { from { opacity:0; transform:translateY(5px); } to { opacity:1; transform:translateY(0); } }
+/* ── PAGE HEADER ── */
+.page-header{margin-bottom:28px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.page-header h1{font-size:1.7rem;color:var(--gold);font-weight:700;letter-spacing:-0.3px}
+.page-header .subtitle{color:var(--text-muted);font-size:0.88rem;margin-top:4px}
+.breadcrumb{display:flex;align-items:center;gap:6px;font-size:0.75rem;color:var(--text-dim);margin-bottom:10px}
+.breadcrumb a{color:var(--gold-dim);cursor:pointer;text-decoration:none}
+.breadcrumb a:hover{color:var(--gold)}
+.breadcrumb-sep{color:var(--text-dim)}
 
-        .header-box {
-            border-bottom: 3px solid var(--parch-border);
-            margin-bottom: 30px;
-            padding-bottom: 10px;
-        }
-        .header-box h2 {
-            font-size: 2.2rem;
-            margin: 0;
-            color: #7a4a00;
-            text-shadow: 1px 1px 0px rgba(255,255,255,0.4);
-        }
+/* ── CARDS ── */
+.card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px 22px;margin-bottom:20px}
+.card-title{font-size:1rem;font-weight:700;color:var(--gold);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.card-title .ct-icon{font-size:14px;opacity:0.8}
 
-        .section-card {
-            background: rgba(255,245,210,0.7);
-            border: 2px solid var(--parch-border);
-            border-radius: 10px;
-            padding: 25px;
-            margin-bottom: 30px;
-            box-shadow: 2px 3px 10px rgba(100,70,20,0.15), inset 0 0 30px rgba(200,160,80,0.1);
-        }
+/* ── GRID CARDS ── */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:4px}
+.mini-card{background:var(--surface3);border:1px solid var(--border);border-radius:var(--radius);padding:13px 15px}
+.mini-card-label{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.8px;color:var(--text-muted);margin-bottom:6px;font-weight:700}
+.mini-card-value{color:var(--text);font-size:0.9rem}
+.mini-card.gold-accent{border-left:3px solid var(--gold)}
+.mini-card.green-accent{border-left:3px solid var(--green)}
 
-        h3 {
-            color: #6b3d00;
-            margin-top: 0;
-            font-size: 1.4rem;
-            border-left: 5px solid var(--dofus-green);
-            padding-left: 15px;
-        }
+/* ── STATUS / ALERT BOXES ── */
+.alert{border-radius:var(--radius);padding:13px 16px;margin-bottom:16px;font-size:0.88rem}
+.alert-warning{background:var(--red-bg);border:1px solid var(--red-border);color:#e8b4af}
+.alert-info{background:var(--blue-bg);border:1px solid rgba(59,130,246,0.3);color:#9dc4f8}
+.alert-success{background:var(--green-bg);border:1px solid rgba(106,170,0,0.3);color:#a8d860}
+.alert-gold{background:var(--gold-bg);border:1px solid var(--border-gold);color:#c8a060}
+.alert b{color:inherit;opacity:0.9}
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 20px;
-        }
+/* ── TABLES ── */
+.table-wrap{overflow-x:auto;margin-top:8px}
+table{width:100%;border-collapse:collapse;font-size:0.87rem}
+th{background:var(--surface3);color:var(--gold);font-weight:700;padding:9px 12px;text-align:left;border-bottom:2px solid var(--border-gold);white-space:nowrap;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.5px}
+td{padding:9px 12px;border-bottom:1px solid var(--border);color:var(--text)}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--gold-bg)}
+.rate{color:var(--amber);font-weight:700;font-size:0.82rem}
+.item-name{color:var(--text);font-weight:500}
+.boss-name{color:var(--text-muted);font-size:0.85rem}
 
-        .info-card {
-            background: rgba(240,220,170,0.6);
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid var(--parch-border);
-        }
-        .info-card strong {
-            color: #7a4a00;
-            display: block;
-            margin-bottom: 8px;
-            border-bottom: 1px solid rgba(180,120,40,0.4);
-        }
+/* ── DROPS ── */
+.drop-search{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.drop-search input{flex:1;min-width:160px;background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:var(--radius);font-size:0.87rem;outline:none}
+.drop-search input:focus{border-color:var(--border-gold)}
+.drop-search input::placeholder{color:var(--text-dim)}
+.tab-bar{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:16px}
+.tab-btn{padding:6px 13px;border-radius:20px;font-size:0.78rem;font-weight:700;cursor:pointer;border:1px solid var(--border);background:var(--surface3);color:var(--text-muted);transition:var(--transition);white-space:nowrap;user-select:none}
+.tab-btn:hover{border-color:var(--border-gold);color:var(--text)}
+.tab-btn.active{background:var(--gold);border-color:var(--gold);color:#1a1200}
+.elem-badge{display:inline-block;font-size:0.72rem;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:4px;border:1px solid}
+.elem-terre{background:rgba(139,90,43,0.15);color:#c8a060;border-color:#8b5a2b}
+.elem-feu{background:rgba(192,57,43,0.15);color:#e07060;border-color:#c0392b}
+.elem-eau{background:rgba(59,130,246,0.15);color:#7ab8f5;border-color:#2563eb}
+.elem-air{background:rgba(148,163,184,0.15);color:#b0c0d8;border-color:#4a6080}
+.elem-multi{background:rgba(147,51,234,0.15);color:#c084fc;border-color:#7e22ce}
+.elem-dofus{background:rgba(212,160,23,0.15);color:#d4a017;border-color:#a07010}
+.elem-carte{background:rgba(106,170,0,0.15);color:#6aaa00;border-color:#4a7a00}
+.no-results{color:var(--text-muted);text-align:center;padding:28px;font-size:0.9rem}
+.count-badge{font-size:0.72rem;background:var(--surface3);border:1px solid var(--border);color:var(--text-muted);padding:2px 8px;border-radius:10px;margin-left:8px;font-weight:500}
 
-        /* --- TABLES --- */
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-        th {
-            background: #c8a040;
-            color: #fff;
-            padding: 12px;
-            text-align: left;
-            border: 1px solid var(--parch-border);
-        }
-        td {
-            padding: 12px;
-            border: 1px solid var(--parch-border);
-            font-size: 0.95rem;
-            background: rgba(255,248,220,0.5);
-        }
-        tr:hover td { background: rgba(222,171,26,0.15); }
+/* ── STEPS ── */
+.steps{display:flex;flex-direction:column;gap:12px;margin-top:4px}
+.step{display:flex;gap:14px;align-items:flex-start}
+.step-num{width:26px;height:26px;border-radius:50%;background:var(--green-dim);color:#fff;font-size:0.78rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.step-body{flex:1}
+.step-title{font-weight:700;color:var(--text);font-size:0.9rem}
+.step-desc{color:var(--text-muted);font-size:0.85rem;margin-top:2px}
 
-        /* --- ELEMENTS --- */
-        .cmd {
-            color: #0a6644;
-            font-weight: bold;
-            background: rgba(200,240,220,0.5);
-            padding: 3px 8px;
-            border-radius: 4px;
-            border: 1px solid #5c8200;
-        }
+/* ── PASSIVE GRID ── */
+.passive-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.passive-card{background:var(--surface3);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;transition:var(--transition)}
+.passive-card:hover{border-color:var(--border-gold);background:var(--gold-bg)}
+.passive-class{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.8px;color:var(--gold-dim);font-weight:700;margin-bottom:5px}
+.passive-bonus{color:var(--text);font-size:0.88rem}
 
-        .highlight-link {
-            color: #8b5a00;
-            text-decoration: underline;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        .highlight-link:hover { color: #c47a00; }
+/* ── PRESTIGE LEVELS ── */
+.prestige-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.prestige-card{background:var(--surface3);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;position:relative;overflow:hidden}
+.prestige-card.highlight{border-color:var(--gold);background:var(--gold-bg)}
+.prestige-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--green-dim)}
+.prestige-card.highlight::before{background:var(--gold)}
+.prestige-lvl{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.8px;color:var(--text-muted);margin-bottom:6px;font-weight:700}
+.prestige-bonus{color:var(--text);font-size:0.85rem;line-height:1.5}
+.prestige-card.highlight .prestige-lvl{color:var(--gold)}
 
-        .warning-box {
-            background: var(--parch-red-bg);
-            border: 2px solid var(--parch-red-border);
-            padding: 15px;
-            border-radius: 8px;
-            margin: 20px 0;
-            color: #6b1a10;
-        }
+/* ── INLINE LINKS ── */
+.ilink{color:var(--gold);cursor:pointer;text-decoration:underline;text-decoration-color:var(--gold-dim);text-underline-offset:2px;font-weight:500;transition:var(--transition)}
+.ilink:hover{color:#f0c030;text-decoration-color:var(--gold)}
 
-        .step-num {
-            background: var(--dofus-green);
-            color: #fff;
-            width: 25px;
-            height: 25px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            margin-right: 10px;
-            font-size: 0.9rem;
-        }
+/* ── CMD PILLS ── */
+.cmd{display:inline-block;background:rgba(106,170,0,0.12);border:1px solid var(--green-dim);color:#90cc30;padding:2px 8px;border-radius:5px;font-family:"Courier New",monospace;font-size:0.83rem;font-weight:700}
 
-        ul { list-style: none; padding-left: 5px; }
-        li { margin-bottom: 12px; position: relative; padding-left: 20px; }
-        li::before { content: "◆"; color: #c8900a; position: absolute; left: 0; font-size: 0.8rem; }
+/* ── DIVIDER ── */
+.divider{height:1px;background:linear-gradient(to right,transparent,var(--border),transparent);margin:20px 0}
 
-        hr.separator {
-            border: 0;
-            height: 1px;
-            background: linear-gradient(to right, transparent, var(--parch-border), transparent);
-            margin: 25px 0;
-        }
+/* ── ORICHOR TABLE ── */
+.orichor-row td:first-child{color:var(--text-muted)}
+.orichor-row td:last-child{color:var(--amber);font-weight:700}
 
-        b { color: #3b2a14; }
+/* ── SORT COFFRE CARDS ── */
+.coffre-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px, 1fr));gap:12px}
+.coffre-card{background:var(--surface3);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px 20px}
+.coffre-card.c1{border-top:3px solid var(--gold-dim)}
+.coffre-card.c2{border-top:3px solid var(--gold)}
+.coffre-title{font-size:1rem;font-weight:700;color:var(--gold);margin-bottom:6px}
+.coffre-levels{font-size:0.85rem;color:var(--text-muted);margin-bottom:12px}
+.coffre-cost{font-size:1.4rem;font-weight:700;color:var(--amber);margin-bottom:4px}
+.coffre-cost-label{font-size:0.75rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px}
+.coffre-note{font-size:0.8rem;color:var(--green);margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
 
-        /* Mobile */
-        .mobile-menu-toggle {
-            display: none;
-            position: fixed;
-            top: 15px; left: 15px;
-            z-index: 200;
-            background: var(--dofus-gold);
-            color: var(--dofus-bg);
-            border: none;
-            padding: 12px 16px;
-            border-radius: 8px;
-            font-size: 1.5rem;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-        }
-        .mobile-overlay { display: none; position: fixed; top:0;left:0;right:0;bottom:0; background:rgba(0,0,0,0.7); z-index:99; }
-
-        @media (max-width: 1000px) {
-            .sidebar { width: 70px; }
-            .sidebar h1, .nav-label, .nav-link span { display: none; }
-            .main-content { margin-left: 70px; width: calc(100% - 70px); padding: 30px 20px; }
-        }
-        @media (max-width: 768px) {
-            .mobile-menu-toggle { display: block; }
-            .sidebar { transform: translateX(-100%); transition: transform 0.3s ease; width: 280px; z-index: 150; }
-            .sidebar.mobile-open { transform: translateX(0); }
-            .sidebar h1, .nav-label, .nav-link span { display: block; }
-            .mobile-overlay.active { display: block; }
-            .main-content { margin-left: 0; width: 100%; padding: 70px 15px 20px 15px; }
-            .header-box h2 { font-size: 1.6rem; }
-            .grid { grid-template-columns: 1fr; }
-            table { font-size: 0.85rem; }
-            th, td { padding: 8px 6px; }
-        }
-        @media (max-width: 480px) {
-            .header-box h2 { font-size: 1.3rem; }
-            .section-card { padding: 15px; }
-            h3 { font-size: 1.2rem; }
-        }
-    </style>
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .logo-sub { display: none; }
+  .nav-item span:not(.nav-icon) { display: none; }
+  .nav-item { padding: 0 12px; }
+  .main{padding:24px 20px}
+}
+@media(max-width:640px){
+  .grid,.passive-grid,.prestige-grid{grid-template-columns:1fr 1fr}
+  .main{padding:18px 12px}
+  .page-header h1{font-size:1.3rem}
+  .logo-title { font-size: 0.9rem; }
+}
+</style>
 </head>
 <body>
-    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
-    <div class="mobile-overlay" onclick="closeMobileMenu()"></div>
 
-    <div class="sidebar">
-        <h1>Pov'Typus Wiki Officiel</h1>
-        <div class="nav-group">
-            <span class="nav-label">Informations Générale</span>
-            <div class="nav-link active" onclick="switchTab(event, 'guide')">🚀 <span>Présentation</span></div>
-            <div class="nav-link" onclick="switchTab(event, 'tuto')">🚀 <span>Guide du débutant</span></div>
-        </div>
-        <div class="nav-group">
-            <span class="nav-label">Mécaniques Serveur</span>
-            <div class="nav-link" onclick="switchTab(event, 'passifs')">🛡️ <span>Passif de classe</span></div>
-            <div class="nav-link" onclick="switchTab(event, 'amelioration-passif')">🛡️ <span>Amélioration du passif</span></div>
-            <div class="nav-link" onclick="switchTab(event, 'cmds')">⌨️ <span>Commandes joueur</span></div>
-            <div class="nav-link" onclick="switchTab(event, 'sorts')">📦 <span>Obtention des sorts</span></div>
-            <div class="nav-link" onclick="switchTab(event, 'item-upgrade')">⌨️ <span>Amélioration du stuff</span></div>
-            <div class="nav-link" onclick="switchTab(event, 'recycling')">⌨️ <span>Recyclage</span></div>
-        </div>
-        <div class="nav-group">
-            <span class="nav-label">Économie / Drop</span>
-            <div class="nav-link" onclick="switchTab(event, 'money')">💰 <span>Monnaies</span></div>
-            <div class="nav-link" onclick="switchTab(event, 'drops')">🥚 <span>Drop Rare</span></div>
-        </div>
-        <div class="nav-group">
-            <span class="nav-label">End-Game</span>
-            <div class="nav-link" onclick="switchTab(event, 'prestige')">👑 <span>Prestige</span></div>
-            <div class="nav-link" onclick="switchTab(event, 'larmes')">💧 <span>Evolution dofus</span></div>
-            <div class="nav-link" onclick="switchTab(event, 'trans')">✨ <span>Transcendance</span></div>
-            <div class="nav-link" onclick="switchTab(event, 'songe')">✨ <span>Songe Infini</span></div>
-        </div>
+<nav class="topnav">
+  <div class="logo">
+    <span class="logo-title">⚔ Pov'Typus Wiki</span>
+    <span class="logo-sub">Officiel — MàJ 17/04/2026</span>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-item active" onclick="go('accueil')"><span class="nav-icon">🏠</span><span>Présentation</span></div>
+    <div class="nav-item" onclick="go('tuto')"><span class="nav-icon">🚀</span><span>Guide débutant</span></div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-item" onclick="go('passifs')"><span class="nav-icon">🛡</span><span>Passifs</span></div>
+    <div class="nav-item" onclick="go('cmds')"><span class="nav-icon">⌨</span><span>Commandes</span></div>
+    <div class="nav-item" onclick="go('stuff')"><span class="nav-icon">⚙</span><span>Amélioration</span></div>
+    <div class="nav-item" onclick="go('sorts')"><span class="nav-icon">📦</span><span>Sorts</span></div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-item" onclick="go('monnaies')"><span class="nav-icon">💰</span><span>Monnaies</span></div>
+    <div class="nav-item" onclick="go('drops')"><span class="nav-icon">💎</span><span>Drops rares</span></div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-item" onclick="go('maitrise')"><span class="nav-icon">👑</span><span>Maîtrise</span></div>
+    <div class="nav-item" onclick="go('dofus')"><span class="nav-icon">💧</span><span>Dofus</span></div>
+  </div>
+</nav>
+
+<main class="main">
+
+<div id="accueil" class="panel active">
+  <div class="breadcrumb"><span>Wiki</span><span class="breadcrumb-sep">›</span><span>Présentation</span></div>
+  <div class="page-header">
+    <h1>Bienvenue sur Pov'Typus</h1>
+    <div class="subtitle">Serveur 100% FreeToWin — Fait avec passion</div>
+  </div>
+
+  <div class="alert alert-gold">
+    <b>État :</b> <span style="color:#6aaa00;font-weight:700">En Ligne</span> &nbsp;·&nbsp;
+    <b>Discord :</b> <a href="https://discord.gg/TKC6TpAmQW" target="_blank" style="color:#7289da">discord.gg/TKC6TpAmQW</a> &nbsp;·&nbsp;
+    <b>Serveur orienté Duo compte minimum.</b>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">🚀</span>Premiers pas</div>
+    <div class="grid">
+      <div class="mini-card green-accent">
+        <div class="mini-card-label">Choix de classe</div>
+        <div class="mini-card-value">Consultez les <a class="ilink" onclick="go('passifs')">18 passifs uniques</a> avant de choisir.</div>
+      </div>
+      <div class="mini-card green-accent">
+        <div class="mini-card-label">Sorts</div>
+        <div class="mini-card-value">Apprentissage classique jusqu'au niv. 100, puis via des <a class="ilink" onclick="go('monnaies')">Orichors</a>. Voir les <a class="ilink" onclick="go('sorts')">Coffres de sorts</a>.</div>
+      </div>
+      <div class="mini-card green-accent">
+        <div class="mini-card-label">Équipement de départ</div>
+        <div class="mini-card-value">Panoplie aventurier + familier sagesse + votre <a class="ilink" onclick="go('passifs')">Artefact passif</a>.</div>
+      </div>
+      <div class="mini-card green-accent">
+        <div class="mini-card-label">Prospection de base</div>
+        <div class="mini-card-value">Chaque personnage démarre avec <b>200 prospection</b>.</div>
+      </div>
+      <div class="mini-card green-accent">
+        <div class="mini-card-label">Mode Ombre</div>
+        <div class="mini-card-value">Mort permanente en PvM activable via un PNJ au zaap d'Astrub.</div>
+      </div>
+      <div class="mini-card green-accent">
+        <div class="mini-card-label">Sorts spéciaux</div>
+        <div class="mini-card-value">3 sorts sélectionnés par classe reçoivent des modifications uniques.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">⭐</span>Fonctionnalités clés</div>
+    <div class="grid">
+      <div class="mini-card gold-accent">
+        <div class="mini-card-label">Drop méritant</div>
+        <div class="mini-card-value">Nouveaux objets <b>Artefacts</b> — voir les <a class="ilink" onclick="go('drops')">Drops rares</a>.</div>
+      </div>
+      <div class="mini-card gold-accent">
+        <div class="mini-card-label">Maîtrise de classe</div>
+        <div class="mini-card-value">Montez jusqu'au <a class="ilink" onclick="go('maitrise')">niveau 200</a> pour le plein potentiel.</div>
+      </div>
+      <div class="mini-card gold-accent">
+        <div class="mini-card-label">Items évolutifs</div>
+        <div class="mini-card-value">Forgemagie + boost Tavernier — voir <a class="ilink" onclick="go('stuff')">Amélioration du stuff</a>.</div>
+      </div>
+      <div class="mini-card gold-accent">
+        <div class="mini-card-label">IA retravaillée</div>
+        <div class="mini-card-value">Des monstres plus intelligents pour plus de challenge.</div>
+      </div>
+      <div class="mini-card gold-accent">
+        <div class="mini-card-label">Forgemagie</div>
+        <div class="mini-card-value">Système complet avec limites, overmaxs et exo garanti. <a class="ilink" onclick="go('stuff')">Détails</a>.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="tuto" class="panel">
+  <div class="breadcrumb"><a onclick="go('accueil')">Wiki</a><span class="breadcrumb-sep">›</span><span>Guide débutant</span></div>
+  <div class="page-header"><h1>Guide du débutant</h1><div class="subtitle">Tout ce qu'il faut savoir pour bien commencer</div></div>
+
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">🎮</span>À la création du personnage</div>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Choisissez votre classe</div><div class="step-desc">Chaque classe a un <a class="ilink" onclick="go('passifs')">passif unique</a> sous forme d'Artefact. Consultez la liste avant de vous décider.</div></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Récupérez vos objets de départ</div><div class="step-desc">Panoplie aventurier, familier sagesse/dommages et votre Artefact de classe vous sont automatiquement attribués.</div></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Mode Ombre (optionnel)</div><div class="step-desc">Souhaitez-vous la mort permanente en PvM ? Parlez au <b>Pactisant des Ténèbres</b> (aussi accessible via <span class="cmd">.start</span>).</div></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">💡</span>Conseils essentiels</div>
+    <div class="alert alert-warning"><b>Le serveur est orienté Duo Compte minimum.</b> Jouer seul est fortement déconseillé.</div>
+    <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:8px">
+      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Les clefs de donjon se drop dans la zone de leur donjon. Utilisez <span class="cmd">.ki [nom de l'item]</span> pour localiser n'importe quel drop.</li>
+      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Vos sorts s'apprennent classiquement jusqu'au niveau 100. Au-delà, des <a class="ilink" onclick="go('sorts')">Coffres de sorts</a> achetables avec des <a class="ilink" onclick="go('monnaies')">Orichors</a> permettent de débloquer les sorts 101-200.</li>
+      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>200 Prospection de base vous permettent de bien farmer dès le départ.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">📈</span>Comment s'optimiser ?</div>
+    <div class="grid">
+      <div class="mini-card gold-accent"><div class="mini-card-label">Équipement</div><div class="mini-card-value"><a class="ilink" onclick="go('stuff')">Améliorer son stuff</a> via la forgemagie et le Tavernier Feubuk.</div></div>
+      <div class="mini-card gold-accent"><div class="mini-card-label">Dofus</div><div class="mini-card-value"><a class="ilink" onclick="go('dofus')">Améliorer ses dofus</a> via le système Larme Éthérée.</div></div>
+      <div class="mini-card gold-accent"><div class="mini-card-label">Maîtrise</div><div class="mini-card-value">Atteindre la <a class="ilink" onclick="go('maitrise')">Maîtrise de classe</a> pour des bonus permanents puissants.</div></div>
+    </div>
+  </div>
+</div>
+
+<div id="passifs" class="panel">
+  <div class="breadcrumb"><a onclick="go('accueil')">Wiki</a><span class="breadcrumb-sep">›</span><span>Passifs de classe</span></div>
+  <div class="page-header"><h1>Passifs de Classe</h1><div class="subtitle">18 classes — chacune avec un Artefact passif unique</div></div>
+
+  <div class="alert alert-info">Chaque classe possède un <b>Artefact</b> dictant son passif.</div>
+
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">🛡</span>Tous les passifs</div>
+    <div class="passive-grid">
+      <div class="passive-card"><div class="passive-class">Iop</div><div class="passive-bonus">+15% de dégâts en mêlée</div></div>
+      <div class="passive-card"><div class="passive-class">Cra</div><div class="passive-bonus">+15% de dégâts à distance</div></div>
+      <div class="passive-card"><div class="passive-class">Sacrieur</div><div class="passive-bonus">+20% de Vitalité</div></div>
+      <div class="passive-card"><div class="passive-class">Eniripsa</div><div class="passive-bonus">Soigne 5% aux alliés (début de tour)</div></div>
+      <div class="passive-card"><div class="passive-class">Sram</div><div class="passive-bonus">+25 Dommages critiques</div></div>
+      <div class="passive-card"><div class="passive-class">Xélor</div><div class="passive-bonus">+1 PA en début de tour (max 2)</div></div>
+      <div class="passive-card"><div class="passive-class">Sadida</div><div class="passive-bonus">300% du niveau en bouclier (fin de tour)</div></div>
+      <div class="passive-card"><div class="passive-class">Osamodas</div><div class="passive-bonus">3 invocations · Les invos alliés reçoivent 10 dmg début de tour (1 tour)</div></div>
+      <div class="passive-card"><div class="passive-class">Ecaflip</div><div class="passive-bonus">+15% Coups Critiques</div></div>
+      <div class="passive-card"><div class="passive-class">Enutrof</div><div class="passive-bonus">+15% Dommages Armes</div></div>
+      <div class="passive-card"><div class="passive-class">Feca</div><div class="passive-bonus">-15% Dommages Subis</div></div>
+      <div class="passive-card"><div class="passive-class">Pandawa</div><div class="passive-bonus">État Intaclable permanent</div></div>
+      <div class="passive-card"><div class="passive-class">Roublard</div><div class="passive-bonus">+30% Dmg Finaux tour pair / -30% tour impair</div></div>
+      <div class="passive-card"><div class="passive-class">Zobal</div><div class="passive-bonus">+25% Boucliers Reçus</div></div>
+      <div class="passive-card"><div class="passive-class">Steamer</div><div class="passive-bonus">+1 PM en début de tour (max 2)</div></div>
+      <div class="passive-card"><div class="passive-class">Eliotrope</div><div class="passive-bonus">+10% Dmg Finaux par entité déplacée</div></div>
+      <div class="passive-card"><div class="passive-class">Huppermage</div><div class="passive-bonus">+10% Dmg Mêlée et Distance</div></div>
+      <div class="passive-card"><div class="passive-class">Ouginak</div><div class="passive-bonus">Récupère 5% PV max si frappé</div></div>
+    </div>
+    <div class="divider"></div>
+  </div>
+</div>
+
+<div id="cmds" class="panel">
+  <div class="breadcrumb"><a onclick="go('accueil')">Wiki</a><span class="breadcrumb-sep">›</span><span>Commandes</span></div>
+  <div class="page-header"><h1>Commandes Joueur</h1><div class="subtitle">Commandes disponibles en jeu</div></div>
+
+  <div class="alert alert-info">Les crochets <b>[</b> et <b>]</b> ne sont pas à saisir — ils indiquent un paramètre.</div>
+
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">⌨</span>Utilitaires</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Commande</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><span class="cmd">.ki [nom]</span></td><td>Localiser l'origine d'un item (donjon / monstre).</td></tr>
+          <tr><td><span class="cmd">.kwa [monstre]</span></td><td>Voir le butin complet d'un monstre.</td></tr>
+          <tr><td><span class="cmd">.start</span></td><td>Téléportation rapide vers la map de départ.</td></tr>
+          <tr><td><span class="cmd">.fm</span></td><td>Téléportation rapide vers l'atelier de forgemagie.</td></tr>
+          <tr><td><span class="cmd">.craft</span></td><td>Téléportation rapide vers les ateliers de craft.</td></tr>
+          <tr><td><span class="cmd">.groupe</span></td><td>Invite auto le compte secondaire + ipdrop + autofollow activés.</td></tr>
+          <tr><td><span class="cmd">.k</span></td><td>Centralise les kamas de tous vos comptes.</td></tr>
+          <tr><td><span class="cmd">.bug</span></td><td>Téléporte vers une cellule accessible si le joueur est bloqué.</td></tr>
+          <tr><td><span class="cmd">.power</span></td><td>Affiche votre score de puissance calculé sur vos statistiques.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div id="sorts" class="panel">
+  <div class="breadcrumb"><a onclick="go('accueil')">Wiki</a><span class="breadcrumb-sep">›</span><span>Sorts &amp; Coffres</span></div>
+  <div class="page-header"><h1>Sorts &amp; Coffres de classe</h1><div class="subtitle">Système d'obtention de sorts via coffres et jetons</div></div>
+
+  <div class="alert alert-success"><b>Bonne nouvelle :</b> L'achat d'un coffre débloque <b>tous les sorts</b> qu'il contient en une seule fois.</div>
+
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">📚</span>Sorts niveaux 1–100</div>
+    <p style="color:var(--text-muted);font-size:0.9rem">Appris classiquement via l'apprentissage normal en jeu.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">📦</span>Coffres de sorts — Niveaux 101 à 200</div>
+    <div class="alert alert-gold" style="margin-bottom:16px"><b>Localisation :</b> PNJ à la <b>Milice d'Astrub</b> · Achat avec des <a class="ilink" onclick="go('monnaies')">Orichors</a> · Chaque coffre contient <b>tous</b> les sorts de sa tranche.</div>
+    <div class="coffre-grid">
+      <div class="coffre-card c1">
+        <div class="coffre-title">Coffre 101 à 150</div>
+        <div class="coffre-cost"> Coût : 600 Orichors</div>
+        <div class="coffre-note">✓ Donne tous les sorts de niveau 101 à 150 de votre classe.</div>
+      </div>
+      <div class="coffre-card c2">
+        <div class="coffre-title">Coffre 151 à 200</div>
+        <div class="coffre-cost">Coût : 1 200 Orichors</div>
+        <div class="coffre-note">✓ Donne tous les sorts de niveau 151 à 200 de votre classe.</div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <p style="color:var(--text-muted);font-size:0.85rem">Comment obtenir des Orichors ? → <a class="ilink" onclick="go('monnaies')">Section Monnaies</a></p>
+  </div>
+</div>
+
+<div id="stuff" class="panel">
+  <div class="breadcrumb"><a onclick="go('accueil')">Wiki</a><span class="breadcrumb-sep">›</span><span>Amélioration du stuff</span></div>
+  <div class="page-header"><h1>Équipement &amp; Amélioration</h1><div class="subtitle">Obtenir, forger et booster votre stuff</div></div>
+
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">🏪</span>Achat à la taverne d'Astrub</div>
+    <ul style="list-style:none;display:flex;flex-direction:column;gap:8px">
+      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Les équipements s'achètent avec des <a class="ilink" onclick="go('monnaies')">Pièces d'Or</a>.</li>
+      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Dès l'achat, les items sont directement en <b>jet parfait</b>.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">🔨</span>Forgemagie</div>
+    <div class="grid">
+      <div class="mini-card gold-accent"><div class="mini-card-label">Exo garanti</div><div class="mini-card-value">Les runes <b>PA, PM et PO</b> ont un taux de réussite de <b>100%</b>.</div></div>
+      <div class="mini-card gold-accent"><div class="mini-card-label">Overmax naturel</div><div class="mini-card-value">Les objets supportent jusqu'à <b>+50% de statistiques</b> au-dessus du maximum.</div></div>
+      <div class="mini-card gold-accent"><div class="mini-card-label">Limites absolues</div><div class="mini-card-value">Plafonds fixes — ex : 504 Vitalité, 101 Force.</div></div>
+      <div class="mini-card gold-accent"><div class="mini-card-label">Items niv. 190+</div><div class="mini-card-value">Les limites absolues sont augmentées de <b>+20%</b> pour les items haute rareté.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">⚡</span>Tavernier Feubuk — Atelier FM Bonta</div>
+    <div class="alert alert-warning"><b>Attention :</b> Une fois boosté, l'item <b>ne peut plus être forgemagé</b>. Finalisez votre FM avant le boost.</div>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Rassemblez 3 exemplaires identiques</div><div class="step-desc">Même item, trois fois. Pour familier/montilier : 10 exemplaires requis.</div></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Placez l'item à booster en premier</div><div class="step-desc">L'item en première position dans l'échange sera celui amélioré.</div></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Résultat : +10% sur toutes les stats</div><div class="step-desc">L'item reçoit un boost massif et permanent de 10% de ses statistiques.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<div id="monnaies" class="panel">
+  <div class="breadcrumb"><a onclick="go('accueil')">Wiki</a><span class="breadcrumb-sep">›</span><span>Monnaies</span></div>
+  <div class="page-header"><h1>Monnaies &amp; Économie</h1><div class="subtitle">Kamas, Pièces d'Or, Orichors, Larmes Éthérées</div></div>
+
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">💰</span>Kamas</div>
+    <p style="color:var(--text-muted);font-size:0.9rem">Utilisables pour acheter des parchottages, pierres d'âmes, cosmétiques et sorts spéciaux auprès des PNJ au Zaap d'Astrub.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">🪙</span>Pièce d'Or</div>
+    <div class="grid">
+      <div class="mini-card green-accent"><div class="mini-card-label">Hors donjon</div><div class="mini-card-value"><b>1 pièce</b> par monstre tué.</div></div>
+      <div class="mini-card green-accent"><div class="mini-card-label">En donjon</div><div class="mini-card-value">Taux <b>×5</b> par rapport au farm en zone ouverte.</div></div>
+      <div class="mini-card green-accent"><div class="mini-card-label">Utilisation</div><div class="mini-card-value">Acheter des équipements à la <a class="ilink" onclick="go('stuff')">Taverne d'Astrub</a>.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">🔮</span>Orichors</div>
+    <div class="alert alert-gold" style="margin-bottom:14px"><b>Utilisation :</b>Achat des <a class="ilink" onclick="go('sorts')">Coffres de sorts</a> 101-200.</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Source</th><th>Gain</th></tr></thead>
+        <tbody class="orichor-row">
+          <tr class="orichor-row"><td>Farm hors donjon</td><td>1% de chance par combat</td></tr>
+          <tr class="orichor-row"><td>Donjon niv. 1–50</td><td>1 Orichor / salle</td></tr>
+          <tr class="orichor-row"><td>Donjon niv. 51–100</td><td>2 Orichors / salle</td></tr>
+          <tr class="orichor-row"><td>Donjon niv. 101–150</td><td>3 Orichors / salle</td></tr>
+          <tr class="orichor-row"><td>Donjon niv. 151–200+</td><td>4 Orichors / salle</td></tr>
+          <tr class="orichor-row"><td>Donjon à vagues</td><td><b>+10 Orichors</b> bonus</td></tr>
+          <tr class="orichor-row"><td>Antre Pov'Typus</td><td>Bonus supplémentaire / salle</td></tr>
+          <tr class="orichor-row"><td>Dimensions</td><td>Bonus indexé sur le niveau du donjon</td></tr>
+          <tr class="orichor-row"><td>Recyclage (100 items simultanés)</td><td>1 Orichor</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">💧</span>Larme Éthérée</div>
+    <p style="color:var(--text-muted);font-size:0.9rem">Obtenues en échangeant vos Dofus auprès du PNJ <b>Gislain Scythe</b> à l'Atelier de Bonta. Utilisées pour l'<a class="ilink" onclick="go('dofus')">Évolution des Dofus</a>.</p>
+  </div>
+</div>
+
+<div id="drops" class="panel">
+  <div class="breadcrumb"><a onclick="go('accueil')">Wiki</a><span class="breadcrumb-sep">›</span><span>Drops rares</span></div>
+  <div class="page-header"><h1>Drops Rares</h1><div class="subtitle">Dofus, Artefacts &amp; Cartes — par boss</div></div>
+
+  <div class="drop-search">
+    <input type="text" id="dropSearch" placeholder="Rechercher un item ou un boss..." oninput="filterDrops()">
+  </div>
+
+  <div class="tab-bar" id="dropTabs">
+    <button class="tab-btn active" onclick="setDropTab('all',this)">Tous <span class="count-badge" id="cnt-all">0</span></button>
+    <button class="tab-btn" onclick="setDropTab('carte',this)"><span class="elem-badge elem-carte">Carte</span> Cartes</button>
+    <button class="tab-btn" onclick="setDropTab('dofus',this)"><span class="elem-badge elem-dofus">Dofus</span> Dofus</button>
+    <button class="tab-btn" onclick="setDropTab('terre',this)"><span class="elem-badge elem-terre">Terre</span> Artefacts Terre</button>
+    <button class="tab-btn" onclick="setDropTab('feu',this)"><span class="elem-badge elem-feu">Feu</span> Artefacts Feu</button>
+    <button class="tab-btn" onclick="setDropTab('eau',this)"><span class="elem-badge elem-eau">Eau</span> Artefacts Eau</button>
+    <button class="tab-btn" onclick="setDropTab('air',this)"><span class="elem-badge elem-air">Air</span> Artefacts Air</button>
+    <button class="tab-btn" onclick="setDropTab('multi',this)"><span class="elem-badge elem-multi">Multi</span> Artefacts Multi</button>
+  </div>
+
+  <div class="card" style="padding:0;overflow:hidden">
+    <div class="table-wrap" style="margin:0">
+      <table id="dropTable">
+        <thead><tr><th>Item</th><th>Catégorie</th><th>Boss</th><th>Taux</th></tr></thead>
+        <tbody id="dropBody"></tbody>
+      </table>
+    </div>
+    <div id="noResults" class="no-results" style="display:none">Aucun résultat pour cette recherche.</div>
+  </div>
+</div>
+
+<div id="maitrise" class="panel">
+  <div class="breadcrumb"><a onclick="go('accueil')">Wiki</a><span class="breadcrumb-sep">›</span><span>Maîtrise de classe</span></div>
+  <div class="page-header"><h1>Maîtrise de Classe</h1><div class="subtitle">Progressez sans limite jusqu'au niveau 200</div></div>
+
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">👑</span>Principe</div>
+    <div class="grid">
+      <div class="mini-card gold-accent"><div class="mini-card-label">Palier</div><div class="mini-card-value">La Maîtrise s'incrémente <b>tous les 20 niveaux</b>.</div></div>
+      <div class="mini-card gold-accent"><div class="mini-card-label">Pas de reset</div><div class="mini-card-value">Aucun retour au niveau 1 — l'aventure continue !</div></div>
+      <div class="mini-card gold-accent"><div class="mini-card-label">Bonus</div><div class="mini-card-value">Statistiques permanentes + <b>+40 points</b> de caractéristiques par palier.</div></div>
+    </div>
+  </div>
+
+<div class="card">
+  <div class="card-title"><span class="ct-icon">📊</span>Détail des paliers</div>
+  <div class="prestige-grid">
+
+    <div class="prestige-card">
+      <div class="prestige-lvl">Niveau 20</div>
+      <div class="prestige-bonus">
+        <strong>Bonus du palier :</strong><br>
+        +50 Vitalité<br><br>
+        <strong>Total cumulé :</strong>
+        <ul style="list-style:none; padding-left:0; margin-top:5px; font-size:0.8rem; color:var(--text-muted)">
+          <li>• 50 Vitalité</li>
+        </ul>
+      </div>
     </div>
 
-    <div class="main-content">
+    <div class="prestige-card">
+      <div class="prestige-lvl">Niveau 40</div>
+      <div class="prestige-bonus">
+        <strong>Bonus du palier :</strong><br>
+        +25 Stats (Sag/For/Agi/Int/Cha)<br><br>
+        <strong>Total cumulé :</strong>
+        <ul style="list-style:none; padding-left:0; margin-top:5px; font-size:0.8rem; color:var(--text-muted)">
+          <li>• 50 Vitalité</li>
+          <li>• 25 Stats</li>
+        </ul>
+      </div>
+    </div>
 
-        <div id="guide" class="panel active">
-            <div class="header-box"><h2>Informations détaillé du serveur</h2></div>
-            <div class="warning-box">
-                <b>Dernière mise à jour effectué : 20/02/2026</b>
-                <hr class="separator">
-                <b>A savoir :</b> La totalité du serveur est entièrement FreeToWin, je fais ça uniquement par passion et vous garanti une aventure <b>100% Gratuite</b>
-                <hr class="separator">
-                <b>Etat du serveur : <span style="color: #2a7a2a;">En Ligne</span></b>
-                <hr class="separator">
-                <b>Lien du discord : <a href="https://discord.gg/TKC6TpAmQW" target="_blank" style="color: #7289da;">https://discord.gg/TKC6TpAmQW</a></b>
-                <hr class="separator">
-                <b>Votre avis compte ! N'hésitez pas à faire des suggestions dans le discord !</b>
-                <hr class="separator">
-                <b>Voir la dernière <span class="highlight-link" onclick="linkTo('last-update')">Mise à jour.</span></b>
-                <hr class="separator">
-                <b>Prochainement : <span class="highlight-link" onclick="linkTo('next-time')">A venir</span></b>
-            </div>
-            <hr class="separator">
-            <h3>Nouveau ? Lisez notre <span class="highlight-link" onclick="linkTo('tuto')">Guide du débutant.</span></h3>
-            <div class="section-card">
-                <h3>Premiers Pas</h3>
-                <ul>
-                    <li><b>Choix de Classe :</b> Consultez l'onglet <span class="highlight-link" onclick="linkTo('passifs')">Passifs</span> pour voir les 19 bonus uniques.</li>
-                    <li><b>Sorts de départ :</b> Vous connaissez automatiquement <b>Maîtrise d'arme</b> et <b>Flamiche</b>.</li>
-                    <li><b>Mode Ombre :</b> Activable via un PNJ au zaap d'Astrub pour la mort permanente en PvM.</li>
-                    <li><b>Début :</b> Vous commencez avec une panoplie aventurier et un familier sagesse.</li>
-                    <li><b>Particularité :</b> Les personnages commencent avec 200 prospection de base.</li>
-                    <li><b>Sorts Spéciaux :</b> 3 sorts ont été sélectionnés par classe pour subir des modifications.</li>
-                </ul>
-            </div>
-            <div class="section-card">
-                <h3>Informations Générale</h3>
-                <ul>
-                    <li><b>Le serveur est orienté Mono/Duocompte !</b></li>
-                    <li><b>Système de création du compte depuis le jeu directement.</b></li>
-                    <li><b>Réel sentiment de progression tout au long de l'aventure !</b></li>
-                    <li><b>Nouveaux systèmes n'existant pas dans les autres serveurs !</b></li>
-                    <li><b>Système de forgemagie avec des limites complètement opérationnel !</b></li>
-                    <li><b>Une Intelligence Artificielle retravaillée pour toujours plus de défi !</b></li>
-                    <li><b>Des succès score retravaillés pour obtenir des récompenses uniques !</b></li>
-                    <li><b>Des ajouts de skin/monstres des versions supérieures ! (Max 2.73)</b></li>
-                </ul>
-            </div>
-            <div class="section-card">
-                <h3>Fonctionnalité</h3>
-                <div class="grid">
-                    <div class="info-card"><strong>Drop Méritant</strong>Les équipements tombent directement sur les monstres et sont répartis entre les IP du combat.</div>
-                    <div class="info-card"><strong>Prestige sans retour au niveau 1</strong>Montez jusqu'au <span class="highlight-link" onclick="linkTo('prestige')">Prestige</span> 15 pour des bonus de statistiques.</div>
-                    <div class="info-card"><strong>Posséder tous les sorts</strong>Collectionnez les <span class="highlight-link" onclick="linkTo('sorts')">jetons/coffres</span> de sort et obtenez tous les sorts du jeu !</div>
-                    <div class="info-card"><strong>Passif Améliorable</strong>Améliorez vos passifs pour un end-game toujours plus opti ! <span class="highlight-link" onclick="linkTo('amelioration-passif')">Evolution</span></div>
-                    <div class="info-card"><strong>Transcendance</strong>Cumulez jusqu'à 3 passifs via la <span class="highlight-link" onclick="linkTo('trans')">Transcendance</span> !</div>
-                    <div class="info-card"><strong>Items évolutifs</strong>Repoussez les limites de votre stuff grâce aux <span class="highlight-link" onclick="linkTo('item-upgrade')">Améliorations</span> disponibles !</div>
-                    <div class="info-card"><strong>Recyclage rapide</strong>Convertissez les items inutiles en kamas/orichor via le <span class="highlight-link" onclick="linkTo('recycling')">Recyclage</span> au zaap d'Astrub !</div>
-                    <div class="info-card"><strong>Songe Infini</strong>Combats de 8 monstres dont 3 boss à chaque tentative !</div>
-                    <div class="info-card"><strong>Mise à jour régulière !</strong>Restez à l'affût des dernières <span class="highlight-link" onclick="linkTo('last-update')">Mises à jour</span> !</div>
-                </div>
-            </div>
-        </div>
+    <div class="prestige-card">
+      <div class="prestige-lvl">Niveau 60</div>
+      <div class="prestige-bonus">
+        <strong>Bonus du palier :</strong><br>
+        +10 Résistances fixes<br><br>
+        <strong>Total cumulé :</strong>
+        <ul style="list-style:none; padding-left:0; margin-top:5px; font-size:0.8rem; color:var(--text-muted)">
+          <li>• 50 Vitalité</li>
+          <li>• 25 Stats</li>
+          <li>• 10 Résistances fixes</li>
+        </ul>
+      </div>
+    </div>
 
-        <div id="last-update" class="panel">
-            <div class="header-box"><h2>Notes de Mise à Jour - 20/02/2026</h2></div>
-            <div class="section-card">
-                <h3>Items</h3>
-                <ul>
-                    <li><b>Parchemins de sort Xélor :</b> Rayon Ténébreux et Glas introduits en jeu, dans le coffre xélor IV et le jeton de sort Ultime.</li>
-                    <li><b>Familiers Légendaires :</b> Ajout du Bouftou Royal (Drop BR : 1%) et du Meulou (Drop Meulou : 1%).</li>
-                </ul>
-                <hr class="separator">
-                <h3>PNJ</h3>
-                <ul>
-                    <li><b>Recyclage de sort (Astrub) :</b> Échangez vos parchemins inutiles contre 3 pièces d'or l'unité.</li>
-                    <li><b>Pierrik l'Unificateur :</b> Nouveau système de fusion d'équipement.
-                        <ul>
-                            <li>Nécessite deux items de la même catégorie (ex: deux capes) mais de noms différents.</li>
-                            <li>Les items doivent avoir été préalablement améliorés via le Tavernier Feubuk.</li>
-                        </ul>
-                    </li>
-                </ul>
-                <hr class="separator">
-                <h3>Challenges & Succès</h3>
-                <ul>
-                    <li><b>Nouveau Challenge "Demi-Mesure" :</b> Utiliser au maximum la moitié de ses PA disponibles durant son tour.</li>
-                    <li><b>Rasboul Majeur :</b> L'icône du succès "Temps qui court" est remplacée par "Zombie".</li>
-                </ul>
-                <hr class="separator">
-                <h3>Commandes & Divers</h3>
-                <ul>
-                    <li><b>Commande .Power :</b> La commande a été revue, découvrez-la en jeu !</li>
-                </ul>
-            </div>
-        </div>
+    <div class="prestige-card">
+      <div class="prestige-lvl">Niveau 80</div>
+      <div class="prestige-bonus">
+        <strong>Bonus du palier :</strong><br>
+        +1 PO · +1 Invo · +20 PP<br><br>
+        <strong>Total cumulé :</strong>
+        <ul style="list-style:none; padding-left:0; margin-top:5px; font-size:0.8rem; color:var(--text-muted)">
+          <li>• 50 Vitalité</li>
+          <li>• 25 Stats</li>
+          <li>• 10 Résistances fixes</li>
+          <li>• 20 Prospection</li>
+          <li>• 1 Portée</li>
+          <li>• 1 Invocation</li>
+        </ul>
+      </div>
+    </div>
 
-        <div id="next-time" class="panel">
-            <div class="header-box"><h2>Listes des ajouts prévus prochainement</h2></div>
-            <div class="section-card">
-                <h3>Monstre et Panoplie (version 2.73 maximum)</h3>
-                <ul>
-                    <li>Ajout progressif des derniers boss.</li>
-                    <li>Ajout progressif des dernières panoplies.</li>
-                </ul>
-                <h3>Contenu Late-Game</h3>
-                <ul>
-                    <li>Les <span class="highlight-link" onclick="linkTo('songe')">Songes Infini</span> revisités sur 50 étages maximum.</li>
-                    <li>Zone niveau 200 - 300</li>
-                    <li>Item niveau 200 - 300</li>
-                    <li>Sanctification d'un item.</li>
-                </ul>
-            </div>
-        </div>
+    <div class="prestige-card">
+      <div class="prestige-lvl">Niveau 100</div>
+      <div class="prestige-bonus">
+        <strong>Bonus du palier :</strong><br>
+        +10 Dommages<br><br>
+        <strong>Total cumulé :</strong>
+        <ul style="list-style:none; padding-left:0; margin-top:5px; font-size:0.8rem; color:var(--text-muted)">
+          <li>• 50 Vitalité</li>
+          <li>• 25 Stats</li>
+          <li>• 10 Résistances fixes</li>
+          <li>• 20 Prospection</li>
+          <li>• 10 Dommages</li>
+          <li>• 1 Portée</li>
+          <li>• 1 Invocation</li>
+        </ul>
+      </div>
+    </div>
 
-        <div id="passifs" class="panel">
-            <div class="header-box"><h2>Passifs de Classe (19)</h2></div>
-            <div class="section-card">
-                <p>Chaque classe possède un <b>Artefact</b> unique dictant son passif :</p>
-                <p>Les passifs sont disponibles à partir du niveau 200. <span class="highlight-link" onclick="linkTo('trans')">Transcendance</span></p>
-                <div class="grid">
-                    <div class="info-card"><strong>Iop</strong>+15% de dégâts en mêlée</div>
-                    <div class="info-card"><strong>Cra</strong>+15% de dégâts à distance</div>
-                    <div class="info-card"><strong>Sacrieur</strong>+20% de Vitalité</div>
-                    <div class="info-card"><strong>Eniripsa</strong>Soigne 5% aux alliés (début tour)</div>
-                    <div class="info-card"><strong>Sram</strong>+25 dommages critiques</div>
-                    <div class="info-card"><strong>Xélor</strong>+1 PA en début de tour (Max. 2)</div>
-                    <div class="info-card"><strong>Sadida</strong>300% du niveau en bouclier (fin tour)</div>
-                    <div class="info-card"><strong>Forgelance</strong>+8% dmg finaux & -8% dégâts subis</div>
-                    <div class="info-card"><strong>Osamodas</strong>+30 de tacle et de fuite</div>
-                    <div class="info-card"><strong>Ecaflip</strong>+15% Coups Critiques</div>
-                    <div class="info-card"><strong>Enutrof</strong>+15% Dommages Armes</div>
-                    <div class="info-card"><strong>Feca</strong>-15% Dommages Subis</div>
-                    <div class="info-card"><strong>Pandawa</strong>État Intaclable permanent</div>
-                    <div class="info-card"><strong>Roublard</strong>+30% Dmg Finaux tour pair, -30% tour impair</div>
-                    <div class="info-card"><strong>Zobal</strong>+25% Boucliers Reçus</div>
-                    <div class="info-card"><strong>Steamer</strong>+1 PM en début de tour (Max. 2)</div>
-                    <div class="info-card"><strong>Eliotrope</strong>+10% Dmg Finaux par entité déplacée</div>
-                    <div class="info-card"><strong>Huppermage</strong>+10% Dmg Mêlée et Distance</div>
-                    <div class="info-card"><strong>Ouginak</strong>Récupère 5% PV max si frappé</div>
-                </div>
-            </div>
-        </div>
+    <div class="prestige-card">
+      <div class="prestige-lvl">Niveau 120</div>
+      <div class="prestige-bonus">
+        <strong>Bonus du palier :</strong><br>
+        +25 Stats<br><br>
+        <strong>Total cumulé :</strong>
+        <ul style="list-style:none; padding-left:0; margin-top:5px; font-size:0.8rem; color:var(--text-muted)">
+          <li>• 50 Vitalité</li>
+          <li>• 50 Stats</li>
+          <li>• 10 Résistances fixes</li>
+          <li>• 20 Prospection</li>
+          <li>• 10 Dommages</li>
+          <li>• 1 Portée</li>
+          <li>• 1 Invocation</li>
+        </ul>
+      </div>
+    </div>
 
-        <div id="prestige" class="panel">
-            <div class="header-box"><h2>Le Système de Prestige</h2></div>
-            <div class="section-card">
-                <h3>Prestige</h3>
-                <p>Une fois le niveau 200 atteint, vous pouvez passer un grade de Prestige dans la milice d'Astrub.</p>
-                <ul>
-                    <li>Pas de retour au niveau 1, votre aventure continue !</li>
-                    <li>Le prestige 15 est situé au niveau <b>395</b>.</li>
-                    <li>Accorde des bonus de caractéristiques permanents.</li>
-                    <li>Accorde des points de caractéristiques supplémentaires à chaque palier.</li>
-                </ul>
-            </div>
-            <div class="section-card">
-                <h3>Bonus Prestige 15 (cumulé)</h3>
-                <ul>
-                    <li>400 Vitalité, 225 à toutes les stats, 45 résistances fixes à tous les éléments</li>
-                    <li>1 Portée, 1 Invocation, 10 Dommages, 10% Critique, 20 Dommages critique, 20% Dommages finaux</li>
-                </ul>
-            </div>
-            <div class="header-box"><h2>Bonus Prestige Détail</h2></div>
-            <div class="section-card">
-                <div class="grid">
-                    <div class="info-card"><strong>Prestige 1 - Niveau 200</strong><b>Exp : 5.555.424.000</b><ul><li>150 Vitalité</li></ul></div>
-                    <div class="info-card"><strong>Prestige 2 - Niveau 220</strong><b>Exp : 6.775.634.950</b><ul><li>25 Sagesse / Force / Agilité / Intelligence / Chance</li></ul></div>
-                    <div class="info-card"><strong>Prestige 3 - Niveau 240</strong><b>Exp : 8.186.089.059</b><ul><li>15 Résistance fixe à tous les éléments</li></ul></div>
-                    <div class="info-card"><strong>Prestige 4 - Niveau 260</strong><b>Exp : 9.890.151.191</b><ul><li>1 Portée / 1 Invocation</li></ul></div>
-                    <div class="info-card"><strong>Prestige 5 - Niveau 280</strong><b>Exp : 11.948.940.439</b><ul><li>10 Dommages</li></ul></div>
-                    <div class="info-card"><strong>Prestige 6 - Niveau 300</strong><b>Exp : 14.436.298.783</b><ul><li>25 Sagesse / Force / Agilité / Intelligence / Chance</li></ul></div>
-                    <div class="info-card"><strong>Prestige 7 - Niveau 315</strong><b>Exp : 16.636.068.929</b><ul><li>15 Résistance fixe à tous les éléments</li></ul></div>
-                    <div class="info-card"><strong>Prestige 8 - Niveau 330</strong><b>Exp : 19.171.035.011</b><ul><li>5% Coups critique / 10 Dommages critique</li></ul></div>
-                    <div class="info-card"><strong>Prestige 9 - Niveau 345</strong><b>Exp : 22.092.273.419</b><ul><li>10% Dommages finaux</li></ul></div>
-                    <div class="info-card"><strong>Prestige 10 - Niveau 360</strong><b>Exp : 25.458.643.445</b><ul><li>150 Vitalité / 75 à toutes les stats</li></ul></div>
-                    <div class="info-card"><strong>Prestige 11 - Niveau 375</strong><b>Exp : 29.337.973.226</b><ul><li>15 Résistance fixe à tous les éléments</li></ul></div>
-                    <div class="info-card"><strong>Prestige 12 - Niveau 380</strong><b>Exp : 30.758.257.209</b><ul><li>25 Sagesse / Force / Agilité / Intelligence / Chance</li></ul></div>
-                    <div class="info-card"><strong>Prestige 13 - Niveau 385</strong><b>Exp : 32.247.298.722</b><ul><li>5% Coups critique / 10 Dommages critique</li></ul></div>
-                    <div class="info-card"><strong>Prestige 14 - Niveau 390</strong><b>Exp : 33.808.426.394</b><ul><li>10% Dommages finaux</li></ul></div>
-                    <div class="info-card"><strong>Prestige 15 - Niveau 395</strong><b>Exp : 35.445.129.997</b><ul><li>150 Vitalité / 75 à toutes les stats</li></ul></div>
-                </div>
-            </div>
-        </div>
+    <div class="prestige-card">
+      <div class="prestige-lvl">Niveau 140</div>
+      <div class="prestige-bonus">
+        <strong>Bonus du palier :</strong><br>
+        +10 Résistances fixes<br><br>
+        <strong>Total cumulé :</strong>
+        <ul style="list-style:none; padding-left:0; margin-top:5px; font-size:0.8rem; color:var(--text-muted)">
+          <li>• 50 Vitalité</li>
+          <li>• 50 Stats</li>
+          <li>• 20 Résistances fixes</li>
+          <li>• 20 Prospection</li>
+          <li>• 10 Dommages</li>
+          <li>• 1 Portée</li>
+          <li>• 1 Invocation</li>
+        </ul>
+      </div>
+    </div>
 
-        <div id="cmds" class="panel">
-            <div class="header-box"><h2>Commandes Joueur</h2></div>
-            <div class="section-card">
-                <h3>Utilitaires</h3>
-                <div class="warning-box"><p>Les signes <b>[</b> et <b>]</b> ne sont pas à écrire.</p></div>
-                <ul>
-                    <li><span class="cmd">.ki [nom]</span> : Localiser le drop d'un item.</li>
-                    <li><span class="cmd">.kwa [monstre]</span> : Voir le butin d'un mob.</li>
-                    <li><span class="cmd">.pano [pano]</span> : Afficher la liste des monstres qui possèdent la panoplie en drop.</li>
-                    <li><span class="cmd">.start / .fm / .craft</span> : Téléportations rapides.</li>
-                    <li><span class="cmd">.groupe</span> : Invitation automatique du compte secondaire, ipdrop actif, autofollow actif.</li>
-                    <li><span class="cmd">.k</span> : Centraliser les kamas.</li>
-                    <li><span class="cmd">.what</span> : Affiche les informations détaillées d'un sort de classe au rang 1.</li>
-                    <li><span class="cmd">.bug</span> : Téléporte sur une cellule accessible si le joueur est bloqué.</li>
-                    <li><span class="cmd">.power</span> : Donne votre score de puissance calculé sur vos statistiques.</li>
-                </ul>
-            </div>
-        </div>
+    <div class="prestige-card">
+      <div class="prestige-lvl">Niveau 160</div>
+      <div class="prestige-bonus">
+        <strong>Bonus du palier :</strong><br>
+        +10 Dmg Crit. · +30 PP<br><br>
+        <strong>Total cumulé :</strong>
+        <ul style="list-style:none; padding-left:0; margin-top:5px; font-size:0.8rem; color:var(--text-muted)">
+          <li>• 50 Vitalité</li>
+          <li>• 50 Stats</li>
+          <li>• 20 Résistances fixes</li>
+          <li>• 50 Prospection</li>
+          <li>• 10 Dommages</li>
+          <li>• 10 Dommages Critiques</li>
+          <li>• 1 Portée</li>
+          <li>• 1 Invocation</li>
+        </ul>
+      </div>
+    </div>
 
-        <div id="money" class="panel">
-            <div class="header-box"><h2>Économie & Monnaies</h2></div>
-            <div class="section-card">
-                <h3>Monnaies de base</h3>
-                <ul><li><b>Kamas :</b> Achat de parchottage, pierres d'âmes, cosmétiques et clefs de donjon auprès des PNJ au Zaap d'Astrub.</li></ul>
-                <hr class="separator">
-                <h3>Pièce d'Or</h3>
-                <ul>
-                    <li>Vous obtenez une pièce d'or par monstre tué.</li>
-                    <li>Ce taux est doublé en donjon.</li>
-                    <li>Ce taux est encore doublé si vous équipez un multiman (compagnon).</li>
-                </ul>
-                <hr class="separator">
-                <h3>Obtention des Orichors</h3>
-                <p><b>Utilisation :</b> Dépensez-les auprès du PNJ (Passif Amélioration) dans la Milice d'Astrub en [5,-19] pour améliorer vos <span class="highlight-link" onclick="linkTo('passifs')">Artefacts</span> !</p>
-                <table>
-                    <thead><tr><th>Activité</th><th>Gain</th></tr></thead>
-                    <tbody>
-                        <tr><td><b>Hors Donjon</b></td><td>1% de chance de drop par combat.</td></tr>
-                        <tr><td><b>Donjon Niv. 1-50</b></td><td>1 Orichor / salle.</td></tr>
-                        <tr><td><b>Donjon Niv. 51-100</b></td><td>2 Orichors / salle.</td></tr>
-                        <tr><td><b>Donjon Niv. 101-150</b></td><td>3 Orichors / salle.</td></tr>
-                        <tr><td><b>Donjon Niv. 151-200+</b></td><td>4 Orichors / salle.</td></tr>
-                        <tr><td><b>Donjon à vagues</b></td><td>Bonus spécial de <b>+10 Orichors</b>.</td></tr>
-                    </tbody>
-                </table>
-                <hr class="separator">
-                <ul>
-                    <li><b>Antre Pov'Typus :</b> Bonus d'Orichors supplémentaire par salle terminée.</li>
-                    <li><b>Dimensions :</b> Bonus d'Orichors indexé sur le niveau du donjon.</li>
-                    <li><b>Recyclage :</b> 1 Orichor offert pour 100 items vendus simultanément au PNJ.</li>
-                </ul>
-                <hr class="separator">
-                <h3>Manuscrit Ancien</h3>
-                <ul>
-                    <li><b>Obtention :</b> Niveau 200 requis ainsi que la <span class="highlight-link" onclick="linkTo('trans')">Transcendance</span> de niveau 1.</li>
-                    <li><b>Gain :</b> Gain aléatoire de 1 à 5 par combat PvM remporté.</li>
-                </ul>
-                <hr class="separator">
-                <h3>Reflet Onirique</h3>
-                <ul>
-                    <li><b>Obtention :</b> Via les <span class="highlight-link" onclick="linkTo('songe')">Songes Infinis</span> !</li>
-                    <li><b>Utilisation :</b> Parlez au PNJ (Malice) sur la map des songes (touche T) pour acheter des items légendaires.</li>
-                </ul>
-                <hr class="separator">
-                <h3>Larme Ethérée</h3>
-                <ul><li><b>Obtention :</b> En échangeant vos dofus auprès du PNJ <span class="highlight-link" onclick="linkTo('larmes')">Gislain Scythe</span> à l'atelier de Bonta.</li></ul>
-            </div>
-        </div>
+    <div class="prestige-card">
+      <div class="prestige-lvl">Niveau 180</div>
+      <div class="prestige-bonus">
+        <strong>Bonus du palier :</strong><br>
+        +10% Dommages finaux<br><br>
+        <strong>Total cumulé :</strong>
+        <ul style="list-style:none; padding-left:0; margin-top:5px; font-size:0.8rem; color:var(--text-muted)">
+          <li>• 50 Vitalité</li>
+          <li>• 50 Stats</li>
+          <li>• 20 Résistances fixes</li>
+          <li>• 50 Prospection</li>
+          <li>• 10 Dommages</li>
+          <li>• 10 Dommages Critiques</li>
+          <li>• 10% Dommages finaux</li>
+          <li>• 1 Portée</li>
+          <li>• 1 Invocation</li>
+        </ul>
+      </div>
+    </div>
 
-        <div id="larmes" class="panel">
-            <div class="header-box"><h2>Evolution Dofus</h2></div>
-            <div class="section-card">
-                <h3>Recyclage (PNJ Gislain Scythe - Atelier de Bonta)</h3>
-                <div class="grid">
-                    <div class="info-card"><strong>Dofus</strong>3 Larmes par Dofus.</div>
-                    <div class="info-card"><strong>Dofaléa</strong>5 Larmes par Dofus.</div>
-                </div>
-                <div class="warning-box"><b>A savoir :</b> Un dofus obtenu via succès ne peut pas être brisé via ce système.</div>
-                <ul>
-                    <li>1 seul dofus par échange pour la conversion en larme éthérée.</li>
-                    <li>L'amélioration du dofus se passe sur le PNJ Thalyion.</li>
-                </ul>
-                <hr class="separator">
-                <h3>Évolution (PNJ Thalyion - Atelier de Bonta)</h3>
-                <table>
-                    <tr><th>Rang</th><th>Coût</th><th>Effet</th></tr>
-                    <tr><td><b>Original</b></td><td>Aucun craft possible</td><td>Jet 1.29</td></tr>
-                    <tr><td><b>Rare</b></td><td>15 Larmes éthérées + Dofus Original</td><td>Jet 2.51</td></tr>
-                    <tr><td><b>Mythique</b></td><td>15 Larmes éthérées + Dofus Rare</td><td>Jet amélioré</td></tr>
-                </table>
-                <hr class="separator">
-                <h3>Dofus éligibles à ce système</h3>
-                <ul>
-                    <li>Dofus Emeraude Original</li>
-                    <li>Dofus Pourpre Original</li>
-                    <li>Dofus Turquoise Original</li>
-                    <li>Dofus Ivoire Original</li>
-                    <li>Dofus Ebène Original</li>
-                    <li>Dofus Vulbis Original</li>
-                    <li>Dofus Ocre Original</li>
-                </ul>
-            </div>
-        </div>
+    <div class="prestige-card highlight">
+      <div class="prestige-lvl">Niveau 200 ★</div>
+      <div class="prestige-bonus">
+        <strong>Bonus du palier :</strong><br>
+        +50 Vitalité · +50 Stats<br><br>
+        <strong>Total cumulé (20 à 200) :</strong>
+        <ul style="list-style:none; padding-left:0; margin-top:5px; font-size:0.8rem; color:var(--text)">
+          <li>• 100 Vitalité</li>
+          <li>• 100 Stats (Sag/For/Agi/Int/Cha)</li>
+          <li>• 20 Résistances fixes</li>
+          <li>• 50 Prospection</li>
+          <li>• 10 Dommages</li>
+          <li>• 10 Dommages Critiques</li>
+          <li>• 10% Dommages finaux</li>
+          <li>• 1 Portée</li>
+          <li>• 1 Invocation</li>
+        </ul>
+      </div>
+    </div>
 
-        <div id="drops" class="panel">
-            <div class="header-box"><h2>Taux de Drop Dofus</h2></div>
-            <div class="section-card">
-                <table>
-                    <thead><tr><th>Dofus</th><th>Boss</th><th>Taux</th></tr></thead>
-                    <tbody>
-                        <tr><td>Kalyptus</td><td>Skeunk</td><td>100%</td></tr>
-                        <tr><td>Dofus Émeraude</td><td>Abraknyde Ancestral</td><td>1%</td></tr>
-                        <tr><td>Dom de Pin</td><td>Maître Pandore</td><td>1%</td></tr>
-                        <tr><td>Dotruche</td><td>Haute Truche</td><td>0.8%</td></tr>
-                        <tr><td>Dofus Pourpre</td><td>Minotot / Minototor</td><td>0.8%</td></tr>
-                        <tr><td>Dofus Turquoise</td><td>Dragon Cochon / Chêne Mou</td><td>0.8%</td></tr>
-                        <tr><td>Dolmanax</td><td>Kanigroula</td><td>0.8%</td></tr>
-                        <tr><td>Dokoko</td><td>Moon</td><td>0.8%</td></tr>
-                        <tr><td>Dofus Émeraude</td><td>Dopeul Dark Vlad</td><td>0.5%</td></tr>
-                        <tr><td>Dofus des Veilleurs</td><td>Captain Ekarlatte</td><td>0.5%</td></tr>
-                        <tr><td>Dofus Argenté Scintillant</td><td>Fuji Givrefoux</td><td>0.5%</td></tr>
-                        <tr><td>Jyfus</td><td>Comte Razof</td><td>0.5%</td></tr>
-                        <tr><td>Dofus Vulbis</td><td>Crocabulia</td><td>0.2%</td></tr>
-                        <tr><td>Dofus Ocre</td><td>Merkator</td><td>0.2%</td></tr>
-                        <tr><td>Dolmanax Scintillant</td><td>Glourséleste</td><td>0.2%</td></tr>
-                        <tr><td>Dofus Forgelave</td><td>Solar</td><td>0.2%</td></tr>
-                        <tr><td>Dofus Ivoire</td><td>Ilyzaelle</td><td>0.2%</td></tr>
-                        <tr><td>Dofus Ebène</td><td>Tal Kasha</td><td>0.2%</td></tr>
-                        <tr><td>Dofus Nébuleux</td><td>Vortex / Chaloeil / Reine des voleurs / Roi Nidas</td><td>0.2%</td></tr>
-                        <tr><td>Dofus Abyssal</td><td>Koutoulou / Dantinéa / Capitaine Meno</td><td>0.2%</td></tr>
-                        <tr><td>Dofus des Glaces</td><td>Missiz Frizz / Nileza / Klime / Sylargh / Comte Harebourg</td><td>0.2%</td></tr>
-                        <tr><td>Dofus du Cauchemar</td><td>Guerre</td><td>0.1%</td></tr>
-                        <tr><td>Dofus Sylvestre</td><td>Corruption</td><td>0.1%</td></tr>
-                        <tr><td>Dorigami</td><td>Servitude</td><td>0.1%</td></tr>
-                        <tr><td>Domakuro</td><td>Misère</td><td>0.1%</td></tr>
-                    </tbody>
-                </table>
-            </div>
-            <hr class="separator">
-            <div class="section-card">
-                <table>
-                    <thead><tr><th>Artefact</th><th>Boss</th><th>Taux</th></tr></thead>
-                    <tbody>
-                        <tr><td>Carapace du Titan</td><td>Grollum</td><td>3%</td></tr>
-                        <tr><td>Sagesse Infinie</td><td>Phossile</td><td>3%</td></tr>
-                        <tr><td>Poursuite de l'ombre</td><td>Haute Truche</td><td>3%</td></tr>
-                        <tr><td>Prisme fragmenté</td><td>Bworkette</td><td>3%</td></tr>
-                        <tr><td>Pierre de l'Equité</td><td>Nelween</td><td>3%</td></tr>
-                        <tr><td>Furher du Ravageur</td><td>Fuji Givrefoux Nourricière</td><td>3%</td></tr>
-                    </tbody>
-                </table>
-            </div>
-            <hr class="separator">
-            <div class="section-card">
-                <table>
-                    <thead><tr><th>Familier Légendaire</th><th>Boss</th><th>Taux</th></tr></thead>
-                    <tbody>
-                        <tr><td>Bouftou Royal</td><td>Bouftou Royal</td><td>1%</td></tr>
-                        <tr><td>Meulou</td><td>Meulou</td><td>1%</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+  </div>
+</div>
+</div>
 
-        <div id="trans" class="panel">
-            <div class="header-box"><h2>La Transcendance</h2></div>
-            <div class="section-card">
-                <h3>Fusion de Passifs</h3>
-                <p>Permet de cumuler jusqu'à <b>3 passifs</b> simultanément.</p>
-                <ul>
-                    <li><b>Requis :</b> Niveau 200.</li>
-                    <li><b>Lieu :</b> Milice d'Astrub [5,-19] (Sous-sol).</li>
-                    <li><b>Ressource :</b> Manuscrits Anciens (drop auto).</li>
-                </ul>
-                <hr class="separator">
-                <h3>Particularité</h3>
-                <ul>
-                    <li>Dès l'activation, vous débloquez le drop des <b><span class="highlight-link" onclick="linkTo('money')">Manuscrits Anciens</span></b>.</li>
-                    <li>Chaque niveau requiert un montant croissant de Manuscrits Anciens.</li>
-                    <li>Nouveau passif possible aux paliers transcendance 3 (2e passif) et 5 (3e passif).</li>
-                </ul>
-                <div class="warning-box"><b>Important :</b> Une fois transcendance 5, vous pouvez continuer le farm pour créer des versions différentes de vos passifs.</div>
-                <hr class="separator">
-                <h3>Comment ça fonctionne ?</h3>
-                <p>Équipez votre <span class="highlight-link" onclick="linkTo('passifs')">passif</span> et possédez-en un dans l'inventaire, la fusion s'effectue via le PNJ <b><span class="highlight-link" onclick="linkTo('amelioration-passif')">Transcendance / Evolution</span></b>.</p>
-                <p><i>Note : La fusion consomme le premier passif de votre inventaire.</i></p>
-            </div>
-        </div>
+<div id="dofus" class="panel">
+  <div class="breadcrumb"><a onclick="go('accueil')">Wiki</a><span class="breadcrumb-sep">›</span><span>Évolution Dofus</span></div>
+  <div class="page-header"><h1>Évolution des Dofus</h1><div class="subtitle">Recyclage et amélioration via les Larmes Éthérées</div></div>
 
-        <div id="sorts" class="panel">
-            <div class="header-box"><h2>Coffres & Jetons de Sorts</h2></div>
-            <div class="section-card">
-                <ul>
-                    <li>Système d'obtention de sort aléatoire via des objets spéciaux !</li>
-                    <li>Les objets ci-dessous sont à drop uniquement sur les <b>Boss de donjon</b>.</li>
-                    <li>Beaucoup de boss contiennent plusieurs jetons/coffres de classe, restez attentif à vos loots !</li>
-                </ul>
-                <hr class="separator">
-                <h3>Jetons de Sorts (Taux Raisonnable)</h3>
-                <p>Contient un sort aléatoire d'une des 18 classes. 4 Grades : Faible, Intermédiaire, Puissant, Ultime.</p>
-                <ul>
-                    <li><b>Faible :</b> Sort Niveau 1 à 50</li>
-                    <li><b>Intermédiaire :</b> Sort Niveau 51 à 100</li>
-                    <li><b>Puissant :</b> Sort Niveau 101 à 150</li>
-                    <li><b>Ultime :</b> Sort Niveau 151 à 200</li>
-                </ul>
-                <hr class="separator">
-                <h3>Coffres de Classes (Taux faible)</h3>
-                <p>Les coffres contiennent des sorts liés à une classe précise. 4 Grades : I, II, III, IV.</p>
-                <ul>
-                    <li><b>Grade I :</b> Sort Niveau 1 à 50</li>
-                    <li><b>Grade II :</b> Sort Niveau 51 à 100</li>
-                    <li><b>Grade III :</b> Sort Niveau 101 à 150</li>
-                    <li><b>Grade IV :</b> Sort Niveau 151 à 200</li>
-                </ul>
-                <hr class="separator">
-                <h3>Roulette du Zaap d'Astrub</h3>
-                <p>Sélection de 3 sorts importants pour chacune des 18 classes. Contient des objets <b>Inédits</b>.</p>
-                <ul>
-                    <li><b>200.000 Kamas</b> et 10 Parchemins de Sort.</li>
-                    <li><b>1 Ticket de Loterie</b> (Lot spécial garanti + deux lots uniques !).</li>
-                </ul>
-            </div>
-        </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">♻</span>Recyclage — PNJ Gislain Scythe (Atelier de Bonta)</div>
+    <div class="alert alert-warning">Un Dofus obtenu via un <b>succès</b> ne peut pas être brisé dans ce système.</div>
+    <div class="grid" style="margin-top:10px">
+      <div class="mini-card gold-accent"><div class="mini-card-label">Dofus classique</div><div class="mini-card-value"><b>3 Larmes</b> par Dofus brisé.</div></div>
+      <div class="mini-card gold-accent"><div class="mini-card-label">Dofaléa</div><div class="mini-card-value"><b>5 Larmes</b> par Dofaléa brisé.</div></div>
+    </div>
+    <p style="color:var(--text-muted);font-size:0.85rem;margin-top:12px">Limite : <b>1 seul dofus</b> par échange pour la conversion en Larme Éthérée.</p>
+  </div>
 
-        <div id="recycling" class="panel">
-            <div class="header-box"><h2>Recyclage des items</h2></div>
-            <div class="section-card">
-                <h3>Recyclage d'Item</h3>
-                <p>La vente des objets est automatique. Le prix calculé est égal au <b>niveau multiplié par 10.</b></p>
-                <p>Vous obtenez un orichor par vague de 100 items vendus <b>simultanément</b>.</p>
-                <h3>Exclusion de la vente</h3>
-                <ul>
-                    <li>Tout item objet vivant / apparât est exclu de la vente.</li>
-                    <li>Tout item objet trophée / dofus est exclu de la vente.</li>
-                    <li>Tout item objet familier / montilier / certificat est exclu de la vente.</li>
-                    <li>Signez votre item via la <span class="highlight-link" onclick="linkTo('item-upgrade')">Forgemagie</span> pour qu'il ne soit pas brisé !</li>
-                </ul>
-            </div>
-            <hr class="separator">
-            <div class="section-card">
-                <h3>Recyclage de Sort</h3>
-                <p>Situé aussi sur la map Start, ce PNJ vous achète vos parchemins de sort inutiles automatiquement.</p>
-                <p>Le taux de conversion est de 1 parchemin pour 3 <span class="highlight-link" onclick="linkTo('money')">pièces d'or</span>.</p>
-            </div>
-        </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">⬆</span>Évolution — PNJ Thalyion (Atelier de Bonta)</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Rang</th><th>Coût</th><th>Jets obtenus</th></tr></thead>
+        <tbody>
+          <tr><td><b>Original</b> <span style="color:var(--text-muted);font-size:0.8rem">(base)</span></td><td><span style="color:var(--text-muted)">Aucun craft</span></td><td>Jet 1.29</td></tr>
+          <tr><td><b style="color:var(--amber)">Rare</b></td><td>15 Larmes éthérées + Dofus Original</td><td>Jet 2.51</td></tr>
+          <tr><td><b style="color:var(--gold)">Mythique</b></td><td>15 Larmes éthérées + Dofus Rare</td><td>Jet amélioré</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="divider"></div>
+    <p style="font-size:0.85rem;color:var(--text-muted)">Comment obtenir des Larmes ? → <a class="ilink" onclick="go('monnaies')">Section Monnaies</a> &nbsp;·&nbsp; Quels Dofus farmer ? → <a class="ilink" onclick="go('drops')">Drops Rares</a></p>
+  </div>
+</div>
 
-        <div id="amelioration-passif" class="panel">
-            <div class="header-box"><h2>Amélioration des Passifs</h2></div>
-            <div class="section-card">
-                <h3>Étapes d'évolution</h3>
-                <ul>
-                    <li><span class="step-num">1</span> <b>Localisation :</b> Milice d'Astrub en <b>[5,-19]</b>.</li>
-                    <li><span class="step-num">2</span> <b>PNJ :</b> Parlez au PNJ nommé <b>Passif Amélioration</b>.</li>
-                    <li><span class="step-num">3</span> <b>Achat :</b> Procurez-vous l'objet <b>Passif Maîtrisé</b> pour 80 Orichors.</li>
-                    <li><span class="step-num">4</span> <b>Action :</b> Faites un <b>clic droit / utiliser</b> sur l'objet avec votre artefact équipé.</li>
-                </ul>
-                <hr class="separator">
-                <h3>Consignes importantes</h3>
-                <ul>
-                    <li><b>Déséquipement :</b> Retirez votre <b>arme</b> et votre <b>bouclier</b> avant l'évolution.</li>
-                    <li><b>Actualisation :</b> Effectuez une <b>déco/reco</b> pour valider les nouvelles statistiques.</li>
-                    <li><b>Validation :</b> Un message confirmera le passage au statut <b>Légendaire</b> dans le chat.</li>
-                    <li><b>Limite :</b> Il n'existe aucune limite d'apprentissage pour ce système.</li>
-                </ul>
-            </div>
-            <div class="section-card">
-                <h3>Evolution du passif (Transcendance)</h3>
-                <div class="warning-box">
-                    <ul>
-                        <li><b>Important :</b> Vous devez équiper l'<span class="highlight-link" onclick="linkTo('passifs')">artefact</span> à améliorer et posséder dans l'inventaire le passif voulu.</li>
-                        <li>Si vous avez plusieurs passifs dans l'inventaire, le premier de la liste sera utilisé lors de la fusion.</li>
-                        <li><b>Requis : </b><span class="highlight-link" onclick="linkTo('trans')">Transcendance</span> de niveau 3 (première fusion) et niveau 5 (deuxième fusion).</li>
-                    </ul>
-                </div>
-                <ul>
-                    <li><span class="step-num">1</span> <b>Localisation :</b> Milice d'Astrub en <b>[5,-19]</b>.</li>
-                    <li><span class="step-num">2</span> <b>PNJ :</b> Parlez au PNJ nommé <b>Transcendance / Evolution</b>.</li>
-                    <li><span class="step-num">3</span> <b>Achat :</b> Procurez-vous un passif différent de ceux déjà sur votre artefact pour 250 <span class="highlight-link" onclick="linkTo('money')">Orichors</span>.</li>
-                    <li><span class="step-num">4</span> <b>Fusion :</b> Parlez au PNJ nommé <b>Transcendance / Evolution</b>.</li>
-                    <li><span class="step-num">5</span> <b>Enjoy :</b> Admirez votre nouvel artefact !</li>
-                </ul>
-            </div>
-        </div>
+</main>
 
-        <div id="item-upgrade" class="panel">
-            <div class="header-box"><h2>Amélioration du stuff</h2></div>
-            <div class="section-card">
-                <h3>Forgemagie</h3>
-                <ul>
-                    <li><b>Exotisme Garanti :</b> Le passage des runes <b>PA, PM et PO</b> affiche un taux de réussite de <b>100%</b>.</li>
-                    <li><b>Overmax Naturel :</b> Les objets supportent jusqu'à <b>50% de statistiques supplémentaires</b>.</li>
-                    <li><b>Limites Absolues :</b> Plafonds (ex: 504 Vitalité, 101 Force).</li>
-                    <li><b>Bonus Haut Niveau :</b> Pour les items <b>Niv. 190+</b>, les limites absolues sont augmentées de <b>20%</b>.</li>
-                </ul>
-                <hr class="separator">
-                <h3>Tavernier Feubuk (Atelier FM Bonta)</h3>
-                <div class="warning-box"><b>ATTENTION :</b> Une fois boosté, l'item ne peut plus être forgemagé, mais peut encore recevoir le <b>Boost d'Item</b> ou être <b>Fusionné</b>.</div>
-                <ul>
-                    <li>Déposez <b>3 exemplaires identiques</b> du même item.</li>
-                    <li>Placez l'item à améliorer en <b>première position</b> dans l'échange.</li>
-                    <li><b>Résultat :</b> L'item reçoit un boost massif de <b>60% de ses statistiques</b>.</li>
-                    <li>Fonctionne sur tous les items, y compris les Dofus (ex: 3 Dofus Ocre).</li>
-                    <li><b>Familier/Montilier :</b> 5 exemplaires sont nécessaires pour l'amélioration.</li>
-                </ul>
-                <hr class="separator">
-                <h3>Boost d'Item</h3>
-                <div class="warning-box"><b>ATTENTION :</b> Une fois boosté, l'item ne peut plus être forgemagé. Un seul boost possible.</div>
-                <ul>
-                    <li>S'obtiennent à la <b>Milice d'Astrub</b> contre des <span class="highlight-link" onclick="linkTo('money')">orichors</span>.</li>
-                    <li><b>Seringue d'Alchimie Prodigieuse :</b> +15% de stats (résistance et dommages exclus).</li>
-                    <li><b>Éther de Renforcement Total :</b> +25% de stats (résistance et dommages exclus).</li>
-                </ul>
-                <hr class="separator">
-                <h3>Fusion d'équipement (Pierrik l'Unificateur)</h3>
-                <ul>
-                    <li><b>Localisation :</b> Pierrik se trouve sur la même map que le <b>Tavernier Feubuk</b> (Atelier FM Bonta).</li>
-                    <li><b>Concept :</b> Fusionnez deux items différents pour combiner leur puissance.</li>
-                    <li><b>Conditions :</b>
-                        <ul>
-                            <li>Même catégorie (ex: deux capes) mais noms différents.</li>
-                            <li>Maximum 25 niveaux d'écart entre les deux items.</li>
-                            <li>Un item déjà fusionné ne peut plus servir pour une prochaine fusion.</li>
-                            <li><b>Pré-requis :</b> Les deux items doivent avoir été améliorés via le <b>Tavernier Feubuk</b>.</li>
-                        </ul>
-                    </li>
-                    <li><b>Note :</b> Aucun item n'est exclu de ce système de fusion !</li>
-                </ul>
-            </div>
-        </div>
+<script>
+const DROPS=[
+  {cat:'carte',item:'Carte de Boss',boss:'Tout les boss',rate:'1%'},
+  {cat:'dofus',item:'Kalyptus',boss:'Malléfisk',rate:'0.1%'},
+  {cat:'dofus',item:'Dofus Émeraude (Rare)',boss:'Royalmouth',rate:'0.1%'},
+  {cat:'dofus',item:'Dom de Pin',boss:'Korriandre',rate:'0.1%'},
+  {cat:'dofus',item:'Dotruche',boss:'Silf le Rasboul Majeur',rate:'0.1%'},
+  {cat:'dofus',item:'Dofus Pourpre (Rare)',boss:'Ben le Ripate',rate:'0.1%'},
+  {cat:'dofus',item:'Dofus Turquoise (Rare)',boss:'Klime',rate:'0.1%'},
+  {cat:'dofus',item:'Dolmanax',boss:'Ougah',rate:'0.1%'},
+  {cat:'dofus',item:'Dokoko',boss:'Capitaine Ekarlatte',rate:'0.1%'},
+  {cat:'dofus',item:'Dofus des Veilleurs',boss:'Grollum',rate:'0.1%'},
+  {cat:'dofus',item:'Dofus Argenté Scintillant',boss:'XLII',rate:'0.1%'},
+  {cat:'dofus',item:'Jyfus',boss:'Tal Kasha',rate:'0.1%'},
+  {cat:'dofus',item:'Dofus Vulbis (Rare)',boss:'Tengu Givrefoux',rate:'0.1%'},
+  {cat:'dofus',item:'Dofus Ocre (Rare)',boss:'Glourséleste',rate:'0.1%'},
+  {cat:'dofus',item:'Dolmanax Scintillant',boss:'Roi Nidas',rate:'0.1%'},
+  {cat:'dofus',item:'Dofus Forgelave',boss:'Obsidiantre',rate:'0.1%'},
+  {cat:'dofus',item:'Dofus Ivoire (Rare)',boss:'Ilyzaelle',rate:'0.1%'},
+  {cat:'dofus',item:'Dofus Ebène (Rare)',boss:'Anerice la Shushess',rate:'0.1%'},
+  {cat:'dofus',item:'Dofus Nébuleux',boss:'Reine des voleurs',rate:'0.1%'},
+  {cat:'dofus',item:'Dofus Abyssal',boss:'Capitaine Meno',rate:'0.1%'},
+  {cat:'dofus',item:'Dofus des Glaces',boss:'Comte Harebourg',rate:'0.1%'},
+  {cat:'dofus',item:'Dofus du Cauchemar',boss:'Solar',rate:'0.1%'},
+  {cat:'dofus',item:'Dofus Sylvestre',boss:'Toxoliath',rate:'0.1%'},
+  {cat:'dofus',item:'Dorigami',boss:'Comte Razof',rate:'0.1%'},
+  {cat:'dofus',item:'Domakuro',boss:'Maître Pandore',rate:'0.1%'},
+  {cat:'dofus',item:'Dofaléa',boss:'Chaloeil',rate:'0.1%'},
+  {cat:'dofus',item:'Dofus du Vilain Corbac',boss:'Maître Corbac',rate:'0.1%'},
+  {cat:'dofus',item:'Dofus de la Peste',boss:'Sphincter Cell',rate:'0.1%'},
+  {cat:'dofus',item:'Cafar\'Dofus',boss:'Kankreblath',rate:'0.1%'},
+  {cat:'terre',item:'Fléau des Accablés',boss:'Nelween',rate:'0.5%'},
+  {cat:'terre',item:'Pierre de Vengeance de Zei',boss:'Phossile',rate:'0.5%'},
+  {cat:'terre',item:'Tesson de Boyarsky',boss:'Nileza',rate:'0.5%'},
+  {cat:'feu',item:'Cheville Ouvrière',boss:'Bouftou Royal',rate:'0.5%'},
+  {cat:'feu',item:'Moratoire',boss:'Obsidiantre',rate:'0.5%'},
+  {cat:'feu',item:'Éclat d\'âme rouge',boss:'Solar',rate:'0.5%'},
+  {cat:'eau',item:'Altération ésotérique',boss:'Corailleur Magistral',rate:'0.5%'},
+  {cat:'eau',item:'Gemme d\'Aisance',boss:'Ben le Ripate',rate:'0.5%'},
+  {cat:'eau',item:'Mirinae, larme du tisseur d\'étoiles',boss:'Dantinéa',rate:'0.5%'},
+  {cat:'air',item:'Couronne de Foudre',boss:'Tofu Royal',rate:'0.5%'},
+  {cat:'air',item:'Gogok de Vivacité',boss:'Silf le Rasboul Majeur',rate:'0.5%'},
+  {cat:'air',item:'Instagel',boss:'Ilyzaelle',rate:'0.5%'},
+  {cat:'multi',item:'Fléau des puissants',boss:'Gourlo le Terrible',rate:'0.5%'},
+  {cat:'multi',item:'Force de la simplicité',boss:'Chêne Mou',rate:'0.5%'},
+  {cat:'multi',item:'Taeguk',boss:'Nileza',rate:'0.5%'},
+];
 
-        <div id="songe" class="panel">
-            <div class="header-box"><h2>Explication des Songes Infinis</h2></div>
-            <div class="section-card">
-                <h3><b>Date de sortie :</b> Février 2026.</h3>
-                <h3>A venir..</h3>
-                <ul>
-                    <li>Le système des songes est en cours de refonte.</li>
-                    <li>Date de déploiement : Entre le 01 et le 05 février 2026.</li>
-                </ul>
-                <h3>Spoil</h3>
-                <ul>
-                    <li>Contenu end-game (niveau 200 et plus).</li>
-                    <li>Réalisable en <b>Solo</b>.</li>
-                    <li>Le niveau d'optimisation demandé sera élevé (Niveau SS+ minimum) → commande <span class="highlight-link" onclick="linkTo('cmds')">.power</span></li>
-                    <li>Combat de 8 monstres dont 3 boss à chaque fois.</li>
-                    <li>Aucun gain d'expérience.</li>
-                    <li>Nombre d'étages fixe : 100.</li>
-                    <li>Une seule récompense : <span class="highlight-link" onclick="linkTo('money')">Reflets Oniriques</span>.</li>
-                </ul>
-            </div>
-        </div>
+const CAT_LABELS={carte:'Carte',dofus:'Dofus',terre:'Artefact Terre',feu:'Artefact Feu',eau:'Artefact Eau',air:'Artefact Air',multi:'Artefact Multi'};
+const CAT_CLASS={carte:'elem-carte',dofus:'elem-dofus',terre:'elem-terre',feu:'elem-feu',eau:'elem-eau',air:'elem-air',multi:'elem-multi'};
 
-        <div id="tuto" class="panel">
-            <div class="header-box"><h2>Guide du débutant</h2></div>
-            <div class="section-card">
-                <h3>La création</h3>
-                <ul>
-                    <li>Dès la création de votre personnage vous obtenez une panoplie aventurier ainsi qu'un familier sagesse/dommages.</li>
-                    <li>Vous connaissez deux sorts : Maîtrise d'arme ainsi que Flamiche (meilleur élément en vol de vie).</li>
-                    <li><b>Joris</b> est présent sur la map de départ pour vous expliquer comment obtenir des équipements/sorts.</li>
-                    <li>Si vous souhaitez une mort permanente en PvM, parlez au <b>Pactisant des Ténèbres</b> (aussi en map <b>.start</b>).</li>
-                </ul>
-                <hr class="separator">
-                <h3>Conseils</h3>
-                <ul>
-                    <li>De nombreux succès vous donnent des <span class="highlight-link" onclick="linkTo('sorts')">jetons de sort</span> ainsi que des Artefacts, faites-en un maximum !</li>
-                    <li>Les Clefs de donjon s'achètent en map <b>.start</b> et sont aussi en drop dans les monstres de la zone associée.</li>
-                    <li>N'hésitez pas à faire un tour à la Milice d'Incarnam, une surprise vous y attend à l'étage !</li>
-                </ul>
-                <hr class="separator">
-                <h3>Comment s'optimiser ?</h3>
-                <ul>
-                    <li><span class="highlight-link" onclick="linkTo('item-upgrade')">Améliorer son équipement</span>.</li>
-                    <li><span class="highlight-link" onclick="linkTo('larmes')">Améliorer ses dofus</span>.</li>
-                    <li><span class="highlight-link" onclick="linkTo('prestige')">Aller au delà du niveau 200</span>.</li>
-                    <li><span class="highlight-link" onclick="linkTo('trans')">Améliorer son passif</span>.</li>
-                </ul>
-            </div>
-        </div>
+let currentTab='all';
 
-    </div><!-- fin .main-content -->
+function renderDrops(){
+  const q=document.getElementById('dropSearch').value.toLowerCase().trim();
+  const tbody=document.getElementById('dropBody');
+  const noR=document.getElementById('noResults');
+  const filtered=DROPS.filter(d=>{
+    const matchTab=currentTab==='all'||d.cat===currentTab;
+    const matchQ=!q||d.item.toLowerCase().includes(q)||d.boss.toLowerCase().includes(q);
+    return matchTab&&matchQ;
+  });
+  document.getElementById('cnt-all').textContent=DROPS.length;
+  if(!filtered.length){tbody.innerHTML='';noR.style.display='block';return;}
+  noR.style.display='none';
+  tbody.innerHTML=filtered.map(d=>`
+    <tr>
+      <td class="item-name">${d.item}</td>
+      <td><span class="elem-badge ${CAT_CLASS[d.cat]}">${CAT_LABELS[d.cat]}</span></td>
+      <td class="boss-name">${d.boss}</td>
+      <td class="rate">${d.rate}</td>
+    </tr>`).join('');
+}
 
-    <script>
-        function toggleMobileMenu() {
-            document.querySelector('.sidebar').classList.toggle('mobile-open');
-            document.querySelector('.mobile-overlay').classList.toggle('active');
-        }
-        function closeMobileMenu() {
-            document.querySelector('.sidebar').classList.remove('mobile-open');
-            document.querySelector('.mobile-overlay').classList.remove('active');
-        }
-        function switchTab(event, tabId) {
-            document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
-            if (event) {
-                event.currentTarget.classList.add('active');
-            } else {
-                const btn = Array.from(document.querySelectorAll('.nav-link'))
-                    .find(l => l.getAttribute('onclick')?.includes(tabId));
-                if (btn) btn.classList.add('active');
-            }
-            window.scrollTo(0, 0);
-            if (window.innerWidth <= 768) closeMobileMenu();
-        }
-        function linkTo(tabId) { switchTab(null, tabId); }
-    </script>
+function filterDrops(){renderDrops();}
+function setDropTab(tab,btn){
+  currentTab=tab;
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderDrops();
+}
+
+function go(id){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  const panel=document.getElementById(id);
+  if(panel)panel.classList.add('active');
+  const navItem=document.querySelector(`.nav-item[onclick="go('${id}')"]`);
+  if(navItem)navItem.classList.add('active');
+  window.scrollTo(0,0);
+  if(id==='drops')renderDrops();
+}
+
+renderDrops();
+</script>
 </body>
 </html>
