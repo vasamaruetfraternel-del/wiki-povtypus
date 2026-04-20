@@ -219,7 +219,7 @@ tr:hover td{background:var(--gold-bg)}
 <nav class="topnav">
   <div class="logo">
     <span class="logo-title">⚔ Pov'Typus Wiki</span>
-    <span class="logo-sub">Officiel — MàJ 17/04/2026</span>
+    <span class="logo-sub">Dernière MàJ du serveur : 20/04/2026</span>
   </div>
 
   <div class="nav-section">
@@ -257,9 +257,10 @@ tr:hover td{background:var(--gold-bg)}
   <div class="alert alert-gold">
     <b>État :</b> <span style="color:#6aaa00;font-weight:700">En Ligne</span> &nbsp;·&nbsp;
     <b>Discord :</b> <a href="https://discord.gg/TKC6TpAmQW" target="_blank" style="color:#7289da">discord.gg/TKC6TpAmQW</a> &nbsp;·&nbsp;
-    <b>Serveur orienté Duo compte minimum.</b>
   </div>
-
+  
+  <div class="alert alert-info">Avant toute chose, merci de lire le <a class="ilink" onclick="go('tuto')">Guide du débutant</a></div>
+  
   <div class="card">
     <div class="card-title"><span class="ct-icon">🚀</span>Premiers pas</div>
     <div class="grid">
@@ -327,16 +328,18 @@ tr:hover td{background:var(--gold-bg)}
       <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Choisissez votre classe</div><div class="step-desc">Chaque classe a un <a class="ilink" onclick="go('passifs')">passif unique</a> sous forme d'Artefact. Consultez la liste avant de vous décider.</div></div></div>
       <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Récupérez vos objets de départ</div><div class="step-desc">Panoplie aventurier, familier sagesse/dommages et votre Artefact de classe vous sont automatiquement attribués.</div></div></div>
       <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Mode Ombre (optionnel)</div><div class="step-desc">Souhaitez-vous la mort permanente en PvM ? Parlez au <b>Pactisant des Ténèbres</b> (aussi accessible via <span class="cmd">.start</span>).</div></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Succès Exploration</div><div class="step-desc">N'hésitez pas à faire le tour d'incarnam, le succès vous aidera grandement pour le début du serveur.</div></div></div>
     </div>
   </div>
 
   <div class="card">
-    <div class="card-title"><span class="ct-icon">💡</span>Conseils essentiels</div>
-    <div class="alert alert-warning"><b>Le serveur est orienté Duo Compte minimum.</b> Jouer seul est fortement déconseillé.</div>
+    <div class="card-title"><span class="ct-icon">💡</span>Points Important</div>
+    <div class="alert alert-warning"><b>Le serveur est orienté Duo Compte minimum.</b> Jouer un seul personnage est fortement déconseillé.</div>
     <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:8px">
-      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Les clefs de donjon se drop dans la zone de leur donjon. Utilisez <span class="cmd">.ki [nom de l'item]</span> pour localiser n'importe quel drop.</li>
+      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Les clefs de donjon se drop dans la zone de leur donjon. Utilisez <span class="cmd">.drop</span> pour localiser n'importe quel drop.</li>
       <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Vos sorts s'apprennent classiquement jusqu'au niveau 100. Au-delà, des <a class="ilink" onclick="go('sorts')">Coffres de sorts</a> achetables avec des <a class="ilink" onclick="go('monnaies')">Orichors</a> permettent de débloquer les sorts 101-200.</li>
       <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>200 Prospection de base vous permettent de bien farmer dès le départ.</li>
+            <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Tout du long de votre phase de leveling, vous obtiendrez des bonus supplémentaire via la <a class="ilink" onclick="go('maitrise')">Maîtrise</a>.</li>
     </ul>
   </div>
 
@@ -399,6 +402,7 @@ tr:hover td{background:var(--gold-bg)}
           <tr><td><span class="cmd">.start</span></td><td>Téléportation rapide vers la map de départ.</td></tr>
           <tr><td><span class="cmd">.fm</span></td><td>Téléportation rapide vers l'atelier de forgemagie.</td></tr>
           <tr><td><span class="cmd">.craft</span></td><td>Téléportation rapide vers les ateliers de craft.</td></tr>
+          <tr><td><span class="cmd">.drop</span></td><td>Donne la liste des drop disponible dans la zone actuel.</td></tr>
           <tr><td><span class="cmd">.groupe</span></td><td>Invite auto le compte secondaire + ipdrop + autofollow activés.</td></tr>
           <tr><td><span class="cmd">.k</span></td><td>Centralise les kamas de tous vos comptes.</td></tr>
           <tr><td><span class="cmd">.bug</span></td><td>Téléporte vers une cellule accessible si le joueur est bloqué.</td></tr>
@@ -506,7 +510,6 @@ tr:hover td{background:var(--gold-bg)}
           <tr class="orichor-row"><td>Donjon à vagues</td><td><b>+10 Orichors</b> bonus</td></tr>
           <tr class="orichor-row"><td>Antre Pov'Typus</td><td>Bonus supplémentaire / salle</td></tr>
           <tr class="orichor-row"><td>Dimensions</td><td>Bonus indexé sur le niveau du donjon</td></tr>
-          <tr class="orichor-row"><td>Recyclage (100 items simultanés)</td><td>1 Orichor</td></tr>
         </tbody>
       </table>
     </div>
@@ -553,11 +556,10 @@ tr:hover td{background:var(--gold-bg)}
   <div class="page-header"><h1>Maîtrise de Classe</h1><div class="subtitle">Progressez sans limite jusqu'au niveau 200</div></div>
 
   <div class="card">
-    <div class="card-title"><span class="ct-icon">👑</span>Principe</div>
+    <div class="card-title"><span class="ct-icon">👑</span>Comment ça marche et c'est quoi ?</div>
     <div class="grid">
-      <div class="mini-card gold-accent"><div class="mini-card-label">Palier</div><div class="mini-card-value">La Maîtrise s'incrémente <b>tous les 20 niveaux</b>.</div></div>
-      <div class="mini-card gold-accent"><div class="mini-card-label">Pas de reset</div><div class="mini-card-value">Aucun retour au niveau 1 — l'aventure continue !</div></div>
-      <div class="mini-card gold-accent"><div class="mini-card-label">Bonus</div><div class="mini-card-value">Statistiques permanentes + <b>+40 points</b> de caractéristiques par palier.</div></div>
+      <div class="mini-card gold-accent"><div class="mini-card-label">Palier</div><div class="mini-card-value"><b>Tous les 20 niveaux</b> vous gagnez en maîtrise de votre classe représenter par des stats supplémentaire.</div></div>
+      <div class="mini-card gold-accent"><div class="mini-card-label">Bonus</div><div class="mini-card-value">Points de statistiques bonus : + <b>+40 points</b> de caractéristiques par palier.</div></div>
     </div>
   </div>
 
@@ -715,11 +717,11 @@ tr:hover td{background:var(--gold-bg)}
     </div>
 
     <div class="prestige-card highlight">
-      <div class="prestige-lvl">Niveau 200 ★</div>
+      <div class="prestige-lvl">★ Niveau 200 ★</div>
       <div class="prestige-bonus">
         <strong>Bonus du palier :</strong><br>
         +50 Vitalité · +50 Stats<br><br>
-        <strong>Total cumulé (20 à 200) :</strong>
+        <strong>Total cumulé :</strong>
         <ul style="list-style:none; padding-left:0; margin-top:5px; font-size:0.8rem; color:var(--text)">
           <li>• 100 Vitalité</li>
           <li>• 100 Stats (Sag/For/Agi/Int/Cha)</li>
@@ -765,7 +767,7 @@ tr:hover td{background:var(--gold-bg)}
       </table>
     </div>
     <div class="divider"></div>
-    <p style="font-size:0.85rem;color:var(--text-muted)">Comment obtenir des Larmes ? → <a class="ilink" onclick="go('monnaies')">Section Monnaies</a> &nbsp;·&nbsp; Quels Dofus farmer ? → <a class="ilink" onclick="go('drops')">Drops Rares</a></p>
+    <p style="font-size:0.85rem;color:var(--text-muted)">Sur qui je drop mes dofus ? → <a class="ilink" onclick="go('drops')">Drops Rares</a></p>
   </div>
 </div>
 
