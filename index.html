@@ -242,6 +242,7 @@ tr:hover td{background:var(--gold-bg)}
   <div class="nav-section">
     <div class="nav-item" onclick="go('maitrise')"><span class="nav-icon">👑</span><span>Maîtrise</span></div>
     <div class="nav-item" onclick="go('dofus')"><span class="nav-icon">💧</span><span>Dofus</span></div>
+    <div class="nav-item" onclick="go('ombre')"><span class="nav-icon"></head></span><span>Ombre</span></div>
   </div>
 </nav>
 
@@ -327,8 +328,9 @@ tr:hover td{background:var(--gold-bg)}
     <div class="steps">
       <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Choisissez votre classe</div><div class="step-desc">Chaque classe a un <a class="ilink" onclick="go('passifs')">passif unique</a> sous forme d'Artefact. Consultez la liste avant de vous décider.</div></div></div>
       <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Récupérez vos objets de départ</div><div class="step-desc">Panoplie aventurier, familier sagesse/dommages et votre Artefact de classe vous sont automatiquement attribués.</div></div></div>
-      <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Mode Ombre (optionnel)</div><div class="step-desc">Souhaitez-vous la mort permanente en PvM ? Parlez au <b>Pactisant des Ténèbres</b> (aussi accessible via <span class="cmd">.start</span>).</div></div></div>
       <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Succès Exploration</div><div class="step-desc">N'hésitez pas à faire le tour d'incarnam, le succès vous aidera grandement pour le début du serveur.</div></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Mode Ombre</div><div class="step-desc">Souhaitez-vous la mort permanente en PvM ? Parlez au <b><a class="ilink" onclick="go('ombre')">Pactisant des Ténèbres</a></b> (aussi accessible via <span class="cmd">.start</span>).</div></div></div>
+      <div class="step"><div class="step-num">5</div><div class="step-body"><div class="step-title">Et les stuff je les ai ou ?</div><div class="step-desc">L'achat des stuff se passe avec les <a class="ilink" onclick="go('monnaies')">pièce d'or</a> à la <a class="ilink" onclick="go('stuff')">Taverne d'Astrub</a>.</div></div></div>
     </div>
   </div>
 
@@ -336,7 +338,7 @@ tr:hover td{background:var(--gold-bg)}
     <div class="card-title"><span class="ct-icon">💡</span>Points Important</div>
     <div class="alert alert-warning"><b>Le serveur est orienté Duo Compte minimum.</b> Jouer un seul personnage est fortement déconseillé.</div>
     <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:8px">
-      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Les clefs de donjon se drop dans la zone de leur donjon. Utilisez <span class="cmd">.drop</span> pour localiser n'importe quel drop.</li>
+      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Les clefs de donjon se drop dans la zone de leur donjon. Utilisez <span class="cmd">.drop</span> dans une zone/dj pour connaître leur localisation.</li>
       <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Vos sorts s'apprennent classiquement jusqu'au niveau 100. Au-delà, des <a class="ilink" onclick="go('sorts')">Coffres de sorts</a> achetables avec des <a class="ilink" onclick="go('monnaies')">Orichors</a> permettent de débloquer les sorts 101-200.</li>
       <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>200 Prospection de base vous permettent de bien farmer dès le départ.</li>
             <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Tout du long de votre phase de leveling, vous obtiendrez des bonus supplémentaire via la <a class="ilink" onclick="go('maitrise')">Maîtrise</a>.</li>
@@ -349,6 +351,24 @@ tr:hover td{background:var(--gold-bg)}
       <div class="mini-card gold-accent"><div class="mini-card-label">Équipement</div><div class="mini-card-value"><a class="ilink" onclick="go('stuff')">Améliorer son stuff</a> via la forgemagie et le Tavernier Feubuk.</div></div>
       <div class="mini-card gold-accent"><div class="mini-card-label">Dofus</div><div class="mini-card-value"><a class="ilink" onclick="go('dofus')">Améliorer ses dofus</a> via le système Larme Éthérée.</div></div>
       <div class="mini-card gold-accent"><div class="mini-card-label">Maîtrise</div><div class="mini-card-value">Atteindre la <a class="ilink" onclick="go('maitrise')">Maîtrise de classe</a> pour des bonus permanents puissants.</div></div>
+    </div>
+  </div>
+</div>
+
+<div id="ombre" class="panel">
+  <div class="breadcrumb"><a onclick="go('accueil')">Wiki</a><span class="breadcrumb-sep">›</span><span>Ombre</span></div>
+  <div class="page-header"><h1>Mode Ombre</h1><div class="subtitle">Tout ce qu'il faut savoir sur le mode ombre</div></div>
+
+  <div class="alert alert-info">Le mode n'est activable seulement si votre personnage est maximum de niveau 20.</div>
+
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">🎮</span>Activation et Spécificités</div>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Comment jouer en mode ombre ?</div><div class="step-desc">Parlez au <b>Pactisant des Ténèbres</b> sur la map de départ. (aussi accessible via <span class="cmd">.start</span>).</div></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">J'y gagne quoi ?</div><div class="step-desc">Jouer en mode ombre vous permet de bénéficier d'un bonus sur l'expérience et le drop de 300% (x3).</div></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Les Limites</div><div class="step-desc">La commande <span class="cmd">.retry</span> n'est pas accessible et l'abandon sera considéré comme une défaite.</div></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Et si je meurt ?</div><div class="step-desc">En mode ombre, la mort en PvM est permanente.Votre personnage revient au niveau 1, inventaire vide (sauf objet donner au départ). L'experience est triplé jusqu'au plus haut niveau atteint toute mort confondu.</div></div></div>
+      <div class="step"><div class="step-num">5</div><div class="step-body"><div class="step-title">Et les succès dans tout ça ?</div><div class="step-desc">Les succès ne sont pas reset.</div></div></div>
     </div>
   </div>
 </div>
@@ -472,7 +492,7 @@ tr:hover td{background:var(--gold-bg)}
     <div class="steps">
       <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Rassemblez 3 exemplaires identiques</div><div class="step-desc">Même item, trois fois. Pour familier/montilier : 10 exemplaires requis.</div></div></div>
       <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Placez l'item à booster en premier</div><div class="step-desc">L'item en première position dans l'échange sera celui amélioré.</div></div></div>
-      <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Résultat : +10% sur toutes les stats</div><div class="step-desc">L'item reçoit un boost massif et permanent de 10% de ses statistiques.</div></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Résultat : +10% sur toutes les stats</div><div class="step-desc">L'item reçoit un boost permanent de 10% de ses statistiques. S'il s'agit d'un familier/montilier , le boost est de 25%.</div></div></div>
     </div>
   </div>
 </div>
