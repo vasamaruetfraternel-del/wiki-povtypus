@@ -15,84 +15,35 @@
   --amber:#f59e0b;--amber-bg:rgba(245,158,11,0.1);
   --text:#e8e0c4;--text-muted:#8a8270;--text-dim:#5a5445;
   --border:#2e2e24;--border-gold:rgba(212,160,23,0.3);
-  --topnav-h: 60px;
-  --radius:8px;--radius-lg:12px;
-  --transition:0.18s ease;
+  --topnav-h:60px;--radius:8px;--radius-lg:12px;--transition:0.18s ease;
 }
 body{font-family:"Trebuchet MS",Arial,sans-serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column;min-height:100vh;font-size:14.5px;line-height:1.6}
 
-/* ── TOP NAV (HORIZONTAL) ── */
-.topnav {
-  width: 100%;
-  height: var(--topnav-h);
-  background: var(--surface);
-  border-bottom: 1px solid var(--border-gold);
-  display: flex;
-  align-items: center;
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  overflow-x: auto;
-  overflow-y: hidden;
-}
-.topnav::-webkit-scrollbar { height: 4px; }
-.topnav::-webkit-scrollbar-thumb { background: var(--border); }
+/* ── TOP NAV ── */
+.topnav{width:100%;height:var(--topnav-h);background:var(--surface);border-bottom:1px solid var(--border-gold);display:flex;align-items:center;position:sticky;top:0;z-index:50;overflow-x:auto;overflow-y:hidden}
+.topnav::-webkit-scrollbar{height:4px}
+.topnav::-webkit-scrollbar-thumb{background:var(--border)}
+.logo{padding:0 20px;height:100%;display:flex;flex-direction:column;justify-content:center;border-right:1px solid var(--border);flex-shrink:0}
+.logo-title{font-size:1rem;font-weight:700;color:var(--gold);letter-spacing:.5px}
+.logo-sub{font-size:.72rem;color:var(--text-muted);margin-top:2px}
+.nav-section{display:flex;align-items:center;height:100%;border-right:1px solid var(--border)}
+.nav-item{display:flex;align-items:center;gap:8px;padding:0 16px;height:100%;cursor:pointer;color:var(--text-muted);border-bottom:3px solid transparent;transition:var(--transition);font-size:.85rem;user-select:none;white-space:nowrap}
+.nav-item:hover{background:var(--gold-bg);color:var(--text);border-bottom-color:var(--gold-dim)}
+.nav-item.active{background:var(--gold-bg);color:var(--gold);border-bottom-color:var(--gold);font-weight:700}
+.nav-item .nav-icon{width:16px;height:16px;opacity:.7;flex-shrink:0;font-size:13px;display:flex;align-items:center;justify-content:center}
+.nav-item.active .nav-icon{opacity:1}
 
-.logo {
-  padding: 0 20px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border-right: 1px solid var(--border);
-  flex-shrink: 0;
-}
-.logo-title { font-size: 1rem; font-weight: 700; color: var(--gold); letter-spacing: 0.5px; }
-.logo-sub { font-size: 0.72rem; color: var(--text-muted); margin-top: 2px; }
-
-.nav-section {
-  display: flex;
-  align-items: center;
-  height: 100%;
-  border-right: 1px solid var(--border);
-}
-.nav-label { display: none; /* Masqué pour plus de clarté en horizontal */ }
-
-.nav-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 0 16px;
-  height: 100%;
-  cursor: pointer;
-  color: var(--text-muted);
-  border-bottom: 3px solid transparent;
-  transition: var(--transition);
-  font-size: 0.85rem;
-  user-select: none;
-  white-space: nowrap;
-}
-.nav-item:hover { background: var(--gold-bg); color: var(--text); border-bottom-color: var(--gold-dim); }
-.nav-item.active { background: var(--gold-bg); color: var(--gold); border-bottom-color: var(--gold); font-weight: 700; }
-.nav-item .nav-icon { width: 16px; height: 16px; opacity: 0.7; flex-shrink: 0; font-size: 13px; display: flex; align-items: center; justify-content: center; }
-.nav-item.active .nav-icon { opacity: 1; }
-
-/* ── MAIN (PLEINE LARGEUR) ── */
-.main {
-  flex: 1;
-  padding: 36px 44px;
-  width: 100%;
-  max-width: 100%; /* Prend tout l'espace disponible */
-}
-.panel{display:none;animation:fadeIn 0.25s ease}
+/* ── MAIN ── */
+.main{flex:1;padding:36px 44px;width:100%;max-width:100%}
+.panel{display:none;animation:fadeIn .25s ease}
 .panel.active{display:block}
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 
 /* ── PAGE HEADER ── */
 .page-header{margin-bottom:28px;padding-bottom:16px;border-bottom:1px solid var(--border)}
-.page-header h1{font-size:1.7rem;color:var(--gold);font-weight:700;letter-spacing:-0.3px}
-.page-header .subtitle{color:var(--text-muted);font-size:0.88rem;margin-top:4px}
-.breadcrumb{display:flex;align-items:center;gap:6px;font-size:0.75rem;color:var(--text-dim);margin-bottom:10px}
+.page-header h1{font-size:1.7rem;color:var(--gold);font-weight:700;letter-spacing:-.3px}
+.page-header .subtitle{color:var(--text-muted);font-size:.88rem;margin-top:4px}
+.breadcrumb{display:flex;align-items:center;gap:6px;font-size:.75rem;color:var(--text-dim);margin-bottom:10px}
 .breadcrumb a{color:var(--gold-dim);cursor:pointer;text-decoration:none}
 .breadcrumb a:hover{color:var(--gold)}
 .breadcrumb-sep{color:var(--text-dim)}
@@ -100,78 +51,107 @@ body{font-family:"Trebuchet MS",Arial,sans-serif;background:var(--bg);color:var(
 /* ── CARDS ── */
 .card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px 22px;margin-bottom:20px}
 .card-title{font-size:1rem;font-weight:700;color:var(--gold);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
-.card-title .ct-icon{font-size:14px;opacity:0.8}
+.card-title .ct-icon{font-size:14px;opacity:.8}
 
 /* ── GRID CARDS ── */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:4px}
 .mini-card{background:var(--surface3);border:1px solid var(--border);border-radius:var(--radius);padding:13px 15px}
-.mini-card-label{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.8px;color:var(--text-muted);margin-bottom:6px;font-weight:700}
-.mini-card-value{color:var(--text);font-size:0.9rem}
+.mini-card-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.8px;color:var(--text-muted);margin-bottom:6px;font-weight:700}
+.mini-card-value{color:var(--text);font-size:.9rem}
 .mini-card.gold-accent{border-left:3px solid var(--gold)}
 .mini-card.green-accent{border-left:3px solid var(--green)}
 
-/* ── STATUS / ALERT BOXES ── */
-.alert{border-radius:var(--radius);padding:13px 16px;margin-bottom:16px;font-size:0.88rem}
+/* ── ALERTS ── */
+.alert{border-radius:var(--radius);padding:13px 16px;margin-bottom:16px;font-size:.88rem}
 .alert-warning{background:var(--red-bg);border:1px solid var(--red-border);color:#e8b4af}
-.alert-info{background:var(--blue-bg);border:1px solid rgba(59,130,246,0.3);color:#9dc4f8}
-.alert-success{background:var(--green-bg);border:1px solid rgba(106,170,0,0.3);color:#a8d860}
+.alert-info{background:var(--blue-bg);border:1px solid rgba(59,130,246,.3);color:#9dc4f8}
+.alert-success{background:var(--green-bg);border:1px solid rgba(106,170,0,.3);color:#a8d860}
 .alert-gold{background:var(--gold-bg);border:1px solid var(--border-gold);color:#c8a060}
-.alert b{color:inherit;opacity:0.9}
+.alert b{color:inherit;opacity:.9}
 
 /* ── TABLES ── */
 .table-wrap{overflow-x:auto;margin-top:8px}
-table{width:100%;border-collapse:collapse;font-size:0.87rem}
-th{background:var(--surface3);color:var(--gold);font-weight:700;padding:9px 12px;text-align:left;border-bottom:2px solid var(--border-gold);white-space:nowrap;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.5px}
+table{width:100%;border-collapse:collapse;font-size:.87rem}
+th{background:var(--surface3);color:var(--gold);font-weight:700;padding:9px 12px;text-align:left;border-bottom:2px solid var(--border-gold);white-space:nowrap;font-size:.78rem;text-transform:uppercase;letter-spacing:.5px}
 td{padding:9px 12px;border-bottom:1px solid var(--border);color:var(--text)}
 tr:last-child td{border-bottom:none}
 tr:hover td{background:var(--gold-bg)}
-.rate{color:var(--amber);font-weight:700;font-size:0.82rem}
+.rate{color:var(--amber);font-weight:700;font-size:.82rem}
 .item-name{color:var(--text);font-weight:500}
-.boss-name{color:var(--text-muted);font-size:0.85rem}
+.boss-name{color:var(--text-muted);font-size:.85rem}
 
 /* ── DROPS ── */
 .drop-search{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap}
-.drop-search input{flex:1;min-width:160px;background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:var(--radius);font-size:0.87rem;outline:none}
+.drop-search input{flex:1;min-width:160px;background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:var(--radius);font-size:.87rem;outline:none}
 .drop-search input:focus{border-color:var(--border-gold)}
 .drop-search input::placeholder{color:var(--text-dim)}
 .tab-bar{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:16px}
-.tab-btn{padding:6px 13px;border-radius:20px;font-size:0.78rem;font-weight:700;cursor:pointer;border:1px solid var(--border);background:var(--surface3);color:var(--text-muted);transition:var(--transition);white-space:nowrap;user-select:none}
+.tab-btn{padding:6px 13px;border-radius:20px;font-size:.78rem;font-weight:700;cursor:pointer;border:1px solid var(--border);background:var(--surface3);color:var(--text-muted);transition:var(--transition);white-space:nowrap;user-select:none}
 .tab-btn:hover{border-color:var(--border-gold);color:var(--text)}
 .tab-btn.active{background:var(--gold);border-color:var(--gold);color:#1a1200}
-.elem-badge{display:inline-block;font-size:0.72rem;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:4px;border:1px solid}
-.elem-terre{background:rgba(139,90,43,0.15);color:#c8a060;border-color:#8b5a2b}
-.elem-feu{background:rgba(192,57,43,0.15);color:#e07060;border-color:#c0392b}
-.elem-eau{background:rgba(59,130,246,0.15);color:#7ab8f5;border-color:#2563eb}
-.elem-air{background:rgba(148,163,184,0.15);color:#b0c0d8;border-color:#4a6080}
-.elem-multi{background:rgba(147,51,234,0.15);color:#c084fc;border-color:#7e22ce}
-.elem-dofus{background:rgba(212,160,23,0.15);color:#d4a017;border-color:#a07010}
-.elem-carte{background:rgba(106,170,0,0.15);color:#6aaa00;border-color:#4a7a00}
-.no-results{color:var(--text-muted);text-align:center;padding:28px;font-size:0.9rem}
-.count-badge{font-size:0.72rem;background:var(--surface3);border:1px solid var(--border);color:var(--text-muted);padding:2px 8px;border-radius:10px;margin-left:8px;font-weight:500}
+.elem-badge{display:inline-block;font-size:.72rem;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:4px;border:1px solid}
+.elem-terre{background:rgba(139,90,43,.15);color:#c8a060;border-color:#8b5a2b}
+.elem-feu{background:rgba(192,57,43,.15);color:#e07060;border-color:#c0392b}
+.elem-eau{background:rgba(59,130,246,.15);color:#7ab8f5;border-color:#2563eb}
+.elem-air{background:rgba(148,163,184,.15);color:#b0c0d8;border-color:#4a6080}
+.elem-multi{background:rgba(147,51,234,.15);color:#c084fc;border-color:#7e22ce}
+.elem-dofus{background:rgba(212,160,23,.15);color:#d4a017;border-color:#a07010}
+.elem-carte{background:rgba(106,170,0,.15);color:#6aaa00;border-color:#4a7a00}
+.no-results{color:var(--text-muted);text-align:center;padding:28px;font-size:.9rem}
+.count-badge{font-size:.72rem;background:var(--surface3);border:1px solid var(--border);color:var(--text-muted);padding:2px 8px;border-radius:10px;margin-left:8px;font-weight:500}
 
 /* ── STEPS ── */
 .steps{display:flex;flex-direction:column;gap:12px;margin-top:4px}
 .step{display:flex;gap:14px;align-items:flex-start}
-.step-num{width:26px;height:26px;border-radius:50%;background:var(--green-dim);color:#fff;font-size:0.78rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.step-num{width:26px;height:26px;border-radius:50%;background:var(--green-dim);color:#fff;font-size:.78rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
 .step-body{flex:1}
-.step-title{font-weight:700;color:var(--text);font-size:0.9rem}
-.step-desc{color:var(--text-muted);font-size:0.85rem;margin-top:2px}
+.step-title{font-weight:700;color:var(--text);font-size:.9rem}
+.step-desc{color:var(--text-muted);font-size:.85rem;margin-top:2px}
 
 /* ── PASSIVE GRID ── */
 .passive-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
 .passive-card{background:var(--surface3);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;transition:var(--transition)}
 .passive-card:hover{border-color:var(--border-gold);background:var(--gold-bg)}
-.passive-class{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.8px;color:var(--gold-dim);font-weight:700;margin-bottom:5px}
-.passive-bonus{color:var(--text);font-size:0.88rem}
+.passive-class{font-size:.72rem;text-transform:uppercase;letter-spacing:.8px;color:var(--gold-dim);font-weight:700;margin-bottom:5px}
+.passive-bonus{color:var(--text);font-size:.88rem}
 
-/* ── PRESTIGE LEVELS ── */
+/* ── MAÎTRISE ── */
+.maitrise-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:4px}
+.maitrise-card{background:var(--surface3);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;position:relative;overflow:hidden;transition:var(--transition)}
+.maitrise-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--green-dim)}
+.maitrise-card.highlight{border-color:var(--gold);background:var(--gold-bg)}
+.maitrise-card.highlight::before{background:var(--gold)}
+.maitrise-card:hover{border-color:var(--border-gold)}
+.maitrise-card.highlight:hover{border-color:var(--gold)}
+
+.mc-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.mc-lvl{font-size:.72rem;text-transform:uppercase;letter-spacing:.8px;font-weight:700;color:var(--text-muted)}
+.maitrise-card.highlight .mc-lvl{color:var(--gold)}
+.mc-star{font-size:.8rem}
+
+.mc-bonus-label{font-size:.68rem;text-transform:uppercase;letter-spacing:.6px;color:var(--text-dim);font-weight:700;margin-bottom:4px}
+.mc-bonus-val{font-size:.92rem;font-weight:700;color:var(--text);line-height:1.3;margin-bottom:12px}
+.maitrise-card.highlight .mc-bonus-val{color:var(--gold)}
+
+.mc-cumul-label{font-size:.68rem;text-transform:uppercase;letter-spacing:.6px;color:var(--text-dim);font-weight:700;margin-bottom:5px}
+.mc-cumul-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:3px}
+.mc-cumul-list li{font-size:.78rem;color:var(--text-muted);padding-left:12px;position:relative;line-height:1.3}
+.mc-cumul-list li::before{content:'·';position:absolute;left:0;color:var(--green-dim)}
+.maitrise-card.highlight .mc-cumul-list li{color:var(--text)}
+
+/* Type badge on tab */
+.type-badge-dps{background:rgba(192,57,43,.15);color:#e07060;border-color:#c0392b}
+.type-badge-soutien{background:rgba(106,170,0,.15);color:#6aaa00;border-color:#4a7a00}
+.type-badge-tank{background:rgba(59,130,246,.15);color:#7ab8f5;border-color:#2563eb}
+
+/* ── PRESTIGE (legacy, kept for compatibility) ── */
 .prestige-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
 .prestige-card{background:var(--surface3);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;position:relative;overflow:hidden}
 .prestige-card.highlight{border-color:var(--gold);background:var(--gold-bg)}
 .prestige-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--green-dim)}
 .prestige-card.highlight::before{background:var(--gold)}
-.prestige-lvl{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.8px;color:var(--text-muted);margin-bottom:6px;font-weight:700}
-.prestige-bonus{color:var(--text);font-size:0.85rem;line-height:1.5}
+.prestige-lvl{font-size:.72rem;text-transform:uppercase;letter-spacing:.8px;color:var(--text-muted);margin-bottom:6px;font-weight:700}
+.prestige-bonus{color:var(--text);font-size:.85rem;line-height:1.5}
 .prestige-card.highlight .prestige-lvl{color:var(--gold)}
 
 /* ── INLINE LINKS ── */
@@ -179,7 +159,7 @@ tr:hover td{background:var(--gold-bg)}
 .ilink:hover{color:#f0c030;text-decoration-color:var(--gold)}
 
 /* ── CMD PILLS ── */
-.cmd{display:inline-block;background:rgba(106,170,0,0.12);border:1px solid var(--green-dim);color:#90cc30;padding:2px 8px;border-radius:5px;font-family:"Courier New",monospace;font-size:0.83rem;font-weight:700}
+.cmd{display:inline-block;background:rgba(106,170,0,.12);border:1px solid var(--green-dim);color:#90cc30;padding:2px 8px;border-radius:5px;font-family:"Courier New",monospace;font-size:.83rem;font-weight:700}
 
 /* ── DIVIDER ── */
 .divider{height:1px;background:linear-gradient(to right,transparent,var(--border),transparent);margin:20px 0}
@@ -188,29 +168,27 @@ tr:hover td{background:var(--gold-bg)}
 .orichor-row td:first-child{color:var(--text-muted)}
 .orichor-row td:last-child{color:var(--amber);font-weight:700}
 
-/* ── SORT COFFRE CARDS ── */
-.coffre-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px, 1fr));gap:12px}
+/* ── COFFRE CARDS ── */
+.coffre-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
 .coffre-card{background:var(--surface3);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px 20px}
 .coffre-card.c1{border-top:3px solid var(--gold-dim)}
 .coffre-card.c2{border-top:3px solid var(--gold)}
 .coffre-title{font-size:1rem;font-weight:700;color:var(--gold);margin-bottom:6px}
-.coffre-levels{font-size:0.85rem;color:var(--text-muted);margin-bottom:12px}
 .coffre-cost{font-size:1.4rem;font-weight:700;color:var(--amber);margin-bottom:4px}
-.coffre-cost-label{font-size:0.75rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px}
-.coffre-note{font-size:0.8rem;color:var(--green);margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
+.coffre-note{font-size:.8rem;color:var(--green);margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
 
 /* ── RESPONSIVE ── */
 @media(max-width:900px){
-  .logo-sub { display: none; }
-  .nav-item span:not(.nav-icon) { display: none; }
-  .nav-item { padding: 0 12px; }
+  .logo-sub{display:none}
+  .nav-item span:not(.nav-icon){display:none}
+  .nav-item{padding:0 12px}
   .main{padding:24px 20px}
 }
 @media(max-width:640px){
-  .grid,.passive-grid,.prestige-grid{grid-template-columns:1fr 1fr}
+  .grid,.passive-grid,.maitrise-grid{grid-template-columns:1fr 1fr}
   .main{padding:18px 12px}
   .page-header h1{font-size:1.3rem}
-  .logo-title { font-size: 0.9rem; }
+  .logo-title{font-size:.9rem}
 }
 </style>
 </head>
@@ -221,130 +199,88 @@ tr:hover td{background:var(--gold-bg)}
     <span class="logo-title">⚔ Pov'Typus Wiki</span>
     <span class="logo-sub">Dernière MàJ du serveur : 20/04/2026</span>
   </div>
-
   <div class="nav-section">
     <div class="nav-item active" onclick="go('accueil')"><span class="nav-icon">🏠</span><span>Présentation</span></div>
     <div class="nav-item" onclick="go('tuto')"><span class="nav-icon">🚀</span><span>Guide débutant</span></div>
   </div>
-
   <div class="nav-section">
     <div class="nav-item" onclick="go('passifs')"><span class="nav-icon">🛡</span><span>Passifs</span></div>
     <div class="nav-item" onclick="go('cmds')"><span class="nav-icon">⌨</span><span>Commandes</span></div>
     <div class="nav-item" onclick="go('stuff')"><span class="nav-icon">⚙</span><span>Amélioration</span></div>
     <div class="nav-item" onclick="go('sorts')"><span class="nav-icon">📦</span><span>Sorts</span></div>
   </div>
-
   <div class="nav-section">
     <div class="nav-item" onclick="go('monnaies')"><span class="nav-icon">💰</span><span>Monnaies</span></div>
     <div class="nav-item" onclick="go('drops')"><span class="nav-icon">💎</span><span>Drops rares</span></div>
   </div>
-
   <div class="nav-section">
     <div class="nav-item" onclick="go('maitrise')"><span class="nav-icon">👑</span><span>Maîtrise</span></div>
     <div class="nav-item" onclick="go('dofus')"><span class="nav-icon">💧</span><span>Dofus</span></div>
-    <div class="nav-item" onclick="go('ombre')"><span class="nav-icon">💀</head></span><span>Ombre</span></div>
+    <div class="nav-item" onclick="go('ombre')"><span class="nav-icon">💀</span><span>Ombre</span></div>
   </div>
 </nav>
 
 <main class="main">
 
+<!-- ══════════════ ACCUEIL ══════════════ -->
 <div id="accueil" class="panel active">
   <div class="breadcrumb"><span>Wiki</span><span class="breadcrumb-sep">›</span><span>Présentation</span></div>
   <div class="page-header">
     <h1>Bienvenue sur Pov'Typus</h1>
     <div class="subtitle">Serveur 100% FreeToWin — Fait avec passion</div>
   </div>
-
   <div class="alert alert-gold">
     <b>État :</b> <span style="color:#6aaa00;font-weight:700">En Ligne</span> &nbsp;·&nbsp;
-    <b>Discord :</b> <a href="https://discord.gg/TKC6TpAmQW" target="_blank" style="color:#7289da">discord.gg/TKC6TpAmQW</a> &nbsp;·&nbsp;
+    <b>Discord :</b> <a href="https://discord.gg/TKC6TpAmQW" target="_blank" style="color:#7289da">discord.gg/TKC6TpAmQW</a>
   </div>
-  
   <div class="alert alert-info">Avant toute chose, merci de lire le <a class="ilink" onclick="go('tuto')">Guide du débutant</a></div>
-  
   <div class="card">
     <div class="card-title"><span class="ct-icon">🚀</span>Premiers pas</div>
     <div class="grid">
-      <div class="mini-card green-accent">
-        <div class="mini-card-label">Choix de classe</div>
-        <div class="mini-card-value">Consultez les <a class="ilink" onclick="go('passifs')">18 passifs uniques</a> avant de choisir.</div>
-      </div>
-      <div class="mini-card green-accent">
-        <div class="mini-card-label">Sorts</div>
-        <div class="mini-card-value">Apprentissage classique jusqu'au niv. 100, puis via des <a class="ilink" onclick="go('monnaies')">Orichors</a>. Voir les <a class="ilink" onclick="go('sorts')">Coffres de sorts</a>.</div>
-      </div>
-      <div class="mini-card green-accent">
-        <div class="mini-card-label">Équipement de départ</div>
-        <div class="mini-card-value">Panoplie aventurier + familier sagesse + votre <a class="ilink" onclick="go('passifs')">Artefact passif</a>.</div>
-      </div>
-      <div class="mini-card green-accent">
-        <div class="mini-card-label">Prospection de base</div>
-        <div class="mini-card-value">Chaque personnage démarre avec <b>200 prospection</b>.</div>
-      </div>
-      <div class="mini-card green-accent">
-        <div class="mini-card-label">Mode Ombre</div>
-        <div class="mini-card-value">Mort permanente en PvM activable via un PNJ au zaap d'Astrub.</div>
-      </div>
-      <div class="mini-card green-accent">
-        <div class="mini-card-label">Sorts spéciaux</div>
-        <div class="mini-card-value">3 sorts sélectionnés par classe reçoivent des modifications uniques.</div>
-      </div>
+      <div class="mini-card green-accent"><div class="mini-card-label">Choix de classe</div><div class="mini-card-value">Consultez les <a class="ilink" onclick="go('passifs')">18 passifs uniques</a> avant de choisir.</div></div>
+      <div class="mini-card green-accent"><div class="mini-card-label">Sorts</div><div class="mini-card-value">Apprentissage classique jusqu'au niv. 100, puis via des <a class="ilink" onclick="go('monnaies')">Orichors</a>. Voir les <a class="ilink" onclick="go('sorts')">Coffres de sorts</a>.</div></div>
+      <div class="mini-card green-accent"><div class="mini-card-label">Équipement de départ</div><div class="mini-card-value">Panoplie aventurier + familier sagesse + votre <a class="ilink" onclick="go('passifs')">Artefact passif</a>.</div></div>
+      <div class="mini-card green-accent"><div class="mini-card-label">Prospection de base</div><div class="mini-card-value">Chaque personnage démarre avec <b>200 prospection</b>.</div></div>
+      <div class="mini-card green-accent"><div class="mini-card-label">Mode Ombre</div><div class="mini-card-value">Mort permanente en PvM activable via un PNJ au zaap d'Astrub.</div></div>
+      <div class="mini-card green-accent"><div class="mini-card-label">Sorts spéciaux</div><div class="mini-card-value">3 sorts sélectionnés par classe reçoivent des modifications uniques.</div></div>
     </div>
   </div>
-
   <div class="card">
     <div class="card-title"><span class="ct-icon">⭐</span>Fonctionnalités clés</div>
     <div class="grid">
-      <div class="mini-card gold-accent">
-        <div class="mini-card-label">Drop méritant</div>
-        <div class="mini-card-value">Nouveaux objets <b>Artefacts</b> — voir les <a class="ilink" onclick="go('drops')">Drops rares</a>.</div>
-      </div>
-      <div class="mini-card gold-accent">
-        <div class="mini-card-label">Maîtrise de classe</div>
-        <div class="mini-card-value">Montez jusqu'au <a class="ilink" onclick="go('maitrise')">niveau 200</a> pour le plein potentiel.</div>
-      </div>
-      <div class="mini-card gold-accent">
-        <div class="mini-card-label">Items évolutifs</div>
-        <div class="mini-card-value">Forgemagie + boost Tavernier — voir <a class="ilink" onclick="go('stuff')">Amélioration du stuff</a>.</div>
-      </div>
-      <div class="mini-card gold-accent">
-        <div class="mini-card-label">IA retravaillée</div>
-        <div class="mini-card-value">Des monstres plus intelligents pour plus de challenge.</div>
-      </div>
-      <div class="mini-card gold-accent">
-        <div class="mini-card-label">Forgemagie</div>
-        <div class="mini-card-value">Système complet avec limites, overmaxs et exo garanti. <a class="ilink" onclick="go('stuff')">Détails</a>.</div>
-      </div>
+      <div class="mini-card gold-accent"><div class="mini-card-label">Drop méritant</div><div class="mini-card-value">Nouveaux objets <b>Artefacts</b> — voir les <a class="ilink" onclick="go('drops')">Drops rares</a>.</div></div>
+      <div class="mini-card gold-accent"><div class="mini-card-label">Maîtrise de classe</div><div class="mini-card-value">Montez jusqu'au <a class="ilink" onclick="go('maitrise')">niveau 201</a> pour le plein potentiel.</div></div>
+      <div class="mini-card gold-accent"><div class="mini-card-label">Items évolutifs</div><div class="mini-card-value">Forgemagie + boost Tavernier — voir <a class="ilink" onclick="go('stuff')">Amélioration du stuff</a>.</div></div>
+      <div class="mini-card gold-accent"><div class="mini-card-label">IA retravaillée</div><div class="mini-card-value">Des monstres plus intelligents pour plus de challenge.</div></div>
+      <div class="mini-card gold-accent"><div class="mini-card-label">Forgemagie</div><div class="mini-card-value">Système complet avec limites, overmaxs et exo garanti. <a class="ilink" onclick="go('stuff')">Détails</a>.</div></div>
     </div>
   </div>
 </div>
 
+<!-- ══════════════ TUTO ══════════════ -->
 <div id="tuto" class="panel">
   <div class="breadcrumb"><a onclick="go('accueil')">Wiki</a><span class="breadcrumb-sep">›</span><span>Guide débutant</span></div>
   <div class="page-header"><h1>Guide du débutant</h1><div class="subtitle">Tout ce qu'il faut savoir pour bien commencer</div></div>
-
   <div class="card">
     <div class="card-title"><span class="ct-icon">🎮</span>À la création du personnage</div>
     <div class="steps">
       <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Choisissez votre classe</div><div class="step-desc">Chaque classe a un <a class="ilink" onclick="go('passifs')">passif unique</a> sous forme d'Artefact. Consultez la liste avant de vous décider.</div></div></div>
       <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Récupérez vos objets de départ</div><div class="step-desc">Panoplie aventurier, familier sagesse/dommages et votre Artefact de classe vous sont automatiquement attribués.</div></div></div>
       <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Succès Exploration</div><div class="step-desc">N'hésitez pas à faire le tour d'incarnam, le succès vous aidera grandement pour le début du serveur.</div></div></div>
-      <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Et les stuff je les ai ou ?</div><div class="step-desc">L'achat des stuff se passe avec les <a class="ilink" onclick="go('monnaies')">pièce d'or</a> à la <a class="ilink" onclick="go('stuff')">Taverne d'Astrub</a>.</div></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Et les stuff je les ai où ?</div><div class="step-desc">L'achat des stuff se passe avec les <a class="ilink" onclick="go('monnaies')">pièces d'or</a> à la <a class="ilink" onclick="go('stuff')">Taverne d'Astrub</a>.</div></div></div>
       <div class="step"><div class="step-num">💀</div><div class="step-body"><div class="step-title">Mode Ombre</div><div class="step-desc">Souhaitez-vous la mort permanente en PvM ? Parlez au <b><a class="ilink" onclick="go('ombre')">Pactisant des Ténèbres</a></b> (aussi accessible via <span class="cmd">.start</span>).</div></div></div>
     </div>
   </div>
-
   <div class="card">
-    <div class="card-title"><span class="ct-icon">💡</span>Points Important</div>
+    <div class="card-title"><span class="ct-icon">💡</span>Points Importants</div>
     <div class="alert alert-warning"><b>Le serveur est orienté Duo Compte minimum.</b> Jouer un seul personnage est fortement déconseillé.</div>
     <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:8px">
       <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Les clefs de donjon se drop dans la zone de leur donjon. Utilisez <span class="cmd">.drop</span> dans une zone/dj pour connaître leur localisation.</li>
       <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Vos sorts s'apprennent classiquement jusqu'au niveau 100. Au-delà, des <a class="ilink" onclick="go('sorts')">Coffres de sorts</a> achetables avec des <a class="ilink" onclick="go('monnaies')">Orichors</a> permettent de débloquer les sorts 101-200.</li>
       <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>200 Prospection de base vous permettent de bien farmer dès le départ.</li>
-            <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Tout du long de votre phase de leveling, vous obtiendrez des bonus supplémentaire via la <a class="ilink" onclick="go('maitrise')">Maîtrise</a>.</li>
+      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Tout au long de votre phase de leveling, vous obtiendrez des bonus supplémentaires via la <a class="ilink" onclick="go('maitrise')">Maîtrise</a>.</li>
     </ul>
   </div>
-
   <div class="card">
     <div class="card-title"><span class="ct-icon">📈</span>Comment s'optimiser ?</div>
     <div class="grid">
@@ -355,30 +291,28 @@ tr:hover td{background:var(--gold-bg)}
   </div>
 </div>
 
+<!-- ══════════════ OMBRE ══════════════ -->
 <div id="ombre" class="panel">
   <div class="breadcrumb"><a onclick="go('accueil')">Wiki</a><span class="breadcrumb-sep">›</span><span>Ombre</span></div>
   <div class="page-header"><h1>Mode Ombre</h1><div class="subtitle">Tout ce qu'il faut savoir sur le mode ombre</div></div>
-
-  <div class="alert alert-info">Le mode n'est activable seulement si votre personnage est maximum de niveau 20.</div>
-
+  <div class="alert alert-info">Le mode n'est activable que si votre personnage est maximum niveau 20.</div>
   <div class="card">
     <div class="card-title"><span class="ct-icon">🎮</span>Activation et Spécificités</div>
     <div class="steps">
-      <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Comment jouer en mode ombre ?</div><div class="step-desc">Parlez au <b>Pactisant des Ténèbres</b> sur la map de départ. (aussi accessible via <span class="cmd">.start</span>).</div></div></div>
+      <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Comment jouer en mode ombre ?</div><div class="step-desc">Parlez au <b>Pactisant des Ténèbres</b> sur la map de départ (aussi accessible via <span class="cmd">.start</span>).</div></div></div>
       <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">J'y gagne quoi ?</div><div class="step-desc">Jouer en mode ombre vous permet de bénéficier d'un bonus sur l'expérience et le drop de 300% (x3).</div></div></div>
       <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Les Limites</div><div class="step-desc">La commande <span class="cmd">.retry</span> n'est pas accessible et l'abandon sera considéré comme une défaite.</div></div></div>
-      <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Et si je meurt ?</div><div class="step-desc">En mode ombre, la mort en PvM est permanente.Votre personnage revient au niveau 1, inventaire vide (sauf objet donner au départ). L'experience est triplé jusqu'au plus haut niveau atteint toute mort confondu.</div></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Et si je meurs ?</div><div class="step-desc">En mode ombre, la mort en PvM est permanente. Votre personnage revient au niveau 1, inventaire vide (sauf objets donnés au départ). L'expérience est triplée jusqu'au plus haut niveau atteint, toute mort confondue.</div></div></div>
       <div class="step"><div class="step-num">5</div><div class="step-body"><div class="step-title">Et les succès dans tout ça ?</div><div class="step-desc">Les succès ne sont pas reset.</div></div></div>
     </div>
   </div>
 </div>
 
+<!-- ══════════════ PASSIFS ══════════════ -->
 <div id="passifs" class="panel">
   <div class="breadcrumb"><a onclick="go('accueil')">Wiki</a><span class="breadcrumb-sep">›</span><span>Passifs de classe</span></div>
   <div class="page-header"><h1>Passifs de Classe</h1><div class="subtitle">18 classes — chacune avec un Artefact passif unique</div></div>
-
   <div class="alert alert-info">Chaque classe possède un <b>Artefact</b> dictant son passif.</div>
-
   <div class="card">
     <div class="card-title"><span class="ct-icon">🛡</span>Tous les passifs</div>
     <div class="passive-grid">
@@ -401,16 +335,14 @@ tr:hover td{background:var(--gold-bg)}
       <div class="passive-card"><div class="passive-class">Huppermage</div><div class="passive-bonus">+10% Dmg Mêlée et Distance</div></div>
       <div class="passive-card"><div class="passive-class">Ouginak</div><div class="passive-bonus">Récupère 5% PV max si frappé</div></div>
     </div>
-    <div class="divider"></div>
   </div>
 </div>
 
+<!-- ══════════════ COMMANDES ══════════════ -->
 <div id="cmds" class="panel">
   <div class="breadcrumb"><a onclick="go('accueil')">Wiki</a><span class="breadcrumb-sep">›</span><span>Commandes</span></div>
   <div class="page-header"><h1>Commandes Joueur</h1><div class="subtitle">Commandes disponibles en jeu</div></div>
-
   <div class="alert alert-info">Les crochets <b>[</b> et <b>]</b> ne sont pas à saisir — ils indiquent un paramètre.</div>
-
   <div class="card">
     <div class="card-title"><span class="ct-icon">⌨</span>Utilitaires</div>
     <div class="table-wrap">
@@ -423,7 +355,7 @@ tr:hover td{background:var(--gold-bg)}
           <tr><td><span class="cmd">.start</span></td><td>Téléportation rapide vers la map de départ.</td></tr>
           <tr><td><span class="cmd">.fm</span></td><td>Téléportation rapide vers l'atelier de forgemagie.</td></tr>
           <tr><td><span class="cmd">.craft</span></td><td>Téléportation rapide vers les ateliers de craft.</td></tr>
-          <tr><td><span class="cmd">.drop</span></td><td>Donne la liste des drop disponible dans la zone actuel.</td></tr>
+          <tr><td><span class="cmd">.drop</span></td><td>Donne la liste des drops disponibles dans la zone actuelle.</td></tr>
           <tr><td><span class="cmd">.groupe</span></td><td>Invite auto le compte secondaire + ipdrop + autofollow activés.</td></tr>
           <tr><td><span class="cmd">.k</span></td><td>Centralise les kamas de tous vos comptes.</td></tr>
           <tr><td><span class="cmd">.bug</span></td><td>Téléporte vers une cellule accessible si le joueur est bloqué.</td></tr>
@@ -434,41 +366,31 @@ tr:hover td{background:var(--gold-bg)}
   </div>
 </div>
 
+<!-- ══════════════ SORTS ══════════════ -->
 <div id="sorts" class="panel">
   <div class="breadcrumb"><a onclick="go('accueil')">Wiki</a><span class="breadcrumb-sep">›</span><span>Sorts &amp; Coffres</span></div>
   <div class="page-header"><h1>Sorts &amp; Coffres de classe</h1><div class="subtitle">Système d'obtention de sorts via coffres et jetons</div></div>
-
   <div class="alert alert-success"><b>Bonne nouvelle :</b> L'achat d'un coffre débloque <b>tous les sorts</b> qu'il contient en une seule fois.</div>
-
   <div class="card">
     <div class="card-title"><span class="ct-icon">📚</span>Sorts niveaux 1–100</div>
-    <p style="color:var(--text-muted);font-size:0.9rem">Appris classiquement via l'apprentissage normal en jeu.</p>
+    <p style="color:var(--text-muted);font-size:.9rem">Appris classiquement via l'apprentissage normal en jeu.</p>
   </div>
-
   <div class="card">
     <div class="card-title"><span class="ct-icon">📦</span>Coffres de sorts — Niveaux 101 à 200</div>
     <div class="alert alert-gold" style="margin-bottom:16px"><b>Localisation :</b> PNJ à la <b>Milice d'Astrub</b> · Achat avec des <a class="ilink" onclick="go('monnaies')">Orichors</a> · Chaque coffre contient <b>tous</b> les sorts de sa tranche.</div>
     <div class="coffre-grid">
-      <div class="coffre-card c1">
-        <div class="coffre-title">Coffre 101 à 150</div>
-        <div class="coffre-cost"> Coût : 600 Orichors</div>
-        <div class="coffre-note">✓ Donne tous les sorts de niveau 101 à 150 de votre classe.</div>
-      </div>
-      <div class="coffre-card c2">
-        <div class="coffre-title">Coffre 151 à 200</div>
-        <div class="coffre-cost">Coût : 1 200 Orichors</div>
-        <div class="coffre-note">✓ Donne tous les sorts de niveau 151 à 200 de votre classe.</div>
-      </div>
+      <div class="coffre-card c1"><div class="coffre-title">Coffre 101 à 150</div><div class="coffre-cost">Coût : 600 Orichors</div><div class="coffre-note">✓ Donne tous les sorts de niveau 101 à 150 de votre classe.</div></div>
+      <div class="coffre-card c2"><div class="coffre-title">Coffre 151 à 200</div><div class="coffre-cost">Coût : 1 200 Orichors</div><div class="coffre-note">✓ Donne tous les sorts de niveau 151 à 200 de votre classe.</div></div>
     </div>
     <div class="divider"></div>
-    <p style="color:var(--text-muted);font-size:0.85rem">Comment obtenir des Orichors ? → <a class="ilink" onclick="go('monnaies')">Section Monnaies</a></p>
+    <p style="color:var(--text-muted);font-size:.85rem">Comment obtenir des Orichors ? → <a class="ilink" onclick="go('monnaies')">Section Monnaies</a></p>
   </div>
 </div>
 
+<!-- ══════════════ STUFF ══════════════ -->
 <div id="stuff" class="panel">
   <div class="breadcrumb"><a onclick="go('accueil')">Wiki</a><span class="breadcrumb-sep">›</span><span>Amélioration du stuff</span></div>
   <div class="page-header"><h1>Équipement &amp; Amélioration</h1><div class="subtitle">Obtenir, forger et booster votre stuff</div></div>
-
   <div class="card">
     <div class="card-title"><span class="ct-icon">🏪</span>Achat à la taverne d'Astrub</div>
     <ul style="list-style:none;display:flex;flex-direction:column;gap:8px">
@@ -476,7 +398,6 @@ tr:hover td{background:var(--gold-bg)}
       <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Dès l'achat, les items sont directement en <b>jet parfait</b>.</li>
     </ul>
   </div>
-
   <div class="card">
     <div class="card-title"><span class="ct-icon">🔨</span>Forgemagie</div>
     <div class="grid">
@@ -486,27 +407,25 @@ tr:hover td{background:var(--gold-bg)}
       <div class="mini-card gold-accent"><div class="mini-card-label">Items niv. 190+</div><div class="mini-card-value">Les limites absolues sont augmentées de <b>+20%</b> pour les items haute rareté.</div></div>
     </div>
   </div>
-
   <div class="card">
     <div class="card-title"><span class="ct-icon">⚡</span>Tavernier Feubuk — Atelier FM Bonta</div>
     <div class="alert alert-warning"><b>Attention :</b> Une fois boosté, l'item <b>ne peut plus être forgemagé</b>. Finalisez votre FM avant le boost.</div>
     <div class="steps">
       <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Rassemblez 3 exemplaires identiques</div><div class="step-desc">Même item, trois fois. Pour familier/montilier : 10 exemplaires requis.</div></div></div>
       <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Placez l'item à booster en premier</div><div class="step-desc">L'item en première position dans l'échange sera celui amélioré.</div></div></div>
-      <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Résultat : +10% sur toutes les stats</div><div class="step-desc">L'item reçoit un boost permanent de 10% de ses statistiques. S'il s'agit d'un familier/montilier , le boost est de 25%.</div></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Résultat : +10% sur toutes les stats</div><div class="step-desc">L'item reçoit un boost permanent de 10% de ses statistiques. S'il s'agit d'un familier/montilier, le boost est de 25%.</div></div></div>
     </div>
   </div>
 </div>
 
+<!-- ══════════════ MONNAIES ══════════════ -->
 <div id="monnaies" class="panel">
   <div class="breadcrumb"><a onclick="go('accueil')">Wiki</a><span class="breadcrumb-sep">›</span><span>Monnaies</span></div>
   <div class="page-header"><h1>Monnaies &amp; Économie</h1><div class="subtitle">Kamas, Pièces d'Or, Orichors, Larmes Éthérées</div></div>
-
   <div class="card">
     <div class="card-title"><span class="ct-icon">💰</span>Kamas</div>
-    <p style="color:var(--text-muted);font-size:0.9rem">Utilisables pour acheter des parchottages, pierres d'âmes, cosmétiques et sorts spéciaux auprès des PNJ au Zaap d'Astrub.</p>
+    <p style="color:var(--text-muted);font-size:.9rem">Utilisables pour acheter des parchottages, pierres d'âmes, cosmétiques et sorts spéciaux auprès des PNJ au Zaap d'Astrub.</p>
   </div>
-
   <div class="card">
     <div class="card-title"><span class="ct-icon">🪙</span>Pièce d'Or</div>
     <div class="grid">
@@ -515,10 +434,9 @@ tr:hover td{background:var(--gold-bg)}
       <div class="mini-card green-accent"><div class="mini-card-label">Utilisation</div><div class="mini-card-value">Acheter des équipements à la <a class="ilink" onclick="go('stuff')">Taverne d'Astrub</a>.</div></div>
     </div>
   </div>
-
   <div class="card">
     <div class="card-title"><span class="ct-icon">🔮</span>Orichors</div>
-    <div class="alert alert-gold" style="margin-bottom:14px"><b>Utilisation :</b>Achat des <a class="ilink" onclick="go('sorts')">Coffres de sorts</a> 101-200.</div>
+    <div class="alert alert-gold" style="margin-bottom:14px"><b>Utilisation :</b> Achat des <a class="ilink" onclick="go('sorts')">Coffres de sorts</a> 101-200.</div>
     <div class="table-wrap">
       <table>
         <thead><tr><th>Source</th><th>Gain</th></tr></thead>
@@ -535,21 +453,19 @@ tr:hover td{background:var(--gold-bg)}
       </table>
     </div>
   </div>
-
   <div class="card">
     <div class="card-title"><span class="ct-icon">💧</span>Larme Éthérée</div>
-    <p style="color:var(--text-muted);font-size:0.9rem">Obtenues en échangeant vos Dofus auprès du PNJ <b>Gislain Scythe</b> à l'Atelier de Bonta. Utilisées pour l'<a class="ilink" onclick="go('dofus')">Évolution des Dofus</a>.</p>
+    <p style="color:var(--text-muted);font-size:.9rem">Obtenues en échangeant vos Dofus auprès du PNJ <b>Gislain Scythe</b> à l'Atelier de Bonta. Utilisées pour l'<a class="ilink" onclick="go('dofus')">Évolution des Dofus</a>.</p>
   </div>
 </div>
 
+<!-- ══════════════ DROPS ══════════════ -->
 <div id="drops" class="panel">
   <div class="breadcrumb"><a onclick="go('accueil')">Wiki</a><span class="breadcrumb-sep">›</span><span>Drops rares</span></div>
   <div class="page-header"><h1>Drops Rares</h1><div class="subtitle">Dofus, Artefacts &amp; Cartes — par boss</div></div>
-
   <div class="drop-search">
     <input type="text" id="dropSearch" placeholder="Rechercher un item ou un boss..." oninput="filterDrops()">
   </div>
-
   <div class="tab-bar" id="dropTabs">
     <button class="tab-btn active" onclick="setDropTab('all',this)">Tous <span class="count-badge" id="cnt-all">0</span></button>
     <button class="tab-btn" onclick="setDropTab('carte',this)"><span class="elem-badge elem-carte">Carte</span> Cartes</button>
@@ -560,7 +476,6 @@ tr:hover td{background:var(--gold-bg)}
     <button class="tab-btn" onclick="setDropTab('air',this)"><span class="elem-badge elem-air">Air</span> Artefacts Air</button>
     <button class="tab-btn" onclick="setDropTab('multi',this)"><span class="elem-badge elem-multi">Multi</span> Artefacts Multi</button>
   </div>
-
   <div class="card" style="padding:0;overflow:hidden">
     <div class="table-wrap" style="margin:0">
       <table id="dropTable">
@@ -572,199 +487,33 @@ tr:hover td{background:var(--gold-bg)}
   </div>
 </div>
 
+<!-- ══════════════ MAÎTRISE ══════════════ -->
 <div id="maitrise" class="panel">
   <div class="breadcrumb"><a onclick="go('accueil')">Wiki</a><span class="breadcrumb-sep">›</span><span>Maîtrise de classe</span></div>
-  <div class="page-header"><h1>Maîtrise de Classe</h1><div class="subtitle">Progressez sans limite jusqu'au niveau 200</div></div>
+  <div class="page-header"><h1>Maîtrise de Classe</h1><div class="subtitle">Progressez jusqu'au niveau 201 — choisissez votre spécialisation</div></div>
 
-  <div class="card">
-    <div class="card-title"><span class="ct-icon">👑</span>Comment ça marche et c'est quoi ?</div>
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-title"><span class="ct-icon">👑</span>Comment ça marche ?</div>
     <div class="grid">
-      <div class="mini-card gold-accent"><div class="mini-card-label">Palier</div><div class="mini-card-value"><b>Tous les 20 niveaux</b> vous gagnez en maîtrise de votre classe représenter par des stats supplémentaire.</div></div>
-      <div class="mini-card gold-accent"><div class="mini-card-label">Bonus</div><div class="mini-card-value">Points de statistiques bonus : + <b>+40 points</b> de caractéristiques par palier.</div></div>
+      <div class="mini-card gold-accent"><div class="mini-card-label">Paliers</div><div class="mini-card-value">Un bonus tous les <b>20 niveaux</b>, de 20 à 200. Plus un ultime bonus au niveau <b>201</b>.</div></div>
+      <div class="mini-card gold-accent"><div class="mini-card-label">Spécialisation</div><div class="mini-card-value">Choisissez votre type : <b>DPS</b>, <b>Soutien</b> ou <b>Tank</b>. Chaque type a ses propres bonus.</div></div>
+      <div class="mini-card gold-accent"><div class="mini-card-label">Bonus commun niv. 201</div><div class="mini-card-value"><b>+5% Do Mêlée / Distance / Sorts</b> — partagé par les 3 types.</div></div>
     </div>
   </div>
 
-<div class="card">
-  <div class="card-title"><span class="ct-icon">📊</span>Détail des paliers</div>
-  <div class="prestige-grid">
-
-    <div class="prestige-card">
-      <div class="prestige-lvl">Niveau 20</div>
-      <div class="prestige-bonus">
-        <strong>Bonus du palier :</strong><br>
-        +50 Vitalité<br><br>
-        <strong>Total cumulé :</strong>
-        <ul style="list-style:none; padding-left:0; margin-top:5px; font-size:0.8rem; color:var(--text-muted)">
-          <li>• 50 Vitalité</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="prestige-card">
-      <div class="prestige-lvl">Niveau 40</div>
-      <div class="prestige-bonus">
-        <strong>Bonus du palier :</strong><br>
-        +25 Stats (Sag/For/Agi/Int/Cha)<br><br>
-        <strong>Total cumulé :</strong>
-        <ul style="list-style:none; padding-left:0; margin-top:5px; font-size:0.8rem; color:var(--text-muted)">
-          <li>• 50 Vitalité</li>
-          <li>• 25 Stats</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="prestige-card">
-      <div class="prestige-lvl">Niveau 60</div>
-      <div class="prestige-bonus">
-        <strong>Bonus du palier :</strong><br>
-        +10 Résistances fixes<br><br>
-        <strong>Total cumulé :</strong>
-        <ul style="list-style:none; padding-left:0; margin-top:5px; font-size:0.8rem; color:var(--text-muted)">
-          <li>• 50 Vitalité</li>
-          <li>• 25 Stats</li>
-          <li>• 10 Résistances fixes</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="prestige-card">
-      <div class="prestige-lvl">Niveau 80</div>
-      <div class="prestige-bonus">
-        <strong>Bonus du palier :</strong><br>
-        +1 PO · +1 Invo · +20 PP<br><br>
-        <strong>Total cumulé :</strong>
-        <ul style="list-style:none; padding-left:0; margin-top:5px; font-size:0.8rem; color:var(--text-muted)">
-          <li>• 50 Vitalité</li>
-          <li>• 25 Stats</li>
-          <li>• 10 Résistances fixes</li>
-          <li>• 20 Prospection</li>
-          <li>• 1 Portée</li>
-          <li>• 1 Invocation</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="prestige-card">
-      <div class="prestige-lvl">Niveau 100</div>
-      <div class="prestige-bonus">
-        <strong>Bonus du palier :</strong><br>
-        +10 Dommages<br><br>
-        <strong>Total cumulé :</strong>
-        <ul style="list-style:none; padding-left:0; margin-top:5px; font-size:0.8rem; color:var(--text-muted)">
-          <li>• 50 Vitalité</li>
-          <li>• 25 Stats</li>
-          <li>• 10 Résistances fixes</li>
-          <li>• 20 Prospection</li>
-          <li>• 10 Dommages</li>
-          <li>• 1 Portée</li>
-          <li>• 1 Invocation</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="prestige-card">
-      <div class="prestige-lvl">Niveau 120</div>
-      <div class="prestige-bonus">
-        <strong>Bonus du palier :</strong><br>
-        +25 Stats<br><br>
-        <strong>Total cumulé :</strong>
-        <ul style="list-style:none; padding-left:0; margin-top:5px; font-size:0.8rem; color:var(--text-muted)">
-          <li>• 50 Vitalité</li>
-          <li>• 50 Stats</li>
-          <li>• 10 Résistances fixes</li>
-          <li>• 20 Prospection</li>
-          <li>• 10 Dommages</li>
-          <li>• 1 Portée</li>
-          <li>• 1 Invocation</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="prestige-card">
-      <div class="prestige-lvl">Niveau 140</div>
-      <div class="prestige-bonus">
-        <strong>Bonus du palier :</strong><br>
-        +10 Résistances fixes<br><br>
-        <strong>Total cumulé :</strong>
-        <ul style="list-style:none; padding-left:0; margin-top:5px; font-size:0.8rem; color:var(--text-muted)">
-          <li>• 50 Vitalité</li>
-          <li>• 50 Stats</li>
-          <li>• 20 Résistances fixes</li>
-          <li>• 20 Prospection</li>
-          <li>• 10 Dommages</li>
-          <li>• 1 Portée</li>
-          <li>• 1 Invocation</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="prestige-card">
-      <div class="prestige-lvl">Niveau 160</div>
-      <div class="prestige-bonus">
-        <strong>Bonus du palier :</strong><br>
-        +10 Dmg Crit. · +30 PP<br><br>
-        <strong>Total cumulé :</strong>
-        <ul style="list-style:none; padding-left:0; margin-top:5px; font-size:0.8rem; color:var(--text-muted)">
-          <li>• 50 Vitalité</li>
-          <li>• 50 Stats</li>
-          <li>• 20 Résistances fixes</li>
-          <li>• 50 Prospection</li>
-          <li>• 10 Dommages</li>
-          <li>• 10 Dommages Critiques</li>
-          <li>• 1 Portée</li>
-          <li>• 1 Invocation</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="prestige-card">
-      <div class="prestige-lvl">Niveau 180</div>
-      <div class="prestige-bonus">
-        <strong>Bonus du palier :</strong><br>
-        +10% Dommages finaux<br><br>
-        <strong>Total cumulé :</strong>
-        <ul style="list-style:none; padding-left:0; margin-top:5px; font-size:0.8rem; color:var(--text-muted)">
-          <li>• 50 Vitalité</li>
-          <li>• 50 Stats</li>
-          <li>• 20 Résistances fixes</li>
-          <li>• 50 Prospection</li>
-          <li>• 10 Dommages</li>
-          <li>• 10 Dommages Critiques</li>
-          <li>• 10% Dommages finaux</li>
-          <li>• 1 Portée</li>
-          <li>• 1 Invocation</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="prestige-card highlight">
-      <div class="prestige-lvl">★ Niveau 200 ★</div>
-      <div class="prestige-bonus">
-        <strong>Bonus du palier :</strong><br>
-        +50 Vitalité · +50 Stats<br><br>
-        <strong>Total cumulé :</strong>
-        <ul style="list-style:none; padding-left:0; margin-top:5px; font-size:0.8rem; color:var(--text)">
-          <li>• 100 Vitalité</li>
-          <li>• 100 Stats (Sag/For/Agi/Int/Cha)</li>
-          <li>• 20 Résistances fixes</li>
-          <li>• 50 Prospection</li>
-          <li>• 10 Dommages</li>
-          <li>• 10 Dommages Critiques</li>
-          <li>• 10% Dommages finaux</li>
-          <li>• 1 Portée</li>
-          <li>• 1 Invocation</li>
-        </ul>
-      </div>
-    </div>
-
+  <div class="tab-bar" id="maitriseTabBar">
+    <button class="tab-btn active" onclick="setMaitriseType('dps',this)">⚔ DPS</button>
+    <button class="tab-btn" onclick="setMaitriseType('soutien',this)">💚 Soutien</button>
+    <button class="tab-btn" onclick="setMaitriseType('tank',this)">🛡 Tank</button>
   </div>
-</div>
+
+  <div id="maitriseGrid" class="maitrise-grid"></div>
 </div>
 
+<!-- ══════════════ DOFUS ══════════════ -->
 <div id="dofus" class="panel">
   <div class="breadcrumb"><a onclick="go('accueil')">Wiki</a><span class="breadcrumb-sep">›</span><span>Évolution Dofus</span></div>
   <div class="page-header"><h1>Évolution des Dofus</h1><div class="subtitle">Recyclage et amélioration via les Larmes Éthérées</div></div>
-
   <div class="card">
     <div class="card-title"><span class="ct-icon">♻</span>Recyclage — PNJ Gislain Scythe (Atelier de Bonta)</div>
     <div class="alert alert-warning">Un Dofus obtenu via un <b>succès</b> ne peut pas être brisé dans ce système.</div>
@@ -772,29 +521,29 @@ tr:hover td{background:var(--gold-bg)}
       <div class="mini-card gold-accent"><div class="mini-card-label">Dofus classique</div><div class="mini-card-value"><b>3 Larmes</b> par Dofus brisé.</div></div>
       <div class="mini-card gold-accent"><div class="mini-card-label">Dofaléa</div><div class="mini-card-value"><b>5 Larmes</b> par Dofaléa brisé.</div></div>
     </div>
-    <p style="color:var(--text-muted);font-size:0.85rem;margin-top:12px">Limite : <b>1 seul dofus</b> par échange pour la conversion en Larme Éthérée.</p>
+    <p style="color:var(--text-muted);font-size:.85rem;margin-top:12px">Limite : <b>1 seul dofus</b> par échange pour la conversion en Larme Éthérée.</p>
   </div>
-
   <div class="card">
     <div class="card-title"><span class="ct-icon">⬆</span>Évolution — PNJ Thalyion (Atelier de Bonta)</div>
     <div class="table-wrap">
       <table>
         <thead><tr><th>Rang</th><th>Coût</th><th>Jets obtenus</th></tr></thead>
         <tbody>
-          <tr><td><b>Original</b> <span style="color:var(--text-muted);font-size:0.8rem">(base)</span></td><td><span style="color:var(--text-muted)">Aucun craft</span></td><td>Jet 1.29</td></tr>
+          <tr><td><b>Original</b> <span style="color:var(--text-muted);font-size:.8rem">(base)</span></td><td><span style="color:var(--text-muted)">Aucun craft</span></td><td>Jet 1.29</td></tr>
           <tr><td><b style="color:var(--amber)">Rare</b></td><td>15 Larmes éthérées + Dofus Original</td><td>Jet 2.51</td></tr>
           <tr><td><b style="color:var(--gold)">Mythique</b></td><td>15 Larmes éthérées + Dofus Rare</td><td>Jet amélioré</td></tr>
         </tbody>
       </table>
     </div>
     <div class="divider"></div>
-    <p style="font-size:0.85rem;color:var(--text-muted)">Sur qui je drop mes dofus ? → <a class="ilink" onclick="go('drops')">Drops Rares</a></p>
+    <p style="font-size:.85rem;color:var(--text-muted)">Sur qui je drop mes dofus ? → <a class="ilink" onclick="go('drops')">Drops Rares</a></p>
   </div>
 </div>
 
 </main>
 
 <script>
+/* ══ DROPS ══ */
 const DROPS=[
   {cat:'carte',item:'Carte de Boss',boss:'Tout les boss',rate:'1%'},
   {cat:'dofus',item:'Kalyptus',boss:'Malléfisk',rate:'0.1%'},
@@ -841,41 +590,105 @@ const DROPS=[
   {cat:'multi',item:'Force de la simplicité',boss:'Chêne Mou',rate:'0.5%'},
   {cat:'multi',item:'Taeguk',boss:'Nileza',rate:'0.5%'},
 ];
-
 const CAT_LABELS={carte:'Carte',dofus:'Dofus',terre:'Artefact Terre',feu:'Artefact Feu',eau:'Artefact Eau',air:'Artefact Air',multi:'Artefact Multi'};
 const CAT_CLASS={carte:'elem-carte',dofus:'elem-dofus',terre:'elem-terre',feu:'elem-feu',eau:'elem-eau',air:'elem-air',multi:'elem-multi'};
-
-let currentTab='all';
-
+let currentDropTab='all';
 function renderDrops(){
   const q=document.getElementById('dropSearch').value.toLowerCase().trim();
   const tbody=document.getElementById('dropBody');
   const noR=document.getElementById('noResults');
   const filtered=DROPS.filter(d=>{
-    const matchTab=currentTab==='all'||d.cat===currentTab;
+    const matchTab=currentDropTab==='all'||d.cat===currentDropTab;
     const matchQ=!q||d.item.toLowerCase().includes(q)||d.boss.toLowerCase().includes(q);
     return matchTab&&matchQ;
   });
   document.getElementById('cnt-all').textContent=DROPS.length;
   if(!filtered.length){tbody.innerHTML='';noR.style.display='block';return;}
   noR.style.display='none';
-  tbody.innerHTML=filtered.map(d=>`
-    <tr>
-      <td class="item-name">${d.item}</td>
-      <td><span class="elem-badge ${CAT_CLASS[d.cat]}">${CAT_LABELS[d.cat]}</span></td>
-      <td class="boss-name">${d.boss}</td>
-      <td class="rate">${d.rate}</td>
-    </tr>`).join('');
+  tbody.innerHTML=filtered.map(d=>`<tr><td class="item-name">${d.item}</td><td><span class="elem-badge ${CAT_CLASS[d.cat]}">${CAT_LABELS[d.cat]}</span></td><td class="boss-name">${d.boss}</td><td class="rate">${d.rate}</td></tr>`).join('');
 }
-
 function filterDrops(){renderDrops();}
 function setDropTab(tab,btn){
-  currentTab=tab;
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  currentDropTab=tab;
+  document.querySelectorAll('#dropTabs .tab-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   renderDrops();
 }
 
+/* ══ MAÎTRISE ══ */
+const MAITRISE = {
+  dps: [
+    { lvl:20,  bonus:'5% Stats All (hors Sag/Vit)',   cumul:['5% Stats All (hors Sag/Vit)'] },
+    { lvl:40,  bonus:'10 Dommages',                   cumul:['5% Stats All (hors Sag/Vit)','10 Dommages'] },
+    { lvl:60,  bonus:'5% Coups Critiques',            cumul:['5% Stats All (hors Sag/Vit)','10 Dommages','5% Coups Critiques'] },
+    { lvl:80,  bonus:'100 Puissance',                 cumul:['5% Stats All (hors Sag/Vit)','10 Dommages','5% Coups Critiques','100 Puissance'] },
+    { lvl:100, bonus:'10% Dommages Finaux',           cumul:['5% Stats All (hors Sag/Vit)','10 Dommages','5% Coups Critiques','100 Puissance','10% Dommages Finaux'] },
+    { lvl:120, bonus:'+10% Stats All (hors Sag/Vit)', cumul:['15% Stats All (hors Sag/Vit)','10 Dommages','5% Coups Critiques','100 Puissance','10% Dommages Finaux'] },
+    { lvl:140, bonus:'20 Dommages',                   cumul:['15% Stats All (hors Sag/Vit)','30 Dommages','5% Coups Critiques','100 Puissance','10% Dommages Finaux'] },
+    { lvl:160, bonus:'10% Coups Critiques',           cumul:['15% Stats All (hors Sag/Vit)','30 Dommages','15% Coups Critiques','100 Puissance','10% Dommages Finaux'] },
+    { lvl:180, bonus:'200 Puissance',                 cumul:['15% Stats All (hors Sag/Vit)','30 Dommages','15% Coups Critiques','300 Puissance','10% Dommages Finaux'] },
+    { lvl:200, bonus:'25% Stats All (hors Sag/Vit)',  cumul:['40% Stats All (hors Sag/Vit)','30 Dommages','15% Coups Critiques','300 Puissance','10% Dommages Finaux'] },
+    { lvl:201, bonus:'5% Do Mêlée/Distance/Sorts',   cumul:['40% Stats All (hors Sag/Vit)','30 Dommages','15% Coups Critiques','300 Puissance','10% Dommages Finaux','5% Do Mêlée/Distance/Sorts'], highlight:true },
+  ],
+  soutien: [
+    { lvl:20,  bonus:'5% Stats All (hors Sag/Vit)',   cumul:['5% Stats All (hors Sag/Vit)'] },
+    { lvl:40,  bonus:'1 Invocation',                  cumul:['5% Stats All (hors Sag/Vit)','1 Invocation'] },
+    { lvl:60,  bonus:'10 Soin',                       cumul:['5% Stats All (hors Sag/Vit)','1 Invocation','10 Soin'] },
+    { lvl:80,  bonus:'100 Prospection',               cumul:['5% Stats All (hors Sag/Vit)','1 Invocation','10 Soin','100 Prospection'] },
+    { lvl:100, bonus:'10% Sort',                      cumul:['5% Stats All (hors Sag/Vit)','1 Invocation','10 Soin','100 Prospection','10% Sort'] },
+    { lvl:120, bonus:'+10% Stats All (hors Sag/Vit)', cumul:['15% Stats All (hors Sag/Vit)','1 Invocation','10 Soin','100 Prospection','10% Sort'] },
+    { lvl:140, bonus:'2 Invocations',                 cumul:['15% Stats All (hors Sag/Vit)','3 Invocations','10 Soin','100 Prospection','10% Sort'] },
+    { lvl:160, bonus:'20 Soin',                       cumul:['15% Stats All (hors Sag/Vit)','3 Invocations','30 Soin','100 Prospection','10% Sort'] },
+    { lvl:180, bonus:'200 Prospection',               cumul:['15% Stats All (hors Sag/Vit)','3 Invocations','30 Soin','300 Prospection','10% Sort'] },
+    { lvl:200, bonus:'15% Stats All (hors Sag/Vit)',  cumul:['30% Stats All (hors Sag/Vit)','3 Invocations','30 Soin','300 Prospection','10% Sort'] },
+    { lvl:201, bonus:'5% Do Mêlée/Distance/Sorts',   cumul:['30% Stats All (hors Sag/Vit)','3 Invocations','30 Soin','300 Prospection','10% Sort','5% Do Mêlée/Distance/Sorts'], highlight:true },
+  ],
+  tank: [
+    { lvl:20,  bonus:'5% Stats All (hors Sag/Vit)',    cumul:['5% Stats All (hors Sag/Vit)'] },
+    { lvl:40,  bonus:'100 PV',                         cumul:['5% Stats All (hors Sag/Vit)','100 PV'] },
+    { lvl:60,  bonus:'15 Résistances Fixes',           cumul:['5% Stats All (hors Sag/Vit)','100 PV','15 Résistances Fixes'] },
+    { lvl:80,  bonus:'100 Renvoie de Dommage',         cumul:['5% Stats All (hors Sag/Vit)','100 PV','15 Résistances Fixes','100 Renvoie de Dommage'] },
+    { lvl:100, bonus:'10% Rés. Mêlée/Distance',        cumul:['5% Stats All (hors Sag/Vit)','100 PV','15 Résistances Fixes','100 Renvoie de Dommage','10% Rés. Mêlée/Distance'] },
+    { lvl:120, bonus:'+10% Stats All (hors Sag/Vit)',  cumul:['15% Stats All (hors Sag/Vit)','100 PV','15 Résistances Fixes','100 Renvoie de Dommage','10% Rés. Mêlée/Distance'] },
+    { lvl:140, bonus:'200 PV',                         cumul:['15% Stats All (hors Sag/Vit)','300 PV','15 Résistances Fixes','100 Renvoie de Dommage','10% Rés. Mêlée/Distance'] },
+    { lvl:160, bonus:'30 Résistances Fixes',           cumul:['15% Stats All (hors Sag/Vit)','300 PV','45 Résistances Fixes','100 Renvoie de Dommage','10% Rés. Mêlée/Distance'] },
+    { lvl:180, bonus:'200 Renvoie de Dommage',         cumul:['15% Stats All (hors Sag/Vit)','300 PV','45 Résistances Fixes','300 Renvoie de Dommage','10% Rés. Mêlée/Distance'] },
+    { lvl:200, bonus:'20% Vitalité',                   cumul:['15% Stats All (hors Sag/Vit)','300 PV','45 Résistances Fixes','300 Renvoie de Dommage','10% Rés. Mêlée/Distance','20% Vitalité'] },
+    { lvl:201, bonus:'5% Do Mêlée/Distance/Sorts',    cumul:['15% Stats All (hors Sag/Vit)','300 PV','45 Résistances Fixes','300 Renvoie de Dommage','10% Rés. Mêlée/Distance','20% Vitalité','5% Do Mêlée/Distance/Sorts'], highlight:true },
+  ]
+};
+
+let currentMaitriseType = 'dps';
+
+function renderMaitrise() {
+  const data = MAITRISE[currentMaitriseType];
+  const grid = document.getElementById('maitriseGrid');
+  grid.innerHTML = data.map(p => {
+    const hl = p.highlight ? 'highlight' : '';
+    const star = p.highlight ? '<span class="mc-star">★</span>' : '';
+    const cumulItems = p.cumul.map(c => `<li>${c}</li>`).join('');
+    return `
+      <div class="maitrise-card ${hl}">
+        <div class="mc-header">
+          <span class="mc-lvl">Niveau ${p.lvl}</span>
+          ${star}
+        </div>
+        <div class="mc-bonus-label">Bonus du palier</div>
+        <div class="mc-bonus-val">${p.bonus}</div>
+        <div class="mc-cumul-label">Total cumulé</div>
+        <ul class="mc-cumul-list">${cumulItems}</ul>
+      </div>`;
+  }).join('');
+}
+
+function setMaitriseType(type, btn) {
+  currentMaitriseType = type;
+  document.querySelectorAll('#maitriseTabBar .tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderMaitrise();
+}
+
+/* ══ NAVIGATION ══ */
 function go(id){
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
@@ -885,9 +698,12 @@ function go(id){
   if(navItem)navItem.classList.add('active');
   window.scrollTo(0,0);
   if(id==='drops')renderDrops();
+  if(id==='maitrise')renderMaitrise();
 }
 
+/* Init */
 renderDrops();
+renderMaitrise();
 </script>
 </body>
 </html>
