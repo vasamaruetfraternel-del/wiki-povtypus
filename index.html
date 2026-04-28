@@ -80,6 +80,54 @@ tr:hover td{background:var(--gold-bg)}
 .item-name{color:var(--text);font-weight:500}
 .boss-name{color:var(--text-muted);font-size:.85rem}
 
+/* ── DROP ROW ── */
+tr.has-tooltip{cursor:help}
+
+/* ── TOOLTIP ── */
+#dropTooltip{
+  position:fixed;
+  background:var(--surface);
+  border:1px solid var(--border-gold);
+  border-radius:var(--radius);
+  padding:11px 15px;
+  font-size:.82rem;
+  color:var(--text);
+  pointer-events:none;
+  z-index:9999;
+  min-width:180px;
+  max-width:280px;
+  display:none;
+  box-shadow:0 6px 24px rgba(0,0,0,.65);
+  transition:opacity .1s ease;
+}
+#dropTooltip.visible{display:block}
+.tt-title{
+  color:var(--gold);
+  font-weight:700;
+  font-size:.86rem;
+  margin-bottom:9px;
+  padding-bottom:7px;
+  border-bottom:1px solid var(--border-gold);
+  line-height:1.3;
+}
+.tt-stat{
+  color:var(--text-muted);
+  padding:3px 0;
+  font-size:.8rem;
+  display:flex;
+  align-items:flex-start;
+  gap:6px;
+  line-height:1.35;
+}
+.tt-stat::before{
+  content:'◆';
+  color:var(--green-dim);
+  font-size:.55rem;
+  flex-shrink:0;
+  margin-top:3px;
+}
+.tt-empty{color:var(--text-dim);font-style:italic;font-size:.78rem}
+
 /* ── DROPS ── */
 .drop-search{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap}
 .drop-search input{flex:1;min-width:160px;background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:var(--radius);font-size:.87rem;outline:none}
@@ -123,36 +171,31 @@ tr:hover td{background:var(--gold-bg)}
 .maitrise-card.highlight::before{background:var(--gold)}
 .maitrise-card:hover{border-color:var(--border-gold)}
 .maitrise-card.highlight:hover{border-color:var(--gold)}
-
 .mc-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)}
 .mc-lvl{font-size:.72rem;text-transform:uppercase;letter-spacing:.8px;font-weight:700;color:var(--text-muted)}
 .maitrise-card.highlight .mc-lvl{color:var(--gold)}
 .mc-star{font-size:.8rem}
-
 .mc-bonus-label{font-size:.68rem;text-transform:uppercase;letter-spacing:.6px;color:var(--text-dim);font-weight:700;margin-bottom:4px}
 .mc-bonus-val{font-size:.92rem;font-weight:700;color:var(--text);line-height:1.3;margin-bottom:12px}
 .maitrise-card.highlight .mc-bonus-val{color:var(--gold)}
-
 .mc-cumul-label{font-size:.68rem;text-transform:uppercase;letter-spacing:.6px;color:var(--text-dim);font-weight:700;margin-bottom:5px}
 .mc-cumul-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:3px}
 .mc-cumul-list li{font-size:.78rem;color:var(--text-muted);padding-left:12px;position:relative;line-height:1.3}
 .mc-cumul-list li::before{content:'·';position:absolute;left:0;color:var(--green-dim)}
 .maitrise-card.highlight .mc-cumul-list li{color:var(--text)}
 
-/* Type badge on tab */
-.type-badge-dps{background:rgba(192,57,43,.15);color:#e07060;border-color:#c0392b}
-.type-badge-soutien{background:rgba(106,170,0,.15);color:#6aaa00;border-color:#4a7a00}
-.type-badge-tank{background:rgba(59,130,246,.15);color:#7ab8f5;border-color:#2563eb}
+/* ── COFFRE CARDS ── */
+.coffre-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.coffre-card{background:var(--surface3);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px 20px}
+.coffre-card.c1{border-top:3px solid var(--gold-dim)}
+.coffre-card.c2{border-top:3px solid var(--gold)}
+.coffre-title{font-size:1rem;font-weight:700;color:var(--gold);margin-bottom:6px}
+.coffre-cost{font-size:1.4rem;font-weight:700;color:var(--amber);margin-bottom:4px}
+.coffre-note{font-size:.8rem;color:var(--green);margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
 
-/* ── PRESTIGE (legacy, kept for compatibility) ── */
-.prestige-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
-.prestige-card{background:var(--surface3);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;position:relative;overflow:hidden}
-.prestige-card.highlight{border-color:var(--gold);background:var(--gold-bg)}
-.prestige-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--green-dim)}
-.prestige-card.highlight::before{background:var(--gold)}
-.prestige-lvl{font-size:.72rem;text-transform:uppercase;letter-spacing:.8px;color:var(--text-muted);margin-bottom:6px;font-weight:700}
-.prestige-bonus{color:var(--text);font-size:.85rem;line-height:1.5}
-.prestige-card.highlight .prestige-lvl{color:var(--gold)}
+/* ── ORICHOR TABLE ── */
+.orichor-row td:first-child{color:var(--text-muted)}
+.orichor-row td:last-child{color:var(--amber);font-weight:700}
 
 /* ── INLINE LINKS ── */
 .ilink{color:var(--gold);cursor:pointer;text-decoration:underline;text-decoration-color:var(--gold-dim);text-underline-offset:2px;font-weight:500;transition:var(--transition)}
@@ -163,19 +206,6 @@ tr:hover td{background:var(--gold-bg)}
 
 /* ── DIVIDER ── */
 .divider{height:1px;background:linear-gradient(to right,transparent,var(--border),transparent);margin:20px 0}
-
-/* ── ORICHOR TABLE ── */
-.orichor-row td:first-child{color:var(--text-muted)}
-.orichor-row td:last-child{color:var(--amber);font-weight:700}
-
-/* ── COFFRE CARDS ── */
-.coffre-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
-.coffre-card{background:var(--surface3);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px 20px}
-.coffre-card.c1{border-top:3px solid var(--gold-dim)}
-.coffre-card.c2{border-top:3px solid var(--gold)}
-.coffre-title{font-size:1rem;font-weight:700;color:var(--gold);margin-bottom:6px}
-.coffre-cost{font-size:1.4rem;font-weight:700;color:var(--amber);margin-bottom:4px}
-.coffre-note{font-size:.8rem;color:var(--green);margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
 
 /* ── RESPONSIVE ── */
 @media(max-width:900px){
@@ -193,6 +223,12 @@ tr:hover td{background:var(--gold-bg)}
 </style>
 </head>
 <body>
+
+<!-- TOOLTIP -->
+<div id="dropTooltip">
+  <div class="tt-title" id="ttTitle"></div>
+  <div id="ttBody"></div>
+</div>
 
 <nav class="topnav">
   <div class="logo">
@@ -254,7 +290,7 @@ tr:hover td{background:var(--gold-bg)}
       <div class="mini-card gold-accent"><div class="mini-card-label">Items évolutifs</div><div class="mini-card-value">Forgemagie + boost Tavernier — voir <a class="ilink" onclick="go('stuff')">Amélioration du stuff</a>.</div></div>
       <div class="mini-card gold-accent"><div class="mini-card-label">IA retravaillée</div><div class="mini-card-value">Des monstres plus intelligents pour plus de challenge.</div></div>
       <div class="mini-card gold-accent"><div class="mini-card-label">Forgemagie</div><div class="mini-card-value">Système complet avec limites, overmaxs et exo garanti. <a class="ilink" onclick="go('stuff')">Détails</a>.</div></div>
-      <div class="mini-card gold-accent"><div class="mini-card-label">Songe Infini</div><div class="mini-card-value">Repoussez les limites de votre personnage à l'aide des <a class="ilink" onclick="go('songe')">Songe Infini</a>.</div></div>    
+      <div class="mini-card gold-accent"><div class="mini-card-label">Songe Infini</div><div class="mini-card-value">Repoussez les limites de votre personnage à l'aide des <a class="ilink" onclick="go('songe')">Songe Infini</a>.</div></div>
     </div>
   </div>
 </div>
@@ -308,17 +344,18 @@ tr:hover td{background:var(--gold-bg)}
       <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Le mode <a class="ilink" onclick="go('ombre')">Ombre</a> n'est pas actif dans la Songe Infini -> en cas de défaite ou abandon, vous ne perdez pas votre progression.</li>
     </ul>
   </div>
-    <div class="card">
+  <div class="card">
     <div class="card-title"><span class="ct-icon">💡</span>Comment sont généré les monstres ?</div>
     <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:8px">
       <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Ils sont au nombre de 5, vous pouvez y accéder en groupe jusqu'à 8 personnages.</li>
       <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Tout les 20 niveaux d'avance dont vous devance le monstre généré, celui-ci reçoit un malus de 15% de stats par tranche de 20 niveaux qui vous sépare (jusqu'à -90% pour 120 niveaux d'écart).</li>
       <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Après ceci, le monstre possède ses stats de base multipliées par un facteur qui dépend de l'étage.</li>
       <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Parmis les monstres générés, il y a toujours un boss.</li>
-      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Lors du même étage pas de panique si vous n'êtes pas capable de les vaincre, la génération est aléatoire pour <b>chaque</b> tentative.</b></li>
+      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Lors du même étage pas de panique si vous n'êtes pas capable de les vaincre, la génération est aléatoire pour <b>chaque</b> tentative.</li>
     </ul>
   </div>
 </div>
+
 <!-- ══════════════ OMBRE ══════════════ -->
 <div id="ombre" class="panel">
   <div class="breadcrumb"><a onclick="go('accueil')">Wiki</a><span class="breadcrumb-sep">›</span><span>Ombre</span></div>
@@ -496,7 +533,7 @@ tr:hover td{background:var(--gold-bg)}
 <!-- ══════════════ DROPS ══════════════ -->
 <div id="drops" class="panel">
   <div class="breadcrumb"><a onclick="go('accueil')">Wiki</a><span class="breadcrumb-sep">›</span><span>Drops rares</span></div>
-  <div class="page-header"><h1>Drops Rares</h1><div class="subtitle">Dofus, Artefacts &amp; Cartes — par boss</div></div>
+  <div class="page-header"><h1>Drops Rares</h1><div class="subtitle">Dofus, Artefacts &amp; Cartes — par boss · Survolez un item pour voir ses statistiques</div></div>
   <div class="drop-search">
     <input type="text" id="dropSearch" placeholder="Rechercher un item ou un boss..." oninput="filterDrops()">
   </div>
@@ -525,7 +562,6 @@ tr:hover td{background:var(--gold-bg)}
 <div id="maitrise" class="panel">
   <div class="breadcrumb"><a onclick="go('accueil')">Wiki</a><span class="breadcrumb-sep">›</span><span>Maîtrise de classe</span></div>
   <div class="page-header"><h1>Maîtrise de Classe</h1><div class="subtitle">Progressez jusqu'au niveau 201 — choisissez votre spécialisation</div></div>
-
   <div class="card" style="margin-bottom:16px">
     <div class="card-title"><span class="ct-icon">👑</span>Comment ça marche ?</div>
     <div class="grid">
@@ -535,13 +571,11 @@ tr:hover td{background:var(--gold-bg)}
     </div>
   </div>
   <div class="alert alert-info">Chaque type possède ses propres avantages, faites les bon choix !</div>
-
   <div class="tab-bar" id="maitriseTabBar">
     <button class="tab-btn active" onclick="setMaitriseType('dps',this)">⚔ DPS</button>
     <button class="tab-btn" onclick="setMaitriseType('soutien',this)">💚 Soutien</button>
     <button class="tab-btn" onclick="setMaitriseType('tank',this)">🛡 Tank</button>
   </div>
-
   <div id="maitriseGrid" class="maitrise-grid"></div>
 </div>
 
@@ -578,144 +612,220 @@ tr:hover td{background:var(--gold-bg)}
 </main>
 
 <script>
-/* ══ DROPS ══ */
-const DROPS=[
-  {cat:'carte',item:'Carte de Boss',boss:'Tout les boss',rate:'1%'},
-  {cat:'dofus',item:'Kalyptus',boss:'Malléfisk',rate:'0.1%'},
-  {cat:'dofus',item:'Dofus Émeraude (Rare)',boss:'Royalmouth',rate:'0.1%'},
-  {cat:'dofus',item:'Dom de Pin',boss:'Korriandre',rate:'0.1%'},
-  {cat:'dofus',item:'Dotruche',boss:'Silf le Rasboul Majeur',rate:'0.1%'},
-  {cat:'dofus',item:'Dofus Pourpre (Rare)',boss:'Ben le Ripate',rate:'0.1%'},
-  {cat:'dofus',item:'Dofus Turquoise (Rare)',boss:'Klime',rate:'0.1%'},
-  {cat:'dofus',item:'Dolmanax',boss:'Ougah',rate:'0.1%'},
-  {cat:'dofus',item:'Dokoko',boss:'Capitaine Ekarlatte',rate:'0.1%'},
-  {cat:'dofus',item:'Dofus des Veilleurs',boss:'Grollum',rate:'0.1%'},
-  {cat:'dofus',item:'Dofus Argenté Scintillant',boss:'XLII',rate:'0.1%'},
-  {cat:'dofus',item:'Jyfus',boss:'Tal Kasha',rate:'0.1%'},
-  {cat:'dofus',item:'Dofus Vulbis (Rare)',boss:'Tengu Givrefoux',rate:'0.1%'},
-  {cat:'dofus',item:'Dofus Ocre (Rare)',boss:'Glourséleste',rate:'0.1%'},
-  {cat:'dofus',item:'Dolmanax Scintillant',boss:'Roi Nidas',rate:'0.1%'},
-  {cat:'dofus',item:'Dofus Forgelave',boss:'Obsidiantre',rate:'0.1%'},
-  {cat:'dofus',item:'Dofus Ivoire (Rare)',boss:'Ilyzaelle',rate:'0.1%'},
-  {cat:'dofus',item:'Dofus Ebène (Rare)',boss:'Anerice la Shushess',rate:'0.1%'},
-  {cat:'dofus',item:'Dofus Nébuleux',boss:'Reine des voleurs',rate:'0.1%'},
-  {cat:'dofus',item:'Dofus Abyssal',boss:'Capitaine Meno',rate:'0.1%'},
-  {cat:'dofus',item:'Dofus des Glaces',boss:'Comte Harebourg',rate:'0.1%'},
-  {cat:'dofus',item:'Dofus du Cauchemar',boss:'Solar',rate:'0.1%'},
-  {cat:'dofus',item:'Dofus Sylvestre',boss:'Toxoliath',rate:'0.1%'},
-  {cat:'dofus',item:'Dorigami',boss:'Comte Razof',rate:'0.1%'},
-  {cat:'dofus',item:'Domakuro',boss:'Maître Pandore',rate:'0.1%'},
-  {cat:'dofus',item:'Dofaléa',boss:'Chaloeil',rate:'0.1%'},
-  {cat:'dofus',item:'Dofus du Vilain Corbac',boss:'Maître Corbac',rate:'0.1%'},
-  {cat:'dofus',item:'Dofus de la Peste',boss:'Sphincter Cell',rate:'0.1%'},
-  {cat:'dofus',item:'Cafar\'Dofus',boss:'Kankreblath',rate:'0.1%'},
-  {cat:'terre',item:'Fléau des Accablés',boss:'Nelween',rate:'0.5%'},
-  {cat:'terre',item:'Pierre de Vengeance de Zei',boss:'Phossile',rate:'0.5%'},
-  {cat:'terre',item:'Tesson de Boyarsky',boss:'Nileza',rate:'0.5%'},
-  {cat:'feu',item:'Cheville Ouvrière',boss:'Bouftou Royal',rate:'0.5%'},
-  {cat:'feu',item:'Moratoire',boss:'Obsidiantre',rate:'0.5%'},
-  {cat:'feu',item:'Éclat d\'âme rouge',boss:'Solar',rate:'0.5%'},
-  {cat:'eau',item:'Altération ésotérique',boss:'Corailleur Magistral',rate:'0.5%'},
-  {cat:'eau',item:'Gemme d\'Aisance',boss:'Ben le Ripate',rate:'0.5%'},
-  {cat:'eau',item:'Mirinae, larme du tisseur d\'étoiles',boss:'Dantinéa',rate:'0.5%'},
-  {cat:'air',item:'Couronne de Foudre',boss:'Tofu Royal',rate:'0.5%'},
-  {cat:'air',item:'Gogok de Vivacité',boss:'Silf le Rasboul Majeur',rate:'0.5%'},
-  {cat:'air',item:'Instagel',boss:'Ilyzaelle',rate:'0.5%'},
-  {cat:'multi',item:'Fléau des puissants',boss:'Gourlo le Terrible',rate:'0.5%'},
-  {cat:'multi',item:'Force de la simplicité',boss:'Chêne Mou',rate:'0.5%'},
-  {cat:'multi',item:'Taeguk',boss:'Nileza',rate:'0.5%'},
+/* ══════════════════════════════════════════════
+   DONNÉES DROPS
+   ─────────────────────────────────────────────
+   • stats : tableau de lignes affichées dans le
+     tooltip au survol. Laissez [] pour "À définir".
+   • Les items cat:'carte' n'ont jamais de tooltip.
+   ══════════════════════════════════════════════ */
+const DROPS = [
+  // ── CARTES ────────────────────────────────────
+  {cat:'carte', item:'Carte de Boss', boss:'Tout les boss', rate:'1%', stats:[]},
+
+  // ── DOFUS ─────────────────────────────────────
+  // → Remplissez le tableau stats:[] de chaque dofus avec vos propres lignes.
+  {cat:'dofus', item:'Kalyptus',                     boss:'Malléfisk',              rate:'0.1%', stats:['56 à 90 prospection']},
+  {cat:'dofus', item:'Dofus Émeraude (Rare)',         boss:'Royalmouth',             rate:'0.1%', stats:['200 vitalité', 'A la fin de tour, confère 100% du niveau du lanceur en points de bouclier pour chaque ennemie au contact.(Invocation exclu)']},
+  {cat:'dofus', item:'Dom de Pin',                   boss:'Korriandre',             rate:'0.1%', stats:['3 invocations', '55 prospection', '20 Retrait PA/PM']},
+  {cat:'dofus', item:'Dotruche',                     boss:'Silf le Rasboul Majeur', rate:'0.1%', stats:['20 puissance']},
+  {cat:'dofus', item:'Dofus Pourpre (Rare)',          boss:'Ben le Ripate',          rate:'0.1%', stats:['80 puissance', 'Pour chaque attaque à distance reçue, les dommages finaux occassionés sont augmentés de 1% (1 tour) (Cumulable 10 fois)']},
+  {cat:'dofus', item:'Dofus Turquoise (Rare)',        boss:'Klime',                  rate:'0.1%', stats:['10% coup critique', 'Pour chaque coup critique occasionné, les dommages finaux sont augmentés de 1% (1 tour) (Cumulable 10 fois)']},
+  {cat:'dofus', item:'Dolmanax',                     boss:'Ougah',                  rate:'0.1%', stats:['70 force/chance/intelligence/agilité']},
+  {cat:'dofus', item:'Dokoko',                       boss:'Capitaine Ekarlatte',    rate:'0.1%', stats:['Tout les 3 tours à partir du tour 4, rend 10% de ses poins de vie maximum']},
+  {cat:'dofus', item:'Dofus des Veilleurs',          boss:'Grollum',                rate:'0.1%', stats:['En début de tour, rend 7% de points de vie aux alliés en ligne']},
+  {cat:'dofus', item:'Dofus Argenté Scintillant',    boss:'XLII',                   rate:'0.1%', stats:['Au début de son tour, si le lanceur a moins de 20% de sa vie, il est soigné de 40% de sa vie et gagne 20% de dommages finaux pour le tour en cours. (Une fois par combat)']},
+  {cat:'dofus', item:'Jyfus',                        boss:'Tal Kasha',              rate:'0.1%', stats:['15% dommages aux sorts','Augmente une caractéristique élémentaire par tour de jeu : 300 chance, 300 force, 300 agilité et 300 intelligence (toujours cet ordre)']},
+  {cat:'dofus', item:'Dofus Vulbis (Rare)',           boss:'Tengu Givrefoux',        rate:'0.1%', stats:['1 PM','Les dommages occasionnés sont augmentés de 10% (1 tour) si aucune attaque occasionnant des dommages n\'a été subis depuis le précédent tour de jeu.']},
+  {cat:'dofus', item:'Dofus Ocre (Rare)',             boss:'Glourséleste',           rate:'0.1%', stats:['1 PA','Donne 1 PA si aucune attaque occasionnant des dommages n\'a été subis depuis le précédent tour de jeu.']},
+  {cat:'dofus', item:'Dolmanax Scintillant',         boss:'Roi Nidas',              rate:'0.1%', stats:['110 force/chance/intelligence/agilité']},
+  {cat:'dofus', item:'Dofus Forgelave',              boss:'Obsidiantre',            rate:'0.1%', stats:['60 résistance poussée','Ajoute 150 points de bouclier si le lanceur est déplacé via une poussée, une attirance, un échange de position ou porté par un panda. Seul les ennemis peuvent déclancher cet effet.']},
+  {cat:'dofus', item:'Dofus Ivoire (Rare)',           boss:'Ilyzaelle',              rate:'0.1%', stats:['40 résistance fixe all','A la fin du tour, les dommages de la prochaine attaque subie sont réduits de 50%']},
+  {cat:'dofus', item:'Dofus Ebène (Rare)',            boss:'Anerice la Shushess',    rate:'0.1%', stats:['Génère 1 charge en début de tour, 1 deuxième en infligeant des dommages de mêlée et 1 troisième en infligeant des dommages à distance.', 'Lorsque 5 charges sont atteintes, la prochaine attaque consomme les charges et applique un poison sur la cible pendant 3 tours.' , 'Chaque charge donne un bonus de 2% de dommages finaux occasionnés.']},
+  {cat:'dofus', item:'Dofus Nébuleux',               boss:'Reine des voleurs',      rate:'0.1%', stats:['Les tours impairs, augmente de 20% les dommages','Les tours pairs, réduit de 10% les dommages']},
+  {cat:'dofus', item:'Dofus Abyssal',                boss:'Capitaine Meno',         rate:'0.1%', stats:['A chaque début de tour, si aucun ennemie n\'est au contact du lanceur, donne 1 PA. Sinon donne 1 PM']},
+  {cat:'dofus', item:'Dofus des Glaces',             boss:'Comte Harebourg',        rate:'0.1%', stats:['20 dommages neutre/feu/terre/air/eau']},
+  {cat:'dofus', item:'Dofus du Cauchemar',           boss:'Solar',                  rate:'0.1%', stats:['20 dommages critiques','3% résistance neutre/feu/terre/air/eau']},
+  {cat:'dofus', item:'Dofus Sylvestre',              boss:'Toxoliath',              rate:'0.1%', stats:['50 tacle','6% dommages mêlée', '-6% résistance mêlée']},
+  {cat:'dofus', item:'Dorigami',                     boss:'Comte Razof',            rate:'0.1%', stats:['50 fuite','6% dommages distance', '-6% résistance distance']},
+  {cat:'dofus', item:'Domakuro',                     boss:'Maître Pandore',         rate:'0.1%', stats:['25 dommages poussée','6% résistance mêlée']},
+  {cat:'dofus', item:'Dofaléa',                      boss:'Chaloeil',               rate:'0.1%', stats:['1 portée','81 à 110 force', '81 à 110 chance', '81 à 110 intelligence', '81 à 110 agilité']},
+  {cat:'dofus', item:'Dofus du Vilain Corbac',       boss:'Maître Corbac',          rate:'0.1%', stats:['60 prospection','300 initiative']},
+  {cat:'dofus', item:'Dofus de la Peste',            boss:'Sphincter Cell',         rate:'0.1%', stats:['10 dommages','3% résistance neutre/feu/terre/air/eau']},
+  {cat:'dofus', item:'Cafar\'Dofus',                 boss:'Kankreblath',            rate:'0.1%', stats:['150 vitalité','15 dommages']},
+
+  // ── ARTEFACTS TERRE ───────────────────────────
+  // → stats : les 3 lignes correspondant aux % 10 / 20 / 30
+  {cat:'terre', item:'Fléau des Accablés',           boss:'Nelween',  rate:'0.5%', stats:['10% force', '100 Vitalité']},
+  {cat:'terre', item:'Pierre de Vengeance de Zei',   boss:'Phossile', rate:'0.5%', stats:['20% force', '200 Vitalité']},
+  {cat:'terre', item:'Tesson de Boyarsky',           boss:'Nileza',   rate:'0.5%', stats:['30% force', '300 Vitalité']},
+
+  // ── ARTEFACTS FEU ─────────────────────────────
+  {cat:'feu', item:'Cheville Ouvrière',              boss:'Bouftou Royal', rate:'0.5%', stats:['10% intelligence', '10 Soin']},
+  {cat:'feu', item:'Moratoire',                      boss:'Obsidiantre',   rate:'0.5%', stats:['20% intelligence', '25 Soin']},
+  {cat:'feu', item:'Éclat d\'âme rouge',             boss:'Solar',         rate:'0.5%', stats:['30% intelligence', '40 Soin']},
+
+  // ── ARTEFACTS EAU ─────────────────────────────
+  {cat:'eau', item:'Altération ésotérique',          boss:'Corailleur Magistral', rate:'0.5%', stats:['10% chance','30 prospection']},
+  {cat:'eau', item:'Gemme d\'Aisance',               boss:'Ben le Ripate',        rate:'0.5%', stats:['20% chance','70 prospection']},
+  {cat:'eau', item:'Mirinae, larme du tisseur d\'étoiles', boss:'Dantinéa',       rate:'0.5%', stats:['30% chance','120 prospection']},
+
+  // ── ARTEFACTS AIR ─────────────────────────────
+  {cat:'air', item:'Couronne de Foudre',             boss:'Tofu Royal',           rate:'0.5%', stats:['10% agilité','5% coup critique']},
+  {cat:'air', item:'Gogok de Vivacité',              boss:'Silf le Rasboul Majeur',rate:'0.5%', stats:['20% agilité','10% coup critique']},
+  {cat:'air', item:'Instagel',                       boss:'Ilyzaelle',            rate:'0.5%', stats:['30% agilité','12% coup critique']},
+
+  // ── ARTEFACTS MULTI ───────────────────────────
+  {cat:'multi', item:'Fléau des puissants',          boss:'Gourlo le Terrible',   rate:'0.5%', stats:['25 puissance', '5% force/intel/chance/agi']},
+  {cat:'multi', item:'Force de la simplicité',       boss:'Chêne Mou',            rate:'0.5%', stats:['60 puissance', '10% force/intel/chance/agi']},
+  {cat:'multi', item:'Taeguk',                       boss:'Nileza',               rate:'0.5%', stats:['85 puissance', '15% force/intel/chance/agi']},
 ];
-const CAT_LABELS={carte:'Carte',dofus:'Dofus',terre:'Artefact Terre',feu:'Artefact Feu',eau:'Artefact Eau',air:'Artefact Air',multi:'Artefact Multi'};
-const CAT_CLASS={carte:'elem-carte',dofus:'elem-dofus',terre:'elem-terre',feu:'elem-feu',eau:'elem-eau',air:'elem-air',multi:'elem-multi'};
-let currentDropTab='all';
-function renderDrops(){
-  const q=document.getElementById('dropSearch').value.toLowerCase().trim();
-  const tbody=document.getElementById('dropBody');
-  const noR=document.getElementById('noResults');
-  const filtered=DROPS.filter(d=>{
-    const matchTab=currentDropTab==='all'||d.cat===currentDropTab;
-    const matchQ=!q||d.item.toLowerCase().includes(q)||d.boss.toLowerCase().includes(q);
-    return matchTab&&matchQ;
-  });
-  document.getElementById('cnt-all').textContent=DROPS.length;
-  if(!filtered.length){tbody.innerHTML='';noR.style.display='block';return;}
-  noR.style.display='none';
-  tbody.innerHTML=filtered.map(d=>`<tr><td class="item-name">${d.item}</td><td><span class="elem-badge ${CAT_CLASS[d.cat]}">${CAT_LABELS[d.cat]}</span></td><td class="boss-name">${d.boss}</td><td class="rate">${d.rate}</td></tr>`).join('');
+
+const CAT_LABELS = {carte:'Carte',dofus:'Dofus',terre:'Artefact Terre',feu:'Artefact Feu',eau:'Artefact Eau',air:'Artefact Air',multi:'Artefact Multi'};
+const CAT_CLASS  = {carte:'elem-carte',dofus:'elem-dofus',terre:'elem-terre',feu:'elem-feu',eau:'elem-eau',air:'elem-air',multi:'elem-multi'};
+let currentDropTab = 'all';
+
+/* ── TOOLTIP ── */
+const tooltip  = document.getElementById('dropTooltip');
+const ttTitle  = document.getElementById('ttTitle');
+const ttBody   = document.getElementById('ttBody');
+const PAD = 14; // px offset from cursor
+
+function showTooltip(e, d) {
+  ttTitle.textContent = d.item;
+  if (d.stats && d.stats.length) {
+    ttBody.innerHTML = d.stats.map(s => `<div class="tt-stat">${s}</div>`).join('');
+  } else {
+    ttBody.innerHTML = '<div class="tt-empty">Stats à définir</div>';
+  }
+  tooltip.classList.add('visible');
+  moveTooltip(e);
 }
-function filterDrops(){renderDrops();}
-function setDropTab(tab,btn){
-  currentDropTab=tab;
-  document.querySelectorAll('#dropTabs .tab-btn').forEach(b=>b.classList.remove('active'));
+
+function moveTooltip(e) {
+  const tw = tooltip.offsetWidth, th = tooltip.offsetHeight;
+  const vw = window.innerWidth,   vh = window.innerHeight;
+  let x = e.clientX + PAD, y = e.clientY + PAD;
+  if (x + tw > vw - 8) x = e.clientX - tw - PAD;
+  if (y + th > vh - 8) y = e.clientY - th - PAD;
+  tooltip.style.left = x + 'px';
+  tooltip.style.top  = y + 'px';
+}
+
+function hideTooltip() {
+  tooltip.classList.remove('visible');
+}
+
+document.addEventListener('mousemove', e => {
+  if (tooltip.classList.contains('visible')) moveTooltip(e);
+});
+
+/* ── RENDER ── */
+function renderDrops() {
+  const q     = document.getElementById('dropSearch').value.toLowerCase().trim();
+  const tbody = document.getElementById('dropBody');
+  const noR   = document.getElementById('noResults');
+
+  const filtered = DROPS.filter(d => {
+    const matchTab = currentDropTab === 'all' || d.cat === currentDropTab;
+    const matchQ   = !q || d.item.toLowerCase().includes(q) || d.boss.toLowerCase().includes(q);
+    return matchTab && matchQ;
+  });
+
+  document.getElementById('cnt-all').textContent = DROPS.length;
+
+  if (!filtered.length) {
+    tbody.innerHTML = '';
+    noR.style.display = 'block';
+    return;
+  }
+  noR.style.display = 'none';
+
+  tbody.innerHTML = filtered.map((d, i) => {
+    const hasTooltip = d.cat !== 'carte';
+    const cls = hasTooltip ? 'has-tooltip' : '';
+    return `<tr class="${cls}" data-idx="${DROPS.indexOf(d)}">
+      <td class="item-name">${d.item}</td>
+      <td><span class="elem-badge ${CAT_CLASS[d.cat]}">${CAT_LABELS[d.cat]}</span></td>
+      <td class="boss-name">${d.boss}</td>
+      <td class="rate">${d.rate}</td>
+    </tr>`;
+  }).join('');
+
+  // Attach hover listeners
+  tbody.querySelectorAll('tr.has-tooltip').forEach(row => {
+    const d = DROPS[+row.dataset.idx];
+    row.addEventListener('mouseenter', e => showTooltip(e, d));
+    row.addEventListener('mouseleave', hideTooltip);
+  });
+}
+
+function filterDrops()          { renderDrops(); }
+function setDropTab(tab, btn)   {
+  currentDropTab = tab;
+  document.querySelectorAll('#dropTabs .tab-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   renderDrops();
 }
 
 /* ══ MAÎTRISE ══ */
 const MAITRISE = {
-  dps: [
-    { lvl:20,  bonus:'5% Stats All (hors Sag/Vit)',   cumul:['5% Stats All (hors Sag/Vit)'] },
-    { lvl:40,  bonus:'10 Dommages',                   cumul:['5% Stats All (hors Sag/Vit)','10 Dommages'] },
-    { lvl:60,  bonus:'5% Coups Critiques',            cumul:['5% Stats All (hors Sag/Vit)','10 Dommages','5% Coups Critiques'] },
-    { lvl:80,  bonus:'100 Puissance',                 cumul:['5% Stats All (hors Sag/Vit)','10 Dommages','5% Coups Critiques','100 Puissance'] },
-    { lvl:100, bonus:'10% Dommages Finaux',           cumul:['5% Stats All (hors Sag/Vit)','10 Dommages','5% Coups Critiques','100 Puissance','10% Dommages Finaux'] },
-    { lvl:120, bonus:'+10% Stats All (hors Sag/Vit)', cumul:['15% Stats All (hors Sag/Vit)','10 Dommages','5% Coups Critiques','100 Puissance','10% Dommages Finaux'] },
-    { lvl:140, bonus:'20 Dommages',                   cumul:['15% Stats All (hors Sag/Vit)','30 Dommages','5% Coups Critiques','100 Puissance','10% Dommages Finaux'] },
-    { lvl:160, bonus:'10% Coups Critiques',           cumul:['15% Stats All (hors Sag/Vit)','30 Dommages','15% Coups Critiques','100 Puissance','10% Dommages Finaux'] },
-    { lvl:180, bonus:'200 Puissance',                 cumul:['15% Stats All (hors Sag/Vit)','30 Dommages','15% Coups Critiques','300 Puissance','10% Dommages Finaux'] },
-    { lvl:200, bonus:'25% Stats All (hors Sag/Vit)',  cumul:['40% Stats All (hors Sag/Vit)','30 Dommages','15% Coups Critiques','300 Puissance','10% Dommages Finaux'] },
-    { lvl:201, bonus:'5% Do Mêlée/Distance/Sorts',   cumul:['40% Stats All (hors Sag/Vit)','30 Dommages','15% Coups Critiques','300 Puissance','10% Dommages Finaux','5% Do Mêlée/Distance/Sorts'], highlight:true },
+  dps:[
+    {lvl:20,  bonus:'5% Stats All (hors Sag/Vit)',   cumul:['5% Stats All (hors Sag/Vit)']},
+    {lvl:40,  bonus:'10 Dommages',                   cumul:['5% Stats All (hors Sag/Vit)','10 Dommages']},
+    {lvl:60,  bonus:'5% Coups Critiques',            cumul:['5% Stats All (hors Sag/Vit)','10 Dommages','5% Coups Critiques']},
+    {lvl:80,  bonus:'100 Puissance',                 cumul:['5% Stats All (hors Sag/Vit)','10 Dommages','5% Coups Critiques','100 Puissance']},
+    {lvl:100, bonus:'10% Dommages Finaux',           cumul:['5% Stats All (hors Sag/Vit)','10 Dommages','5% Coups Critiques','100 Puissance','10% Dommages Finaux']},
+    {lvl:120, bonus:'+10% Stats All (hors Sag/Vit)', cumul:['15% Stats All (hors Sag/Vit)','10 Dommages','5% Coups Critiques','100 Puissance','10% Dommages Finaux']},
+    {lvl:140, bonus:'20 Dommages',                   cumul:['15% Stats All (hors Sag/Vit)','30 Dommages','5% Coups Critiques','100 Puissance','10% Dommages Finaux']},
+    {lvl:160, bonus:'10% Coups Critiques',           cumul:['15% Stats All (hors Sag/Vit)','30 Dommages','15% Coups Critiques','100 Puissance','10% Dommages Finaux']},
+    {lvl:180, bonus:'200 Puissance',                 cumul:['15% Stats All (hors Sag/Vit)','30 Dommages','15% Coups Critiques','300 Puissance','10% Dommages Finaux']},
+    {lvl:200, bonus:'25% Stats All (hors Sag/Vit)',  cumul:['40% Stats All (hors Sag/Vit)','30 Dommages','15% Coups Critiques','300 Puissance','10% Dommages Finaux']},
+    {lvl:201, bonus:'5% Do Mêlée/Distance/Sorts',   cumul:['40% Stats All (hors Sag/Vit)','30 Dommages','15% Coups Critiques','300 Puissance','10% Dommages Finaux','5% Do Mêlée/Distance/Sorts'],highlight:true},
   ],
-  soutien: [
-    { lvl:20,  bonus:'5% Stats All (hors Sag/Vit)',   cumul:['5% Stats All (hors Sag/Vit)'] },
-    { lvl:40,  bonus:'1 Invocation',                  cumul:['5% Stats All (hors Sag/Vit)','1 Invocation'] },
-    { lvl:60,  bonus:'10 Soin',                       cumul:['5% Stats All (hors Sag/Vit)','1 Invocation','10 Soin'] },
-    { lvl:80,  bonus:'100 Prospection',               cumul:['5% Stats All (hors Sag/Vit)','1 Invocation','10 Soin','100 Prospection'] },
-    { lvl:100, bonus:'10% Sort',                      cumul:['5% Stats All (hors Sag/Vit)','1 Invocation','10 Soin','100 Prospection','10% Sort'] },
-    { lvl:120, bonus:'+10% Stats All (hors Sag/Vit)', cumul:['15% Stats All (hors Sag/Vit)','1 Invocation','10 Soin','100 Prospection','10% Sort'] },
-    { lvl:140, bonus:'2 Invocations',                 cumul:['15% Stats All (hors Sag/Vit)','3 Invocations','10 Soin','100 Prospection','10% Sort'] },
-    { lvl:160, bonus:'20 Soin',                       cumul:['15% Stats All (hors Sag/Vit)','3 Invocations','30 Soin','100 Prospection','10% Sort'] },
-    { lvl:180, bonus:'200 Prospection',               cumul:['15% Stats All (hors Sag/Vit)','3 Invocations','30 Soin','300 Prospection','10% Sort'] },
-    { lvl:200, bonus:'15% Stats All (hors Sag/Vit)',  cumul:['30% Stats All (hors Sag/Vit)','3 Invocations','30 Soin','300 Prospection','10% Sort'] },
-    { lvl:201, bonus:'5% Do Mêlée/Distance/Sorts',   cumul:['30% Stats All (hors Sag/Vit)','3 Invocations','30 Soin','300 Prospection','10% Sort','5% Do Mêlée/Distance/Sorts'], highlight:true },
+  soutien:[
+    {lvl:20,  bonus:'5% Stats All (hors Sag/Vit)',   cumul:['5% Stats All (hors Sag/Vit)']},
+    {lvl:40,  bonus:'1 Invocation',                  cumul:['5% Stats All (hors Sag/Vit)','1 Invocation']},
+    {lvl:60,  bonus:'10 Soin',                       cumul:['5% Stats All (hors Sag/Vit)','1 Invocation','10 Soin']},
+    {lvl:80,  bonus:'100 Prospection',               cumul:['5% Stats All (hors Sag/Vit)','1 Invocation','10 Soin','100 Prospection']},
+    {lvl:100, bonus:'10% Sort',                      cumul:['5% Stats All (hors Sag/Vit)','1 Invocation','10 Soin','100 Prospection','10% Sort']},
+    {lvl:120, bonus:'+10% Stats All (hors Sag/Vit)', cumul:['15% Stats All (hors Sag/Vit)','1 Invocation','10 Soin','100 Prospection','10% Sort']},
+    {lvl:140, bonus:'2 Invocations',                 cumul:['15% Stats All (hors Sag/Vit)','3 Invocations','10 Soin','100 Prospection','10% Sort']},
+    {lvl:160, bonus:'20 Soin',                       cumul:['15% Stats All (hors Sag/Vit)','3 Invocations','30 Soin','100 Prospection','10% Sort']},
+    {lvl:180, bonus:'200 Prospection',               cumul:['15% Stats All (hors Sag/Vit)','3 Invocations','30 Soin','300 Prospection','10% Sort']},
+    {lvl:200, bonus:'15% Stats All (hors Sag/Vit)',  cumul:['30% Stats All (hors Sag/Vit)','3 Invocations','30 Soin','300 Prospection','10% Sort']},
+    {lvl:201, bonus:'5% Do Mêlée/Distance/Sorts',   cumul:['30% Stats All (hors Sag/Vit)','3 Invocations','30 Soin','300 Prospection','10% Sort','5% Do Mêlée/Distance/Sorts'],highlight:true},
   ],
-  tank: [
-    { lvl:20,  bonus:'5% Stats All (hors Sag/Vit)',    cumul:['5% Stats All (hors Sag/Vit)'] },
-    { lvl:40,  bonus:'100 PV',                         cumul:['5% Stats All (hors Sag/Vit)','100 PV'] },
-    { lvl:60,  bonus:'15 Résistances Fixes',           cumul:['5% Stats All (hors Sag/Vit)','100 PV','15 Résistances Fixes'] },
-    { lvl:80,  bonus:'100 Renvoie de Dommage',         cumul:['5% Stats All (hors Sag/Vit)','100 PV','15 Résistances Fixes','100 Renvoie de Dommage'] },
-    { lvl:100, bonus:'10% Rés. Mêlée/Distance',        cumul:['5% Stats All (hors Sag/Vit)','100 PV','15 Résistances Fixes','100 Renvoie de Dommage','10% Rés. Mêlée/Distance'] },
-    { lvl:120, bonus:'+10% Stats All (hors Sag/Vit)',  cumul:['15% Stats All (hors Sag/Vit)','100 PV','15 Résistances Fixes','100 Renvoie de Dommage','10% Rés. Mêlée/Distance'] },
-    { lvl:140, bonus:'200 PV',                         cumul:['15% Stats All (hors Sag/Vit)','300 PV','15 Résistances Fixes','100 Renvoie de Dommage','10% Rés. Mêlée/Distance'] },
-    { lvl:160, bonus:'30 Résistances Fixes',           cumul:['15% Stats All (hors Sag/Vit)','300 PV','45 Résistances Fixes','100 Renvoie de Dommage','10% Rés. Mêlée/Distance'] },
-    { lvl:180, bonus:'200 Renvoie de Dommage',         cumul:['15% Stats All (hors Sag/Vit)','300 PV','45 Résistances Fixes','300 Renvoie de Dommage','10% Rés. Mêlée/Distance'] },
-    { lvl:200, bonus:'20% Vitalité',                   cumul:['15% Stats All (hors Sag/Vit)','300 PV','45 Résistances Fixes','300 Renvoie de Dommage','10% Rés. Mêlée/Distance','20% Vitalité'] },
-    { lvl:201, bonus:'5% Do Mêlée/Distance/Sorts',    cumul:['15% Stats All (hors Sag/Vit)','300 PV','45 Résistances Fixes','300 Renvoie de Dommage','10% Rés. Mêlée/Distance','20% Vitalité','5% Do Mêlée/Distance/Sorts'], highlight:true },
+  tank:[
+    {lvl:20,  bonus:'5% Stats All (hors Sag/Vit)',    cumul:['5% Stats All (hors Sag/Vit)']},
+    {lvl:40,  bonus:'100 PV',                         cumul:['5% Stats All (hors Sag/Vit)','100 PV']},
+    {lvl:60,  bonus:'15 Résistances Fixes',           cumul:['5% Stats All (hors Sag/Vit)','100 PV','15 Résistances Fixes']},
+    {lvl:80,  bonus:'100 Renvoie de Dommage',         cumul:['5% Stats All (hors Sag/Vit)','100 PV','15 Résistances Fixes','100 Renvoie de Dommage']},
+    {lvl:100, bonus:'10% Rés. Mêlée/Distance',        cumul:['5% Stats All (hors Sag/Vit)','100 PV','15 Résistances Fixes','100 Renvoie de Dommage','10% Rés. Mêlée/Distance']},
+    {lvl:120, bonus:'+10% Stats All (hors Sag/Vit)',  cumul:['15% Stats All (hors Sag/Vit)','100 PV','15 Résistances Fixes','100 Renvoie de Dommage','10% Rés. Mêlée/Distance']},
+    {lvl:140, bonus:'200 PV',                         cumul:['15% Stats All (hors Sag/Vit)','300 PV','15 Résistances Fixes','100 Renvoie de Dommage','10% Rés. Mêlée/Distance']},
+    {lvl:160, bonus:'30 Résistances Fixes',           cumul:['15% Stats All (hors Sag/Vit)','300 PV','45 Résistances Fixes','100 Renvoie de Dommage','10% Rés. Mêlée/Distance']},
+    {lvl:180, bonus:'200 Renvoie de Dommage',         cumul:['15% Stats All (hors Sag/Vit)','300 PV','45 Résistances Fixes','300 Renvoie de Dommage','10% Rés. Mêlée/Distance']},
+    {lvl:200, bonus:'20% Vitalité',                   cumul:['15% Stats All (hors Sag/Vit)','300 PV','45 Résistances Fixes','300 Renvoie de Dommage','10% Rés. Mêlée/Distance','20% Vitalité']},
+    {lvl:201, bonus:'5% Do Mêlée/Distance/Sorts',    cumul:['15% Stats All (hors Sag/Vit)','300 PV','45 Résistances Fixes','300 Renvoie de Dommage','10% Rés. Mêlée/Distance','20% Vitalité','5% Do Mêlée/Distance/Sorts'],highlight:true},
   ]
 };
 
 let currentMaitriseType = 'dps';
-
 function renderMaitrise() {
   const data = MAITRISE[currentMaitriseType];
-  const grid = document.getElementById('maitriseGrid');
-  grid.innerHTML = data.map(p => {
+  document.getElementById('maitriseGrid').innerHTML = data.map(p => {
     const hl = p.highlight ? 'highlight' : '';
     const star = p.highlight ? '<span class="mc-star">★</span>' : '';
-    const cumulItems = p.cumul.map(c => `<li>${c}</li>`).join('');
-    return `
-      <div class="maitrise-card ${hl}">
-        <div class="mc-header">
-          <span class="mc-lvl">Niveau ${p.lvl}</span>
-          ${star}
-        </div>
-        <div class="mc-bonus-label">Bonus du palier</div>
-        <div class="mc-bonus-val">${p.bonus}</div>
-        <div class="mc-cumul-label">Total cumulé</div>
-        <ul class="mc-cumul-list">${cumulItems}</ul>
-      </div>`;
+    return `<div class="maitrise-card ${hl}">
+      <div class="mc-header"><span class="mc-lvl">Niveau ${p.lvl}</span>${star}</div>
+      <div class="mc-bonus-label">Bonus du palier</div>
+      <div class="mc-bonus-val">${p.bonus}</div>
+      <div class="mc-cumul-label">Total cumulé</div>
+      <ul class="mc-cumul-list">${p.cumul.map(c=>`<li>${c}</li>`).join('')}</ul>
+    </div>`;
   }).join('');
 }
-
 function setMaitriseType(type, btn) {
   currentMaitriseType = type;
   document.querySelectorAll('#maitriseTabBar .tab-btn').forEach(b => b.classList.remove('active'));
@@ -724,16 +834,17 @@ function setMaitriseType(type, btn) {
 }
 
 /* ══ NAVIGATION ══ */
-function go(id){
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-  const panel=document.getElementById(id);
-  if(panel)panel.classList.add('active');
-  const navItem=document.querySelector(`.nav-item[onclick="go('${id}')"]`);
-  if(navItem)navItem.classList.add('active');
-  window.scrollTo(0,0);
-  if(id==='drops')renderDrops();
-  if(id==='maitrise')renderMaitrise();
+function go(id) {
+  hideTooltip();
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const panel = document.getElementById(id);
+  if (panel) panel.classList.add('active');
+  const nav = document.querySelector(`.nav-item[onclick="go('${id}')"]`);
+  if (nav) nav.classList.add('active');
+  window.scrollTo(0, 0);
+  if (id === 'drops')   renderDrops();
+  if (id === 'maitrise') renderMaitrise();
 }
 
 /* Init */
