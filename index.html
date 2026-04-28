@@ -217,6 +217,7 @@ tr:hover td{background:var(--gold-bg)}
     <div class="nav-item" onclick="go('maitrise')"><span class="nav-icon">👑</span><span>Maîtrise</span></div>
     <div class="nav-item" onclick="go('dofus')"><span class="nav-icon">💧</span><span>Dofus</span></div>
     <div class="nav-item" onclick="go('ombre')"><span class="nav-icon">💀</span><span>Ombre</span></div>
+    <div class="nav-item" onclick="go('songe')"><span class="nav-icon">🌀</span><span>Songe Infini</span></div>
   </div>
 </nav>
 
@@ -253,6 +254,7 @@ tr:hover td{background:var(--gold-bg)}
       <div class="mini-card gold-accent"><div class="mini-card-label">Items évolutifs</div><div class="mini-card-value">Forgemagie + boost Tavernier — voir <a class="ilink" onclick="go('stuff')">Amélioration du stuff</a>.</div></div>
       <div class="mini-card gold-accent"><div class="mini-card-label">IA retravaillée</div><div class="mini-card-value">Des monstres plus intelligents pour plus de challenge.</div></div>
       <div class="mini-card gold-accent"><div class="mini-card-label">Forgemagie</div><div class="mini-card-value">Système complet avec limites, overmaxs et exo garanti. <a class="ilink" onclick="go('stuff')">Détails</a>.</div></div>
+      <div class="mini-card gold-accent"><div class="mini-card-label">Songe Infini</div><div class="mini-card-value">Repoussez les limites de votre personnage à l'aide des <a class="ilink" onclick="go('songe')">Songe Infini</a>.</div></div>    
     </div>
   </div>
 </div>
@@ -291,6 +293,32 @@ tr:hover td{background:var(--gold-bg)}
   </div>
 </div>
 
+<!-- ══════════════ Songe infini ══════════════ -->
+<div id="songe" class="panel">
+  <div class="breadcrumb"><a onclick="go('accueil')">Wiki</a><span class="breadcrumb-sep">›</span><span>Songe Infini</span></div>
+  <div class="page-header"><h1>Songe Infini</h1><div class="subtitle">Explication et récompenses</div></div>
+  <div class="alert alert-info">Pour accéder à la Songe Infini, appuyer sur votre touche de clavier <b>T</b> puis parler au PNJ <b>L'Ultime Défi</b> afin de commencer un combat.</div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">💡</span>Détails important à connaître avant de vous lancer</div>
+    <div class="alert alert-warning"><b>Niveau 100 minimum recommandé.</b> Il est possible d'y accéder plus tôt mais vous aurez plus de difficultés.</div>
+    <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:8px">
+      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Chaque étage réussi vous offrira des <a class="ilink" onclick="go('monnaies')">Reflet Onirique</a>.</li>
+      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Tout les 5 étages vaincus, votre <a class="ilink" onclick="go('maitrise')">Maîtrise</a> sera améliorée.</li>
+      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Il n'y a pas de limite d'étage, mais la difficulté augmente progressivement.</li>
+      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Le mode <a class="ilink" onclick="go('ombre')">Ombre</a> n'est pas actif dans la Songe Infini -> en cas de défaite ou abandon, vous ne perdez pas votre progression.</li>
+    </ul>
+  </div>
+    <div class="card">
+    <div class="card-title"><span class="ct-icon">💡</span>Comment sont généré les monstres ?</div>
+    <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:8px">
+      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Ils sont au nombre de 5, vous pouvez y accéder en groupe jusqu'à 8 personnages.</li>
+      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Tout les 20 niveaux d'avance dont vous devance le monstre généré, celui-ci reçoit un malus de 15% de stats par tranche de 20 niveaux qui vous sépare (jusqu'à -90% pour 120 niveaux d'écart).</li>
+      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Après ceci, le monstre possède ses stats de base multipliées par un facteur qui dépend de l'étage.</li>
+      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Parmis les monstres générés, il y a toujours un boss.</li>
+      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Lors du même étage pas de panique si vous n'êtes pas capable de les vaincre, la génération est aléatoire pour <b>chaque</b> tentative.</b></li>
+    </ul>
+  </div>
+</div>
 <!-- ══════════════ OMBRE ══════════════ -->
 <div id="ombre" class="panel">
   <div class="breadcrumb"><a onclick="go('accueil')">Wiki</a><span class="breadcrumb-sep">›</span><span>Ombre</span></div>
@@ -306,6 +334,7 @@ tr:hover td{background:var(--gold-bg)}
       <div class="step"><div class="step-num">5</div><div class="step-body"><div class="step-title">Et les succès dans tout ça ?</div><div class="step-desc">Les succès ne sont pas reset.</div></div></div>
     </div>
   </div>
+  <div class="alert alert-warning">Le mode Ombre n'est pas actif dans les <a class="ilink" onclick="go('songe')">Songe Infini</a> -> en cas de défaite ou abandon, vous ne perdez pas votre progression.</div>
 </div>
 
 <!-- ══════════════ PASSIFS ══════════════ -->
@@ -323,13 +352,13 @@ tr:hover td{background:var(--gold-bg)}
       <div class="passive-card"><div class="passive-class">Sram</div><div class="passive-bonus">+25 Dommages critiques</div></div>
       <div class="passive-card"><div class="passive-class">Xélor</div><div class="passive-bonus">+1 PA en début de tour (max 2)</div></div>
       <div class="passive-card"><div class="passive-class">Sadida</div><div class="passive-bonus">300% du niveau en bouclier (fin de tour)</div></div>
-      <div class="passive-card"><div class="passive-class">Osamodas</div><div class="passive-bonus">3 invocations · Les invos alliés reçoivent 10 dmg début de tour (1 tour)</div></div>
+      <div class="passive-card"><div class="passive-class">Osamodas</div><div class="passive-bonus">3 invocations · Les alliés reçoivent 20 dmg début de tour (1 tour), les invos recoivent 200 puissance en supplément (1 tour)</div></div>
       <div class="passive-card"><div class="passive-class">Ecaflip</div><div class="passive-bonus">+15% Coups Critiques</div></div>
-      <div class="passive-card"><div class="passive-class">Enutrof</div><div class="passive-bonus">+15% Dommages Armes</div></div>
+      <div class="passive-card"><div class="passive-class">Enutrof</div><div class="passive-bonus">Les retrait PM sont inesquivables</div></div>
       <div class="passive-card"><div class="passive-class">Feca</div><div class="passive-bonus">-15% Dommages Subis</div></div>
       <div class="passive-card"><div class="passive-class">Pandawa</div><div class="passive-bonus">État Intaclable permanent</div></div>
-      <div class="passive-card"><div class="passive-class">Roublard</div><div class="passive-bonus">+30% Dmg Finaux tour pair / -30% tour impair</div></div>
-      <div class="passive-card"><div class="passive-class">Zobal</div><div class="passive-bonus">+25% Boucliers Reçus</div></div>
+      <div class="passive-card"><div class="passive-class">Roublard</div><div class="passive-bonus">+30% Dmg Finaux tour pair, -30% tour impair</div></div>
+      <div class="passive-card"><div class="passive-class">Zobal</div><div class="passive-bonus">+25% Boucliers Reçus, +15% Dommages Armes</div></div>
       <div class="passive-card"><div class="passive-class">Steamer</div><div class="passive-bonus">+1 PM en début de tour (max 2)</div></div>
       <div class="passive-card"><div class="passive-class">Eliotrope</div><div class="passive-bonus">+10% Dmg Finaux par entité déplacée</div></div>
       <div class="passive-card"><div class="passive-class">Huppermage</div><div class="passive-bonus">+10% Dmg Mêlée et Distance</div></div>
@@ -424,7 +453,7 @@ tr:hover td{background:var(--gold-bg)}
   <div class="page-header"><h1>Monnaies &amp; Économie</h1><div class="subtitle">Kamas, Pièces d'Or, Orichors, Larmes Éthérées</div></div>
   <div class="card">
     <div class="card-title"><span class="ct-icon">💰</span>Kamas</div>
-    <p style="color:var(--text-muted);font-size:.9rem">Utilisables pour acheter des parchottages, pierres d'âmes, cosmétiques et sorts spéciaux auprès des PNJ au Zaap d'Astrub.</p>
+    <p style="color:var(--text-muted);font-size:.9rem">Utilisables pour acheter des parchotages, pierres d'âmes, cosmétiques et sorts spéciaux auprès des PNJ au Zaap d'Astrub.</p>
   </div>
   <div class="card">
     <div class="card-title"><span class="ct-icon">🪙</span>Pièce d'Or</div>
@@ -448,7 +477,7 @@ tr:hover td{background:var(--gold-bg)}
           <tr class="orichor-row"><td>Donjon niv. 151–200+</td><td>4 Orichors / salle</td></tr>
           <tr class="orichor-row"><td>Donjon à vagues</td><td><b>+10 Orichors</b> bonus</td></tr>
           <tr class="orichor-row"><td>Antre Pov'Typus</td><td>Bonus supplémentaire / salle</td></tr>
-          <tr class="orichor-row"><td>Dimensions</td><td>Bonus indexé sur le niveau du donjon</td></tr>
+          <tr class="orichor-row"><td>Map de Boss en vagues</td><td>Bonus indexé sur le niveau du donjon</td></tr>
         </tbody>
       </table>
     </div>
@@ -456,6 +485,11 @@ tr:hover td{background:var(--gold-bg)}
   <div class="card">
     <div class="card-title"><span class="ct-icon">💧</span>Larme Éthérée</div>
     <p style="color:var(--text-muted);font-size:.9rem">Obtenues en échangeant vos Dofus auprès du PNJ <b>Gislain Scythe</b> à l'Atelier de Bonta. Utilisées pour l'<a class="ilink" onclick="go('dofus')">Évolution des Dofus</a>.</p>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="ct-icon">🌌</span>Reflet Onirique</div>
+    <div class="alert alert-gold" style="margin-bottom:14px"><b>Utilisation :</b> Achat de passif de familier et/ou objet légendaire sur le PNJ <b>Malice</b> situé sur la map des <a class="ilink" onclick="go('songe')">Songe Infini</a>.</div>
+    <p style="color:var(--text-muted);font-size:.9rem">Obtenues en réussissant un étage de <a class="ilink" onclick="go('songe')">Songe Infini</a>.</p>
   </div>
 </div>
 
