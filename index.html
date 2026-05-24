@@ -12,12 +12,49 @@
   --green:#6aaa00;--green-dim:#4a7a00;--green-bg:rgba(106,170,0,0.1);
   --red:#c0392b;--red-bg:rgba(192,57,43,0.12);--red-border:#8b2a1e;
   --blue:#3b82f6;--blue-bg:rgba(59,130,246,0.1);
-  --amber:#f59e0b;--amber-bg:rgba(245,158,11,0.1);
+  --amber:#f59e0b;
   --text:#e8e0c4;--text-muted:#8a8270;--text-dim:#5a5445;
   --border:#2e2e24;--border-gold:rgba(212,160,23,0.3);
   --topnav-h:60px;--radius:8px;--radius-lg:12px;--transition:0.18s ease;
 }
 body{font-family:"Trebuchet MS",Arial,sans-serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column;min-height:100vh;font-size:14.5px;line-height:1.6}
+
+/* ── PROGRESS BAR ── */
+#scrollBar{position:fixed;top:var(--topnav-h);left:0;height:3px;background:linear-gradient(to right,var(--green-dim),var(--gold));z-index:60;width:0%;pointer-events:none;transition:width .08s linear}
+
+/* ── BACK TO TOP ── */
+#backTop{position:fixed;bottom:28px;right:28px;width:42px;height:42px;background:var(--gold);color:#1a1200;border:none;border-radius:50%;cursor:pointer;font-size:18px;font-weight:900;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:60;box-shadow:0 4px 20px rgba(0,0,0,.5)}
+#backTop.show{opacity:1;pointer-events:all}
+#backTop:hover{transform:translateY(-3px)}
+
+/* ── GLOSSARY ── */
+.gl{border-bottom:1px dotted var(--gold-dim);cursor:help}
+#glTip{position:fixed;background:var(--surface);border:1px solid var(--border-gold);border-radius:var(--radius);padding:8px 13px;font-size:.78rem;color:var(--text-muted);pointer-events:none;z-index:9997;max-width:260px;display:none;box-shadow:0 4px 20px rgba(0,0,0,.6);line-height:1.45}
+#glTip.show{display:block}
+.gl-title{font-size:.7rem;text-transform:uppercase;letter-spacing:.6px;font-weight:700;color:var(--gold-dim);margin-bottom:4px}
+
+/* ── TOC ── */
+.toc-wrap{position:sticky;top:calc(var(--topnav-h) + 5px);z-index:39;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:8px 14px;margin-bottom:22px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;box-shadow:0 2px 14px rgba(0,0,0,.35);backdrop-filter:blur(4px)}
+.toc-lbl{font-size:.65rem;text-transform:uppercase;letter-spacing:.9px;font-weight:700;color:var(--text-dim);white-space:nowrap;padding-right:6px;border-right:1px solid var(--border)}
+.toc-btn{font-size:.76rem;padding:4px 12px;border-radius:12px;border:1px solid var(--border);background:var(--surface3);color:var(--text-muted);cursor:pointer;transition:var(--transition);white-space:nowrap;user-select:none}
+.toc-btn:hover{border-color:var(--border-gold);color:var(--gold);background:var(--gold-bg)}
+
+/* ── SUMMARY ── */
+.summary-card{background:var(--surface2);border:1px solid var(--border-gold);border-left:3px solid var(--gold);border-radius:var(--radius-lg);padding:14px 18px;margin-bottom:20px}
+.summary-hd{font-size:.67rem;text-transform:uppercase;letter-spacing:1px;font-weight:700;color:var(--gold-dim);margin-bottom:9px;display:flex;align-items:center;gap:6px}
+.summary-list{list-style:none;display:flex;flex-direction:column;gap:5px}
+.summary-list li{font-size:.85rem;color:var(--text-muted);padding-left:18px;position:relative;line-height:1.45}
+.summary-list li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:700;font-size:.72rem;top:3px}
+.summary-list li strong{color:var(--text)}
+
+/* ── RELATED ── */
+.related-bar{margin-top:28px;padding-top:18px;border-top:1px solid var(--border)}
+.related-lbl{font-size:.67rem;text-transform:uppercase;letter-spacing:1px;font-weight:700;color:var(--text-dim);margin-bottom:10px}
+.related-links{display:flex;gap:8px;flex-wrap:wrap}
+.rel-link{display:flex;align-items:center;gap:7px;padding:7px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);font-size:.82rem;color:var(--text-muted);cursor:pointer;transition:var(--transition);user-select:none}
+.rel-link:hover{border-color:var(--border-gold);color:var(--gold);background:var(--gold-bg)}
+
+/* ── TOPNAV ── */
 .topnav{width:100%;height:var(--topnav-h);background:var(--surface);border-bottom:1px solid var(--border-gold);display:flex;align-items:center;position:sticky;top:0;z-index:50;overflow-x:auto;overflow-y:hidden}
 .topnav::-webkit-scrollbar{height:4px}
 .topnav::-webkit-scrollbar-thumb{background:var(--border)}
@@ -27,35 +64,43 @@ body{font-family:"Trebuchet MS",Arial,sans-serif;background:var(--bg);color:var(
 .nav-section{display:flex;align-items:center;height:100%;border-right:1px solid var(--border)}
 .nav-item{display:flex;align-items:center;gap:8px;padding:0 16px;height:100%;cursor:pointer;color:var(--text-muted);border-bottom:3px solid transparent;transition:var(--transition);font-size:.85rem;user-select:none;white-space:nowrap}
 .nav-item:hover{background:var(--gold-bg);color:var(--text);border-bottom-color:var(--gold-dim)}
-.nav-item.active{background:var(--gold-bg);color:var(--gold);border-bottom-color:var(--gold);font-weight:700}
+.nav-item.active{background:var(--gold-bg);color:var(--gold);border-bottom-color:var(--gold);font-weight:700;box-shadow:inset 0 -2px 8px rgba(212,160,23,.15)}
 .nav-item .nav-icon{width:16px;height:16px;opacity:.7;flex-shrink:0;font-size:13px;display:flex;align-items:center;justify-content:center}
 .nav-item.active .nav-icon{opacity:1}
+
+/* ── LAYOUT ── */
 .main{flex:1;padding:36px 44px;width:100%;max-width:100%}
 .panel{display:none;animation:fadeIn .25s ease}
 .panel.active{display:block}
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-.page-header{margin-bottom:28px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.page-header{margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border)}
 .page-header h1{font-size:1.7rem;color:var(--gold);font-weight:700;letter-spacing:-.3px}
 .page-header .subtitle{color:var(--text-muted);font-size:.88rem;margin-top:4px}
 .breadcrumb{display:flex;align-items:center;gap:6px;font-size:.75rem;color:var(--text-dim);margin-bottom:10px}
 .breadcrumb a{color:var(--gold-dim);cursor:pointer;text-decoration:none}
 .breadcrumb a:hover{color:var(--gold)}
 .breadcrumb-sep{color:var(--text-dim)}
-.card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px 22px;margin-bottom:20px}
+
+/* ── CARDS ── */
+.card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px 22px;margin-bottom:20px;scroll-margin-top:110px}
 .card-title{font-size:1rem;font-weight:700;color:var(--gold);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
-.card-title .ct-icon{font-size:14px;opacity:.8}
+.ct-icon{font-size:14px;opacity:.8}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:4px}
 .mini-card{background:var(--surface3);border:1px solid var(--border);border-radius:var(--radius);padding:13px 15px}
 .mini-card-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.8px;color:var(--text-muted);margin-bottom:6px;font-weight:700}
 .mini-card-value{color:var(--text);font-size:.9rem}
 .mini-card.gold-accent{border-left:3px solid var(--gold)}
 .mini-card.green-accent{border-left:3px solid var(--green)}
+
+/* ── ALERTS ── */
 .alert{border-radius:var(--radius);padding:13px 16px;margin-bottom:16px;font-size:.88rem}
 .alert-warning{background:var(--red-bg);border:1px solid var(--red-border);color:#e8b4af}
 .alert-info{background:var(--blue-bg);border:1px solid rgba(59,130,246,.3);color:#9dc4f8}
 .alert-success{background:var(--green-bg);border:1px solid rgba(106,170,0,.3);color:#a8d860}
 .alert-gold{background:var(--gold-bg);border:1px solid var(--border-gold);color:#c8a060}
 .alert b{color:inherit;opacity:.9}
+
+/* ── TABLE ── */
 .table-wrap{overflow-x:auto;margin-top:8px}
 table{width:100%;border-collapse:collapse;font-size:.87rem}
 th{background:var(--surface3);color:var(--gold);font-weight:700;padding:9px 12px;text-align:left;border-bottom:2px solid var(--border-gold);white-space:nowrap;font-size:.78rem;text-transform:uppercase;letter-spacing:.5px}
@@ -66,12 +111,16 @@ tr:hover td{background:var(--gold-bg)}
 .item-name{color:var(--text);font-weight:500}
 .boss-name{color:var(--text-muted);font-size:.85rem}
 tr.has-tooltip{cursor:help}
+
+/* ── DROP TOOLTIP ── */
 #dropTooltip{position:fixed;background:var(--surface);border:1px solid var(--border-gold);border-radius:var(--radius);padding:11px 15px;font-size:.82rem;color:var(--text);pointer-events:none;z-index:9999;min-width:180px;max-width:280px;display:none;box-shadow:0 6px 24px rgba(0,0,0,.65)}
 #dropTooltip.visible{display:block}
 .tt-title{color:var(--gold);font-weight:700;font-size:.86rem;margin-bottom:9px;padding-bottom:7px;border-bottom:1px solid var(--border-gold);line-height:1.3}
 .tt-stat{color:var(--text-muted);padding:3px 0;font-size:.8rem;display:flex;align-items:flex-start;gap:6px;line-height:1.35}
 .tt-stat::before{content:'◆';color:var(--green-dim);font-size:.55rem;flex-shrink:0;margin-top:3px}
 .tt-empty{color:var(--text-dim);font-style:italic;font-size:.78rem}
+
+/* ── DROPS PAGE ── */
 .drop-search{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap}
 .drop-search input{flex:1;min-width:160px;background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:var(--radius);font-size:.87rem;outline:none}
 .drop-search input:focus{border-color:var(--border-gold)}
@@ -88,19 +137,27 @@ tr.has-tooltip{cursor:help}
 .elem-multi{background:rgba(147,51,234,.15);color:#c084fc;border-color:#7e22ce}
 .elem-dofus{background:rgba(212,160,23,.15);color:#d4a017;border-color:#a07010}
 .elem-carte{background:rgba(106,170,0,.15);color:#6aaa00;border-color:#4a7a00}
+.elem-gemme{background:rgba(236,72,153,.15);color:#f0a0d0;border-color:#a04080}
+.elem-etincelle{background:rgba(56,189,248,.15);color:#7dd3fc;border-color:#0284c7}
 .no-results{color:var(--text-muted);text-align:center;padding:28px;font-size:.9rem}
 .count-badge{font-size:.72rem;background:var(--surface3);border:1px solid var(--border);color:var(--text-muted);padding:2px 8px;border-radius:10px;margin-left:8px;font-weight:500}
+
+/* ── STEPS ── */
 .steps{display:flex;flex-direction:column;gap:12px;margin-top:4px}
 .step{display:flex;gap:14px;align-items:flex-start}
 .step-num{width:26px;height:26px;border-radius:50%;background:var(--green-dim);color:#fff;font-size:.78rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
 .step-body{flex:1}
 .step-title{font-weight:700;color:var(--text);font-size:.9rem}
 .step-desc{color:var(--text-muted);font-size:.85rem;margin-top:2px}
+
+/* ── PASSIFS ── */
 .passive-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
 .passive-card{background:var(--surface3);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;transition:var(--transition)}
 .passive-card:hover{border-color:var(--border-gold);background:var(--gold-bg)}
 .passive-class{font-size:.72rem;text-transform:uppercase;letter-spacing:.8px;color:var(--gold-dim);font-weight:700;margin-bottom:5px}
 .passive-bonus{color:var(--text);font-size:.88rem}
+
+/* ── MAÎTRISE ── */
 .maitrise-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:4px}
 .maitrise-card{background:var(--surface3);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;position:relative;overflow:hidden;transition:var(--transition)}
 .maitrise-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--green-dim)}
@@ -120,6 +177,8 @@ tr.has-tooltip{cursor:help}
 .mc-cumul-list li{font-size:.78rem;color:var(--text-muted);padding-left:12px;position:relative;line-height:1.3}
 .mc-cumul-list li::before{content:'·';position:absolute;left:0;color:var(--green-dim)}
 .maitrise-card.highlight .mc-cumul-list li{color:var(--text)}
+
+/* ── COFFRES ── */
 .coffre-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
 .coffre-card{background:var(--surface3);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px 20px}
 .coffre-card.c1{border-top:3px solid var(--gold-dim)}
@@ -129,6 +188,25 @@ tr.has-tooltip{cursor:help}
 .coffre-note{font-size:.8rem;color:var(--green);margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
 .orichor-row td:first-child{color:var(--text-muted)}
 .orichor-row td:last-child{color:var(--amber);font-weight:700}
+
+/* ── SERTISSAGE ── */
+.sertis-gems{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-top:6px}
+.sertis-gem{background:var(--surface3);border:1px solid var(--border);border-left:3px solid;border-radius:var(--radius);padding:12px 14px;transition:var(--transition)}
+.sertis-gem:hover{border-color:var(--border-gold)}
+.sertis-gem.g-force{border-left-color:#c8a060}
+.sertis-gem.g-agi{border-left-color:#a8d860}
+.sertis-gem.g-chance{border-left-color:#7ab8f5}
+.sertis-gem.g-intel{border-left-color:#e07060}
+.sg-name{font-weight:700;font-size:.92rem;margin-bottom:3px}
+.sertis-gem.g-force .sg-name{color:#c8a060}
+.sertis-gem.g-agi .sg-name{color:#a8d860}
+.sertis-gem.g-chance .sg-name{color:#7ab8f5}
+.sertis-gem.g-intel .sg-name{color:#e07060}
+.sg-stat{font-size:.78rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;font-weight:700;margin-bottom:8px}
+.sg-bonus{font-size:.85rem;color:var(--text)}
+.sg-bonus b{color:var(--amber)}
+
+/* ── MISC ── */
 .ilink{color:var(--gold);cursor:pointer;text-decoration:underline;text-decoration-color:var(--gold-dim);text-underline-offset:2px;font-weight:500;transition:var(--transition)}
 .ilink:hover{color:#f0c030;text-decoration-color:var(--gold)}
 .cmd{display:inline-block;background:rgba(106,170,0,.12);border:1px solid var(--green-dim);color:#90cc30;padding:2px 8px;border-radius:5px;font-family:"Courier New",monospace;font-size:.83rem;font-weight:700}
@@ -144,10 +222,8 @@ tr.has-tooltip{cursor:help}
 .faq-cat-btn{display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:20px;font-size:.78rem;font-weight:700;cursor:pointer;border:1px solid var(--border);background:var(--surface3);color:var(--text-muted);transition:var(--transition);white-space:nowrap;user-select:none}
 .faq-cat-btn:hover{border-color:var(--border-gold);color:var(--text)}
 .faq-cat-btn.active{background:var(--gold);border-color:var(--gold);color:#1a1200}
-.faq-cat-btn .faq-cat-icon{font-size:13px}
 .faq-section{margin-bottom:28px}
 .faq-section-title{font-size:.75rem;text-transform:uppercase;letter-spacing:1.2px;font-weight:700;color:var(--gold-dim);padding:0 4px 10px;border-bottom:1px solid var(--border);margin-bottom:12px;display:flex;align-items:center;gap:8px}
-.faq-section-title .fsi{font-size:14px}
 .faq-item{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:8px;overflow:hidden;transition:border-color var(--transition)}
 .faq-item:hover{border-color:rgba(212,160,23,.2)}
 .faq-item.open{border-color:var(--border-gold)}
@@ -157,7 +233,7 @@ tr.has-tooltip{cursor:help}
 .faq-q-text{font-size:.9rem;font-weight:600;color:var(--text);line-height:1.4}
 .faq-arrow{color:var(--text-dim);font-size:.75rem;transition:transform .2s ease;flex-shrink:0}
 .faq-item.open .faq-arrow{transform:rotate(180deg);color:var(--gold)}
-.faq-a{display:none;padding:0 18px 16px 18px;font-size:.87rem;color:var(--text-muted);line-height:1.7;border-top:1px solid var(--border)}
+.faq-a{display:none;padding:0 18px 16px;font-size:.87rem;color:var(--text-muted);line-height:1.7;border-top:1px solid var(--border)}
 .faq-a.show{display:block}
 .faq-a p{margin-top:10px}
 .faq-a ul{list-style:none;display:flex;flex-direction:column;gap:6px;margin-top:8px}
@@ -168,7 +244,6 @@ tr.has-tooltip{cursor:help}
 .faq-a .faq-warn{background:var(--red-bg);border:1px solid var(--red-border);border-radius:var(--radius);padding:10px 13px;margin-top:10px;color:#e8b4af;font-size:.84rem}
 .faq-a .faq-tip{background:var(--green-bg);border:1px solid rgba(106,170,0,.3);border-radius:var(--radius);padding:10px 13px;margin-top:10px;color:#a8d860;font-size:.84rem}
 .faq-empty{text-align:center;padding:40px;color:var(--text-muted);font-size:.9rem}
-.faq-empty .faq-empty-icon{font-size:2rem;margin-bottom:10px;opacity:.4}
 .tag-depart{background:rgba(106,170,0,.12);border-color:rgba(106,170,0,.4);color:#a8d860}
 .tag-stuff{background:rgba(212,160,23,.1);border-color:rgba(212,160,23,.4);color:#d4a017}
 .tag-sorts{background:rgba(59,130,246,.1);border-color:rgba(59,130,246,.4);color:#7ab8f5}
@@ -177,19 +252,23 @@ tr.has-tooltip{cursor:help}
 .tag-maitrise{background:rgba(147,51,234,.12);border-color:rgba(147,51,234,.4);color:#c084fc}
 .tag-dofus{background:rgba(212,160,23,.1);border-color:rgba(212,160,23,.4);color:#d4a017}
 .tag-songe{background:rgba(59,130,246,.08);border-color:rgba(59,130,246,.35);color:#7ab8f5}
+.tag-sertis{background:rgba(236,72,153,.12);border-color:rgba(236,72,153,.4);color:#f0a0d0}
 
 @media(max-width:900px){.logo-sub{display:none}.nav-item span:not(.nav-icon){display:none}.nav-item{padding:0 12px}.main{padding:24px 20px}}
-@media(max-width:640px){.grid,.passive-grid,.maitrise-grid{grid-template-columns:1fr 1fr}.main{padding:18px 12px}.page-header h1{font-size:1.3rem}.logo-title{font-size:.9rem}}
+@media(max-width:640px){.grid,.passive-grid,.maitrise-grid{grid-template-columns:1fr 1fr}.main{padding:18px 12px}.page-header h1{font-size:1.3rem}.logo-title{font-size:.9rem}.toc-wrap{display:none!important}}
 </style>
 </head>
 <body>
 
+<div id="scrollBar"></div>
+<button id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<div id="glTip"><div class="gl-title" id="glTipTitle"></div><span id="glTipBody"></span></div>
 <div id="dropTooltip"><div class="tt-title" id="ttTitle"></div><div id="ttBody"></div></div>
 
 <nav class="topnav">
   <div class="logo">
     <span class="logo-title">⚔ Pov'Typus Wiki</span>
-    <span class="logo-sub">Dernière MàJ du serveur : 28/04/2026</span>
+    <span class="logo-sub">Dernière MàJ : 28/04/2026</span>
   </div>
   <div class="nav-section">
     <div class="nav-item active" onclick="go('accueil')"><span class="nav-icon">🏠</span><span>Présentation</span></div>
@@ -220,128 +299,191 @@ tr.has-tooltip{cursor:help}
 <div id="accueil" class="panel active">
   <div class="breadcrumb"><span>Wiki</span><span class="breadcrumb-sep">›</span><span>Présentation</span></div>
   <div class="page-header"><h1>Bienvenue sur Pov'Typus</h1><div class="subtitle">Serveur 100% FreeToWin — Fait avec passion</div></div>
+  <div class="summary-card">
+    <div class="summary-hd">⚡ En résumé</div>
+    <ul class="summary-list">
+      <li>Serveur <strong>100% Free</strong></li>
+      <li><strong>Duo compte minimum</strong> recommandé — le contenu est pensé pour plusieurs personnages</li>
+      <li><strong>200 <span class="gl" data-term="Prospection">Prospection</span></strong> de base + <strong><span class="gl" data-term="Artefact">Artefact</span> de classe</strong> dès la création du personnage</li>
+    </ul>
+  </div>
   <div class="alert alert-gold"><b>État :</b> <span style="color:#6aaa00;font-weight:700">En Ligne</span> &nbsp;·&nbsp; <b>Discord :</b> <a href="https://discord.gg/TKC6TpAmQW" target="_blank" style="color:#7289da">discord.gg/TKC6TpAmQW</a></div>
   <div class="alert alert-info">Avant toute chose, merci de lire le <a class="ilink" onclick="go('tuto')">Guide du débutant</a></div>
   <div class="card">
     <div class="card-title"><span class="ct-icon">🚀</span>Premiers pas</div>
     <div class="grid">
       <div class="mini-card green-accent"><div class="mini-card-label">Choix de classe</div><div class="mini-card-value">Consultez les <a class="ilink" onclick="go('passifs')">18 passifs uniques</a> avant de choisir.</div></div>
-      <div class="mini-card green-accent"><div class="mini-card-label">Sorts</div><div class="mini-card-value">Apprentissage classique jusqu'au niv. 100, puis via des <a class="ilink" onclick="go('monnaies')">Orichors</a>. Voir les <a class="ilink" onclick="go('sorts')">Coffres de sorts</a>.</div></div>
-      <div class="mini-card green-accent"><div class="mini-card-label">Équipement de départ</div><div class="mini-card-value">Panoplie aventurier + familier sagesse + votre <a class="ilink" onclick="go('passifs')">Artefact passif</a>.</div></div>
-      <div class="mini-card green-accent"><div class="mini-card-label">Prospection de base</div><div class="mini-card-value">Chaque personnage démarre avec <b>200 prospection</b>.</div></div>
-      <div class="mini-card green-accent"><div class="mini-card-label">Mode Ombre</div><div class="mini-card-value">Mort permanente en PvM activable via un PNJ au zaap d'Astrub.</div></div>
+      <div class="mini-card green-accent"><div class="mini-card-label">Sorts</div><div class="mini-card-value">Classique jusqu'au niv. 100, puis via des <a class="ilink" onclick="go('monnaies')"><span class="gl" data-term="Orichor">Orichors</span></a> → <a class="ilink" onclick="go('sorts')">Coffres de sorts</a>.</div></div>
+      <div class="mini-card green-accent"><div class="mini-card-label">Équipement de départ</div><div class="mini-card-value">Panoplie aventurier + familier sagesse + votre <a class="ilink" onclick="go('passifs')"><span class="gl" data-term="Artefact">Artefact</span> passif</a>.</div></div>
+      <div class="mini-card green-accent"><div class="mini-card-label">Prospection de base</div><div class="mini-card-value">Chaque personnage démarre avec <b>200 <span class="gl" data-term="Prospection">prospection</span></b>.</div></div>
+      <div class="mini-card green-accent"><div class="mini-card-label">Mode Ombre</div><div class="mini-card-value">Mort permanente en <span class="gl" data-term="PvM">PvM</span> activable via un PNJ au zaap d'Astrub.</div></div>
       <div class="mini-card green-accent"><div class="mini-card-label">Sorts spéciaux</div><div class="mini-card-value">3 sorts sélectionnés par classe reçoivent des modifications uniques.</div></div>
     </div>
   </div>
   <div class="card">
     <div class="card-title"><span class="ct-icon">⭐</span>Fonctionnalités clés</div>
     <div class="grid">
-      <div class="mini-card gold-accent"><div class="mini-card-label">Drop méritant</div><div class="mini-card-value">Nouveaux objets <b>Artefacts</b> — voir les <a class="ilink" onclick="go('drops')">Drops rares</a>.</div></div>
+      <div class="mini-card gold-accent"><div class="mini-card-label">Drop méritant</div><div class="mini-card-value">Nouveaux objets <b><span class="gl" data-term="Artefact">Artefacts</span></b> — voir les <a class="ilink" onclick="go('drops')">Drops rares</a>.</div></div>
       <div class="mini-card gold-accent"><div class="mini-card-label">Maîtrise de classe</div><div class="mini-card-value">Montez jusqu'au <a class="ilink" onclick="go('maitrise')">niveau 201</a> pour le plein potentiel.</div></div>
-      <div class="mini-card gold-accent"><div class="mini-card-label">Items évolutifs</div><div class="mini-card-value">Forgemagie + boost Tavernier — voir <a class="ilink" onclick="go('stuff')">Amélioration du stuff</a>.</div></div>
+      <div class="mini-card gold-accent"><div class="mini-card-label">Items évolutifs</div><div class="mini-card-value"><span class="gl" data-term="Forgemagie">Forgemagie</span> + boost Tavernier + Sertissage — voir <a class="ilink" onclick="go('stuff')">Amélioration du stuff</a>.</div></div>
       <div class="mini-card gold-accent"><div class="mini-card-label">IA retravaillée</div><div class="mini-card-value">Des monstres plus intelligents pour plus de challenge.</div></div>
-      <div class="mini-card gold-accent"><div class="mini-card-label">Forgemagie</div><div class="mini-card-value">Système complet avec limites, overmaxs et exo garanti. <a class="ilink" onclick="go('stuff')">Détails</a>.</div></div>
-      <div class="mini-card gold-accent"><div class="mini-card-label">Songe Infini</div><div class="mini-card-value">Repoussez les limites de votre personnage via le <a class="ilink" onclick="go('songe')">Songe Infini</a>.</div></div>
+      <div class="mini-card gold-accent"><div class="mini-card-label">Forgemagie</div><div class="mini-card-value">Exo garanti, <span class="gl" data-term="Overmax">overmax</span> et limites personnalisées. <a class="ilink" onclick="go('stuff')">Détails</a>.</div></div>
+      <div class="mini-card gold-accent"><div class="mini-card-label">Songe Infini</div><div class="mini-card-value">Repoussez les limites via le <a class="ilink" onclick="go('songe')">Songe Infini</a>.</div></div>
+      <div class="mini-card gold-accent"><div class="mini-card-label">Sertissage</div><div class="mini-card-value">Repoussez les limites de votre équipement encore plus loin via le <a class="ilink" onclick="go('stuff')">Sertissage</a>.</div></div>
     </div>
   </div>
+  <div class="related-bar"><div class="related-lbl">Voir aussi</div><div class="related-links">
+    <div class="rel-link" onclick="go('tuto')">🚀 Guide débutant</div>
+    <div class="rel-link" onclick="go('faq')">❓ F.A.Q</div>
+    <div class="rel-link" onclick="go('passifs')">🛡 Passifs de classe</div>
+  </div></div>
 </div>
 
 <!-- ══ TUTO ══ -->
 <div id="tuto" class="panel">
   <div class="breadcrumb"><a onclick="go('accueil')">Wiki</a><span class="breadcrumb-sep">›</span><span>Guide débutant</span></div>
   <div class="page-header"><h1>Guide du débutant</h1><div class="subtitle">Tout ce qu'il faut savoir pour bien commencer</div></div>
-  <div class="card">
+  <div class="summary-card">
+    <div class="summary-hd">⚡ En résumé</div>
+    <ul class="summary-list">
+      <li>Récupérez votre <strong><span class="gl" data-term="Artefact">Artefact</span> de classe</strong> + Panoplie Aventurier automatiquement à la création</li>
+      <li>Achetez votre <strong>stuff avec des <span class="gl" data-term="Pièces d'Or">Pièces d'Or</span></strong> à la <strong>Taverne d'Astrub</strong> — tout en <span class="gl" data-term="Jet parfait">jet parfait</span></li>
+      <li>Sorts 101-200 débloqués via des <strong><span class="gl" data-term="Coffres de sorts">Coffres de sorts</span></strong> achetés avec des <span class="gl" data-term="Orichor">Orichors</span></li>
+    </ul>
+  </div>
+  <div class="toc-wrap" id="toc-tuto"></div>
+  <div class="card" id="s-tuto-1" data-s="Création du personnage">
     <div class="card-title"><span class="ct-icon">🎮</span>À la création du personnage</div>
     <div class="steps">
-      <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Choisissez votre classe</div><div class="step-desc">Chaque classe a un <a class="ilink" onclick="go('passifs')">passif unique</a> sous forme d'Artefact. Consultez la liste avant de vous décider.</div></div></div>
-      <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Récupérez vos objets de départ</div><div class="step-desc">Panoplie aventurier, familier sagesse/dommages et votre Artefact de classe vous sont automatiquement attribués.</div></div></div>
-      <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Succès Exploration</div><div class="step-desc">N'hésitez pas à faire le tour d'incarnam, le succès vous aidera grandement pour le début du serveur.</div></div></div>
-      <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Et les stuff je les ai où ?</div><div class="step-desc">L'achat des stuff se passe avec les <a class="ilink" onclick="go('monnaies')">pièces d'or</a> à la <a class="ilink" onclick="go('stuff')">Taverne d'Astrub</a>.</div></div></div>
-      <div class="step"><div class="step-num">💀</div><div class="step-body"><div class="step-title">Mode Ombre</div><div class="step-desc">Souhaitez-vous la mort permanente en PvM ? Parlez au <b><a class="ilink" onclick="go('ombre')">Pactisant des Ténèbres</a></b> (aussi accessible via <span class="cmd">.start</span>).</div></div></div>
+      <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Choisissez votre classe</div><div class="step-desc">Chaque classe a un <a class="ilink" onclick="go('passifs')">passif unique</a> sous forme d'<span class="gl" data-term="Artefact">Artefact</span>. Consultez la liste avant de vous décider.</div></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Récupérez vos objets de départ</div><div class="step-desc">Panoplie aventurier, familier sagesse/dommages et votre <span class="gl" data-term="Artefact">Artefact</span> de classe vous sont automatiquement attribués.</div></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Succès Exploration</div><div class="step-desc">N'hésitez pas à faire le tour d'Incarnam, le succès vous aidera grandement pour le début du serveur.</div></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Et les stuff, je les ai où ?</div><div class="step-desc">L'achat des stuff se passe avec les <a class="ilink" onclick="go('monnaies')"><span class="gl" data-term="Pièces d'Or">pièces d'or</span></a> à la <a class="ilink" onclick="go('stuff')">Taverne d'Astrub</a>.</div></div></div>
+      <div class="step"><div class="step-num">💀</div><div class="step-body"><div class="step-title">Mode Ombre</div><div class="step-desc">Souhaitez-vous la mort permanente en <span class="gl" data-term="PvM">PvM</span> ? Parlez au <b><a class="ilink" onclick="go('ombre')">Pactisant des Ténèbres</a></b> (aussi accessible via <span class="cmd">.start</span>).</div></div></div>
     </div>
   </div>
-  <div class="card">
+  <div class="card" id="s-tuto-2" data-s="Points importants">
     <div class="card-title"><span class="ct-icon">💡</span>Points Importants</div>
     <div class="alert alert-warning"><b>Le serveur est orienté Duo Compte minimum.</b> Jouer un seul personnage est fortement déconseillé.</div>
     <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:8px">
       <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Les clefs de donjon se drop dans la zone de leur donjon. Utilisez <span class="cmd">.drop</span> dans une zone/dj pour connaître leur localisation.</li>
-      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Vos sorts s'apprennent classiquement jusqu'au niveau 100. Au-delà, des <a class="ilink" onclick="go('sorts')">Coffres de sorts</a> achetables avec des <a class="ilink" onclick="go('monnaies')">Orichors</a> permettent de débloquer les sorts 101-200.</li>
-      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>200 Prospection de base vous permettent de bien farmer dès le départ.</li>
-      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Tout au long de votre phase de leveling, vous obtiendrez des bonus supplémentaires via la <a class="ilink" onclick="go('maitrise')">Maîtrise</a>.</li>
+      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Vos sorts s'apprennent classiquement jusqu'au niveau 100. Au-delà, des <a class="ilink" onclick="go('sorts')"><span class="gl" data-term="Coffres de sorts">Coffres de sorts</span></a> achetables avec des <a class="ilink" onclick="go('monnaies')"><span class="gl" data-term="Orichor">Orichors</span></a> permettent de débloquer les sorts 101-200.</li>
+      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>200 <span class="gl" data-term="Prospection">Prospection</span> de base vous permettent de bien farmer dès le départ.</li>
+      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Tout au long de votre phase de leveling, vous obtiendrez des bonus via la <a class="ilink" onclick="go('maitrise')">Maîtrise</a>.</li>
     </ul>
   </div>
-  <div class="card">
+  <div class="card" id="s-tuto-3" data-s="S'optimiser">
     <div class="card-title"><span class="ct-icon">📈</span>Comment s'optimiser ?</div>
     <div class="grid">
-      <div class="mini-card gold-accent"><div class="mini-card-label">Équipement</div><div class="mini-card-value"><a class="ilink" onclick="go('stuff')">Améliorer son stuff</a> via la forgemagie et le Tavernier Feubuk.</div></div>
-      <div class="mini-card gold-accent"><div class="mini-card-label">Dofus</div><div class="mini-card-value"><a class="ilink" onclick="go('dofus')">Améliorer ses dofus</a> via le système Larme Éthérée.</div></div>
+      <div class="mini-card gold-accent"><div class="mini-card-label">Équipement</div><div class="mini-card-value"><a class="ilink" onclick="go('stuff')">Améliorer son stuff</a> via la <span class="gl" data-term="Forgemagie">forgemagie</span>, le Tavernier Feubuk et le <a class="ilink" onclick="go('stuff')">Sertissage</a>.</div></div>
+      <div class="mini-card gold-accent"><div class="mini-card-label">Dofus</div><div class="mini-card-value"><a class="ilink" onclick="go('dofus')">Améliorer ses dofus</a> via le système <span class="gl" data-term="Larme Éthérée">Larme Éthérée</span>.</div></div>
       <div class="mini-card gold-accent"><div class="mini-card-label">Maîtrise</div><div class="mini-card-value">Atteindre la <a class="ilink" onclick="go('maitrise')">Maîtrise de classe</a> pour des bonus permanents puissants.</div></div>
     </div>
   </div>
+  <div class="related-bar"><div class="related-lbl">Voir aussi</div><div class="related-links">
+    <div class="rel-link" onclick="go('passifs')">🛡 Passifs</div>
+    <div class="rel-link" onclick="go('stuff')">⚙ Stuff</div>
+    <div class="rel-link" onclick="go('monnaies')">💰 Monnaies</div>
+    <div class="rel-link" onclick="go('maitrise')">👑 Maîtrise</div>
+  </div></div>
 </div>
 
 <!-- ══ FAQ ══ -->
 <div id="faq" class="panel">
   <div class="breadcrumb"><a onclick="go('accueil')">Wiki</a><span class="breadcrumb-sep">›</span><span>F.A.Q</span></div>
   <div class="page-header"><h1>Foire Aux Questions</h1><div class="subtitle">Les réponses aux questions les plus fréquentes des joueurs</div></div>
-  <div class="faq-search-wrap">
-    <span class="faq-search-icon">🔍</span>
-    <input type="text" id="faqSearch" placeholder="Rechercher une question, un mot-clé..." oninput="filterFaq()">
-  </div>
+  <div class="faq-search-wrap"><span class="faq-search-icon">🔍</span><input type="text" id="faqSearch" placeholder="Rechercher une question, un mot-clé..." oninput="filterFaq()"></div>
   <div class="faq-cats" id="faqCats"></div>
   <div id="faqContainer"></div>
+  <div class="related-bar"><div class="related-lbl">Voir aussi</div><div class="related-links">
+    <div class="rel-link" onclick="go('tuto')">🚀 Guide débutant</div>
+    <div class="rel-link" onclick="go('passifs')">🛡 Passifs</div>
+  </div></div>
 </div>
 
 <!-- ══ SONGE ══ -->
 <div id="songe" class="panel">
   <div class="breadcrumb"><a onclick="go('accueil')">Wiki</a><span class="breadcrumb-sep">›</span><span>Songe Infini</span></div>
   <div class="page-header"><h1>Songe Infini</h1><div class="subtitle">Explication et récompenses</div></div>
-  <div class="alert alert-info">Pour accéder au Songe Infini, appuyer sur votre touche de clavier <b>T</b> puis parler au PNJ <b>L'Ultime Défi</b> afin de commencer un combat.</div>
-  <div class="card">
+  <div class="summary-card">
+    <div class="summary-hd">⚡ En résumé</div>
+    <ul class="summary-list">
+      <li>Accès via la touche <strong>T</strong> → PNJ <strong>L'Ultime Défi</strong> — niveau <strong>100 recommandé</strong></li>
+      <li>Récompenses : <strong><span class="gl" data-term="Reflet Onirique">Reflets Oniriques</span></strong> à chaque étage + palier de <strong>Maîtrise</strong> tous les 5 étages</li>
+      <li><strong><a class="ilink" onclick="go('ombre')">Mode Ombre</a> inactif</strong> ici — pas de perte de personnage en cas d'échec</li>
+    </ul>
+  </div>
+  <div class="toc-wrap" id="toc-songe"></div>
+  <div class="alert alert-info">Pour accéder au Songe Infini, appuyez sur <b>T</b> puis parlez au PNJ <b>L'Ultime Défi</b>.</div>
+  <div class="card" id="s-songe-1" data-s="Avant de se lancer">
     <div class="card-title"><span class="ct-icon">💡</span>Détails importants avant de vous lancer</div>
     <div class="alert alert-warning"><b>Niveau 100 minimum recommandé.</b> Il est possible d'y accéder plus tôt mais vous aurez plus de difficultés.</div>
     <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:8px">
-      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Chaque étage réussi vous offrira des <a class="ilink" onclick="go('monnaies')">Reflets Oniriques</a>.</li>
-      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Tout les 5 étages vaincus, votre <a class="ilink" onclick="go('maitrise')">Maîtrise</a> sera améliorée.</li>
-      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Il n'y a pas de limite d'étage, mais la difficulté augmente progressivement.</li>
-      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Le <a class="ilink" onclick="go('ombre')">mode Ombre</a> n'est pas actif dans le Songe Infini — en cas de défaite ou abandon, vous ne perdez pas votre progression.</li>
+      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Chaque étage réussi vous offrira des <a class="ilink" onclick="go('monnaies')"><span class="gl" data-term="Reflet Onirique">Reflets Oniriques</span></a>.</li>
+      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Tous les 5 étages vaincus, votre <a class="ilink" onclick="go('maitrise')">Maîtrise</a> sera améliorée.</li>
+      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Il n'y a pas de limite d'étage, la difficulté augmente progressivement.</li>
+      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Le <a class="ilink" onclick="go('ombre')">mode Ombre</a> est inactif ici — pas de perte en cas de défaite ou d'abandon.</li>
     </ul>
   </div>
-  <div class="card">
+  <div class="card" id="s-songe-2" data-s="Génération des monstres">
     <div class="card-title"><span class="ct-icon">⚙</span>Comment sont générés les monstres ?</div>
     <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:8px">
-      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Ils sont au nombre de 5, vous pouvez y accéder en groupe jusqu'à 8 personnages.</li>
-      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Un malus de stats de 15 % est appliqué au monstre par palier de 20 niveaux d'écart en faveur de ce dernier. Le malus total est plafonné à 90 % pour un écart de 120 niveaux ou plus.</li>
-      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Après ceci, le monstre possède ses stats de base multipliées par un facteur qui dépend de l'étage.</li>
-      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Parmi les monstres générés, il y a toujours un boss.</li>
-      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Lors d'une tentative, pas de panique si vous n'êtes pas capable de les vaincre, la génération est aléatoire pour <b>chaque</b> tentative.</li>
+      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>5 monstres par combat (toujours un boss parmi eux), accessible jusqu'à 8 joueurs.</li>
+      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Un malus de stats de <b>15%</b> est appliqué au monstre par palier de 20 niveaux d'écart en sa faveur, plafonné à <b>90%</b> pour 120 niveaux ou plus.</li>
+      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Après ceci, les stats du monstre sont multipliées par un facteur lié à l'étage.</li>
+      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>La génération est aléatoire à chaque tentative — retentez si le groupe est trop difficile.</li>
     </ul>
   </div>
+  <div class="related-bar"><div class="related-lbl">Voir aussi</div><div class="related-links">
+    <div class="rel-link" onclick="go('maitrise')">👑 Maîtrise</div>
+    <div class="rel-link" onclick="go('monnaies')">💰 Monnaies</div>
+    <div class="rel-link" onclick="go('ombre')">💀 Mode Ombre</div>
+  </div></div>
 </div>
 
 <!-- ══ OMBRE ══ -->
 <div id="ombre" class="panel">
   <div class="breadcrumb"><a onclick="go('accueil')">Wiki</a><span class="breadcrumb-sep">›</span><span>Ombre</span></div>
-  <div class="page-header"><h1>Mode Ombre</h1><div class="subtitle">Tout ce qu'il faut savoir sur le mode ombre</div></div>
+  <div class="page-header"><h1>Mode Ombre</h1><div class="subtitle">Mort permanente — risque élevé, récompense maximale</div></div>
+  <div class="summary-card">
+    <div class="summary-hd">⚡ En résumé</div>
+    <ul class="summary-list">
+      <li>Activable <strong>uniquement avant le niveau 21</strong> via le Pactisant des Ténèbres</li>
+      <li>Bonus <strong>×3 sur l'expérience ET le drop</strong> en contrepartie du risque</li>
+      <li>Mort en <span class="gl" data-term="PvM">PvM</span> = <strong>retour niveau 1</strong>, inventaire vidé — mais les <strong>succès sont préservés</strong></li>
+    </ul>
+  </div>
   <div class="alert alert-info">Le mode n'est activable que si votre personnage est maximum niveau 20.</div>
   <div class="card">
     <div class="card-title"><span class="ct-icon">🎮</span>Activation et Spécificités</div>
     <div class="steps">
       <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Comment jouer en mode ombre ?</div><div class="step-desc">Parlez au <b>Pactisant des Ténèbres</b> sur la map de départ (aussi accessible via <span class="cmd">.start</span>).</div></div></div>
-      <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">J'y gagne quoi ?</div><div class="step-desc">Jouer en mode ombre vous permet de bénéficier d'un bonus sur l'expérience et le drop de 300% (x3).</div></div></div>
-      <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Les Limites</div><div class="step-desc">La commande <span class="cmd">.retry</span> n'est pas accessible et l'abandon sera considéré comme une défaite.</div></div></div>
-      <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Et si je meurs ?</div><div class="step-desc">En mode ombre, la mort en PvM est permanente. Votre personnage revient au niveau 1, inventaire vide (sauf objets donnés au départ). L'expérience est triplée jusqu'au plus haut niveau atteint, toute mort confondue.</div></div></div>
-      <div class="step"><div class="step-num">5</div><div class="step-body"><div class="step-title">Et les succès dans tout ça ?</div><div class="step-desc">Les succès ne sont pas reset.</div></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">J'y gagne quoi ?</div><div class="step-desc">Bonus sur l'expérience et le drop de <b>300% (×3)</b>.</div></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Les Limites</div><div class="step-desc"><span class="cmd">.retry</span> est interdit et l'abandon est considéré comme une défaite.</div></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Et si je meurs ?</div><div class="step-desc">Retour niveau 1, inventaire vide (sauf objets de départ). L'expérience reste triplée jusqu'au plus haut niveau atteint. Les succès ne sont pas reset.</div></div></div>
     </div>
   </div>
-  <div class="alert alert-warning">Le mode Ombre n'est pas actif dans le <a class="ilink" onclick="go('songe')">Songe Infini</a> — en cas de défaite ou abandon, vous ne perdez pas votre progression.</div>
+  <div class="alert alert-warning">Le <a class="ilink" onclick="go('ombre')">mode Ombre</a> est inactif dans le <a class="ilink" onclick="go('songe')">Songe Infini</a> — pas de perte en cas d'échec ou d'abandon.</div>
+  <div class="related-bar"><div class="related-lbl">Voir aussi</div><div class="related-links">
+    <div class="rel-link" onclick="go('tuto')">🚀 Guide débutant</div>
+    <div class="rel-link" onclick="go('songe')">🌀 Songe Infini</div>
+    <div class="rel-link" onclick="go('cmds')">⌨ Commandes</div>
+  </div></div>
 </div>
 
 <!-- ══ PASSIFS ══ -->
 <div id="passifs" class="panel">
   <div class="breadcrumb"><a onclick="go('accueil')">Wiki</a><span class="breadcrumb-sep">›</span><span>Passifs de classe</span></div>
   <div class="page-header"><h1>Passifs de Classe</h1><div class="subtitle">18 classes — chacune avec un Artefact passif unique</div></div>
-  <div class="alert alert-info">Chaque classe possède un <b>Artefact</b> dictant son passif.</div>
+  <div class="summary-card">
+    <div class="summary-hd">⚡ En résumé</div>
+    <ul class="summary-list">
+      <li><strong>18 classes</strong>, chacune avec un <strong><span class="gl" data-term="Artefact">Artefact</span> passif unique</strong> qui définit son style de jeu</li>
+      <li>L'Artefact est <strong>reçu automatiquement</strong> à la création du personnage</li>
+      <li>Choisissez en connaissance de cause — consultez cette liste avant de créer votre personnage</li>
+    </ul>
+  </div>
+  <div class="alert alert-info">Chaque classe possède un <b><span class="gl" data-term="Artefact">Artefact</span></b> dictant son passif.</div>
   <div class="card">
     <div class="card-title"><span class="ct-icon">🛡</span>Tous les passifs</div>
     <div class="passive-grid">
@@ -352,7 +494,7 @@ tr.has-tooltip{cursor:help}
       <div class="passive-card"><div class="passive-class">Sram</div><div class="passive-bonus">+25 Dommages critiques</div></div>
       <div class="passive-card"><div class="passive-class">Xélor</div><div class="passive-bonus">+1 PA en début de tour (max 2)</div></div>
       <div class="passive-card"><div class="passive-class">Sadida</div><div class="passive-bonus">300% du niveau en bouclier (fin de tour)</div></div>
-      <div class="passive-card"><div class="passive-class">Osamodas</div><div class="passive-bonus">3 invocations · Les alliés reçoivent 20 dmg début de tour (1 tour), les invos recoivent 200 puissance en supplément (1 tour)</div></div>
+      <div class="passive-card"><div class="passive-class">Osamodas</div><div class="passive-bonus">3 invocations · Les alliés reçoivent 20 dmg début de tour (1 tour), les invos reçoivent 200 puissance en supplément (1 tour)</div></div>
       <div class="passive-card"><div class="passive-class">Ecaflip</div><div class="passive-bonus">+15% Coups Critiques</div></div>
       <div class="passive-card"><div class="passive-class">Enutrof</div><div class="passive-bonus">Les retrait PM sont inesquivables</div></div>
       <div class="passive-card"><div class="passive-class">Feca</div><div class="passive-bonus">-15% Dommages Subis</div></div>
@@ -365,18 +507,31 @@ tr.has-tooltip{cursor:help}
       <div class="passive-card"><div class="passive-class">Ouginak</div><div class="passive-bonus">Récupère 5% PV max si frappé</div></div>
     </div>
   </div>
+  <div class="related-bar"><div class="related-lbl">Voir aussi</div><div class="related-links">
+    <div class="rel-link" onclick="go('tuto')">🚀 Guide débutant</div>
+    <div class="rel-link" onclick="go('stuff')">⚙ Stuff</div>
+    <div class="rel-link" onclick="go('faq')">❓ F.A.Q</div>
+  </div></div>
 </div>
 
 <!-- ══ COMMANDES ══ -->
 <div id="cmds" class="panel">
   <div class="breadcrumb"><a onclick="go('accueil')">Wiki</a><span class="breadcrumb-sep">›</span><span>Commandes</span></div>
   <div class="page-header"><h1>Commandes Joueur</h1><div class="subtitle">Commandes disponibles en jeu</div></div>
+  <div class="summary-card">
+    <div class="summary-hd">⚡ En résumé</div>
+    <ul class="summary-list">
+      <li><span class="cmd">.drop</span> pour voir les drops de la zone · <span class="cmd">.ki [nom]</span> pour localiser un item</li>
+      <li><span class="cmd">.start</span> / <span class="cmd">.fm</span> / <span class="cmd">.craft</span> pour les téléportations rapides</li>
+      <li><span class="cmd">.retry</span> pour annuler un combat en donjon (<strong>interdit en <a class="ilink" onclick="go('ombre')">mode Ombre</a></strong>)</li>
+    </ul>
+  </div>
   <div class="alert alert-info">Les crochets <b>[</b> et <b>]</b> ne sont pas à saisir — ils indiquent un paramètre.</div>
   <div class="card">
     <div class="card-title"><span class="ct-icon">⌨</span>Utilitaires</div>
     <div class="table-wrap"><table><thead><tr><th>Commande</th><th>Description</th></tr></thead><tbody>
       <tr><td><span class="cmd">.ki [nom]</span></td><td>Localiser l'origine d'un item (donjon / monstre).</td></tr>
-      <tr><td><span class="cmd">.retry</span></td><td>Permet d'annuler le combat en cours, donjon uniquement, interdit en <a class="ilink" onclick="go('ombre')">mode ombre</a> et tour 3 minimum.</td></tr>
+      <tr><td><span class="cmd">.retry</span></td><td>Annuler le combat en cours (donjon uniquement, tour 3 min.), interdit en <a class="ilink" onclick="go('ombre')">mode ombre</a>.</td></tr>
       <tr><td><span class="cmd">.kwa [monstre]</span></td><td>Voir le butin complet d'un monstre.</td></tr>
       <tr><td><span class="cmd">.start</span></td><td>Téléportation rapide vers la map de départ.</td></tr>
       <tr><td><span class="cmd">.fm</span></td><td>Téléportation rapide vers l'atelier de <a class="ilink" onclick="go('stuff')">forgemagie</a>.</td></tr>
@@ -388,17 +543,33 @@ tr.has-tooltip{cursor:help}
       <tr><td><span class="cmd">.power</span></td><td>Affiche votre score de puissance calculé sur vos statistiques.</td></tr>
     </tbody></table></div>
   </div>
+  <div class="related-bar"><div class="related-lbl">Voir aussi</div><div class="related-links">
+    <div class="rel-link" onclick="go('drops')">💎 Drops rares</div>
+    <div class="rel-link" onclick="go('ombre')">💀 Mode Ombre</div>
+  </div></div>
 </div>
 
 <!-- ══ SORTS ══ -->
 <div id="sorts" class="panel">
   <div class="breadcrumb"><a onclick="go('accueil')">Wiki</a><span class="breadcrumb-sep">›</span><span>Sorts &amp; Coffres</span></div>
   <div class="page-header"><h1>Sorts &amp; Coffres de classe</h1><div class="subtitle">Système d'obtention de sorts via coffres et jetons</div></div>
+  <div class="summary-card">
+    <div class="summary-hd">⚡ En résumé</div>
+    <ul class="summary-list">
+      <li>Niveaux <strong>1–100</strong> : appris classiquement en jeu, rien de spécial</li>
+      <li>Niveaux <strong>101–150</strong> : Coffre à <strong>600 <span class="gl" data-term="Orichor">Orichors</span></strong> · Niveaux <strong>151–200</strong> : Coffre à <strong>1 200 <span class="gl" data-term="Orichor">Orichors</span></strong></li>
+      <li>Achat chez le PNJ à la <strong>Milice d'Astrub</strong> — chaque coffre débloque <strong>tous les sorts</strong> de sa tranche</li>
+    </ul>
+  </div>
+  <div class="toc-wrap" id="toc-sorts"></div>
   <div class="alert alert-success"><b>Bonne nouvelle :</b> L'achat d'un coffre débloque <b>tous les sorts</b> qu'il contient en une seule fois.</div>
-  <div class="card"><div class="card-title"><span class="ct-icon">📚</span>Sorts niveaux 1–100</div><p style="color:var(--text-muted);font-size:.9rem">Appris classiquement via l'apprentissage normal en jeu.</p></div>
-  <div class="card">
+  <div class="card" id="s-sorts-1" data-s="Sorts 1–100">
+    <div class="card-title"><span class="ct-icon">📚</span>Sorts niveaux 1–100</div>
+    <p style="color:var(--text-muted);font-size:.9rem">Appris classiquement via l'apprentissage normal en jeu. Aucun coût supplémentaire.</p>
+  </div>
+  <div class="card" id="s-sorts-2" data-s="Coffres 101–200">
     <div class="card-title"><span class="ct-icon">📦</span>Coffres de sorts — Niveaux 101 à 200</div>
-    <div class="alert alert-gold" style="margin-bottom:16px"><b>Localisation :</b> PNJ à la <b>Milice d'Astrub</b> · Achat avec des <a class="ilink" onclick="go('monnaies')">Orichors</a> · Chaque coffre contient <b>tous</b> les sorts de sa tranche.</div>
+    <div class="alert alert-gold" style="margin-bottom:16px"><b>Localisation :</b> PNJ à la <b>Milice d'Astrub</b> · Achat avec des <a class="ilink" onclick="go('monnaies')"><span class="gl" data-term="Orichor">Orichors</span></a> · Chaque coffre contient <b>tous</b> les sorts de sa tranche.</div>
     <div class="coffre-grid">
       <div class="coffre-card c1"><div class="coffre-title">Coffre 101 à 150</div><div class="coffre-cost">Coût : 600 Orichors</div><div class="coffre-note">✓ Donne tous les sorts de niveau 101 à 150 de votre classe.</div></div>
       <div class="coffre-card c2"><div class="coffre-title">Coffre 151 à 200</div><div class="coffre-cost">Coût : 1 200 Orichors</div><div class="coffre-note">✓ Donne tous les sorts de niveau 151 à 200 de votre classe.</div></div>
@@ -406,45 +577,212 @@ tr.has-tooltip{cursor:help}
     <div class="divider"></div>
     <p style="color:var(--text-muted);font-size:.85rem">Comment obtenir des Orichors ? → <a class="ilink" onclick="go('monnaies')">Section Monnaies</a></p>
   </div>
+  <div class="related-bar"><div class="related-lbl">Voir aussi</div><div class="related-links">
+    <div class="rel-link" onclick="go('monnaies')">💰 Monnaies</div>
+    <div class="rel-link" onclick="go('passifs')">🛡 Passifs</div>
+  </div></div>
 </div>
 
 <!-- ══ STUFF ══ -->
 <div id="stuff" class="panel">
   <div class="breadcrumb"><a onclick="go('accueil')">Wiki</a><span class="breadcrumb-sep">›</span><span>Amélioration du stuff</span></div>
   <div class="page-header"><h1>Équipement &amp; Amélioration</h1><div class="subtitle">Obtenir, forger et booster votre stuff</div></div>
-  <div class="card">
-    <div class="card-title"><span class="ct-icon">🏪</span>Achat à la taverne d'Astrub</div>
-    <ul style="list-style:none;display:flex;flex-direction:column;gap:8px">
-      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Les équipements s'achètent avec des <a class="ilink" onclick="go('monnaies')">Pièces d'Or</a>.</li>
-      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Dès l'achat, les items sont directement en <b>jet parfait</b>.</li>
+  <div class="summary-card">
+    <div class="summary-hd">⚡ En résumé</div>
+    <ul class="summary-list">
+      <li>Achat à la <strong>Taverne d'Astrub</strong> avec des <strong><span class="gl" data-term="Pièces d'Or">Pièces d'Or</span></strong> — items livrés en <strong><span class="gl" data-term="Jet parfait">jet parfait</span></strong></li>
+      <li><span class="gl" data-term="Forgemagie">Forgemagie</span> : <strong><span class="gl" data-term="Exo">Exo</span> PA/PM/PO garanti à 100%</strong>, <span class="gl" data-term="Overmax">overmax</span> naturel jusqu'à +50%</li>
+      <li>Boost Tavernier Feubuk : <strong>3 exemplaires identiques = +10%</strong> permanent sur toutes les stats</li>
+      <li><strong>Sertissage</strong> par Gemme Horadrique pour booster une stat précise (objet boosté Tavernier requis)</li>
     </ul>
   </div>
-  <div class="card">
+  <div class="toc-wrap" id="toc-stuff"></div>
+  <div class="card" id="s-stuff-1" data-s="Taverne d'Astrub">
+    <div class="card-title"><span class="ct-icon">🏪</span>Achat à la Taverne d'Astrub</div>
+    <ul style="list-style:none;display:flex;flex-direction:column;gap:8px">
+      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Les équipements s'achètent avec des <a class="ilink" onclick="go('monnaies')"><span class="gl" data-term="Pièces d'Or">Pièces d'Or</span></a>.</li>
+      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Dès l'achat, les items sont directement en <b><span class="gl" data-term="Jet parfait">jet parfait</span></b>.</li>
+    </ul>
+  </div>
+  <div class="card" id="s-stuff-2" data-s="Forgemagie">
     <div class="card-title"><span class="ct-icon">🔨</span>Forgemagie</div>
     <div class="grid">
       <div class="mini-card gold-accent"><div class="mini-card-label">Exo garanti</div><div class="mini-card-value">Les runes <b>PA, PM et PO</b> ont un taux de réussite de <b>100%</b>.</div></div>
-      <div class="mini-card gold-accent"><div class="mini-card-label">Overmax naturel</div><div class="mini-card-value">Les objets supportent jusqu'à <b>+50% de statistiques</b> au-dessus du maximum.</div></div>
+      <div class="mini-card gold-accent"><div class="mini-card-label">Overmax naturel</div><div class="mini-card-value">Les objets supportent jusqu'à <b>+50%</b> au-dessus du maximum (<span class="gl" data-term="Overmax">overmax</span>).</div></div>
       <div class="mini-card gold-accent"><div class="mini-card-label">Limites absolues</div><div class="mini-card-value">Plafonds fixes — ex : 504 Vitalité, 101 Force.</div></div>
       <div class="mini-card gold-accent"><div class="mini-card-label">Items niv. 190+</div><div class="mini-card-value">Les limites absolues sont augmentées de <b>+20%</b> pour les items haute rareté.</div></div>
     </div>
   </div>
-  <div class="card">
+  <div class="card" id="s-stuff-3" data-s="Boost Tavernier">
     <div class="card-title"><span class="ct-icon">⚡</span>Tavernier Feubuk — Atelier FM Bonta</div>
-    <div class="alert alert-warning"><b>Attention :</b> Une fois boosté, l'item <b>ne peut plus être forgemagé</b>. Finalisez votre FM avant le boost.</div>
+    <div class="alert alert-warning"><b>Attention :</b> Une fois boosté, l'item <b>ne peut plus être forgemagé</b>. Finalisez votre <span class="gl" data-term="Forgemagie">FM</span> avant le boost.</div>
     <div class="steps">
       <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Rassemblez 3 exemplaires identiques</div><div class="step-desc">Même item, trois fois. Pour familier/montilier : 10 exemplaires requis.</div></div></div>
       <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Placez l'item à booster en premier</div><div class="step-desc">L'item en première position dans l'échange sera celui amélioré.</div></div></div>
-      <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Résultat : +10% sur toutes les stats</div><div class="step-desc">L'item reçoit un boost permanent de 10% de ses statistiques. S'il s'agit d'un familier/montilier, le boost est de 25%.</div></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Résultat : +10% sur toutes les stats</div><div class="step-desc">Boost permanent de 10%. Pour un familier/montilier : +25%.</div></div></div>
     </div>
   </div>
+
+<div class="card" id="s-stuff-5" data-s="Sertissage">
+    <div class="card-title"><span class="ct-icon">💎</span>Sertissage par Gemme Horadrique — Pierrick l'Unificateur</div>
+
+    <div class="alert alert-warning"><b>Prérequis indispensable :</b> L'objet doit avoir reçu le <b>boost du Tavernier Feubuk</b> au préalable. Sans ce boost, le sertissage est impossible.</div>
+
+    <div class="alert alert-info">Le sertissage se réalise auprès du PNJ <b>Pierrick l'Unificateur</b>. Il permet de <b>renforcer une statistique déjà présente</b> sur votre objet grâce à une <a class="ilink" onclick="go('drops')">Gemme Horadrique</a>, avec une amélioration optionnelle via l'<a class="ilink" onclick="go('drops')"><b>Étincelle Sublimée</b></a>.</div>
+
+    <p style="color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:.6px;font-size:.72rem;margin:18px 0 10px">Composants nécessaires</p>
+    <div class="grid">
+      <div class="mini-card green-accent">
+        <div class="mini-card-label">Slot 1 — Obligatoire</div>
+        <div class="mini-card-value">L'<b>objet à améliorer</b> (boosté Tavernier au préalable).</div>
+      </div>
+      <div class="mini-card green-accent">
+        <div class="mini-card-label">Slot 2 — Obligatoire</div>
+        <div class="mini-card-value">Une <a class="ilink" onclick="go('drops')"><b>Gemme Horadrique</b></a> qui apportera son bonus.</div>
+      </div>
+      <div class="mini-card gold-accent">
+        <div class="mini-card-label">Slot 3 — Optionnel</div>
+        <div class="mini-card-value">Une <a class="ilink" onclick="go('drops')"><b>Étincelle Sublimée</b></a> pour amplifier le bonus.</div>
+      </div>
+    </div>
+
+    <p style="color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:.6px;font-size:.72rem;margin:20px 0 10px">Fonctionnement</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title">La gemme indique un pourcentage (26 à 50%)</div>
+          <div class="step-desc">Chaque <a class="ilink" onclick="go('drops')">Gemme Horadrique</a> cible <b>une statistique précise</b> (Force, Agilité, Chance ou Intelligence) et affiche son pourcentage d'apport.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title">Application sur la valeur actuelle</div>
+          <div class="step-desc">Ce pourcentage est appliqué à la <b>valeur actuelle</b> de la statistique correspondante sur l'objet, puis <b>ajouté</b> à celle-ci.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">⚡</div>
+        <div class="step-body">
+          <div class="step-title">Avec une Étincelle Sublimée (optionnel)</div>
+          <div class="step-desc">Le bonus appliqué est <b>doublé</b>, avec en plus <b>10% de chance d'être triplé</b> à la place.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-warning" style="margin-top:18px"><b>Important :</b> La statistique ciblée par la gemme doit <b>déjà exister sur l'objet</b>, sinon le sertissage est refusé.</div>
+
+    <p style="color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:.6px;font-size:.72rem;margin:20px 0 10px">Les 4 Gemmes Horadriques</p>
+    <div class="sertis-gems">
+      <div class="sertis-gem g-force">
+        <div class="sg-name">Ombrine Parfaite</div>
+        <div class="sg-stat">Force</div>
+        <div class="sg-bonus"><b>26% à 50%</b> de la Force de l'item</div>
+      </div>
+      <div class="sertis-gem g-agi">
+        <div class="sg-name">Émeraude Parfaite</div>
+        <div class="sg-stat">Agilité</div>
+        <div class="sg-bonus"><b>26% à 50%</b> de l'Agilité de l'item</div>
+      </div>
+      <div class="sertis-gem g-chance">
+        <div class="sg-name">Saphir Parfait</div>
+        <div class="sg-stat">Chance</div>
+        <div class="sg-bonus"><b>26% à 50%</b> de la Chance de l'item</div>
+      </div>
+      <div class="sertis-gem g-intel">
+        <div class="sg-name">Rubis Parfait</div>
+        <div class="sg-stat">Intelligence</div>
+        <div class="sg-bonus"><b>26% à 50%</b> de l'Intelligence de l'item</div>
+      </div>
+    </div>
+
+    <div class="alert alert-success" style="margin-top:16px"><b>Exemple concret :</b> Un objet possède 100 Force. Vous y appliquez une Ombrine Parfaite à 40% → l'objet gagne <b>+40 Force</b> (total : 140). Avec une <a class="ilink" onclick="go('drops')">Étincelle Sublimée</a> → <b>+80 Force</b> garantis, voire <b>+120 Force</b> (10% de chance).</div>
+
+    <p style="color:var(--text-muted);font-size:.85rem;margin-top:14px">Où dropper les gemmes et étincelles ? → <a class="ilink" onclick="go('drops')">Page Drops Rares</a> (onglets <b>Gemmes</b> et <b>Étincelle</b>)</p>
+  </div>
+
+    <p style="color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:.6px;font-size:.72rem;margin:20px 0 10px">Fonctionnement</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title">La gemme indique un pourcentage (26 à 50%)</div>
+          <div class="step-desc">Chaque Gemme Horadrique cible <b>une statistique précise</b> (Force, Agilité, Chance ou Intelligence) et affiche son pourcentage d'apport.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title">Application sur la valeur actuelle</div>
+          <div class="step-desc">Ce pourcentage est appliqué à la <b>valeur actuelle</b> de la statistique correspondante sur l'objet, puis <b>ajouté</b> à celle-ci.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">⚡</div>
+        <div class="step-body">
+          <div class="step-title">Avec une Étincelle Sublimée (optionnel)</div>
+          <div class="step-desc">Le bonus appliqué est <b>doublé</b>, avec en plus <b>10% de chance d'être triplé</b> à la place.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-warning" style="margin-top:18px"><b>Important :</b> La statistique ciblée par la gemme doit <b>déjà exister sur l'objet</b>, sinon le sertissage est refusé.</div>
+
+    <p style="color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:.6px;font-size:.72rem;margin:20px 0 10px">Les 4 Gemmes Horadriques</p>
+    <div class="sertis-gems">
+      <div class="sertis-gem g-force">
+        <div class="sg-name">Ombrine Parfaite</div>
+        <div class="sg-stat">Force</div>
+        <div class="sg-bonus"><b>26% à 50%</b> de la Force de l'item</div>
+      </div>
+      <div class="sertis-gem g-agi">
+        <div class="sg-name">Émeraude Parfaite</div>
+        <div class="sg-stat">Agilité</div>
+        <div class="sg-bonus"><b>26% à 50%</b> de l'Agilité de l'item</div>
+      </div>
+      <div class="sertis-gem g-chance">
+        <div class="sg-name">Saphir Parfait</div>
+        <div class="sg-stat">Chance</div>
+        <div class="sg-bonus"><b>26% à 50%</b> de la Chance de l'item</div>
+      </div>
+      <div class="sertis-gem g-intel">
+        <div class="sg-name">Rubis Parfait</div>
+        <div class="sg-stat">Intelligence</div>
+        <div class="sg-bonus"><b>26% à 50%</b> de l'Intelligence de l'item</div>
+      </div>
+    </div>
+
+    <div class="alert alert-success" style="margin-top:16px"><b>Exemple concret :</b> Un objet possède 100 Force. Vous y appliquez une Ombrine Parfaite à 40% → l'objet gagne <b>+40 Force</b> (total : 140). Avec une Étincelle Sublimée → <b>+80 Force</b> garantis, voire <b>+120 Force</b> (10% de chance).</div>
+
+    <p style="color:var(--text-muted);font-size:.85rem;margin-top:14px">Où dropper les gemmes et étincelles ? → <a class="ilink" onclick="go('drops')">Page Drops Rares</a> (onglets <b>Gemmes</b> et <b>Étincelle</b>)</p>
+  </div>
+
+  <div class="related-bar"><div class="related-lbl">Voir aussi</div><div class="related-links">
+    <div class="rel-link" onclick="go('monnaies')">💰 Monnaies</div>
+    <div class="rel-link" onclick="go('drops')">💎 Drops rares</div>
+    <div class="rel-link" onclick="go('dofus')">💧 Dofus</div>
+  </div></div>
 </div>
 
 <!-- ══ MONNAIES ══ -->
 <div id="monnaies" class="panel">
   <div class="breadcrumb"><a onclick="go('accueil')">Wiki</a><span class="breadcrumb-sep">›</span><span>Monnaies</span></div>
-  <div class="page-header"><h1>Monnaies &amp; Économie</h1><div class="subtitle">Kamas, Pièces d'Or, Orichors, Larmes Éthérées</div></div>
-  <div class="card"><div class="card-title"><span class="ct-icon">💰</span>Kamas</div><p style="color:var(--text-muted);font-size:.9rem">Utilisables pour acheter des parchotages, pierres d'âmes, cosmétiques et sorts spéciaux auprès des PNJ au Zaap d'Astrub.</p></div>
-  <div class="card">
+  <div class="page-header"><h1>Monnaies &amp; Économie</h1><div class="subtitle">Kamas, Pièces d'Or, Orichors, Larmes Éthérées, Reflets Oniriques</div></div>
+  <div class="summary-card">
+    <div class="summary-hd">⚡ En résumé</div>
+    <ul class="summary-list">
+      <li><span class="gl" data-term="Pièces d'Or">Pièces d'Or</span> → <strong><a class="ilink" onclick="go('stuff')">Stuff</a></strong> · <span class="gl" data-term="Orichor">Orichors</span> → <strong><a class="ilink" onclick="go('sorts')">Sorts</a></strong> · <span class="gl" data-term="Larme Éthérée">Larmes</span> → <strong><a class="ilink" onclick="go('dofus')">Dofus</a></strong> · <span class="gl" data-term="Reflet Onirique">Reflets</span> → <strong><a class="ilink" onclick="go('songe')">Songe</a></strong></li>
+      <li>En donjon : <strong>×5 Pièces d'Or</strong> par rapport à la zone ouverte + Orichors par salle selon niveau</li>
+      <li><span class="gl" data-term="Larme Éthérée">Larmes Éthérées</span> obtenues en brisant des Dofus chez <strong>Gislain Scythe</strong> à l'Atelier de Bonta</li>
+    </ul>
+  </div>
+  <div class="toc-wrap" id="toc-monnaies"></div>
+  <div class="card" id="s-monnaies-1" data-s="Kamas">
+    <div class="card-title"><span class="ct-icon">💰</span>Kamas</div>
+    <p style="color:var(--text-muted);font-size:.9rem">Utilisables pour acheter des parchotages, pierres d'âmes, cosmétiques et sorts spéciaux auprès des PNJ au Zaap d'Astrub.</p>
+  </div>
+  <div class="card" id="s-monnaies-2" data-s="Pièces d'Or">
     <div class="card-title"><span class="ct-icon">🪙</span>Pièce d'Or</div>
     <div class="grid">
       <div class="mini-card green-accent"><div class="mini-card-label">Hors donjon</div><div class="mini-card-value"><b>1 pièce</b> par monstre tué.</div></div>
@@ -452,10 +790,10 @@ tr.has-tooltip{cursor:help}
       <div class="mini-card green-accent"><div class="mini-card-label">Utilisation</div><div class="mini-card-value">Acheter des équipements à la <a class="ilink" onclick="go('stuff')">Taverne d'Astrub</a>.</div></div>
     </div>
   </div>
-  <div class="card">
+  <div class="card" id="s-monnaies-3" data-s="Orichors">
     <div class="card-title"><span class="ct-icon">🔮</span>Orichors</div>
     <div class="alert alert-gold" style="margin-bottom:14px"><b>Utilisation :</b> Achat des <a class="ilink" onclick="go('sorts')">Coffres de sorts</a> 101-200.</div>
-    <div class="table-wrap"><table><thead><tr><th>Source</th><th>Gain</th></tr></thead><tbody class="orichor-row">
+    <div class="table-wrap"><table><thead><tr><th>Source</th><th>Gain</th></tr></thead><tbody>
       <tr class="orichor-row"><td>Farm hors donjon</td><td>1% de chance par combat</td></tr>
       <tr class="orichor-row"><td>Donjon niv. 1–50</td><td>1 Orichor / salle</td></tr>
       <tr class="orichor-row"><td>Donjon niv. 51–100</td><td>2 Orichors / salle</td></tr>
@@ -466,73 +804,119 @@ tr.has-tooltip{cursor:help}
       <tr class="orichor-row"><td>Map de Boss en vagues</td><td>Bonus indexé sur le niveau du donjon</td></tr>
     </tbody></table></div>
   </div>
-  <div class="card"><div class="card-title"><span class="ct-icon">💧</span>Larme Éthérée</div><p style="color:var(--text-muted);font-size:.9rem">Obtenues en échangeant vos Dofus auprès du PNJ <b>Gislain Scythe</b> à l'Atelier de Bonta. Utilisées pour l'<a class="ilink" onclick="go('dofus')">Évolution des Dofus</a>.</p></div>
-  <div class="card">
+  <div class="card" id="s-monnaies-4" data-s="Larmes Éthérées">
+    <div class="card-title"><span class="ct-icon">💧</span>Larme Éthérée</div>
+    <p style="color:var(--text-muted);font-size:.9rem">Obtenues en échangeant vos Dofus auprès du PNJ <b>Gislain Scythe</b> à l'Atelier de Bonta. Utilisées pour l'<a class="ilink" onclick="go('dofus')">Évolution des Dofus</a>.</p>
+  </div>
+  <div class="card" id="s-monnaies-5" data-s="Reflets Oniriques">
     <div class="card-title"><span class="ct-icon">🌌</span>Reflet Onirique</div>
-    <div class="alert alert-gold" style="margin-bottom:14px"><b>Utilisation :</b> Achat de passif de familier et/ou objet légendaire sur le PNJ <b>Malice</b> situé sur la map du <a class="ilink" onclick="go('songe')">Songe Infini</a>.</div>
+    <div class="alert alert-gold" style="margin-bottom:14px"><b>Utilisation :</b> Achat de passif de familier et/ou objet légendaire sur le PNJ <b>Malice</b> dans le <a class="ilink" onclick="go('songe')">Songe Infini</a>.</div>
     <p style="color:var(--text-muted);font-size:.9rem">Obtenues en réussissant un étage de <a class="ilink" onclick="go('songe')">Songe Infini</a>.</p>
   </div>
+  <div class="related-bar"><div class="related-lbl">Voir aussi</div><div class="related-links">
+    <div class="rel-link" onclick="go('sorts')">📦 Sorts</div>
+    <div class="rel-link" onclick="go('dofus')">💧 Dofus</div>
+    <div class="rel-link" onclick="go('stuff')">⚙ Stuff</div>
+    <div class="rel-link" onclick="go('songe')">🌀 Songe Infini</div>
+  </div></div>
 </div>
 
 <!-- ══ DROPS ══ -->
 <div id="drops" class="panel">
   <div class="breadcrumb"><a onclick="go('accueil')">Wiki</a><span class="breadcrumb-sep">›</span><span>Drops rares</span></div>
-  <div class="page-header"><h1>Drops Rares</h1><div class="subtitle">Dofus, Artefacts &amp; Cartes — par boss · Survolez un item pour voir ses statistiques</div></div>
+  <div class="page-header"><h1>Drops Rares</h1><div class="subtitle">Dofus, Artefacts, Gemmes &amp; Cartes — Survolez un item pour voir ses statistiques</div></div>
+  <div class="summary-card">
+    <div class="summary-hd">⚡ En résumé</div>
+    <ul class="summary-list">
+      <li><strong>Carte de Boss</strong> : 1% sur tous les boss de donjon</li>
+      <li><strong>Dofus</strong> : 0.1% chacun sur leur boss attitré — survolez pour lire les stats</li>
+      <li><strong>Artefacts</strong> : 0.5%, classés par élément (Terre, Feu, Eau, Air, Multi)</li>
+      <li><strong>Gemmes Horadriques</strong> : 2% sur tous les boss de donjon — pour le <a class="ilink" onclick="go('stuff')">sertissage</a></li>
+      <li><strong>Étincelle Sublimée</strong> : 0.1% sur les archimonstres niveau 50 et plus</li>
+    </ul>
+  </div>
   <div class="drop-search"><input type="text" id="dropSearch" placeholder="Rechercher un item ou un boss..." oninput="filterDrops()"></div>
   <div class="tab-bar" id="dropTabs">
     <button class="tab-btn active" onclick="setDropTab('all',this)">Tous <span class="count-badge" id="cnt-all">0</span></button>
-    <button class="tab-btn" onclick="setDropTab('carte',this)"><span class="elem-badge elem-carte">Carte</span> Cartes</button>
-    <button class="tab-btn" onclick="setDropTab('dofus',this)"><span class="elem-badge elem-dofus">Dofus</span> Dofus</button>
-    <button class="tab-btn" onclick="setDropTab('terre',this)"><span class="elem-badge elem-terre">Terre</span> Artefacts Terre</button>
-    <button class="tab-btn" onclick="setDropTab('feu',this)"><span class="elem-badge elem-feu">Feu</span> Artefacts Feu</button>
-    <button class="tab-btn" onclick="setDropTab('eau',this)"><span class="elem-badge elem-eau">Eau</span> Artefacts Eau</button>
-    <button class="tab-btn" onclick="setDropTab('air',this)"><span class="elem-badge elem-air">Air</span> Artefacts Air</button>
-    <button class="tab-btn" onclick="setDropTab('multi',this)"><span class="elem-badge elem-multi">Multi</span> Artefacts Multi</button>
+    <button class="tab-btn" onclick="setDropTab('carte',this)"><span class="elem-badge elem-carte">Carte</span>Cartes</button>
+    <button class="tab-btn" onclick="setDropTab('dofus',this)"><span class="elem-badge elem-dofus">Dofus</span>Dofus</button>
+    <button class="tab-btn" onclick="setDropTab('terre',this)"><span class="elem-badge elem-terre">Terre</span>Artefacts Terre</button>
+    <button class="tab-btn" onclick="setDropTab('feu',this)"><span class="elem-badge elem-feu">Feu</span>Artefacts Feu</button>
+    <button class="tab-btn" onclick="setDropTab('eau',this)"><span class="elem-badge elem-eau">Eau</span>Artefacts Eau</button>
+    <button class="tab-btn" onclick="setDropTab('air',this)"><span class="elem-badge elem-air">Air</span>Artefacts Air</button>
+    <button class="tab-btn" onclick="setDropTab('multi',this)"><span class="elem-badge elem-multi">Multi</span>Artefacts Multi</button>
+    <button class="tab-btn" onclick="setDropTab('gemme',this)"><span class="elem-badge elem-gemme">Gemme</span>Gemmes Horadriques</button>
+    <button class="tab-btn" onclick="setDropTab('etincelle',this)"><span class="elem-badge elem-etincelle">Étinc.</span>Étincelle Sublimée</button>
   </div>
   <div class="card" style="padding:0;overflow:hidden">
     <div class="table-wrap" style="margin:0">
       <table id="dropTable"><thead><tr><th>Item</th><th>Catégorie</th><th>Boss</th><th>Taux</th></tr></thead><tbody id="dropBody"></tbody></table>
     </div>
-    <div id="noResults" class="no-results" style="display:none">Aucun résultat pour cette recherche.</div>
+    <div id="noResults" class="no-results" style="display:none">Aucun résultat.</div>
   </div>
+  <div class="related-bar"><div class="related-lbl">Voir aussi</div><div class="related-links">
+    <div class="rel-link" onclick="go('dofus')">💧 Évolution Dofus</div>
+    <div class="rel-link" onclick="go('stuff')">⚙ Amélioration du stuff</div>
+  </div></div>
 </div>
 
 <!-- ══ MAÎTRISE ══ -->
 <div id="maitrise" class="panel">
   <div class="breadcrumb"><a onclick="go('accueil')">Wiki</a><span class="breadcrumb-sep">›</span><span>Maîtrise de classe</span></div>
   <div class="page-header"><h1>Maîtrise de Classe</h1><div class="subtitle">Progressez jusqu'au niveau 201 — choisissez votre spécialisation</div></div>
+  <div class="summary-card">
+    <div class="summary-hd">⚡ En résumé</div>
+    <ul class="summary-list">
+      <li>Un bonus tous les <strong>20 niveaux</strong> de 20 à 201, selon votre spécialisation choisie</li>
+      <li><strong>3 maîtrises différentes</strong> basé sur le type principal de la classe choisis : : DPS, Soutien, Tank</li>
+      <li>Progression accélérée via le <a class="ilink" onclick="go('songe')">Songe Infini</a> : <strong>+2% stats tous les 5 étages</strong></li>
+    </ul>
+  </div>
   <div class="card" style="margin-bottom:16px">
     <div class="card-title"><span class="ct-icon">👑</span>Comment ça marche ?</div>
     <div class="grid">
       <div class="mini-card gold-accent"><div class="mini-card-label">Paliers</div><div class="mini-card-value">Un bonus tous les <b>20 niveaux</b>, de 20 à 200.</div></div>
-      <div class="mini-card gold-accent"><div class="mini-card-label">Spécialisation</div><div class="mini-card-value">Choisissez votre type : <b>DPS</b>, <b>Soutien</b> ou <b>Tank</b>. Chaque type a ses propres bonus.</div></div>
-      <div class="mini-card gold-accent"><div class="mini-card-label">Bonus commun niv. 201</div><div class="mini-card-value"><b>+5% Do Mêlée / Distance / Sorts</b> — partagé par les 3 types.</div></div>
-      <div class="mini-card gold-accent"><div class="mini-card-label">Bonus Infini</div><div class="mini-card-value">Gagner 2% dans la force/chance/agilité/intelligence tous les 5 étages réussis en <a class="ilink" onclick="go('songe')">Songe Infini</a>.</div></div>
+      <div class="mini-card gold-accent"><div class="mini-card-label">Spécialisation</div><div class="mini-card-value">Choisissez : <b>DPS</b>, <b>Soutien</b> ou <b>Tank</b>. Chaque type a ses propres bonus.</div></div>
+      <div class="mini-card gold-accent"><div class="mini-card-label">Bonus niv. 201</div><div class="mini-card-value"><b>+5% Do Mêlée / Distance / Sorts</b> — commun aux 3 types.</div></div>
+      <div class="mini-card gold-accent"><div class="mini-card-label">Bonus Infini</div><div class="mini-card-value"><b>+2%</b> Force/Chance/Agi/Intel tous les 5 étages du <a class="ilink" onclick="go('songe')">Songe Infini</a>.</div></div>
     </div>
   </div>
-  <div class="alert alert-info">Chaque type possède ses propres avantages, faites les bons choix !</div>
+  <div class="alert alert-info">Chaque type possède ses propres avantages — faites les bons choix !</div>
   <div class="tab-bar" id="maitriseTabBar">
     <button class="tab-btn active" onclick="setMaitriseType('dps',this)">⚔ DPS</button>
     <button class="tab-btn" onclick="setMaitriseType('soutien',this)">💚 Soutien</button>
     <button class="tab-btn" onclick="setMaitriseType('tank',this)">🛡 Tank</button>
   </div>
   <div id="maitriseGrid" class="maitrise-grid"></div>
+  <div class="related-bar"><div class="related-lbl">Voir aussi</div><div class="related-links">
+    <div class="rel-link" onclick="go('songe')">🌀 Songe Infini</div>
+    <div class="rel-link" onclick="go('drops')">💎 Drops rares</div>
+  </div></div>
 </div>
 
 <!-- ══ DOFUS ══ -->
 <div id="dofus" class="panel">
   <div class="breadcrumb"><a onclick="go('accueil')">Wiki</a><span class="breadcrumb-sep">›</span><span>Évolution Dofus</span></div>
   <div class="page-header"><h1>Évolution des Dofus</h1><div class="subtitle">Recyclage et amélioration via les Larmes Éthérées</div></div>
-  <div class="card">
+  <div class="summary-card">
+    <div class="summary-hd">⚡ En résumé</div>
+    <ul class="summary-list">
+      <li>Droppables sur des boss spécifiques à <strong>0.1%</strong> — voir la <a class="ilink" onclick="go('drops')">page Drops Rares</a></li>
+      <li>Brisez vos Dofus → <strong><span class="gl" data-term="Larme Éthérée">Larmes Éthérées</span></strong> → évolution chez Thalyion à l'Atelier de Bonta</li>
+      <li><strong>3 rangs</strong> : Original (jet 1.29) → Rare (jet 2.51) → Mythique</li>
+    </ul>
+  </div>
+  <div class="toc-wrap" id="toc-dofus"></div>
+  <div class="card" id="s-dofus-1" data-s="Recyclage">
     <div class="card-title"><span class="ct-icon">♻</span>Recyclage — PNJ Gislain Scythe (Atelier de Bonta)</div>
     <div class="alert alert-warning">Un Dofus obtenu via un <b>succès</b> ne peut pas être brisé dans ce système.</div>
     <div class="grid" style="margin-top:10px">
-      <div class="mini-card gold-accent"><div class="mini-card-label">Dofus classique</div><div class="mini-card-value"><b>3 Larmes</b> par Dofus brisé.</div></div>
-      <div class="mini-card gold-accent"><div class="mini-card-label">Dofaléa</div><div class="mini-card-value"><b>5 Larmes</b> par Dofaléa brisé.</div></div>
+      <div class="mini-card gold-accent"><div class="mini-card-label">Dofus classique</div><div class="mini-card-value"><b>3 <span class="gl" data-term="Larme Éthérée">Larmes</span></b> par Dofus brisé.</div></div>
+      <div class="mini-card gold-accent"><div class="mini-card-label">Dofaléa</div><div class="mini-card-value"><b>5 <span class="gl" data-term="Larme Éthérée">Larmes</span></b> par Dofaléa brisé.</div></div>
     </div>
-    <p style="color:var(--text-muted);font-size:.85rem;margin-top:12px">Limite : <b>1 seul dofus</b> par échange pour la conversion en <a class="ilink" onclick="go('monnaies')">Larme Éthérée</a>.</p>
+    <p style="color:var(--text-muted);font-size:.85rem;margin-top:12px">Limite : <b>1 seul dofus</b> par échange.</p>
   </div>
-  <div class="card">
+  <div class="card" id="s-dofus-2" data-s="Évolution">
     <div class="card-title"><span class="ct-icon">⬆</span>Évolution — PNJ Thalyion (Atelier de Bonta)</div>
     <div class="table-wrap"><table><thead><tr><th>Rang</th><th>Coût</th><th>Jets obtenus</th></tr></thead><tbody>
       <tr><td><b>Original</b> <span style="color:var(--text-muted);font-size:.8rem">(base)</span></td><td><span style="color:var(--text-muted)">Aucun craft</span></td><td>Jet 1.29</td></tr>
@@ -542,248 +926,145 @@ tr.has-tooltip{cursor:help}
     <div class="divider"></div>
     <p style="font-size:.85rem;color:var(--text-muted)">Sur qui je drop mes dofus ? → <a class="ilink" onclick="go('drops')">Drops Rares</a></p>
   </div>
+  <div class="related-bar"><div class="related-lbl">Voir aussi</div><div class="related-links">
+    <div class="rel-link" onclick="go('drops')">💎 Drops rares</div>
+    <div class="rel-link" onclick="go('monnaies')">💰 Monnaies</div>
+  </div></div>
 </div>
 
 </main>
 
 <script>
+/* ══ GLOSSAIRE ══ */
+const GLOSSARY = {
+  'Artefact':      'Objet passif unique lié à votre classe, conférant un bonus permanent en combat.',
+  'Orichor':       'Monnaie obtenue en donjon (ou rarement en zone), utilisée pour acheter les Coffres de sorts 101-200.',
+  'Prospection':   'Augmente vos chances de drop d\'objets sur les monstres vaincus.',
+  'Overmax':       'Stats dépassant le maximum naturel d\'un item — jusqu\'à +50% possible en forgemagie.',
+  'Exo':           'Rune ajoutant PA, PM ou PO à un item via forgemagie. Taux de réussite 100% sur ce serveur.',
+  'Forgemagie':    'Système permettant de modifier les statistiques d\'un équipement via des runes.',
+  'Larme Éthérée': 'Obtenue en brisant des Dofus chez Gislain Scythe — sert à l\'évolution des Dofus.',
+  'Reflet Onirique':'Monnaie du Songe Infini, échangeable contre des familiers et objets légendaires chez le PNJ Malice.',
+  'PvM':           'Player versus Monster : combats contre des ennemis contrôlés par le jeu (non-PvP).',
+  'Jet parfait':   'Item dont toutes les statistiques sont au maximum possible lors de l\'achat.',
+  'Pièces d\'Or':  'Monnaie principale : 1 par monstre tué hors donjon, ×5 en donjon. Sert à acheter l\'équipement à la Taverne.',
+  'Coffres de sorts':'Coffres achetés avec des Orichors à la Milice d\'Astrub, débloquant d\'un coup tous les sorts 101-150 ou 151-200.',
+};
+const glTip=document.getElementById('glTip'),glTitle=document.getElementById('glTipTitle'),glBody=document.getElementById('glTipBody');
+document.addEventListener('mouseover',e=>{
+  const g=e.target.closest('.gl');
+  if(!g){glTip.classList.remove('show');return;}
+  const t=g.dataset.term||g.textContent;
+  const def=GLOSSARY[t];
+  if(!def){glTip.classList.remove('show');return;}
+  glTitle.textContent=t;glBody.textContent=def;
+  glTip.classList.add('show');
+});
+document.addEventListener('mousemove',e=>{
+  if(!glTip.classList.contains('show'))return;
+  const x=e.clientX+14,y=e.clientY-54;
+  glTip.style.left=Math.min(x,window.innerWidth-glTip.offsetWidth-8)+'px';
+  glTip.style.top=Math.max(y,8)+'px';
+});
+document.addEventListener('mouseout',e=>{if(!e.relatedTarget||!e.relatedTarget.closest('.gl'))glTip.classList.remove('show');});
+
+/* ══ SCROLL UTILITIES ══ */
+window.addEventListener('scroll',()=>{
+  const s=window.scrollY,m=document.documentElement.scrollHeight-window.innerHeight;
+  document.getElementById('scrollBar').style.width=(m>0?Math.min(s/m*100,100):0)+'%';
+  document.getElementById('backTop').classList.toggle('show',s>300);
+},{passive:true});
+
+/* ══ TOC ══ */
+function buildToc(panelId){
+  const panel=document.getElementById(panelId);
+  if(!panel)return;
+  const wrap=panel.querySelector('.toc-wrap');
+  if(!wrap)return;
+  const items=panel.querySelectorAll('[data-s]');
+  if(items.length<2){wrap.style.display='none';return;}
+  wrap.style.display='';
+  wrap.innerHTML='<span class="toc-lbl">Sur cette page</span>'+
+    Array.from(items).map(el=>`<button class="toc-btn" onclick="goToSection('${el.id}')">${el.dataset.s}</button>`).join('');
+}
+function goToSection(id){
+  const el=document.getElementById(id);
+  if(el){window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-90,behavior:'smooth'});}
+}
+
 /* ══ FAQ ══ */
-const FAQ_CATS = [
-  {id:'all',     label:'Tout voir',    icon:'📋'},
-  {id:'depart',  label:'Débuter',      icon:'🚀'},
-  {id:'stuff',   label:'Équipement',   icon:'⚙'},
-  {id:'sorts',   label:'Sorts',        icon:'📦'},
-  {id:'monnaie', label:'Monnaies',     icon:'💰'},
-  {id:'ombre',   label:'Mode Ombre',   icon:'💀'},
-  {id:'maitrise',label:'Maîtrise',     icon:'👑'},
-  {id:'dofus',   label:'Dofus',        icon:'💧'},
-  {id:'songe',   label:'Songe Infini', icon:'🌀'},
+const FAQ_CATS=[
+  {id:'all',label:'Tout voir',icon:'📋'},{id:'depart',label:'Débuter',icon:'🚀'},
+  {id:'stuff',label:'Équipement',icon:'⚙'},{id:'sertis',label:'Sertissage',icon:'💎'},
+  {id:'sorts',label:'Sorts',icon:'📦'},
+  {id:'monnaie',label:'Monnaies',icon:'💰'},{id:'ombre',label:'Mode Ombre',icon:'💀'},
+  {id:'maitrise',label:'Maîtrise',icon:'👑'},{id:'dofus',label:'Dofus',icon:'💧'},
+  {id:'songe',label:'Songe Infini',icon:'🌀'},
 ];
-
-const FAQ = [
-  // ── DÉBUTER
-  {cat:'depart', q:"Le serveur est-il vraiment gratuit ?",
-   a:`<p>Oui, Pov'Typus est <strong>100% FreeToWin</strong>. Aucun avantage ne s'achète avec de l'argent réel. Tout contenu est accessible uniquement via le jeu.</p>`},
-
-  {cat:'depart', q:"Combien de comptes dois-je jouer ?",
-   a:`<p>Le serveur est <strong>orienté duo minimum</strong>. Jouer un seul personnage est fortement déconseillé car le contenu est conçu pour être fait à plusieurs.</p>
-   <div class="faq-tip">💡 Utilisez la commande <span class="cmd">.groupe</span> pour inviter automatiquement votre compte secondaire avec l'ipdrop et l'autofollow activés. Toutes les commandes sont listées dans la <a class="ilink" onclick="go('cmds')">page Commandes</a>.</div>`},
-
-  {cat:'depart', q:"Que reçoit-on à la création du personnage ?",
-   a:`<ul>
-     <li>La <strong>Panoplie Aventurier</strong> complète</li>
-     <li>Un <strong>familier Sagesse</strong> et un familier dommages</li>
-     <li>Votre <strong><a class="ilink" onclick="go('passifs')">Artefact de classe</a></strong> (passif unique)</li>
-     <li><strong>200 Prospection</strong> de base dès le départ</li>
-   </ul>
-   <div class="faq-tip">💡 Pensez aussi à faire le tour d'Incarnam pour le succès Exploration, très utile en début de progression.</div>`},
-
-  {cat:'depart', q:"Comment choisir ma classe ?",
-   a:`<p>Chaque classe possède un <strong>Artefact passif unique</strong> qui modifie fondamentalement son style de jeu. Consultez la <a class="ilink" onclick="go('passifs')">page des Passifs</a> avant de créer votre personnage.</p>
-   <div class="faq-highlight">⭐ 3 sorts par classe reçoivent également des modifications uniques — renseignez-vous sur le Discord.</div>`},
-
-  {cat:'depart', q:"Où trouver les clefs de donjon ?",
-   a:`<p>Les clefs de donjon se drop <strong>dans la zone de leur donjon</strong>. Utilisez la commande <span class="cmd">.drop</span> une fois dans la zone pour voir la liste des <a class="ilink" onclick="go('drops')">drops disponibles</a> et leur provenance.</p>`},
-
-  {cat:'depart', q:"Je suis bloqué sur la map, que faire ?",
-   a:`<p>Utilisez la commande <span class="cmd">.bug</span> pour vous téléporter automatiquement vers la cellule accessible la plus proche. Toutes les commandes utiles sont listées dans la <a class="ilink" onclick="go('cmds')">page Commandes</a>.</p>`},
-
-  // ── ÉQUIPEMENT
-  {cat:'stuff', q:"Où acheter mon équipement ?",
-   a:`<p>Tous les équipements s'achètent à la <strong>Taverne d'Astrub</strong> avec des <a class="ilink" onclick="go('monnaies')">Pièces d'Or</a>. Les items sont directement livrés en <strong>jet parfait</strong>. Voir la page <a class="ilink" onclick="go('stuff')">Équipement &amp; Amélioration</a> pour tous les détails.</p>`},
-
-  {cat:'stuff', q:"Les exos PA / PM / PO sont-ils garantis ?",
-   a:`<p>Oui ! Les runes <strong>PA, PM et PO</strong> ont un taux de réussite de <strong>100%</strong> en <a class="ilink" onclick="go('stuff')">forgemagie</a>. Fini les sueurs froides devant l'enclume.</p>`},
-
-  {cat:'stuff', q:"Quelles sont les limites de forgemagie ?",
-   a:`<ul>
-     <li>Les objets supportent jusqu'à <strong>+50%</strong> au-dessus de leurs stats maximum (overmax naturel)</li>
-     <li>Des plafonds absolus existent : ex. <strong>504 Vitalité</strong>, <strong>101 Force</strong></li>
-     <li>Pour les items <strong>niveau 190+</strong>, les limites absolues sont augmentées de <strong>+20%</strong></li>
-   </ul>
-   <div class="faq-tip">💡 Le détail complet est disponible sur la page <a class="ilink" onclick="go('stuff')">Équipement &amp; Amélioration</a>.</div>`},
-
-  {cat:'stuff', q:"Comment fonctionne le boost Tavernier Feubuk ?",
-   a:`<ul>
-     <li>Rassemblez <strong>3 exemplaires identiques</strong> du même item (10 pour familier/montilier)</li>
-     <li>Placez l'item à booster <strong>en première position</strong> dans l'échange avec le Tavernier Feubuk</li>
-     <li>Résultat : <strong>+10%</strong> permanent sur toutes les stats (ou <strong>+25%</strong> pour familier/montilier)</li>
-   </ul>
-   <div class="faq-warn">⚠ Une fois boosté, l'item <strong>ne peut plus être forgemagé</strong>. Terminez toujours votre <a class="ilink" onclick="go('stuff')">forgemagie</a> avant le boost !</div>`},
-
-  // ── SORTS
-  {cat:'sorts', q:"Comment apprendre mes sorts au-delà du niveau 100 ?",
-   a:`<p>Les sorts 1–100 s'apprennent classiquement en jeu. Pour les sorts <strong>101 à 200</strong>, achetez des <a class="ilink" onclick="go('sorts')">Coffres de sorts</a> auprès du PNJ à la <strong>Milice d'Astrub</strong> contre des <a class="ilink" onclick="go('monnaies')">Orichors</a>.</p>
-   <ul>
-     <li>Coffre 101–150 : <strong>600 <a class="ilink" onclick="go('monnaies')">Orichors</a></strong></li>
-     <li>Coffre 151–200 : <strong>1 200 <a class="ilink" onclick="go('monnaies')">Orichors</a></strong></li>
-   </ul>
-   <div class="faq-tip">💡 Chaque <a class="ilink" onclick="go('sorts')">coffre</a> débloque <strong>tous les sorts</strong> de sa tranche d'un seul coup.</div>`},
-
-  {cat:'sorts', q:"Comment obtenir des Orichors pour les coffres de sorts ?",
-   a:`<p>Les <a class="ilink" onclick="go('monnaies')">Orichors</a> s'obtiennent de plusieurs façons :</p>
-   <ul>
-     <li>Farm hors donjon : <strong>1% de chance</strong> par combat</li>
-     <li>En donjon selon le niveau : <strong>1 à 4 Orichors</strong> par salle</li>
-     <li>Donjon à vagues : bonus de <strong>+10 Orichors</strong></li>
-     <li>Antre Pov'Typus : bonus supplémentaire par salle</li>
-   </ul>
-   <div class="faq-tip">💡 Le tableau complet des gains est disponible dans la <a class="ilink" onclick="go('monnaies')">section Monnaies</a>.</div>`},
-
-  // ── MONNAIES
-  {cat:'monnaie', q:"Quelles sont les monnaies du serveur ?",
-   a:`<ul>
-     <li>🪙 <strong><a class="ilink" onclick="go('monnaies')">Pièces d'Or</a></strong> — pour acheter l'équipement à la <a class="ilink" onclick="go('stuff')">Taverne d'Astrub</a> (1 par monstre, ×5 en donjon)</li>
-     <li>🔮 <strong><a class="ilink" onclick="go('monnaies')">Orichors</a></strong> — pour les <a class="ilink" onclick="go('sorts')">Coffres de sorts</a> 101-200</li>
-     <li>💧 <strong><a class="ilink" onclick="go('monnaies')">Larmes Éthérées</a></strong> — pour l'<a class="ilink" onclick="go('dofus')">évolution des Dofus</a></li>
-     <li>🌌 <strong><a class="ilink" onclick="go('monnaies')">Reflets Oniriques</a></strong> — récompenses du <a class="ilink" onclick="go('songe')">Songe Infini</a> (familiers, objets légendaires)</li>
-     <li>💰 <strong>Kamas</strong> — parchotages, pierres d'âmes, cosmétiques</li>
-   </ul>`},
-
-  {cat:'monnaie', q:"Vaut-il mieux farmer en zone ou en donjon pour les Pièces d'Or ?",
-   a:`<p>Le donjon est clairement plus rentable : les <a class="ilink" onclick="go('monnaies')">Pièces d'Or</a> y tombent à un taux <strong>×5</strong> par rapport au farm en zone ouverte. Sans compter les <a class="ilink" onclick="go('monnaies')">Orichors</a> supplémentaires par salle.</p>`},
-
-  {cat:'monnaie', q:"Comment obtenir des Larmes Éthérées ?",
-   a:`<p>Apportez vos <a class="ilink" onclick="go('drops')">Dofus</a> au PNJ <strong>Gislain Scythe</strong> à l'Atelier de Bonta :</p>
-   <ul>
-     <li>Dofus classique brisé → <strong>3 <a class="ilink" onclick="go('monnaies')">Larmes</a></strong></li>
-     <li>Dofaléa brisé → <strong>5 <a class="ilink" onclick="go('monnaies')">Larmes</a></strong></li>
-   </ul>
-   <div class="faq-warn">⚠ Limite de <strong>1 dofus par échange</strong>. Les dofus obtenus par succès ne peuvent pas être brisés. Consultez la page <a class="ilink" onclick="go('dofus')">Évolution des Dofus</a> pour les détails.</div>`},
-
-  // ── MODE OMBRE
-  {cat:'ombre', q:"C'est quoi le mode Ombre ?",
-   a:`<p>Le <a class="ilink" onclick="go('ombre')">mode Ombre</a> active la <strong>mort permanente en PvM</strong>. Si votre personnage est vaincu, il repart au niveau 1 avec l'inventaire vide (hors objets de départ).</p>
-   <div class="faq-highlight">⭐ En contrepartie, vous bénéficiez d'un bonus <strong>×3</strong> sur l'expérience ET le drop.</div>`},
-
-  {cat:'ombre', q:"Jusqu'à quel niveau peut-on activer le mode Ombre ?",
-   a:`<p>Le <a class="ilink" onclick="go('ombre')">mode Ombre</a> n'est activable que si votre personnage est au <strong>maximum niveau 20</strong>. Parlez au <strong>Pactisant des Ténèbres</strong> sur la map de départ (accessible via <span class="cmd">.start</span>).</p>`},
-
-  {cat:'ombre', q:"Que se passe-t-il si je meurs en mode Ombre ?",
-   a:`<ul>
-     <li>Retour au <strong>niveau 1</strong></li>
-     <li>Inventaire <strong>entièrement vidé</strong> (sauf les objets donnés au départ)</li>
-     <li>L'expérience reste <strong>×3 jusqu'au plus haut niveau atteint</strong> (toutes morts confondues)</li>
-     <li>Les <strong>succès ne sont pas reset</strong></li>
-   </ul>
-   <div class="faq-tip">💡 Tous les détails sur la page <a class="ilink" onclick="go('ombre')">Mode Ombre</a>.</div>`},
-
-  {cat:'ombre', q:"Le mode Ombre est-il actif dans le Songe Infini ?",
-   a:`<p><strong>Non.</strong> Le <a class="ilink" onclick="go('ombre')">mode Ombre</a> est désactivé dans le <a class="ilink" onclick="go('songe')">Songe Infini</a>. En cas de défaite ou d'abandon, vous ne perdez ni votre personnage ni votre progression dans les étages.</p>`},
-
-  {cat:'ombre', q:"Peut-on utiliser .retry en mode Ombre ?",
-   a:`<p><strong>Non.</strong> La commande <span class="cmd">.retry</span> est interdite en <a class="ilink" onclick="go('ombre')">mode Ombre</a>. De plus, tout abandon de combat est considéré comme une défaite. Consultez la <a class="ilink" onclick="go('cmds')">liste des commandes</a> pour les autres options disponibles.</p>`},
-
-  // ── MAÎTRISE
-  {cat:'maitrise', q:"C'est quoi la Maîtrise de classe ?",
-   a:`<p>La <a class="ilink" onclick="go('maitrise')">Maîtrise</a> est un système de progression offrant des <strong>bonus permanents puissants</strong> tous les 20 niveaux, de 20 à 201. Elle se divise en 3 spécialisations : <strong>DPS</strong>, <strong>Soutien</strong> ou <strong>Tank</strong>, chacune avec ses propres avantages.</p>`},
-
-  {cat:'maitrise', q:"Comment progresser en Maîtrise ?",
-   a:`<ul>
-     <li>En <strong>leveling classique</strong> : un palier de <a class="ilink" onclick="go('maitrise')">Maîtrise</a> tous les 20 niveaux</li>
-     <li>Via le <a class="ilink" onclick="go('songe')">Songe Infini</a> : un palier de <a class="ilink" onclick="go('maitrise')">Maîtrise</a> tous les 5 étages vaincus</li>
-   </ul>
-   <div class="faq-tip">💡 Le <a class="ilink" onclick="go('songe')">Songe Infini</a> est le moyen le plus rapide de progresser en <a class="ilink" onclick="go('maitrise')">Maîtrise</a> au-delà du niveau 200.</div>`},
-
-  {cat:'maitrise', q:"Quel est le bonus au niveau 201 ?",
-   a:`<p>Le niveau 201 est le <strong>palier ultime</strong> de la <a class="ilink" onclick="go('maitrise')">Maîtrise</a>, commun aux 3 spécialisations : <strong>+5% de dommages Mêlée, Distance et Sorts</strong>.</p>
-   <div class="faq-highlight">⭐ De plus, chaque tranche de 5 étages réussis en <a class="ilink" onclick="go('songe')">Songe Infini</a> donne <strong>+2%</strong> dans toutes les caractéristiques élémentaires.</div>`},
-
-  // ── DOFUS
-  {cat:'dofus', q:"Comment améliorer mes Dofus ?",
-   a:`<p>Le système d'<a class="ilink" onclick="go('dofus')">évolution des Dofus</a> se fait à l'<strong>Atelier de Bonta</strong> :</p>
-   <ul>
-     <li>Brisez vos Dofus chez <strong>Gislain Scythe</strong> pour obtenir des <a class="ilink" onclick="go('monnaies')">Larmes Éthérées</a></li>
-     <li>Utilisez ces Larmes chez <strong>Thalyion</strong> pour upgrader un Dofus</li>
-   </ul>
-   <ul>
-     <li>Original → Rare : 15 <a class="ilink" onclick="go('monnaies')">Larmes</a> + Dofus Original (Jet passe à 2.51)</li>
-     <li>Rare → Mythique : 15 <a class="ilink" onclick="go('monnaies')">Larmes</a> + Dofus Rare</li>
-   </ul>`},
-
-  {cat:'dofus', q:"Où dropper les Dofus ?",
-   a:`<p>Chaque Dofus est droppable sur un boss spécifique au taux de <strong>0.1%</strong>. Consultez la <a class="ilink" onclick="go('drops')">page des Drops Rares</a> (onglet Dofus) pour la liste complète avec les stats de chaque Dofus.</p>`},
-
-  // ── SONGE INFINI
-  {cat:'songe', q:"Comment accéder au Songe Infini ?",
-   a:`<p>Appuyez sur la touche <strong>T</strong> de votre clavier puis parlez au PNJ <strong>L'Ultime Défi</strong> pour lancer un combat. Tous les détails sur la page <a class="ilink" onclick="go('songe')">Songe Infini</a>.</p>
-   <div class="faq-warn">⚠ Niveau <strong>100 minimum</strong> recommandé. L'accès est possible plus tôt mais la difficulté sera bien plus élevée.</div>`},
-
-  {cat:'songe', q:"Quelles sont les récompenses du Songe Infini ?",
-   a:`<ul>
-     <li>Des <a class="ilink" onclick="go('monnaies')">Reflets Oniriques</a> à chaque étage réussi (échangeables contre des familiers et objets légendaires chez le PNJ <strong>Malice</strong>)</li>
-     <li>Un palier de <a class="ilink" onclick="go('maitrise')">Maîtrise</a> tous les 5 étages vaincus</li>
-     <li>Gain de <strong>+2%</strong> en Force/Chance/Agilité/Intelligence tous les 5 étages (bonus <a class="ilink" onclick="go('maitrise')">Maîtrise Infinie</a>)</li>
-   </ul>`},
-
-  {cat:'songe', q:"Y a-t-il une limite d'étages ?",
-   a:`<p><strong>Non</strong>, il n'y a pas de limite dans le <a class="ilink" onclick="go('songe')">Songe Infini</a>. La difficulté augmente progressivement à l'infini. À vous de repousser vos limites !</p>`},
+const FAQ=[
+  {cat:'depart',q:"Le serveur est-il vraiment gratuit ?",a:`<p>Oui, Pov'Typus est <strong>100% FreeToWin</strong>. Aucun avantage ne s'achète avec de l'argent réel. Tout contenu est accessible uniquement via le jeu.</p>`},
+  {cat:'depart',q:"Combien de comptes dois-je jouer ?",a:`<p>Le serveur est <strong>orienté duo minimum</strong>. Jouer un seul personnage est fortement déconseillé.</p><div class="faq-tip">💡 Utilisez <span class="cmd">.groupe</span> pour inviter automatiquement votre compte secondaire avec l'ipdrop et l'autofollow activés.</div>`},
+  {cat:'depart',q:"Que reçoit-on à la création du personnage ?",a:`<ul><li>La <strong>Panoplie Aventurier</strong> complète</li><li>Un <strong>familier Sagesse</strong><li>Votre <strong><a class="ilink" onclick="go('passifs')">Artefact de classe</a></strong> (passif unique)</li><li><strong>200 Prospection</strong> de base dès le départ</li></ul><div class="faq-tip">💡 Pensez à faire le tour d'Incarnam pour le succès Exploration.</div>`},
+  {cat:'depart',q:"Comment choisir ma classe ?",a:`<p>Chaque classe possède un <strong>Artefact passif unique</strong>. Consultez la <a class="ilink" onclick="go('passifs')">page des Passifs</a> avant de créer votre personnage.</p><div class="faq-highlight">⭐ 3 sorts par classe reçoivent également des modifications uniques — renseignez-vous sur le Discord.</div>`},
+  {cat:'depart',q:"Où trouver les clefs de donjon ?",a:`<p>Les clefs se drop <strong>dans la zone de leur donjon</strong>. Utilisez <span class="cmd">.drop</span> pour voir la liste des <a class="ilink" onclick="go('drops')">drops disponibles</a>.</p>`},
+  {cat:'depart',q:"Je suis bloqué sur la map, que faire ?",a:`<p>Utilisez <span class="cmd">.bug</span> pour vous téléporter vers la cellule la plus proche. Toutes les commandes sont dans la <a class="ilink" onclick="go('cmds')">page Commandes</a>.</p>`},
+  {cat:'stuff',q:"Où acheter mon équipement ?",a:`<p>À la <strong>Taverne d'Astrub</strong> avec des <a class="ilink" onclick="go('monnaies')">Pièces d'Or</a>. Les items sont livrés en <strong>jet parfait</strong>. Voir <a class="ilink" onclick="go('stuff')">Équipement &amp; Amélioration</a>.</p>`},
+  {cat:'stuff',q:"Les exos PA / PM / PO sont-ils garantis ?",a:`<p>Oui ! Les runes <strong>PA, PM et PO</strong> ont un taux de réussite de <strong>100%</strong> en <a class="ilink" onclick="go('stuff')">forgemagie</a>.</p>`},
+  {cat:'stuff',q:"Quelles sont les limites de forgemagie ?",a:`<ul><li>Overmax jusqu'à <strong>+50%</strong> au-dessus des stats maximum</li><li>Plafonds absolus : ex. <strong>504 Vitalité</strong>, <strong>101 Force</strong></li><li>Items <strong>niveau 190+</strong> : limites augmentées de <strong>+20%</strong></li></ul><div class="faq-tip">💡 Détails sur <a class="ilink" onclick="go('stuff')">Équipement &amp; Amélioration</a>.</div>`},
+  {cat:'stuff',q:"Comment fonctionne le boost Tavernier Feubuk ?",a:`<ul><li>Rassemblez <strong>3 exemplaires identiques</strong> (10 pour familier/montilier)</li><li>Placez l'item à booster <strong>en première position</strong> dans l'échange</li><li>Résultat : <strong>+10%</strong> permanent (ou <strong>+25%</strong> pour familier/montilier)</li></ul><div class="faq-warn">⚠ Une fois boosté, l'item <strong>ne peut plus être forgemagé</strong>. Finalisez votre <a class="ilink" onclick="go('stuff')">FM</a> avant !</div>`},
+  {cat:'sertis',q:"C'est quoi le sertissage ?",a:`<p>Le <a class="ilink" onclick="go('stuff')">sertissage</a> permet d'<strong>amplifier une statistique déjà présente</strong> sur un équipement grâce à une <strong>Gemme Horadrique</strong>, en y ajoutant un pourcentage (26% à 50%) de la valeur actuelle de cette stat.</p><div class="faq-tip">💡 Avec une Étincelle Sublimée, le bonus est doublé (avec 10% de chance d'être triplé !).</div>`},
+  {cat:'sertis',q:"Quels sont les prérequis pour sertir ?",a:`<ul><li>L'objet doit <strong>obligatoirement</strong> avoir reçu le <a class="ilink" onclick="go('stuff')">boost du Tavernier Feubuk</a>.</li><li>Une <strong>Gemme Horadrique</strong> du type correspondant à la stat à booster.</li><li>Optionnel : une <strong>Étincelle Sublimée</strong> pour amplifier le bonus.</li></ul><div class="faq-warn">⚠ La statistique ciblée par la gemme doit déjà exister sur l'objet, sinon le sertissage est refusé.</div>`},
+  {cat:'sertis',q:"Quelles sont les 4 Gemmes Horadriques ?",a:`<ul><li><strong>Ombrine Parfaite</strong> → Force</li><li><strong>Émeraude Parfaite</strong> → Agilité</li><li><strong>Saphir Parfait</strong> → Chance</li><li><strong>Rubis Parfait</strong> → Intelligence</li></ul><p>Chaque gemme apporte entre <strong>26% et 50%</strong> de la stat correspondante de l'item.</p>`},
+  {cat:'sertis',q:"Où dropper les gemmes et l'étincelle ?",a:`<ul><li><strong>Gemmes Horadriques</strong> : 2% de drop sur <strong>tous les boss de donjon</strong></li><li><strong>Étincelle Sublimée</strong> : 0.1% sur les <strong>archimonstres niveau 50 et plus</strong></li></ul><div class="faq-tip">💡 Voir la <a class="ilink" onclick="go('drops')">page Drops Rares</a> (onglets Gemmes / Étincelle).</div>`},
+  {cat:'sertis',q:"À quoi sert l'Étincelle Sublimée exactement ?",a:`<p>Placée dans le 3ème slot lors du sertissage, elle <strong>double automatiquement le bonus</strong> apporté par la Gemme Horadrique.</p><div class="faq-highlight">⭐ De plus, il y a <strong>10% de chance</strong> que le bonus soit <strong>triplé</strong> à la place !</div><p>Exemple : un bonus de +40 Force devient +80 garantis, voire +120 (chance sur 10).</p>`},
+  {cat:'sorts',q:"Comment apprendre mes sorts au-delà du niveau 100 ?",a:`<p>Achetez des <a class="ilink" onclick="go('sorts')">Coffres de sorts</a> à la Milice d'Astrub contre des <a class="ilink" onclick="go('monnaies')">Orichors</a>.</p><ul><li>Coffre 101–150 : <strong>600 Orichors</strong></li><li>Coffre 151–200 : <strong>1 200 Orichors</strong></li></ul><div class="faq-tip">💡 Chaque coffre débloque <strong>tous les sorts</strong> de sa tranche d'un coup.</div>`},
+  {cat:'sorts',q:"Comment obtenir des Orichors ?",a:`<p>Les <a class="ilink" onclick="go('monnaies')">Orichors</a> s'obtiennent :</p><ul><li>Farm hors donjon : <strong>1% de chance</strong> par combat</li><li>En donjon selon le niveau : <strong>1 à 4 Orichors</strong> par salle</li><li>Donjon à vagues : <strong>+10 Orichors</strong> bonus</li></ul><div class="faq-tip">💡 Tableau complet dans la <a class="ilink" onclick="go('monnaies')">section Monnaies</a>.</div>`},
+  {cat:'monnaie',q:"Quelles sont les monnaies du serveur ?",a:`<ul><li>🪙 <strong><a class="ilink" onclick="go('monnaies')">Pièces d'Or</a></strong> — équipement à la <a class="ilink" onclick="go('stuff')">Taverne</a></li><li>🔮 <strong><a class="ilink" onclick="go('monnaies')">Orichors</a></strong> — <a class="ilink" onclick="go('sorts')">Coffres de sorts</a> 101-200</li><li>💧 <strong><a class="ilink" onclick="go('monnaies')">Larmes Éthérées</a></strong> — <a class="ilink" onclick="go('dofus')">évolution des Dofus</a></li><li>🌌 <strong><a class="ilink" onclick="go('monnaies')">Reflets Oniriques</a></strong> — récompenses du <a class="ilink" onclick="go('songe')">Songe Infini</a></li><li>💰 <strong>Kamas</strong> — parchotages, cosmétiques, sorts spéciaux</li></ul>`},
+  {cat:'monnaie',q:"Vaut-il mieux farmer en zone ou en donjon ?",a:`<p>Le donjon est bien plus rentable : <a class="ilink" onclick="go('monnaies')">Pièces d'Or</a> ×5 et <a class="ilink" onclick="go('monnaies')">Orichors</a> à chaque salle.</p>`},
+  {cat:'monnaie',q:"Comment obtenir des Larmes Éthérées ?",a:`<p>Brisez vos <a class="ilink" onclick="go('drops')">Dofus</a> chez <strong>Gislain Scythe</strong> à l'Atelier de Bonta :</p><ul><li>Dofus classique → <strong>3 <a class="ilink" onclick="go('monnaies')">Larmes</a></strong></li><li>Dofaléa → <strong>5 <a class="ilink" onclick="go('monnaies')">Larmes</a></strong></li></ul><div class="faq-warn">⚠ 1 dofus max par échange. Les dofus obtenus par succès ne peuvent pas être brisés.</div>`},
+  {cat:'ombre',q:"C'est quoi le mode Ombre ?",a:`<p>Le <a class="ilink" onclick="go('ombre')">mode Ombre</a> active la <strong>mort permanente en PvM</strong>. Si vaincu → retour niveau 1, inventaire vidé.</p><div class="faq-highlight">⭐ En contrepartie : bonus <strong>×3</strong> sur l'expérience ET le drop.</div>`},
+  {cat:'ombre',q:"Jusqu'à quel niveau peut-on l'activer ?",a:`<p>Maximum <strong>niveau 20</strong>. Parlez au <strong>Pactisant des Ténèbres</strong> (accessible via <span class="cmd">.start</span>).</p>`},
+  {cat:'ombre',q:"Que se passe-t-il si je meurs en mode Ombre ?",a:`<ul><li>Retour au <strong>niveau 1</strong></li><li>Inventaire <strong>entièrement vidé</strong> (sauf objets de départ)</li><li>Expérience ×3 jusqu'au <strong>plus haut niveau atteint</strong></li><li>Les <strong>succès ne sont pas reset</strong></li></ul>`},
+  {cat:'ombre',q:"Le mode Ombre est-il actif dans le Songe Infini ?",a:`<p><strong>Non.</strong> Le <a class="ilink" onclick="go('ombre')">mode Ombre</a> est inactif dans le <a class="ilink" onclick="go('songe')">Songe Infini</a> — aucune perte en cas d'échec.</p>`},
+  {cat:'ombre',q:"Peut-on utiliser .retry en mode Ombre ?",a:`<p><strong>Non.</strong> La commande <span class="cmd">.retry</span> est interdite. Tout abandon est considéré comme une défaite. Voir la <a class="ilink" onclick="go('cmds')">liste des commandes</a>.</p>`},
+  {cat:'maitrise',q:"C'est quoi la Maîtrise de classe ?",a:`<p>La <a class="ilink" onclick="go('maitrise')">Maîtrise</a> offre des <strong>bonus permanents</strong> tous les 20 niveaux (de 20 à 201), selon 3 spécialisations : <strong>DPS</strong>, <strong>Soutien</strong> ou <strong>Tank</strong>.</p>`},
+  {cat:'maitrise',q:"Comment progresser en Maîtrise ?",a:`<ul><li>Leveling classique : un palier de <a class="ilink" onclick="go('maitrise')">Maîtrise</a> tous les <strong>20 niveaux</strong></li><li><a class="ilink" onclick="go('songe')">Songe Infini</a> : un palier tous les <strong>5 étages</strong> vaincus</li></ul><div class="faq-tip">💡 Le Songe est le moyen le plus rapide au-delà du niveau 200.</div>`},
+  {cat:'maitrise',q:"Quel est le bonus au niveau 201 ?",a:`<p><strong>+5% Mêlée / Distance / Sorts</strong> — commun aux 3 spécialisations.</p><div class="faq-highlight">⭐ De plus, chaque tranche de 5 étages du <a class="ilink" onclick="go('songe')">Songe Infini</a> donne <strong>+2%</strong> en Force/Chance/Agilité/Intelligence.</div>`},
+  {cat:'dofus',q:"Comment améliorer mes Dofus ?",a:`<p>À l'<strong>Atelier de Bonta</strong> : brisez chez <strong>Gislain Scythe</strong> → <a class="ilink" onclick="go('monnaies')">Larmes Éthérées</a> → upgradez chez <strong>Thalyion</strong>.</p><ul><li>Original → Rare : 15 <a class="ilink" onclick="go('monnaies')">Larmes</a> + Dofus Original</li><li>Rare → Mythique : 15 <a class="ilink" onclick="go('monnaies')">Larmes</a> + Dofus Rare</li></ul>`},
+  {cat:'dofus',q:"Où dropper les Dofus ?",a:`<p>Chaque Dofus est droppable à <strong>0.1%</strong> sur son boss attitré. Consultez la <a class="ilink" onclick="go('drops')">page Drops Rares</a> (onglet Dofus) — survolez pour lire les stats.</p>`},
+  {cat:'songe',q:"Comment accéder au Songe Infini ?",a:`<p>Touche <strong>T</strong> → PNJ <strong>L'Ultime Défi</strong>. Tous les détails sur la page <a class="ilink" onclick="go('songe')">Songe Infini</a>.</p><div class="faq-warn">⚠ Niveau <strong>100 minimum</strong> recommandé.</div>`},
+  {cat:'songe',q:"Quelles sont les récompenses ?",a:`<ul><li><a class="ilink" onclick="go('monnaies')">Reflets Oniriques</a> à chaque étage (échangeables chez le PNJ <strong>Malice</strong>)</li><li>Palier de <a class="ilink" onclick="go('maitrise')">Maîtrise</a> tous les 5 étages vaincus</li><li><strong>+2%</strong> Force/Chance/Agilité/Intel tous les 5 étages</li></ul>`},
+  {cat:'songe',q:"Y a-t-il une limite d'étages ?",a:`<p><strong>Non.</strong> Le <a class="ilink" onclick="go('songe')">Songe Infini</a> n'a pas de limite — la difficulté augmente à l'infini.</p>`},
 ];
-
-let faqActiveCat='all', faqSearch='';
-
+let faqCat='all',faqQ='';
 function buildFaqCats(){
   document.getElementById('faqCats').innerHTML=FAQ_CATS.map(c=>
-    `<button class="faq-cat-btn${c.id==='all'?' active':''}" onclick="setFaqCat('${c.id}',this)"><span class="faq-cat-icon">${c.icon}</span>${c.label}</button>`
+    `<button class="faq-cat-btn${c.id==='all'?' active':''}" onclick="setFaqCat('${c.id}',this)"><span>${c.icon}</span>${c.label}</button>`
   ).join('');
 }
-
-function setFaqCat(id,btn){
-  faqActiveCat=id;
-  document.querySelectorAll('.faq-cat-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  renderFaq();
-}
-
-function filterFaq(){
-  faqSearch=document.getElementById('faqSearch').value.toLowerCase().trim();
-  renderFaq();
-}
-
+function setFaqCat(id,btn){faqCat=id;document.querySelectorAll('.faq-cat-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderFaq();}
+function filterFaq(){faqQ=document.getElementById('faqSearch').value.toLowerCase().trim();renderFaq();}
 function renderFaq(){
-  const container=document.getElementById('faqContainer');
-  const filtered=FAQ.filter(f=>{
-    const matchCat=faqActiveCat==='all'||f.cat===faqActiveCat;
-    const matchQ=!faqSearch||f.q.toLowerCase().includes(faqSearch)||f.a.toLowerCase().includes(faqSearch);
-    return matchCat&&matchQ;
-  });
-  if(!filtered.length){
-    container.innerHTML=`<div class="faq-empty"><div class="faq-empty-icon">🔍</div>Aucune question ne correspond à votre recherche.</div>`;
-    return;
-  }
-  const TAG_LABELS={depart:'Débuter',stuff:'Équipement',sorts:'Sorts',monnaie:'Monnaies',ombre:'Mode Ombre',maitrise:'Maîtrise',dofus:'Dofus',songe:'Songe Infini'};
-  const TAG_ICONS={depart:'🚀',stuff:'⚙',sorts:'📦',monnaie:'💰',ombre:'💀',maitrise:'👑',dofus:'💧',songe:'🌀'};
-  if(faqActiveCat==='all'&&!faqSearch){
-    const groups={};
-    filtered.forEach(f=>{if(!groups[f.cat])groups[f.cat]=[];groups[f.cat].push(f);});
-    container.innerHTML=Object.entries(groups).map(([cat,items])=>
-      `<div class="faq-section"><div class="faq-section-title"><span class="fsi">${TAG_ICONS[cat]}</span>${TAG_LABELS[cat]}</div>${items.map((f,i)=>faqItemHtml(f,cat+i,TAG_LABELS)).join('')}</div>`
+  const c=document.getElementById('faqContainer');
+  const f=FAQ.filter(x=>(faqCat==='all'||x.cat===faqCat)&&(!faqQ||x.q.toLowerCase().includes(faqQ)||x.a.toLowerCase().includes(faqQ)));
+  const TL={depart:'Débuter',stuff:'Équipement',sertis:'Sertissage',sorts:'Sorts',monnaie:'Monnaies',ombre:'Mode Ombre',maitrise:'Maîtrise',dofus:'Dofus',songe:'Songe Infini'};
+  const TI={depart:'🚀',stuff:'⚙',sertis:'💎',sorts:'📦',monnaie:'💰',ombre:'💀',maitrise:'👑',dofus:'💧',songe:'🌀'};
+  if(!f.length){c.innerHTML=`<div class="faq-empty"><div style="font-size:2rem;opacity:.3;margin-bottom:8px">🔍</div>Aucune question trouvée.</div>`;return;}
+  if(faqCat==='all'&&!faqQ){
+    const g={};f.forEach(x=>{if(!g[x.cat])g[x.cat]=[];g[x.cat].push(x);});
+    c.innerHTML=Object.entries(g).map(([cat,items])=>
+      `<div class="faq-section"><div class="faq-section-title"><span>${TI[cat]}</span>${TL[cat]}</div>${items.map((x,i)=>faqHtml(x,cat+i,TL)).join('')}</div>`
     ).join('');
-  } else {
-    container.innerHTML=filtered.map((f,i)=>faqItemHtml(f,'fq'+i,TAG_LABELS)).join('');
-  }
-  container.querySelectorAll('.faq-q').forEach(q=>{
+  } else {c.innerHTML=f.map((x,i)=>faqHtml(x,'fq'+i,TL)).join('');}
+  c.querySelectorAll('.faq-q').forEach(q=>{
     q.addEventListener('click',()=>{
-      const item=q.closest('.faq-item');
-      const ans=item.querySelector('.faq-a');
-      const isOpen=item.classList.contains('open');
-      item.classList.toggle('open',!isOpen);
-      ans.classList.toggle('show',!isOpen);
+      const it=q.closest('.faq-item'),an=it.querySelector('.faq-a'),op=it.classList.contains('open');
+      it.classList.toggle('open',!op);an.classList.toggle('show',!op);
     });
   });
 }
-
-function faqItemHtml(f,uid,TAG_LABELS){
-  return `<div class="faq-item" id="faq-${uid}">
-    <div class="faq-q">
-      <div class="faq-q-left">
-        <span class="faq-q-tag tag-${f.cat}">${TAG_LABELS[f.cat]}</span>
-        <span class="faq-q-text">${f.q}</span>
-      </div>
-      <span class="faq-arrow">▼</span>
-    </div>
-    <div class="faq-a">${f.a}</div>
-  </div>`;
+function faqHtml(f,uid,TL){
+  return`<div class="faq-item" id="faq-${uid}"><div class="faq-q"><div class="faq-q-left"><span class="faq-q-tag tag-${f.cat}">${TL[f.cat]}</span><span class="faq-q-text">${f.q}</span></div><span class="faq-arrow">▼</span></div><div class="faq-a">${f.a}</div></div>`;
 }
 
 /* ══ DROPS ══ */
@@ -800,14 +1081,14 @@ const DROPS=[
   {cat:'dofus',item:'Dofus des Veilleurs',boss:'Grollum',rate:'0.1%',stats:['En début de tour, rend 7% de points de vie aux alliés en ligne']},
   {cat:'dofus',item:'Dofus Argenté Scintillant',boss:'XLII',rate:'0.1%',stats:["Au début de son tour, si le lanceur a moins de 20% de sa vie, il est soigné de 40% de sa vie et gagne 20% de dommages finaux pour le tour en cours. (Une fois par combat)"]},
   {cat:'dofus',item:'Jyfus',boss:'Tal Kasha',rate:'0.1%',stats:['15% dommages aux sorts',"Augmente une caractéristique élémentaire par tour de jeu : 300 chance, 300 force, 300 agilité et 300 intelligence (toujours cet ordre)"]},
-  {cat:'dofus',item:'Dofus Vulbis (Rare)',boss:'Tengu Givrefoux',rate:'0.1%',stats:['1 PM',"Les dommages occasionnés sont augmentés de 10% (1 tour) si aucune attaque occasionnant des dommages n'a été subis depuis le précédent tour de jeu."]},
-  {cat:'dofus',item:'Dofus Ocre (Rare)',boss:'Glourséleste',rate:'0.1%',stats:['1 PA',"Donne 1 PA si aucune attaque occasionnant des dommages n'a été subis depuis le précédent tour de jeu."]},
+  {cat:'dofus',item:'Dofus Vulbis (Rare)',boss:'Tengu Givrefoux',rate:'0.1%',stats:['1 PM',"Les dommages occasionnés sont augmentés de 10% (1 tour) si aucune attaque n'a été subis depuis le précédent tour."]},
+  {cat:'dofus',item:'Dofus Ocre (Rare)',boss:'Glourséleste',rate:'0.1%',stats:['1 PA',"Donne 1 PA si aucune attaque n'a été subis depuis le précédent tour."]},
   {cat:'dofus',item:'Dolmanax Scintillant',boss:'Roi Nidas',rate:'0.1%',stats:['110 force/chance/intelligence/agilité']},
-  {cat:'dofus',item:'Dofus Forgelave',boss:'Obsidiantre',rate:'0.1%',stats:['60 résistance poussée',"Ajoute 150 points de bouclier si le lanceur est déplacé via une poussée, une attirance, un échange de position ou porté par un panda. Seul les ennemis peuvent déclancher cet effet."]},
+  {cat:'dofus',item:'Dofus Forgelave',boss:'Obsidiantre',rate:'0.1%',stats:['60 résistance poussée',"Ajoute 150 points de bouclier si le lanceur est déplacé via une poussée, attirance, échange ou porté par un panda."]},
   {cat:'dofus',item:'Dofus Ivoire (Rare)',boss:'Ilyzaelle',rate:'0.1%',stats:['40 résistance fixe all','A la fin du tour, les dommages de la prochaine attaque subie sont réduits de 50%']},
-  {cat:'dofus',item:'Dofus Ebène (Rare)',boss:'Anerice la Shushess',rate:'0.1%',stats:['Génère 1 charge en début de tour, 1 deuxième en infligeant des dommages de mêlée et 1 troisième en infligeant des dommages à distance.','Lorsque 5 charges sont atteintes, la prochaine attaque consomme les charges et applique un poison sur la cible pendant 3 tours.','Chaque charge donne un bonus de 2% de dommages finaux occasionnés.']},
-  {cat:'dofus',item:'Dofus Nébuleux',boss:'Reine des voleurs',rate:'0.1%',stats:['Les tours impairs, augmente de 20% les dommages','Les tours pairs, réduit de 10% les dommages']},
-  {cat:'dofus',item:'Dofus Abyssal',boss:'Capitaine Meno',rate:'0.1%',stats:["A chaque début de tour, si aucun ennemie n'est au contact du lanceur, donne 1 PA. Sinon donne 1 PM"]},
+  {cat:'dofus',item:'Dofus Ebène (Rare)',boss:'Anerice la Shushess',rate:'0.1%',stats:['Génère 1 charge en début de tour, +1 en mêlée, +1 à distance.','À 5 charges : applique un poison sur la cible pendant 3 tours.','Chaque charge = +2% dommages finaux.']},
+  {cat:'dofus',item:'Dofus Nébuleux',boss:'Reine des voleurs',rate:'0.1%',stats:['Tours impairs : +20% dommages','Tours pairs : -10% dommages']},
+  {cat:'dofus',item:'Dofus Abyssal',boss:'Capitaine Meno',rate:'0.1%',stats:["Début de tour : si aucun ennemi au contact → +1 PA. Sinon → +1 PM"]},
   {cat:'dofus',item:'Dofus des Glaces',boss:'Comte Harebourg',rate:'0.1%',stats:['20 dommages neutre/feu/terre/air/eau']},
   {cat:'dofus',item:'Dofus du Cauchemar',boss:'Solar',rate:'0.1%',stats:['20 dommages critiques','3% résistance neutre/feu/terre/air/eau']},
   {cat:'dofus',item:'Dofus Sylvestre',boss:'Toxoliath',rate:'0.1%',stats:['50 tacle','6% dommages mêlée','-6% résistance mêlée']},
@@ -832,30 +1113,56 @@ const DROPS=[
   {cat:'multi',item:'Fléau des puissants',boss:'Gourlo le Terrible',rate:'0.5%',stats:['25 puissance','5% force/intel/chance/agi']},
   {cat:'multi',item:'Force de la simplicité',boss:'Chêne Mou',rate:'0.5%',stats:['60 puissance','10% force/intel/chance/agi']},
   {cat:'multi',item:'Taeguk',boss:'Nileza',rate:'0.5%',stats:['85 puissance','15% force/intel/chance/agi']},
+  {cat:'gemme',item:'Ombrine Parfaite',boss:'Tout boss de donjon',rate:'2%',stats:['Gemme Horadrique','Sertissage : 26% à 50% de la Force de l\'item','Nécessite un objet boosté Tavernier','La statistique Force doit déjà exister sur l\'objet']},
+  {cat:'gemme',item:'Émeraude Parfaite',boss:'Tout boss de donjon',rate:'2%',stats:['Gemme Horadrique','Sertissage : 26% à 50% de l\'Agilité de l\'item','Nécessite un objet boosté Tavernier','La statistique Agilité doit déjà exister sur l\'objet']},
+  {cat:'gemme',item:'Saphir Parfait',boss:'Tout boss de donjon',rate:'2%',stats:['Gemme Horadrique','Sertissage : 26% à 50% de la Chance de l\'item','Nécessite un objet boosté Tavernier','La statistique Chance doit déjà exister sur l\'objet']},
+  {cat:'gemme',item:'Rubis Parfait',boss:'Tout boss de donjon',rate:'2%',stats:['Gemme Horadrique','Sertissage : 26% à 50% de l\'Intelligence de l\'item','Nécessite un objet boosté Tavernier','La statistique Intelligence doit déjà exister sur l\'objet']},
+  {cat:'etincelle',item:'Étincelle Sublimée',boss:'Archimonstres niv. 50+',rate:'0.1%',stats:['Double les effets de la Gemme Horadrique appliquée','10% de chance que le bonus soit triplé à la place','Utilisée en complément lors du sertissage (slot 3)']},
 ];
-
-const CAT_LABELS={carte:'Carte',dofus:'Dofus',terre:'Artefact Terre',feu:'Artefact Feu',eau:'Artefact Eau',air:'Artefact Air',multi:'Artefact Multi'};
-const CAT_CLASS={carte:'elem-carte',dofus:'elem-dofus',terre:'elem-terre',feu:'elem-feu',eau:'elem-eau',air:'elem-air',multi:'elem-multi'};
-let currentDropTab='all';
-const tooltip=document.getElementById('dropTooltip'),ttTitle=document.getElementById('ttTitle'),ttBody=document.getElementById('ttBody'),PAD=14;
-function showTooltip(e,d){ttTitle.textContent=d.item;ttBody.innerHTML=d.stats&&d.stats.length?d.stats.map(s=>`<div class="tt-stat">${s}</div>`).join(''):'<div class="tt-empty">Stats à définir</div>';tooltip.classList.add('visible');moveTooltip(e)}
-function moveTooltip(e){const tw=tooltip.offsetWidth,th=tooltip.offsetHeight,vw=window.innerWidth,vh=window.innerHeight;let x=e.clientX+PAD,y=e.clientY+PAD;if(x+tw>vw-8)x=e.clientX-tw-PAD;if(y+th>vh-8)y=e.clientY-th-PAD;tooltip.style.left=x+'px';tooltip.style.top=y+'px'}
-function hideTooltip(){tooltip.classList.remove('visible')}
-document.addEventListener('mousemove',e=>{if(tooltip.classList.contains('visible'))moveTooltip(e)});
-function renderDrops(){const q=document.getElementById('dropSearch').value.toLowerCase().trim(),tbody=document.getElementById('dropBody'),noR=document.getElementById('noResults'),filtered=DROPS.filter(d=>(currentDropTab==='all'||d.cat===currentDropTab)&&(!q||d.item.toLowerCase().includes(q)||d.boss.toLowerCase().includes(q)));document.getElementById('cnt-all').textContent=DROPS.length;if(!filtered.length){tbody.innerHTML='';noR.style.display='block';return}noR.style.display='none';tbody.innerHTML=filtered.map(d=>{const ht=d.cat!=='carte';return`<tr class="${ht?'has-tooltip':''}" data-idx="${DROPS.indexOf(d)}"><td class="item-name">${d.item}</td><td><span class="elem-badge ${CAT_CLASS[d.cat]}">${CAT_LABELS[d.cat]}</span></td><td class="boss-name">${d.boss}</td><td class="rate">${d.rate}</td></tr>`}).join('');tbody.querySelectorAll('tr.has-tooltip').forEach(row=>{const d=DROPS[+row.dataset.idx];row.addEventListener('mouseenter',e=>showTooltip(e,d));row.addEventListener('mouseleave',hideTooltip)})}
+const CL={carte:'Carte',dofus:'Dofus',terre:'Artefact Terre',feu:'Artefact Feu',eau:'Artefact Eau',air:'Artefact Air',multi:'Artefact Multi',gemme:'Gemme',etincelle:'Étincelle'};
+const CC={carte:'elem-carte',dofus:'elem-dofus',terre:'elem-terre',feu:'elem-feu',eau:'elem-eau',air:'elem-air',multi:'elem-multi',gemme:'elem-gemme',etincelle:'elem-etincelle'};
+let curDropTab='all';
+const dTip=document.getElementById('dropTooltip'),dTitle=document.getElementById('ttTitle'),dBody=document.getElementById('ttBody'),PAD=14;
+function showDrop(e,d){dTitle.textContent=d.item;dBody.innerHTML=d.stats&&d.stats.length?d.stats.map(s=>`<div class="tt-stat">${s}</div>`).join(''):'<div class="tt-empty">Stats à définir</div>';dTip.classList.add('visible');moveDrop(e)}
+function moveDrop(e){const tw=dTip.offsetWidth,th=dTip.offsetHeight,vw=window.innerWidth,vh=window.innerHeight;let x=e.clientX+PAD,y=e.clientY+PAD;if(x+tw>vw-8)x=e.clientX-tw-PAD;if(y+th>vh-8)y=e.clientY-th-PAD;dTip.style.left=x+'px';dTip.style.top=y+'px'}
+function hideTooltip(){dTip.classList.remove('visible')}
+document.addEventListener('mousemove',e=>{if(dTip.classList.contains('visible'))moveDrop(e)});
+function renderDrops(){
+  const q=document.getElementById('dropSearch').value.toLowerCase().trim();
+  const tb=document.getElementById('dropBody'),nr=document.getElementById('noResults');
+  const f=DROPS.filter(d=>(curDropTab==='all'||d.cat===curDropTab)&&(!q||d.item.toLowerCase().includes(q)||d.boss.toLowerCase().includes(q)));
+  document.getElementById('cnt-all').textContent=DROPS.length;
+  if(!f.length){tb.innerHTML='';nr.style.display='block';return;}
+  nr.style.display='none';
+  tb.innerHTML=f.map(d=>{const ht=d.cat!=='carte';return`<tr class="${ht?'has-tooltip':''}" data-i="${DROPS.indexOf(d)}"><td class="item-name">${d.item}</td><td><span class="elem-badge ${CC[d.cat]}">${CL[d.cat]}</span></td><td class="boss-name">${d.boss}</td><td class="rate">${d.rate}</td></tr>`}).join('');
+  tb.querySelectorAll('tr.has-tooltip').forEach(r=>{const d=DROPS[+r.dataset.i];r.addEventListener('mouseenter',e=>showDrop(e,d));r.addEventListener('mouseleave',hideTooltip);});
+}
 function filterDrops(){renderDrops()}
-function setDropTab(tab,btn){currentDropTab=tab;document.querySelectorAll('#dropTabs .tab-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderDrops()}
+function setDropTab(t,b){curDropTab=t;document.querySelectorAll('#dropTabs .tab-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderDrops();}
 
 /* ══ MAÎTRISE ══ */
 const MAITRISE={dps:[{lvl:20,bonus:'5% Stats All (hors Sag/Vit)',cumul:['5% Stats All (hors Sag/Vit)']},{lvl:40,bonus:'10 Dommages',cumul:['5% Stats All (hors Sag/Vit)','10 Dommages']},{lvl:60,bonus:'5% Coups Critiques',cumul:['5% Stats All (hors Sag/Vit)','10 Dommages','5% Coups Critiques']},{lvl:80,bonus:'100 Puissance',cumul:['5% Stats All (hors Sag/Vit)','10 Dommages','5% Coups Critiques','100 Puissance']},{lvl:100,bonus:'10% Dommages Finaux',cumul:['5% Stats All (hors Sag/Vit)','10 Dommages','5% Coups Critiques','100 Puissance','10% Dommages Finaux']},{lvl:120,bonus:'+10% Stats All (hors Sag/Vit)',cumul:['15% Stats All (hors Sag/Vit)','10 Dommages','5% Coups Critiques','100 Puissance','10% Dommages Finaux']},{lvl:140,bonus:'20 Dommages',cumul:['15% Stats All (hors Sag/Vit)','30 Dommages','5% Coups Critiques','100 Puissance','10% Dommages Finaux']},{lvl:160,bonus:'10% Coups Critiques',cumul:['15% Stats All (hors Sag/Vit)','30 Dommages','15% Coups Critiques','100 Puissance','10% Dommages Finaux']},{lvl:180,bonus:'200 Puissance',cumul:['15% Stats All (hors Sag/Vit)','30 Dommages','15% Coups Critiques','300 Puissance','10% Dommages Finaux']},{lvl:200,bonus:'25% Stats All (hors Sag/Vit)',cumul:['40% Stats All (hors Sag/Vit)','30 Dommages','15% Coups Critiques','300 Puissance','10% Dommages Finaux']},{lvl:201,bonus:'5% Do Mêlée/Distance/Sorts',cumul:['40% Stats All (hors Sag/Vit)','30 Dommages','15% Coups Critiques','300 Puissance','10% Dommages Finaux','5% Do Mêlée/Distance/Sorts'],highlight:true}],soutien:[{lvl:20,bonus:'5% Stats All (hors Sag/Vit)',cumul:['5% Stats All (hors Sag/Vit)']},{lvl:40,bonus:'1 Invocation',cumul:['5% Stats All (hors Sag/Vit)','1 Invocation']},{lvl:60,bonus:'10 Soin',cumul:['5% Stats All (hors Sag/Vit)','1 Invocation','10 Soin']},{lvl:80,bonus:'100 Prospection',cumul:['5% Stats All (hors Sag/Vit)','1 Invocation','10 Soin','100 Prospection']},{lvl:100,bonus:'10% Sort',cumul:['5% Stats All (hors Sag/Vit)','1 Invocation','10 Soin','100 Prospection','10% Sort']},{lvl:120,bonus:'+10% Stats All (hors Sag/Vit)',cumul:['15% Stats All (hors Sag/Vit)','1 Invocation','10 Soin','100 Prospection','10% Sort']},{lvl:140,bonus:'2 Invocations',cumul:['15% Stats All (hors Sag/Vit)','3 Invocations','10 Soin','100 Prospection','10% Sort']},{lvl:160,bonus:'20 Soin',cumul:['15% Stats All (hors Sag/Vit)','3 Invocations','30 Soin','100 Prospection','10% Sort']},{lvl:180,bonus:'200 Prospection',cumul:['15% Stats All (hors Sag/Vit)','3 Invocations','30 Soin','300 Prospection','10% Sort']},{lvl:200,bonus:'15% Stats All (hors Sag/Vit)',cumul:['30% Stats All (hors Sag/Vit)','3 Invocations','30 Soin','300 Prospection','10% Sort']},{lvl:201,bonus:'5% Do Mêlée/Distance/Sorts',cumul:['30% Stats All (hors Sag/Vit)','3 Invocations','30 Soin','300 Prospection','10% Sort','5% Do Mêlée/Distance/Sorts'],highlight:true}],tank:[{lvl:20,bonus:'5% Stats All (hors Sag/Vit)',cumul:['5% Stats All (hors Sag/Vit)']},{lvl:40,bonus:'100 PV',cumul:['5% Stats All (hors Sag/Vit)','100 PV']},{lvl:60,bonus:'15 Résistances Fixes',cumul:['5% Stats All (hors Sag/Vit)','100 PV','15 Résistances Fixes']},{lvl:80,bonus:'100 Renvoie de Dommage',cumul:['5% Stats All (hors Sag/Vit)','100 PV','15 Résistances Fixes','100 Renvoie de Dommage']},{lvl:100,bonus:'10% Rés. Mêlée/Distance',cumul:['5% Stats All (hors Sag/Vit)','100 PV','15 Résistances Fixes','100 Renvoie de Dommage','10% Rés. Mêlée/Distance']},{lvl:120,bonus:'+10% Stats All (hors Sag/Vit)',cumul:['15% Stats All (hors Sag/Vit)','100 PV','15 Résistances Fixes','100 Renvoie de Dommage','10% Rés. Mêlée/Distance']},{lvl:140,bonus:'200 PV',cumul:['15% Stats All (hors Sag/Vit)','300 PV','15 Résistances Fixes','100 Renvoie de Dommage','10% Rés. Mêlée/Distance']},{lvl:160,bonus:'30 Résistances Fixes',cumul:['15% Stats All (hors Sag/Vit)','300 PV','45 Résistances Fixes','100 Renvoie de Dommage','10% Rés. Mêlée/Distance']},{lvl:180,bonus:'200 Renvoie de Dommage',cumul:['15% Stats All (hors Sag/Vit)','300 PV','45 Résistances Fixes','300 Renvoie de Dommage','10% Rés. Mêlée/Distance']},{lvl:200,bonus:'20% Vitalité',cumul:['15% Stats All (hors Sag/Vit)','300 PV','45 Résistances Fixes','300 Renvoie de Dommage','10% Rés. Mêlée/Distance','20% Vitalité']},{lvl:201,bonus:'5% Do Mêlée/Distance/Sorts',cumul:['15% Stats All (hors Sag/Vit)','300 PV','45 Résistances Fixes','300 Renvoie de Dommage','10% Rés. Mêlée/Distance','20% Vitalité','5% Do Mêlée/Distance/Sorts'],highlight:true}]};
-let currentMaitriseType='dps';
-function renderMaitrise(){const data=MAITRISE[currentMaitriseType];document.getElementById('maitriseGrid').innerHTML=data.map(p=>{const hl=p.highlight?'highlight':'',star=p.highlight?'<span class="mc-star">★</span>':'';return`<div class="maitrise-card ${hl}"><div class="mc-header"><span class="mc-lvl">Niveau ${p.lvl}</span>${star}</div><div class="mc-bonus-label">Bonus du palier</div><div class="mc-bonus-val">${p.bonus}</div><div class="mc-cumul-label">Total cumulé</div><ul class="mc-cumul-list">${p.cumul.map(c=>`<li>${c}</li>`).join('')}</ul></div>`}).join('')}
-function setMaitriseType(type,btn){currentMaitriseType=type;document.querySelectorAll('#maitriseTabBar .tab-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderMaitrise()}
+let curMtype='dps';
+function renderMaitrise(){const d=MAITRISE[curMtype];document.getElementById('maitriseGrid').innerHTML=d.map(p=>{const h=p.highlight?'highlight':'',s=p.highlight?'<span class="mc-star">★</span>':'';return`<div class="maitrise-card ${h}"><div class="mc-header"><span class="mc-lvl">Niveau ${p.lvl}</span>${s}</div><div class="mc-bonus-label">Bonus du palier</div><div class="mc-bonus-val">${p.bonus}</div><div class="mc-cumul-label">Total cumulé</div><ul class="mc-cumul-list">${p.cumul.map(c=>`<li>${c}</li>`).join('')}</ul></div>`}).join('');}
+function setMaitriseType(t,b){curMtype=t;document.querySelectorAll('#maitriseTabBar .tab-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderMaitrise();}
 
 /* ══ NAVIGATION ══ */
-function go(id){hideTooltip();document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));const panel=document.getElementById(id);if(panel)panel.classList.add('active');const nav=document.querySelector(`.nav-item[onclick="go('${id}')"]`);if(nav)nav.classList.add('active');window.scrollTo(0,0);if(id==='drops')renderDrops();if(id==='maitrise')renderMaitrise();if(id==='faq'){buildFaqCats();renderFaq()}}
+function go(id){
+  hideTooltip();glTip.classList.remove('show');
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  const panel=document.getElementById(id);if(panel)panel.classList.add('active');
+  const nav=document.querySelector(`.nav-item[onclick="go('${id}')"]`);if(nav)nav.classList.add('active');
+  window.scrollTo(0,0);
+  buildToc(id);
+  if(id==='drops')renderDrops();
+  if(id==='maitrise')renderMaitrise();
+  if(id==='faq'){buildFaqCats();renderFaq();}
+}
 
+/* Init */
 renderDrops();renderMaitrise();buildFaqCats();renderFaq();
+['accueil','tuto','songe','sorts','stuff','monnaies','dofus'].forEach(buildToc);
 </script>
 </body>
 </html>
