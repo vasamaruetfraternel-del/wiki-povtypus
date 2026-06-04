@@ -12,7 +12,7 @@
   --green:#6aaa00;--green-dim:#4a7a00;--green-bg:rgba(106,170,0,0.1);
   --red:#c0392b;--red-bg:rgba(192,57,43,0.12);--red-border:#8b2a1e;
   --blue:#3b82f6;--blue-bg:rgba(59,130,246,0.1);
-  --amber:#f59e0b;
+  --amber:#f59e0b;--purple:#c084fc;--purple-bg:rgba(147,51,234,0.1);
   --text:#e8e0c4;--text-muted:#8a8270;--text-dim:#5a5445;
   --border:#2e2e24;--border-gold:rgba(212,160,23,0.3);
   --topnav-h:60px;--radius:8px;--radius-lg:12px;--transition:0.18s ease;
@@ -75,11 +75,13 @@ body{font-family:"Trebuchet MS",Arial,sans-serif;background:var(--bg);color:var(
 .mini-card.green-accent{border-left:3px solid var(--green)}
 .mini-card.blue-accent{border-left:3px solid var(--blue)}
 .mini-card.red-accent{border-left:3px solid var(--red)}
+.mini-card.purple-accent{border-left:3px solid var(--purple)}
 .alert{border-radius:var(--radius);padding:13px 16px;margin-bottom:16px;font-size:.88rem}
 .alert-warning{background:var(--red-bg);border:1px solid var(--red-border);color:#e8b4af}
 .alert-info{background:var(--blue-bg);border:1px solid rgba(59,130,246,.3);color:#9dc4f8}
 .alert-success{background:var(--green-bg);border:1px solid rgba(106,170,0,.3);color:#a8d860}
 .alert-gold{background:var(--gold-bg);border:1px solid var(--border-gold);color:#c8a060}
+.alert-purple{background:var(--purple-bg);border:1px solid rgba(147,51,234,.3);color:#c084fc}
 .alert b{color:inherit;opacity:.9}
 .table-wrap{overflow-x:auto;margin-top:8px}
 table{width:100%;border-collapse:collapse;font-size:.87rem}
@@ -91,7 +93,7 @@ tr:hover td{background:var(--gold-bg)}
 .item-name{color:var(--text);font-weight:500}
 .boss-name{color:var(--text-muted);font-size:.85rem}
 tr.has-tooltip{cursor:help}
-#dropTooltip{position:fixed;background:var(--surface);border:1px solid var(--border-gold);border-radius:var(--radius);padding:11px 15px;font-size:.82rem;color:var(--text);pointer-events:none;z-index:9999;min-width:180px;max-width:280px;display:none;box-shadow:0 6px 24px rgba(0,0,0,.65)}
+#dropTooltip{position:fixed;background:var(--surface);border:1px solid var(--border-gold);border-radius:var(--radius);padding:11px 15px;font-size:.82rem;color:var(--text);pointer-events:none;z-index:9999;min-width:180px;max-width:300px;display:none;box-shadow:0 6px 24px rgba(0,0,0,.65)}
 #dropTooltip.visible{display:block}
 .tt-title{color:var(--gold);font-weight:700;font-size:.86rem;margin-bottom:9px;padding-bottom:7px;border-bottom:1px solid var(--border-gold);line-height:1.3}
 .tt-stat{color:var(--text-muted);padding:3px 0;font-size:.8rem;display:flex;align-items:flex-start;gap:6px;line-height:1.35}
@@ -172,7 +174,6 @@ tr.has-tooltip{cursor:help}
 .sg-stat{font-size:.78rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;font-weight:700;margin-bottom:8px}
 .sg-bonus{font-size:.85rem;color:var(--text)}
 .sg-bonus b{color:var(--amber)}
-/* BowfBall cards */
 .ball-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:10px}
 .ball-card{background:var(--surface3);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px 18px;position:relative;overflow:hidden;transition:var(--transition)}
 .ball-card:hover{border-color:var(--border-gold)}
@@ -240,6 +241,69 @@ tr.has-tooltip{cursor:help}
 .tag-songe{background:rgba(59,130,246,.08);border-color:rgba(59,130,246,.35);color:#7ab8f5}
 .tag-sertis{background:rgba(236,72,153,.12);border-color:rgba(236,72,153,.4);color:#f0a0d0}
 .tag-capture{background:rgba(255,140,0,.12);border-color:rgba(255,140,0,.4);color:#ffaa44}
+.tag-alignement{background:rgba(147,51,234,.12);border-color:rgba(147,51,234,.4);color:#c084fc}
+
+/* ══ RECETTE ══ */
+.recette-pnj{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:24px;overflow:hidden;scroll-margin-top:110px}
+.recette-pnj-header{display:flex;align-items:center;gap:14px;padding:16px 22px;border-bottom:1px solid var(--border);background:var(--surface3)}
+.recette-pnj-icon{font-size:1.6rem;width:42px;height:42px;display:flex;align-items:center;justify-content:center;background:var(--bg);border-radius:var(--radius);border:1px solid var(--border)}
+.recette-pnj-info{flex:1}
+.recette-pnj-name{font-size:1rem;font-weight:700;color:var(--gold)}
+.recette-pnj-loc{font-size:.78rem;color:var(--text-muted);margin-top:2px}
+.recette-table-wrap{overflow-x:auto}
+.recette-table{width:100%;border-collapse:collapse;font-size:.87rem}
+.recette-table th{background:var(--surface3);color:var(--gold-dim);font-weight:700;padding:9px 14px;text-align:left;border-bottom:2px solid var(--border-gold);font-size:.72rem;text-transform:uppercase;letter-spacing:.6px;white-space:nowrap}
+.recette-table td{padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:top}
+.recette-table tr:last-child td{border-bottom:none}
+.recette-table tr:hover td{background:var(--gold-bg)}
+.recette-table tr.has-tooltip{cursor:help}
+.r-input{display:flex;flex-direction:column;gap:4px}
+.r-input-item{display:flex;align-items:center;gap:7px;font-size:.86rem;color:var(--text)}
+.r-input-qty{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;background:var(--surface3);border:1px solid var(--border);border-radius:4px;font-size:.75rem;font-weight:700;color:var(--amber);padding:0 5px;flex-shrink:0}
+.r-output{font-weight:700;color:var(--text);font-size:.9rem}
+.r-output-sub{font-size:.78rem;color:var(--text-muted);margin-top:3px}
+.r-note{font-size:.78rem;color:var(--text-muted);font-style:italic}
+.r-note.warn{color:#e8b4af}
+.r-note.tip{color:#a8d860}
+.r-badge{display:inline-block;font-size:.68rem;font-weight:700;padding:2px 6px;border-radius:4px;border:1px solid;margin-left:4px;vertical-align:middle}
+.r-badge-gold{background:var(--gold-bg);border-color:var(--border-gold);color:var(--gold)}
+.r-badge-green{background:var(--green-bg);border-color:rgba(106,170,0,.4);color:var(--green)}
+.r-badge-purple{background:var(--purple-bg);border-color:rgba(147,51,234,.4);color:var(--purple)}
+.r-badge-red{background:var(--red-bg);border-color:var(--red-border);color:#e8b4af}
+.r-sep{height:1px;background:var(--border);margin:0}
+
+/* ALIGNEMENT */
+.align-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:4px}
+.align-card{background:var(--surface3);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px 20px;position:relative;overflow:hidden;transition:var(--transition)}
+.align-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%}
+.align-card.a-bonta::before{background:#7ab8f5}
+.align-card.a-brak::before{background:#e07060}
+.align-card.a-merc::before{background:#c8a060}
+.align-card:hover{border-color:var(--border-gold)}
+.align-card-title{font-size:1rem;font-weight:700;margin-bottom:4px}
+.align-card.a-bonta .align-card-title{color:#7ab8f5}
+.align-card.a-brak .align-card-title{color:#e07060}
+.align-card.a-merc .align-card-title{color:#c8a060}
+.align-cmd{font-family:"Courier New",monospace;font-size:.9rem;font-weight:700;margin-bottom:10px}
+.align-card.a-bonta .align-cmd{color:#7ab8f5}
+.align-card.a-brak .align-cmd{color:#e07060}
+.align-card.a-merc .align-cmd{color:#c8a060}
+.align-desc{font-size:.85rem;color:var(--text-muted);line-height:1.5}
+.honor-table-wrap{margin-top:16px}
+.grade-table{width:100%;border-collapse:collapse;font-size:.86rem}
+.grade-table th{background:var(--surface3);color:var(--gold-dim);font-size:.72rem;text-transform:uppercase;letter-spacing:.6px;padding:8px 12px;border-bottom:2px solid var(--border-gold);text-align:left}
+.grade-table td{padding:8px 12px;border-bottom:1px solid var(--border);color:var(--text)}
+.grade-table tr:last-child td{border-bottom:none}
+.grade-table tr:hover td{background:var(--gold-bg)}
+.grade-num{color:var(--amber);font-weight:700}
+.honor-pts{color:var(--gold);font-weight:700}
+.honor-balls{color:#c084fc;font-weight:700}
+.pts-table{width:100%;border-collapse:collapse;font-size:.86rem;margin-top:8px}
+.pts-table th{background:var(--surface3);color:var(--gold-dim);font-size:.72rem;text-transform:uppercase;letter-spacing:.6px;padding:8px 12px;border-bottom:2px solid var(--border-gold);text-align:left}
+.pts-table td{padding:8px 12px;border-bottom:1px solid var(--border);color:var(--text)}
+.pts-table tr:last-child td{border-bottom:none}
+.pts-table tr:hover td{background:var(--gold-bg)}
+
 @media(max-width:900px){.logo-sub{display:none}.nav-item span:not(.nav-icon){display:none}.nav-item{padding:0 12px}.main{padding:24px 20px}}
 @media(max-width:640px){.grid,.passive-grid,.maitrise-grid{grid-template-columns:1fr 1fr}.main{padding:18px 12px}.page-header h1{font-size:1.3rem}.logo-title{font-size:.9rem}.toc-wrap{display:none!important}}
 </style>
@@ -270,6 +334,7 @@ tr.has-tooltip{cursor:help}
   <div class="nav-section">
     <div class="nav-item" onclick="go('monnaies')"><span class="nav-icon">💰</span><span>Monnaies</span></div>
     <div class="nav-item" onclick="go('drops')"><span class="nav-icon">💎</span><span>Drops rares</span></div>
+    <div class="nav-item" onclick="go('recettes')"><span class="nav-icon">📋</span><span>Recettes</span></div>
   </div>
   <div class="nav-section">
     <div class="nav-item" onclick="go('maitrise')"><span class="nav-icon">👑</span><span>Maîtrise</span></div>
@@ -277,6 +342,7 @@ tr.has-tooltip{cursor:help}
     <div class="nav-item" onclick="go('ombre')"><span class="nav-icon">💀</span><span>Ombre</span></div>
     <div class="nav-item" onclick="go('songe')"><span class="nav-icon">🌀</span><span>Songe Infini</span></div>
     <div class="nav-item" onclick="go('capture')"><span class="nav-icon">🎯</span><span>Capture</span></div>
+    <div class="nav-item" onclick="go('alignement')"><span class="nav-icon">⚖</span><span>Alignement</span></div>
   </div>
 </nav>
 
@@ -318,12 +384,15 @@ tr.has-tooltip{cursor:help}
       <div class="mini-card gold-accent"><div class="mini-card-label">Songe Infini</div><div class="mini-card-value">Repoussez les limites via le <a class="ilink" onclick="go('songe')">Songe Infini</a>.</div></div>
       <div class="mini-card gold-accent"><div class="mini-card-label">Sertissage</div><div class="mini-card-value">Repoussez les limites de votre équipement encore plus loin via le <a class="ilink" onclick="go('stuff')">Sertissage</a>.</div></div>
       <div class="mini-card gold-accent"><div class="mini-card-label">Capture de monstres</div><div class="mini-card-value">Capturez des monstres en combat grâce aux <a class="ilink" onclick="go('capture')">BowfBalls</a> et invoquez-les !</div></div>
+      <div class="mini-card gold-accent"><div class="mini-card-label">Recettes PNJ</div><div class="mini-card-value">Consultez toutes les <a class="ilink" onclick="go('recettes')">recettes d'échange</a> auprès des PNJ spécialisés.</div></div>
+      <div class="mini-card gold-accent"><div class="mini-card-label">Alignement</div><div class="mini-card-value">Rejoignez <a class="ilink" onclick="go('alignement')">Bontarien, Brakmarien ou Mercenaire</a> pour obtenir des Honor Balls.</div></div>
     </div>
   </div>
   <div class="related-bar"><div class="related-lbl">Voir aussi</div><div class="related-links">
     <div class="rel-link" onclick="go('tuto')">🚀 Guide débutant</div>
     <div class="rel-link" onclick="go('faq')">❓ F.A.Q</div>
     <div class="rel-link" onclick="go('passifs')">🛡 Passifs de classe</div>
+    <div class="rel-link" onclick="go('recettes')">📋 Recettes</div>
     <div class="rel-link" onclick="go('capture')">🎯 Capture</div>
   </div></div>
 </div>
@@ -368,6 +437,7 @@ tr.has-tooltip{cursor:help}
       <div class="mini-card gold-accent"><div class="mini-card-label">Dofus</div><div class="mini-card-value"><a class="ilink" onclick="go('dofus')">Améliorer ses dofus</a> via le système <span class="gl" data-term="Larme Éthérée">Larme Éthérée</span>.</div></div>
       <div class="mini-card gold-accent"><div class="mini-card-label">Maîtrise</div><div class="mini-card-value">Atteindre la <a class="ilink" onclick="go('maitrise')">Maîtrise de classe</a> pour des bonus permanents puissants.</div></div>
       <div class="mini-card gold-accent"><div class="mini-card-label">Capture</div><div class="mini-card-value">Capturer des monstres avec les <a class="ilink" onclick="go('capture')">BowfBalls</a> pour enrichir votre arsenal d'invocations.</div></div>
+      <div class="mini-card gold-accent"><div class="mini-card-label">Recettes</div><div class="mini-card-value">Consultez les <a class="ilink" onclick="go('recettes')">recettes PNJ</a> pour optimiser chaque échange.</div></div>
     </div>
   </div>
   <div class="related-bar"><div class="related-lbl">Voir aussi</div><div class="related-links">
@@ -375,6 +445,7 @@ tr.has-tooltip{cursor:help}
     <div class="rel-link" onclick="go('stuff')">⚙ Stuff</div>
     <div class="rel-link" onclick="go('monnaies')">💰 Monnaies</div>
     <div class="rel-link" onclick="go('maitrise')">👑 Maîtrise</div>
+    <div class="rel-link" onclick="go('recettes')">📋 Recettes</div>
     <div class="rel-link" onclick="go('capture')">🎯 Capture</div>
   </div></div>
 </div>
@@ -515,6 +586,7 @@ tr.has-tooltip{cursor:help}
       <li><span class="cmd">.drop</span> pour voir les drops de la zone · <span class="cmd">.ki [nom]</span> pour localiser un item</li>
       <li><span class="cmd">.start</span> / <span class="cmd">.fm</span> / <span class="cmd">.craft</span> pour les téléportations rapides</li>
       <li><span class="cmd">.retry</span> pour annuler un combat en donjon (<strong>interdit en <a class="ilink" onclick="go('ombre')">mode Ombre</a></strong>)</li>
+      <li><span class="cmd">.bonta</span> / <span class="cmd">.brak</span> / <span class="cmd">.mercenaire</span> pour choisir son <a class="ilink" onclick="go('alignement')">alignement</a></li>
     </ul>
   </div>
   <div class="alert alert-info">Les crochets <b>[</b> et <b>]</b> ne sont pas à saisir — ils indiquent un paramètre.</div>
@@ -532,11 +604,15 @@ tr.has-tooltip{cursor:help}
       <tr><td><span class="cmd">.k</span></td><td>Centralise les kamas de tous vos comptes.</td></tr>
       <tr><td><span class="cmd">.bug</span></td><td>Téléporte vers une cellule accessible si le joueur est bloqué.</td></tr>
       <tr><td><span class="cmd">.power</span></td><td>Affiche votre score de puissance calculé sur vos statistiques.</td></tr>
+      <tr><td><span class="cmd">.bonta</span></td><td>Rejoindre l'alignement <b>Bontarien</b> — voir <a class="ilink" onclick="go('alignement')">Alignement</a>.</td></tr>
+      <tr><td><span class="cmd">.brak</span></td><td>Rejoindre l'alignement <b>Brakmarien</b> — voir <a class="ilink" onclick="go('alignement')">Alignement</a>.</td></tr>
+      <tr><td><span class="cmd">.mercenaire</span></td><td>Rejoindre l'alignement <b>Mercenaire</b> (neutre) — voir <a class="ilink" onclick="go('alignement')">Alignement</a>.</td></tr>
     </tbody></table></div>
   </div>
   <div class="related-bar"><div class="related-lbl">Voir aussi</div><div class="related-links">
     <div class="rel-link" onclick="go('drops')">💎 Drops rares</div>
     <div class="rel-link" onclick="go('ombre')">💀 Mode Ombre</div>
+    <div class="rel-link" onclick="go('alignement')">⚖ Alignement</div>
   </div></div>
 </div>
 
@@ -612,37 +688,24 @@ tr.has-tooltip{cursor:help}
       <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Placez l'item à booster en premier</div><div class="step-desc">L'item en première position dans l'échange sera celui amélioré.</div></div></div>
       <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Résultat : +10% sur toutes les stats</div><div class="step-desc">Boost permanent de 10%. Pour un familier/montilier : +25%.</div></div></div>
     </div>
+    <p style="margin-top:14px;font-size:.85rem;color:var(--text-muted)">Voir toutes les recettes du Tavernier → <a class="ilink" onclick="go('recettes')">Page Recettes</a></p>
   </div>
   <div class="card" id="s-stuff-5" data-s="Sertissage">
     <div class="card-title"><span class="ct-icon">💎</span>Sertissage par Gemme Horadrique — Pierrick l'Unificateur</div>
     <div class="alert alert-warning"><b>Prérequis indispensable :</b> L'objet doit avoir reçu le <b>boost du Tavernier Feubuk</b> au préalable. Sans ce boost, le sertissage est impossible.</div>
     <div class="alert alert-info">Le sertissage se réalise auprès du PNJ <b>Pierrick l'Unificateur</b>. Il permet de <b>renforcer une statistique déjà présente</b> sur votre objet grâce à une <a class="ilink" onclick="go('drops')">Gemme Horadrique</a>, avec une amélioration optionnelle via l'<a class="ilink" onclick="go('drops')"><b>Étincelle Sublimée</b></a>.</div>
-    <p style="color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:.6px;font-size:.72rem;margin:18px 0 10px">Composants nécessaires</p>
-    <div class="grid">
-      <div class="mini-card green-accent"><div class="mini-card-label">Slot 1 — Obligatoire</div><div class="mini-card-value">L'<b>objet à améliorer</b> (boosté Tavernier au préalable).</div></div>
-      <div class="mini-card green-accent"><div class="mini-card-label">Slot 2 — Obligatoire</div><div class="mini-card-value">Une <a class="ilink" onclick="go('drops')"><b>Gemme Horadrique</b></a> qui apportera son bonus.</div></div>
-      <div class="mini-card gold-accent"><div class="mini-card-label">Slot 3 — Optionnel</div><div class="mini-card-value">Une <a class="ilink" onclick="go('drops')"><b>Étincelle Sublimée</b></a> pour amplifier le bonus.</div></div>
-    </div>
-    <p style="color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:.6px;font-size:.72rem;margin:20px 0 10px">Fonctionnement</p>
-    <div class="steps">
-      <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">La gemme indique un pourcentage (26 à 50%)</div><div class="step-desc">Chaque <a class="ilink" onclick="go('drops')">Gemme Horadrique</a> cible <b>une statistique précise</b> (Force, Agilité, Chance ou Intelligence) et affiche son pourcentage d'apport.</div></div></div>
-      <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Application sur la valeur actuelle</div><div class="step-desc">Ce pourcentage est appliqué à la <b>valeur actuelle</b> de la statistique correspondante sur l'objet, puis <b>ajouté</b> à celle-ci.</div></div></div>
-      <div class="step"><div class="step-num">⚡</div><div class="step-body"><div class="step-title">Avec une Étincelle Sublimée (optionnel)</div><div class="step-desc">Le bonus appliqué est <b>doublé</b>, avec en plus <b>10% de chance d'être triplé</b> à la place.</div></div></div>
-    </div>
-    <div class="alert alert-warning" style="margin-top:18px"><b>Important :</b> La statistique ciblée par la gemme doit <b>déjà exister sur l'objet</b>, sinon le sertissage est refusé.</div>
-    <p style="color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:.6px;font-size:.72rem;margin:20px 0 10px">Les 4 Gemmes Horadriques</p>
     <div class="sertis-gems">
       <div class="sertis-gem g-force"><div class="sg-name">Ombrine Parfaite</div><div class="sg-stat">Force</div><div class="sg-bonus"><b>26% à 50%</b> de la Force de l'item</div></div>
       <div class="sertis-gem g-agi"><div class="sg-name">Émeraude Parfaite</div><div class="sg-stat">Agilité</div><div class="sg-bonus"><b>26% à 50%</b> de l'Agilité de l'item</div></div>
       <div class="sertis-gem g-chance"><div class="sg-name">Saphir Parfait</div><div class="sg-stat">Chance</div><div class="sg-bonus"><b>26% à 50%</b> de la Chance de l'item</div></div>
       <div class="sertis-gem g-intel"><div class="sg-name">Rubis Parfait</div><div class="sg-stat">Intelligence</div><div class="sg-bonus"><b>26% à 50%</b> de l'Intelligence de l'item</div></div>
     </div>
-    <div class="alert alert-success" style="margin-top:16px"><b>Exemple concret :</b> Un objet possède 100 Force. Vous y appliquez une Ombrine Parfaite à 40% → l'objet gagne <b>+40 Force</b> (total : 140). Avec une <a class="ilink" onclick="go('drops')">Étincelle Sublimée</a> → <b>+80 Force</b> garantis, voire <b>+120 Force</b> (10% de chance).</div>
-    <p style="color:var(--text-muted);font-size:.85rem;margin-top:14px">Où dropper les gemmes et étincelles ? → <a class="ilink" onclick="go('drops')">Page Drops Rares</a> (onglets <b>Gemmes</b> et <b>Étincelle</b>)</p>
+    <p style="color:var(--text-muted);font-size:.85rem;margin-top:14px">Voir toutes les recettes de Pierrick → <a class="ilink" onclick="go('recettes')">Page Recettes</a></p>
   </div>
   <div class="related-bar"><div class="related-lbl">Voir aussi</div><div class="related-links">
     <div class="rel-link" onclick="go('monnaies')">💰 Monnaies</div>
     <div class="rel-link" onclick="go('drops')">💎 Drops rares</div>
+    <div class="rel-link" onclick="go('recettes')">📋 Recettes</div>
     <div class="rel-link" onclick="go('dofus')">💧 Dofus</div>
   </div></div>
 </div>
@@ -662,7 +725,7 @@ tr.has-tooltip{cursor:help}
   <div class="toc-wrap" id="toc-monnaies"></div>
   <div class="card" id="s-monnaies-1" data-s="Kamas">
     <div class="card-title"><span class="ct-icon">💰</span>Kamas</div>
-    <p style="color:var(--text-muted);font-size:.9rem">Utilisables pour acheter des parchotages, pierres d'âmes, cosmétiques et sorts spéciaux auprès des PNJ au Zaap d'Astrub.</p>
+    <p style="color:var(--text-muted);font-size:.9rem">Utilisables pour acheter des parchotages, pierres d'âmes, cosmétiques et sorts spéciaux auprès des PNJ au Zaap d'Astrub. La <b>Master Ball</b> s'achète également chez le Prêtre pour <b>3 200 000 kamas</b>.</p>
   </div>
   <div class="card" id="s-monnaies-2" data-s="Pièces d'Or">
     <div class="card-title"><span class="ct-icon">🪙</span>Pièce d'Or</div>
@@ -741,7 +804,274 @@ tr.has-tooltip{cursor:help}
   <div class="related-bar"><div class="related-lbl">Voir aussi</div><div class="related-links">
     <div class="rel-link" onclick="go('dofus')">💧 Évolution Dofus</div>
     <div class="rel-link" onclick="go('stuff')">⚙ Amélioration du stuff</div>
+    <div class="rel-link" onclick="go('recettes')">📋 Recettes</div>
     <div class="rel-link" onclick="go('capture')">🎯 Capture de monstres</div>
+  </div></div>
+</div>
+
+<!-- ══ RECETTES ══ -->
+<div id="recettes" class="panel">
+  <div class="breadcrumb"><a onclick="go('accueil')">Wiki</a><span class="breadcrumb-sep">›</span><span>Recettes PNJ</span></div>
+  <div class="page-header"><h1>Recettes PNJ</h1><div class="subtitle">Tous les échanges disponibles auprès des artisans spécialisés</div></div>
+  <div class="summary-card">
+    <div class="summary-hd">⚡ En résumé</div>
+    <ul class="summary-list">
+      <li><strong>Tavernier Feubuk</strong> — Boost d'équipements, gemmes et familiers par accumulation</li>
+      <li><strong>Pierrick l'Unificateur</strong> — Sertissage de statistiques via Gemmes Horadriques</li>
+      <li><strong>Gislain Scythe</strong> — Recyclage de Dofus en Larmes Éthérées</li>
+      <li><strong>Thalyion, Forgeron des Âmes</strong> — Évolution et fusion de Dofus + craft du Doternel</li>
+    </ul>
+  </div>
+  <div class="toc-wrap" id="toc-recettes"></div>
+
+  <!-- TAVERNIER FEUBUK -->
+  <div class="recette-pnj" id="s-recettes-1" data-s="Tavernier Feubuk">
+    <div class="recette-pnj-header">
+      <div class="recette-pnj-icon">⚡</div>
+      <div class="recette-pnj-info">
+        <div class="recette-pnj-name">Tavernier Feubuk</div>
+        <div class="recette-pnj-loc">📍 Atelier de Forgemagie — Bonta</div>
+      </div>
+    </div>
+    <div class="alert alert-warning" style="margin:16px 16px 0;border-radius:var(--radius)"><b>Important :</b> Une fois un item boosté, il <b>ne peut plus être forgemagé</b>. Finalisez toujours votre FM avant de passer chez le Tavernier.</div>
+    <div class="recette-table-wrap" style="margin-top:12px">
+      <table class="recette-table">
+        <thead>
+          <tr>
+            <th>Ingrédients</th>
+            <th>Résultat</th>
+            <th>Note</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="r-input">
+                <div class="r-input-item"><span class="r-input-qty">×3</span> Même équipement (item à booster en 1ᵉʳ)</div>
+              </div>
+            </td>
+            <td>
+              <div class="r-output">Équipement boosté</div>
+              <div class="r-output-sub">+10% sur toutes les statistiques</div>
+            </td>
+            <td><span class="r-note tip">L'item placé en première position reçoit le boost.</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="r-input">
+                <div class="r-input-item"><span class="r-input-qty">×3</span> Même Artefact (artefact à booster en 1ᵉʳ)</div>
+              </div>
+            </td>
+            <td>
+              <div class="r-output">Artefact boosté</div>
+              <div class="r-output-sub">+25% sur toutes les statistiques</div>
+            </td>
+            <td><span class="r-note tip">Même logique que l'équipement — le 1ᵉʳ slot est boosté.</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="r-input">
+                <div class="r-input-item"><span class="r-input-qty">×5</span> Même Gemme Horadrique</div>
+              </div>
+            </td>
+            <td>
+              <div class="r-output">Gemme Horadrique<span class="r-badge r-badge-gold">Jet Parfait</span></div>
+              <div class="r-output-sub">Valeur de sertissage maximale (50%)</div>
+            </td>
+            <td><span class="r-note tip">Permet de garantir le bonus maximum lors du sertissage.</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="r-input">
+                <div class="r-input-item"><span class="r-input-qty">×5</span> Étincelle Sublimée</div>
+              </div>
+            </td>
+            <td>
+              <div class="r-output">Étincelle Sublimée Parfaite<span class="r-badge r-badge-purple">Nouveau</span></div>
+              <div class="r-output-sub">Triple les effets de la gemme à coup sûr</div>
+            </td>
+            <td><span class="r-note tip">Contrairement à l'Étincelle normale, le triple est garanti (pas de chance).</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="r-input">
+                <div class="r-input-item"><span class="r-input-qty">×10</span> Même Familier ou Montilier (à booster en 1ᵉʳ)</div>
+              </div>
+            </td>
+            <td>
+              <div class="r-output">Familier / Montilier boosté</div>
+              <div class="r-output-sub">+25% sur toutes les statistiques</div>
+            </td>
+            <td><span class="r-note tip">10 exemplaires requis — boost plus puissant que l'équipement classique.</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- PIERRICK -->
+  <div class="recette-pnj" id="s-recettes-2" data-s="Pierrick l'Unificateur">
+    <div class="recette-pnj-header">
+      <div class="recette-pnj-icon">💎</div>
+      <div class="recette-pnj-info">
+        <div class="recette-pnj-name">Pierrick l'Unificateur</div>
+        <div class="recette-pnj-loc">📍 Atelier de Bonta</div>
+      </div>
+    </div>
+    <div class="alert alert-warning" style="margin:16px 16px 0;border-radius:var(--radius)"><b>Prérequis :</b> L'objet doit avoir été <b>boosté par le Tavernier Feubuk</b> au préalable. La stat ciblée par la gemme doit déjà exister sur l'objet.</div>
+    <div class="recette-table-wrap" style="margin-top:12px">
+      <table class="recette-table">
+        <thead>
+          <tr>
+            <th>Slot 1 — Obligatoire</th>
+            <th>Slot 2 — Obligatoire</th>
+            <th>Slot 3 — Optionnel</th>
+            <th>Résultat</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="r-input-item"><span class="r-input-qty">×1</span> Objet à améliorer <span style="font-size:.75rem;color:var(--text-muted)">(boosté Tavernier)</span></div></td>
+            <td><div class="r-input-item"><span class="r-input-qty">×1</span> Gemme Horadrique</div></td>
+            <td><div class="r-note" style="font-style:italic;color:var(--text-dim)">Rien</div></td>
+            <td>
+              <div class="r-output">Stat augmentée de 26% à 50%</div>
+              <div class="r-output-sub">Valeur dépend du jet de la gemme</div>
+            </td>
+          </tr>
+          <tr>
+            <td><div class="r-input-item"><span class="r-input-qty">×1</span> Objet à améliorer <span style="font-size:.75rem;color:var(--text-muted)">(boosté Tavernier)</span></div></td>
+            <td><div class="r-input-item"><span class="r-input-qty">×1</span> Gemme Horadrique</div></td>
+            <td><div class="r-input-item"><span class="r-input-qty">×1</span> Étincelle Sublimée</div></td>
+            <td>
+              <div class="r-output">Bonus de la gemme × 2</div>
+              <div class="r-output-sub">10% de chance d'être × 3 à la place</div>
+            </td>
+          </tr>
+          <tr>
+            <td><div class="r-input-item"><span class="r-input-qty">×1</span> Objet à améliorer <span style="font-size:.75rem;color:var(--text-muted)">(boosté Tavernier)</span></div></td>
+            <td><div class="r-input-item"><span class="r-input-qty">×1</span> Gemme Horadrique</div></td>
+            <td><div class="r-input-item"><span class="r-input-qty">×1</span> Étincelle Sublimée Parfaite</div></td>
+            <td>
+              <div class="r-output">Bonus de la gemme × 3<span class="r-badge r-badge-gold">Garanti</span></div>
+              <div class="r-output-sub">Triple systématique, sans aléatoire</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="padding:14px 16px;background:var(--surface3);border-top:1px solid var(--border)">
+      <p style="font-size:.82rem;color:var(--text-muted)"><b style="color:var(--text)">Exemple :</b> Un objet avec 100 Force + Ombrine Parfaite à 40% → <b style="color:var(--amber)">+40 Force</b>. Avec Étincelle Sublimée → <b style="color:var(--amber)">+80 Force</b> garanti (ou +120 sur 10%). Avec Étincelle Parfaite → <b style="color:var(--gold)">+120 Force</b> garanti.</p>
+    </div>
+  </div>
+
+  <!-- GISLAIN SCYTHE -->
+  <div class="recette-pnj" id="s-recettes-3" data-s="Gislain Scythe">
+    <div class="recette-pnj-header">
+      <div class="recette-pnj-icon">♻</div>
+      <div class="recette-pnj-info">
+        <div class="recette-pnj-name">Gislain Scythe</div>
+        <div class="recette-pnj-loc">📍 Atelier de Bonta — Recyclage de Dofus</div>
+      </div>
+    </div>
+    <div class="alert alert-warning" style="margin:16px 16px 0;border-radius:var(--radius)"><b>Restriction :</b> Maximum <b>1 Dofus par échange</b>. Les Dofus obtenus via un <b>succès</b> ne peuvent pas être brisés ici.</div>
+    <div class="recette-table-wrap" style="margin-top:12px">
+      <table class="recette-table">
+        <thead>
+          <tr>
+            <th>Ingrédient</th>
+            <th>Résultat</th>
+            <th>Note</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="r-input-item"><span class="r-input-qty">×1</span> Dofus (classique)</div></td>
+            <td>
+              <div class="r-output">3 Larmes Éthérées</div>
+            </td>
+            <td><span class="r-note">Utilisez-les chez Thalyion pour évoluer vos Dofus.</span></td>
+          </tr>
+          <tr>
+            <td><div class="r-input-item"><span class="r-input-qty">×1</span> Dofaléa</div></td>
+            <td>
+              <div class="r-output">5 Larmes Éthérées</div>
+            </td>
+            <td><span class="r-note tip">Le Dofaléa vaut plus car ses stats sont supérieures.</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- THALYION -->
+  <div class="recette-pnj" id="s-recettes-4" data-s="Thalyion, Forgeron des Âmes">
+    <div class="recette-pnj-header">
+      <div class="recette-pnj-icon">💧</div>
+      <div class="recette-pnj-info">
+        <div class="recette-pnj-name">Thalyion, Forgeron des Âmes</div>
+        <div class="recette-pnj-loc">📍 Atelier de Bonta — Évolution &amp; Fusion de Dofus</div>
+      </div>
+    </div>
+    <div class="recette-table-wrap" style="margin-top:12px">
+      <table class="recette-table">
+        <thead>
+          <tr>
+            <th>Ingrédients</th>
+            <th>Résultat</th>
+            <th>Jets obtenus</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="r-input">
+                <div class="r-input-item"><span class="r-input-qty">×1</span> Dofus Original</div>
+                <div class="r-input-item"><span class="r-input-qty">×15</span> Larmes Éthérées</div>
+              </div>
+            </td>
+            <td>
+              <div class="r-output">Dofus Rare<span class="r-badge r-badge-gold">Rang 2</span></div>
+            </td>
+            <td><span style="color:var(--amber);font-weight:700">Jet 2.51</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="r-input">
+                <div class="r-input-item"><span class="r-input-qty">×1</span> Dofus Rare</div>
+                <div class="r-input-item"><span class="r-input-qty">×15</span> Larmes Éthérées</div>
+              </div>
+            </td>
+            <td>
+              <div class="r-output">Dofus Mythique<span class="r-badge r-badge-gold">Rang 3</span></div>
+            </td>
+            <td><span style="color:var(--gold);font-weight:700">Jet amélioré</span></td>
+          </tr>
+          <tr style="cursor:help" class="has-tooltip" data-tt-title="Doternel" data-tt-stats='["20% Vitalité","20% Force","20% Agilité","20% Chance","20% Intelligence","20% Sagesse"]'>
+            <td>
+              <div class="r-input">
+                <div class="r-input-item"><span style="font-size:.8rem;color:var(--text-muted)">1 Carte de Boss de chaque boss de donjon</span></div>
+              </div>
+            </td>
+            <td>
+              <div class="r-output">Doternel<span class="r-badge r-badge-green">Légendaire</span></div>
+              <div class="r-output-sub">Survolez pour voir les stats</div>
+            </td>
+            <td><span style="color:var(--gold);font-weight:700">Unique</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="padding:14px 16px;background:var(--surface3);border-top:1px solid var(--border)">
+      <p style="font-size:.82rem;color:var(--text-muted)">Les <b style="color:var(--text)">Cartes de Boss</b> s'obtiennent à <b>1%</b> sur tous les boss de donjon. Il faut en collecter une de chaque boss pour forger le Doternel.</p>
+    </div>
+  </div>
+
+  <div class="related-bar"><div class="related-lbl">Voir aussi</div><div class="related-links">
+    <div class="rel-link" onclick="go('drops')">💎 Drops rares</div>
+    <div class="rel-link" onclick="go('stuff')">⚙ Amélioration du stuff</div>
+    <div class="rel-link" onclick="go('dofus')">💧 Évolution Dofus</div>
+    <div class="rel-link" onclick="go('monnaies')">💰 Monnaies</div>
   </div></div>
 </div>
 
@@ -787,31 +1117,14 @@ tr.has-tooltip{cursor:help}
     <div class="summary-hd">⚡ En résumé</div>
     <ul class="summary-list">
       <li>Droppables sur des boss spécifiques à <strong>0.1%</strong> — voir la <a class="ilink" onclick="go('drops')">page Drops Rares</a></li>
-      <li>Brisez vos Dofus → <strong><span class="gl" data-term="Larme Éthérée">Larmes Éthérées</span></strong> → évolution chez Thalyion à l'Atelier de Bonta</li>
+      <li>Brisez vos Dofus chez <strong>Gislain Scythe</strong> → <strong><span class="gl" data-term="Larme Éthérée">Larmes Éthérées</span></strong> → évolution chez <strong>Thalyion</strong></li>
       <li><strong>3 rangs</strong> : Original (jet 1.29) → Rare (jet 2.51) → Mythique</li>
+      <li>Collectez une <strong>Carte de Boss</strong> de chaque donjon → fusionnez chez Thalyion pour obtenir le <strong>Doternel</strong></li>
     </ul>
   </div>
-  <div class="toc-wrap" id="toc-dofus"></div>
-  <div class="card" id="s-dofus-1" data-s="Recyclage">
-    <div class="card-title"><span class="ct-icon">♻</span>Recyclage — PNJ Gislain Scythe (Atelier de Bonta)</div>
-    <div class="alert alert-warning">Un Dofus obtenu via un <b>succès</b> ne peut pas être brisé dans ce système.</div>
-    <div class="grid" style="margin-top:10px">
-      <div class="mini-card gold-accent"><div class="mini-card-label">Dofus classique</div><div class="mini-card-value"><b>3 <span class="gl" data-term="Larme Éthérée">Larmes</span></b> par Dofus brisé.</div></div>
-      <div class="mini-card gold-accent"><div class="mini-card-label">Dofaléa</div><div class="mini-card-value"><b>5 <span class="gl" data-term="Larme Éthérée">Larmes</span></b> par Dofaléa brisé.</div></div>
-    </div>
-    <p style="color:var(--text-muted);font-size:.85rem;margin-top:12px">Limite : <b>1 seul dofus</b> par échange.</p>
-  </div>
-  <div class="card" id="s-dofus-2" data-s="Évolution">
-    <div class="card-title"><span class="ct-icon">⬆</span>Évolution — PNJ Thalyion (Atelier de Bonta)</div>
-    <div class="table-wrap"><table><thead><tr><th>Rang</th><th>Coût</th><th>Jets obtenus</th></tr></thead><tbody>
-      <tr><td><b>Original</b> <span style="color:var(--text-muted);font-size:.8rem">(base)</span></td><td><span style="color:var(--text-muted)">Aucun craft</span></td><td>Jet 1.29</td></tr>
-      <tr><td><b style="color:var(--amber)">Rare</b></td><td>15 <a class="ilink" onclick="go('monnaies')">Larmes éthérées</a> + Dofus Original</td><td>Jet 2.51</td></tr>
-      <tr><td><b style="color:var(--gold)">Mythique</b></td><td>15 <a class="ilink" onclick="go('monnaies')">Larmes éthérées</a> + Dofus Rare</td><td>Jet amélioré</td></tr>
-    </tbody></table></div>
-    <div class="divider"></div>
-    <p style="font-size:.85rem;color:var(--text-muted)">Sur qui je drop mes dofus ? → <a class="ilink" onclick="go('drops')">Drops Rares</a></p>
-  </div>
+  <div class="alert alert-info">Toutes les recettes de recyclage et d'évolution sont regroupées dans la <a class="ilink" onclick="go('recettes')"><b>page Recettes PNJ</b></a>.</div>
   <div class="related-bar"><div class="related-lbl">Voir aussi</div><div class="related-links">
+    <div class="rel-link" onclick="go('recettes')">📋 Recettes PNJ</div>
     <div class="rel-link" onclick="go('drops')">💎 Drops rares</div>
     <div class="rel-link" onclick="go('monnaies')">💰 Monnaies</div>
   </div></div>
@@ -824,47 +1137,49 @@ tr.has-tooltip{cursor:help}
   <div class="summary-card">
     <div class="summary-hd">⚡ En résumé</div>
     <ul class="summary-list">
-      <li><strong>5 BowfBalls</strong> avec des taux de capture distincts — droppables à <strong>10%</strong> sur les boss de donjon</li>
-      <li>Sort <strong>Lancer de BowfBall</strong> disponible chez le <strong>Prêtre au Zaap d'Astrub</strong></li>
-      <li>Jusqu'à <strong>3 BowfBalls équipées simultanément</strong> — une tentative de capture par ball en fin de combat</li>
-      <li>Les invocations issues des captures <strong>ne comptent pas</strong> dans votre total d'invocations</li>
+      <li><strong>5 BowfBalls</strong> avec des taux de capture distincts — Poké/Super/Hyper droppables à <strong>10%</strong> sur les boss</li>
+      <li><strong>Master Ball</strong> achetable chez le Prêtre au Zaap d'Astrub pour <strong>3 200 000 Kamas</strong></li>
+      <li><strong>Honor Ball</strong> obtenue via le système d'<a class="ilink" onclick="go('alignement')">Alignement</a> — 1 ball par grade atteint</li>
+      <li>Jusqu'à <strong>3 BowfBalls équipées simultanément</strong> — les invocations sont indépendantes de votre total</li>
     </ul>
   </div>
   <div class="toc-wrap" id="toc-capture"></div>
-
   <div class="card" id="s-capture-1" data-s="Les BowfBalls">
     <div class="card-title"><span class="ct-icon">🎯</span>Les 5 BowfBalls</div>
-    <div class="alert alert-gold"><b>Drop :</b> Poké Ball, Super Ball et Hyper Ball droppent à <b>10%</b> sur <b>tous les boss de donjon</b>. Master Ball et Honor Ball s'obtiennent autrement.</div>
     <div class="ball-grid">
       <div class="ball-card b-poke">
         <div class="ball-name">🔴 Poké Ball</div>
         <div class="ball-rate">25%</div>
         <div class="ball-target">Hors boss uniquement</div>
+        <div style="font-size:.75rem;color:var(--text-muted);margin-top:8px">Drop : 10% sur tous les boss de donjon</div>
       </div>
       <div class="ball-card b-super">
         <div class="ball-name">🔵 Super Ball</div>
         <div class="ball-rate">50%</div>
         <div class="ball-target">Hors boss uniquement</div>
+        <div style="font-size:.75rem;color:var(--text-muted);margin-top:8px">Drop : 10% sur tous les boss de donjon</div>
       </div>
       <div class="ball-card b-hyper">
         <div class="ball-name">🟢 Hyper Ball</div>
         <div class="ball-rate">75%</div>
         <div class="ball-target">Hors boss uniquement</div>
+        <div style="font-size:.75rem;color:var(--text-muted);margin-top:8px">Drop : 10% sur tous les boss de donjon</div>
       </div>
       <div class="ball-card b-master">
         <div class="ball-name">⭐ Master Ball</div>
         <div class="ball-rate">100%</div>
         <div class="ball-target">Hors boss uniquement</div>
+        <div style="font-size:.75rem;color:var(--text-muted);margin-top:8px">Achat : <b style="color:var(--amber)">3 200 000 Kamas</b> chez le Prêtre — Zaap d'Astrub</div>
       </div>
       <div class="ball-card b-honor">
         <div class="ball-name">💜 Honor Ball</div>
         <div class="ball-rate">50%</div>
         <div class="ball-target">Boss uniquement</div>
+        <div style="font-size:.75rem;color:var(--text-muted);margin-top:8px">Obtenue via l'<a class="ilink" onclick="go('alignement')">Alignement</a> — 1 ball par grade atteint</div>
       </div>
     </div>
     <div class="alert alert-info" style="margin-top:16px">Il n'est <b>pas possible d'équiper deux fois la même BowfBall</b> en simultané — limitation pour préserver l'équilibre du système.</div>
   </div>
-
   <div class="card" id="s-capture-2" data-s="Comment capturer">
     <div class="card-title"><span class="ct-icon">⚙</span>Comment capturer un monstre ?</div>
     <div class="steps">
@@ -875,7 +1190,6 @@ tr.has-tooltip{cursor:help}
     </div>
     <div class="alert alert-warning" style="margin-top:12px">Les balls à usage <b>Hors Boss</b> ne fonctionneront pas sur un boss, et l'<b>Honor Ball</b> est réservée exclusivement aux boss.</div>
   </div>
-
   <div class="card" id="s-capture-3" data-s="Utiliser les captures">
     <div class="card-title"><span class="ct-icon">🧬</span>Comment utiliser les monstres capturés ?</div>
     <div class="steps">
@@ -885,21 +1199,81 @@ tr.has-tooltip{cursor:help}
     </div>
     <div class="alert alert-success" style="margin-top:12px"><b>Invocations indépendantes :</b> Les monstres capturés via les BowfBalls <b>n'utilisent pas</b> votre total d'invocations habituel — ce sont des invocations à part entière.</div>
   </div>
+  <div class="related-bar"><div class="related-lbl">Voir aussi</div><div class="related-links">
+    <div class="rel-link" onclick="go('drops')">💎 Drops rares</div>
+    <div class="rel-link" onclick="go('alignement')">⚖ Alignement</div>
+    <div class="rel-link" onclick="go('tuto')">🚀 Guide débutant</div>
+  </div></div>
+</div>
 
-  <div class="card" id="s-capture-4" data-s="Slots et inventaire">
-    <div class="card-title"><span class="ct-icon">🎒</span>Slots dédiés dans l'inventaire</div>
-    <p style="color:var(--text-muted);font-size:.9rem;margin-bottom:12px">3 emplacements spéciaux ont été ajoutés à l'inventaire pour accueillir les BowfBalls. Ces slots sont distincts de l'équipement classique.</p>
-    <div class="grid">
-      <div class="mini-card blue-accent"><div class="mini-card-label">Slots BowfBall</div><div class="mini-card-value"><b>3 slots</b> dédiés dans l'inventaire, indépendants de l'équipement.</div></div>
-      <div class="mini-card blue-accent"><div class="mini-card-label">Limitation</div><div class="mini-card-value">Impossible d'équiper <b>deux fois la même</b> BowfBall simultanément.</div></div>
-      <div class="mini-card blue-accent"><div class="mini-card-label">Capacité</div><div class="mini-card-value">Chaque BowfBall peut contenir <b>un monstre capturé</b>.</div></div>
+<!-- ══ ALIGNEMENT ══ -->
+<div id="alignement" class="panel">
+  <div class="breadcrumb"><a onclick="go('accueil')">Wiki</a><span class="breadcrumb-sep">›</span><span>Alignement</span></div>
+  <div class="page-header"><h1>Système d'Alignement</h1><div class="subtitle">Bontarien, Brakmarien ou Mercenaire — montez vos grades pour gagner des Honor Balls</div></div>
+  <div class="summary-card">
+    <div class="summary-hd">⚡ En résumé</div>
+    <ul class="summary-list">
+      <li>Choisissez votre camp avec <span class="cmd">.bonta</span> / <span class="cmd">.brak</span> / <span class="cmd">.mercenaire</span></li>
+      <li>Chaque monstre vaincu rapporte des <strong>points d'honneur</strong> — les boss en rapportent davantage</li>
+      <li>À chaque nouveau grade, vous recevez autant d'<strong>Honor Balls</strong> que votre numéro de grade (ex : grade 5 = 5 balls)</li>
+      <li>L'<strong>Honor Ball</strong> est la seule BowfBall capable de capturer un <strong>boss</strong></li>
+    </ul>
+  </div>
+  <div class="toc-wrap" id="toc-alignement"></div>
+
+  <div class="card" id="s-align-1" data-s="Choisir son alignement">
+    <div class="card-title"><span class="ct-icon">⚖</span>Choisir son alignement</div>
+    <div class="align-grid">
+      <div class="align-card a-bonta">
+        <div class="align-card-title">🔵 Bontarien</div>
+        <div class="align-cmd">.bonta</div>
+        <div class="align-desc">Rejoignez les forces de Bonta. Chaque grade obtenu vous récompense d'Honor Balls utilisables pour capturer des boss.</div>
+      </div>
+      <div class="align-card a-brak">
+        <div class="align-card-title">🔴 Brakmarien</div>
+        <div class="align-cmd">.brak</div>
+        <div class="align-desc">Rejoignez les forces de Brakmar. Même système de grades et de récompenses que Bonta, côté ombres.</div>
+      </div>
+      <div class="align-card a-merc">
+        <div class="align-card-title">⭐ Mercenaire</div>
+        <div class="align-cmd">.mercenaire</div>
+        <div class="align-desc">Ni Bonta ni Brakmar — pour les joueurs qui préfèrent rester neutres. Les grades et Honor Balls restent accessibles.</div>
+      </div>
     </div>
   </div>
 
+  <div class="card" id="s-align-2" data-s="Points d'honneur">
+    <div class="card-title"><span class="ct-icon">🏆</span>Comment gagner des points d'honneur ?</div>
+    <div class="table-wrap">
+      <table class="pts-table">
+        <thead><tr><th>Source</th><th>Points gagnés</th></tr></thead>
+        <tbody>
+          <tr><td>Monstre standard vaincu</td><td><span class="honor-pts">1 point</span></td></tr>
+          <tr><td>Boss de donjon niv. 1–50</td><td><span class="honor-pts">5 points</span></td></tr>
+          <tr><td>Boss de donjon niv. 51–100</td><td><span class="honor-pts">10 points</span></td></tr>
+          <tr><td>Boss de donjon niv. 101–150</td><td><span class="honor-pts">15 points</span></td></tr>
+          <tr><td>Boss de donjon niv. 151+</td><td><span class="honor-pts">20 points</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card" id="s-align-3" data-s="Grades &amp; Honor Balls">
+    <div class="card-title"><span class="ct-icon">💜</span>Grades &amp; récompenses en Honor Balls</div>
+    <div class="alert alert-purple">À chaque grade atteint, vous recevez un nombre d'<b>Honor Balls</b> égal à votre numéro de grade. Plus vous progressez, plus la récompense est généreuse.</div>
+    <div class="honor-table-wrap">
+      <table class="grade-table">
+        <thead><tr><th>Grade</th><th>Honor Balls reçues</th><th>Cumulé total</th></tr></thead>
+        <tbody id="gradeTableBody"></tbody>
+      </table>
+    </div>
+    <div class="alert alert-info" style="margin-top:16px">L'<b>Honor Ball</b> est la seule ball capable de capturer un <b>boss</b> en combat, avec un taux de <b>50%</b>. Voir la <a class="ilink" onclick="go('capture')">page Capture</a> pour l'utiliser.</div>
+  </div>
+
   <div class="related-bar"><div class="related-lbl">Voir aussi</div><div class="related-links">
+    <div class="rel-link" onclick="go('capture')">🎯 Capture de monstres</div>
+    <div class="rel-link" onclick="go('cmds')">⌨ Commandes</div>
     <div class="rel-link" onclick="go('drops')">💎 Drops rares</div>
-    <div class="rel-link" onclick="go('passifs')">🛡 Passifs</div>
-    <div class="rel-link" onclick="go('tuto')">🚀 Guide débutant</div>
   </div></div>
 </div>
 
@@ -938,7 +1312,7 @@ const FAQ_CATS=[
   {id:'sorts',label:'Sorts',icon:'📦'},{id:'monnaie',label:'Monnaies',icon:'💰'},
   {id:'ombre',label:'Mode Ombre',icon:'💀'},{id:'maitrise',label:'Maîtrise',icon:'👑'},
   {id:'dofus',label:'Dofus',icon:'💧'},{id:'songe',label:'Songe Infini',icon:'🌀'},
-  {id:'capture',label:'Capture',icon:'🎯'},
+  {id:'capture',label:'Capture',icon:'🎯'},{id:'alignement',label:'Alignement',icon:'⚖'},
 ];
 const FAQ=[
   {cat:'depart',q:"Le serveur est-il vraiment gratuit ?",a:`<p>Oui, Pov'Typus est <strong>100% FreeToWin</strong>. Aucun avantage ne s'achète avec de l'argent réel. Tout contenu est accessible uniquement via le jeu.</p>`},
@@ -950,35 +1324,34 @@ const FAQ=[
   {cat:'stuff',q:"Où acheter mon équipement ?",a:`<p>À la <strong>Taverne d'Astrub</strong> avec des <a class="ilink" onclick="go('monnaies')">Pièces d'Or</a>. Les items sont livrés en <strong>jet parfait</strong>. Voir <a class="ilink" onclick="go('stuff')">Équipement &amp; Amélioration</a>.</p>`},
   {cat:'stuff',q:"Les exos PA / PM / PO sont-ils garantis ?",a:`<p>Oui ! Les runes <strong>PA, PM et PO</strong> ont un taux de réussite de <strong>100%</strong> en <a class="ilink" onclick="go('stuff')">forgemagie</a>.</p>`},
   {cat:'stuff',q:"Quelles sont les limites de forgemagie ?",a:`<ul><li>Overmax jusqu'à <strong>+50%</strong> au-dessus des stats maximum</li><li>Plafonds absolus : ex. <strong>504 Vitalité</strong>, <strong>101 Force</strong></li><li>Items <strong>niveau 190+</strong> : limites augmentées de <strong>+20%</strong></li></ul><div class="faq-tip">💡 Détails sur <a class="ilink" onclick="go('stuff')">Équipement &amp; Amélioration</a>.</div>`},
-  {cat:'stuff',q:"Comment fonctionne le boost Tavernier Feubuk ?",a:`<ul><li>Rassemblez <strong>3 exemplaires identiques</strong> (10 pour familier/montilier)</li><li>Placez l'item à booster <strong>en première position</strong> dans l'échange</li><li>Résultat : <strong>+10%</strong> permanent (ou <strong>+25%</strong> pour familier/montilier)</li></ul><div class="faq-warn">⚠ Une fois boosté, l'item <strong>ne peut plus être forgemagé</strong>. Finalisez votre <a class="ilink" onclick="go('stuff')">FM</a> avant !</div>`},
-  {cat:'sertis',q:"C'est quoi le sertissage ?",a:`<p>Le <a class="ilink" onclick="go('stuff')">sertissage</a> permet d'<strong>amplifier une statistique déjà présente</strong> sur un équipement grâce à une <strong>Gemme Horadrique</strong>, en y ajoutant un pourcentage (26% à 50%) de la valeur actuelle de cette stat.</p><div class="faq-tip">💡 Avec une Étincelle Sublimée, le bonus est doublé (avec 10% de chance d'être triplé !).</div>`},
-  {cat:'sertis',q:"Quels sont les prérequis pour sertir ?",a:`<ul><li>L'objet doit <strong>obligatoirement</strong> avoir reçu le <a class="ilink" onclick="go('stuff')">boost du Tavernier Feubuk</a>.</li><li>Une <strong>Gemme Horadrique</strong> du type correspondant à la stat à booster.</li><li>Optionnel : une <strong>Étincelle Sublimée</strong> pour amplifier le bonus.</li></ul><div class="faq-warn">⚠ La statistique ciblée par la gemme doit déjà exister sur l'objet, sinon le sertissage est refusé.</div>`},
-  {cat:'sertis',q:"Quelles sont les 4 Gemmes Horadriques ?",a:`<ul><li><strong>Ombrine Parfaite</strong> → Force</li><li><strong>Émeraude Parfaite</strong> → Agilité</li><li><strong>Saphir Parfait</strong> → Chance</li><li><strong>Rubis Parfait</strong> → Intelligence</li></ul><p>Chaque gemme apporte entre <strong>26% et 50%</strong> de la stat correspondante de l'item.</p>`},
+  {cat:'stuff',q:"Comment fonctionne le boost Tavernier Feubuk ?",a:`<ul><li>Rassemblez <strong>3 exemplaires identiques</strong> (10 pour familier/montilier)</li><li>Placez l'item à booster <strong>en première position</strong> dans l'échange</li><li>Résultat : <strong>+10%</strong> permanent (ou <strong>+25%</strong> pour artefact/familier/montilier)</li></ul><div class="faq-warn">⚠ Une fois boosté, l'item <strong>ne peut plus être forgemagé</strong>. Finalisez votre <a class="ilink" onclick="go('stuff')">FM</a> avant !</div><div class="faq-tip">💡 Voir toutes les recettes → <a class="ilink" onclick="go('recettes')">Page Recettes</a></div>`},
+  {cat:'sertis',q:"C'est quoi le sertissage ?",a:`<p>Le <a class="ilink" onclick="go('stuff')">sertissage</a> permet d'<strong>amplifier une statistique déjà présente</strong> sur un équipement grâce à une <strong>Gemme Horadrique</strong>, en y ajoutant un pourcentage (26% à 50%) de la valeur actuelle de cette stat.</p><div class="faq-tip">💡 Avec une Étincelle Sublimée, le bonus est doublé. Avec l'Étincelle Parfaite (5 Étincelles fusionnées), il est triplé à coup sûr !</div>`},
+  {cat:'sertis',q:"Quels sont les prérequis pour sertir ?",a:`<ul><li>L'objet doit <strong>obligatoirement</strong> avoir reçu le <a class="ilink" onclick="go('stuff')">boost du Tavernier Feubuk</a>.</li><li>Une <strong>Gemme Horadrique</strong> du type correspondant à la stat à booster.</li><li>Optionnel : une <strong>Étincelle Sublimée</strong> ou <strong>Étincelle Sublimée Parfaite</strong> pour amplifier le bonus.</li></ul><div class="faq-warn">⚠ La statistique ciblée par la gemme doit déjà exister sur l'objet, sinon le sertissage est refusé.</div>`},
+  {cat:'sertis',q:"Quelle est la différence entre l'Étincelle Sublimée et l'Étincelle Parfaite ?",a:`<ul><li><strong>Étincelle Sublimée</strong> : double le bonus de la gemme, avec <strong>10% de chance de le tripler</strong> à la place.</li><li><strong>Étincelle Sublimée Parfaite</strong> : triple le bonus <strong>à coup sûr</strong>, sans aléatoire.</li></ul><div class="faq-highlight">⭐ L'Étincelle Parfaite s'obtient en fusionnant 5 Étincelles Sublimées chez le Tavernier Feubuk.</div>`},
   {cat:'sertis',q:"Où dropper les gemmes et l'étincelle ?",a:`<ul><li><strong>Gemmes Horadriques</strong> : 2% de drop sur <strong>tous les boss de donjon</strong></li><li><strong>Étincelle Sublimée</strong> : 2% sur les <strong>archimonstres niveau 50 et plus</strong></li></ul><div class="faq-tip">💡 Voir la <a class="ilink" onclick="go('drops')">page Drops Rares</a> (onglets Gemmes / Étincelle).</div>`},
-  {cat:'sertis',q:"À quoi sert l'Étincelle Sublimée exactement ?",a:`<p>Placée dans le 3ème slot lors du sertissage, elle <strong>double automatiquement le bonus</strong> apporté par la Gemme Horadrique.</p><div class="faq-highlight">⭐ De plus, il y a <strong>10% de chance</strong> que le bonus soit <strong>triplé</strong> à la place !</div><p>Exemple : un bonus de +40 Force devient +80 garantis, voire +120 (chance sur 10).</p>`},
   {cat:'sorts',q:"Comment apprendre mes sorts au-delà du niveau 100 ?",a:`<p>Achetez des <a class="ilink" onclick="go('sorts')">Coffres de sorts</a> à la Milice d'Astrub contre des <a class="ilink" onclick="go('monnaies')">Orichors</a>.</p><ul><li>Coffre 101–150 : <strong>600 Orichors</strong></li><li>Coffre 151–200 : <strong>1 200 Orichors</strong></li></ul><div class="faq-tip">💡 Chaque coffre débloque <strong>tous les sorts</strong> de sa tranche d'un coup.</div>`},
   {cat:'sorts',q:"Comment obtenir des Orichors ?",a:`<p>Les <a class="ilink" onclick="go('monnaies')">Orichors</a> s'obtiennent :</p><ul><li>Farm hors donjon : <strong>1% de chance</strong> par combat</li><li>En donjon selon le niveau : <strong>1 à 4 Orichors</strong> par salle</li><li>Donjon à vagues : <strong>+10 Orichors</strong> bonus</li></ul><div class="faq-tip">💡 Tableau complet dans la <a class="ilink" onclick="go('monnaies')">section Monnaies</a>.</div>`},
-  {cat:'monnaie',q:"Quelles sont les monnaies du serveur ?",a:`<ul><li>🪙 <strong><a class="ilink" onclick="go('monnaies')">Pièces d'Or</a></strong> — équipement à la <a class="ilink" onclick="go('stuff')">Taverne</a></li><li>🔮 <strong><a class="ilink" onclick="go('monnaies')">Orichors</a></strong> — <a class="ilink" onclick="go('sorts')">Coffres de sorts</a> 101-200</li><li>💧 <strong><a class="ilink" onclick="go('monnaies')">Larmes Éthérées</a></strong> — <a class="ilink" onclick="go('dofus')">évolution des Dofus</a></li><li>🌌 <strong><a class="ilink" onclick="go('monnaies')">Reflets Oniriques</a></strong> — récompenses du <a class="ilink" onclick="go('songe')">Songe Infini</a></li><li>💰 <strong>Kamas</strong> — parchotages, cosmétiques, sorts spéciaux</li></ul>`},
+  {cat:'monnaie',q:"Quelles sont les monnaies du serveur ?",a:`<ul><li>🪙 <strong><a class="ilink" onclick="go('monnaies')">Pièces d'Or</a></strong> — équipement à la <a class="ilink" onclick="go('stuff')">Taverne</a></li><li>🔮 <strong><a class="ilink" onclick="go('monnaies')">Orichors</a></strong> — <a class="ilink" onclick="go('sorts')">Coffres de sorts</a> 101-200</li><li>💧 <strong><a class="ilink" onclick="go('monnaies')">Larmes Éthérées</a></strong> — <a class="ilink" onclick="go('dofus')">évolution des Dofus</a></li><li>🌌 <strong><a class="ilink" onclick="go('monnaies')">Reflets Oniriques</a></strong> — récompenses du <a class="ilink" onclick="go('songe')">Songe Infini</a></li><li>💰 <strong>Kamas</strong> — parchotages, cosmétiques, sorts spéciaux, Master Ball</li></ul>`},
   {cat:'monnaie',q:"Vaut-il mieux farmer en zone ou en donjon ?",a:`<p>Le donjon est bien plus rentable : <a class="ilink" onclick="go('monnaies')">Pièces d'Or</a> ×5 et <a class="ilink" onclick="go('monnaies')">Orichors</a> à chaque salle.</p>`},
   {cat:'monnaie',q:"Comment obtenir des Larmes Éthérées ?",a:`<p>Brisez vos <a class="ilink" onclick="go('drops')">Dofus</a> chez <strong>Gislain Scythe</strong> à l'Atelier de Bonta :</p><ul><li>Dofus classique → <strong>3 <a class="ilink" onclick="go('monnaies')">Larmes</a></strong></li><li>Dofaléa → <strong>5 <a class="ilink" onclick="go('monnaies')">Larmes</a></strong></li></ul><div class="faq-warn">⚠ 1 dofus max par échange. Les dofus obtenus par succès ne peuvent pas être brisés.</div>`},
   {cat:'ombre',q:"C'est quoi le mode Ombre ?",a:`<p>Le <a class="ilink" onclick="go('ombre')">mode Ombre</a> active la <strong>mort permanente en PvM</strong>. Si vaincu → retour niveau 1, inventaire vidé.</p><div class="faq-highlight">⭐ En contrepartie : bonus <strong>×3</strong> sur l'expérience ET le drop.</div>`},
   {cat:'ombre',q:"Jusqu'à quel niveau peut-on l'activer ?",a:`<p>Maximum <strong>niveau 20</strong>. Parlez au <strong>Pactisant des Ténèbres</strong> (accessible via <span class="cmd">.start</span>).</p>`},
   {cat:'ombre',q:"Que se passe-t-il si je meurs en mode Ombre ?",a:`<ul><li>Retour au <strong>niveau 1</strong></li><li>Inventaire <strong>entièrement vidé</strong> (sauf objets de départ)</li><li>Expérience ×3 jusqu'au <strong>plus haut niveau atteint</strong></li><li>Les <strong>succès ne sont pas reset</strong></li></ul>`},
   {cat:'ombre',q:"Le mode Ombre est-il actif dans le Songe Infini ?",a:`<p><strong>Non.</strong> Le <a class="ilink" onclick="go('ombre')">mode Ombre</a> est inactif dans le <a class="ilink" onclick="go('songe')">Songe Infini</a> — aucune perte en cas d'échec.</p>`},
-  {cat:'ombre',q:"Peut-on utiliser .retry en mode Ombre ?",a:`<p><strong>Non.</strong> La commande <span class="cmd">.retry</span> est interdite. Tout abandon est considéré comme une défaite. Voir la <a class="ilink" onclick="go('cmds')">liste des commandes</a>.</p>`},
   {cat:'maitrise',q:"C'est quoi la Maîtrise de classe ?",a:`<p>La <a class="ilink" onclick="go('maitrise')">Maîtrise</a> offre des <strong>bonus permanents</strong> tous les 20 niveaux (de 20 à 201), selon 3 spécialisations : <strong>DPS</strong>, <strong>Soutien</strong> ou <strong>Tank</strong>.</p>`},
-  {cat:'maitrise',q:"Comment progresser en Maîtrise ?",a:`<ul><li>Leveling classique : un palier de <a class="ilink" onclick="go('maitrise')">Maîtrise</a> tous les <strong>20 niveaux</strong></li><li><a class="ilink" onclick="go('songe')">Songe Infini</a> : un palier tous les <strong>5 étages</strong> vaincus</li></ul><div class="faq-tip">💡 Le Songe est le moyen le plus rapide au-delà du niveau 200.</div>`},
+  {cat:'maitrise',q:"Comment progresser en Maîtrise ?",a:`<ul><li>Leveling classique : un palier de <a class="ilink" onclick="go('maitrise')">Maîtrise</a> tous les <strong>20 niveaux</strong></li><li><a class="ilink" onclick="go('songe')">Songe Infini</a> : un palier tous les <strong>5 étages</strong> vaincus</li></ul>`},
   {cat:'maitrise',q:"Quel est le bonus au niveau 201 ?",a:`<p><strong>+5% Mêlée / Distance / Sorts</strong> — commun aux 3 spécialisations.</p><div class="faq-highlight">⭐ De plus, chaque tranche de 5 étages du <a class="ilink" onclick="go('songe')">Songe Infini</a> donne <strong>+2%</strong> en Force/Chance/Agilité/Intelligence.</div>`},
-  {cat:'dofus',q:"Comment améliorer mes Dofus ?",a:`<p>À l'<strong>Atelier de Bonta</strong> : brisez chez <strong>Gislain Scythe</strong> → <a class="ilink" onclick="go('monnaies')">Larmes Éthérées</a> → upgradez chez <strong>Thalyion</strong>.</p><ul><li>Original → Rare : 15 <a class="ilink" onclick="go('monnaies')">Larmes</a> + Dofus Original</li><li>Rare → Mythique : 15 <a class="ilink" onclick="go('monnaies')">Larmes</a> + Dofus Rare</li></ul>`},
-  {cat:'dofus',q:"Où dropper les Dofus ?",a:`<p>Chaque Dofus est droppable à <strong>0.1%</strong> sur son boss attitré. Consultez la <a class="ilink" onclick="go('drops')">page Drops Rares</a> (onglet Dofus) — survolez pour lire les stats.</p>`},
+  {cat:'dofus',q:"Comment améliorer mes Dofus ?",a:`<p>À l'<strong>Atelier de Bonta</strong> : brisez chez <strong>Gislain Scythe</strong> → <a class="ilink" onclick="go('monnaies')">Larmes Éthérées</a> → upgradez chez <strong>Thalyion</strong>. Voir la <a class="ilink" onclick="go('recettes')">page Recettes</a>.</p>`},
+  {cat:'dofus',q:"Où dropper les Dofus ?",a:`<p>Chaque Dofus est droppable à <strong>0.1%</strong> sur son boss attitré. Consultez la <a class="ilink" onclick="go('drops')">page Drops Rares</a> (onglet Dofus).</p>`},
+  {cat:'dofus',q:"C'est quoi le Doternel ?",a:`<p>Le <strong>Doternel</strong> est un Dofus légendaire fusionné chez <strong>Thalyion</strong> à partir d'une <strong>Carte de Boss</strong> de chaque boss de donjon. Il offre <strong>+20%</strong> en Vitalité, Force, Agilité, Chance, Intelligence et Sagesse.</p><div class="faq-tip">💡 Les Cartes de Boss droppent à 1% sur tous les boss de donjon.</div>`},
   {cat:'songe',q:"Comment accéder au Songe Infini ?",a:`<p>Touche <strong>T</strong> → PNJ <strong>L'Ultime Défi</strong>. Tous les détails sur la page <a class="ilink" onclick="go('songe')">Songe Infini</a>.</p><div class="faq-warn">⚠ Niveau <strong>100 minimum</strong> recommandé.</div>`},
-  {cat:'songe',q:"Quelles sont les récompenses ?",a:`<ul><li><a class="ilink" onclick="go('monnaies')">Reflets Oniriques</a> à chaque étage (échangeables chez le PNJ <strong>Malice</strong>)</li><li>Palier de <a class="ilink" onclick="go('maitrise')">Maîtrise</a> tous les 5 étages vaincus</li><li><strong>+2%</strong> Force/Chance/Agilité/Intel tous les 5 étages</li></ul>`},
-  {cat:'songe',q:"Y a-t-il une limite d'étages ?",a:`<p><strong>Non.</strong> Le <a class="ilink" onclick="go('songe')">Songe Infini</a> n'a pas de limite — la difficulté augmente à l'infini.</p>`},
-  {cat:'capture',q:"C'est quoi les BowfBalls ?",a:`<p>Les BowfBalls sont des objets permettant de <strong>capturer des monstres en combat</strong>. Il en existe 5 types avec des taux de capture distincts. Voir la <a class="ilink" onclick="go('capture')">page Capture</a> pour les détails.</p>`},
-  {cat:'capture',q:"Où obtenir des BowfBalls ?",a:`<ul><li><strong>Poké Ball, Super Ball, Hyper Ball</strong> : 10% sur tous les <strong>boss de donjon</strong></li><li><strong>Master Ball</strong> et <strong>Honor Ball</strong> : obtention spécifique (renseignez-vous sur le Discord)</li></ul>`},
-  {cat:'capture',q:"Combien de BowfBalls puis-je équiper ?",a:`<p>Jusqu'à <strong>3 BowfBalls simultanément</strong> dans les slots dédiés de l'inventaire. Il est impossible d'équiper deux fois la même.</p>`},
-  {cat:'capture',q:"Les monstres capturés utilisent-ils mes invocations ?",a:`<p><strong>Non.</strong> Les invocations issues des BowfBalls sont <strong>indépendantes</strong> de votre total d'invocations habituel — elles ne le consomment pas.</p>`},
-  {cat:'capture',q:"Peut-on capturer un boss ?",a:`<p>Oui, mais uniquement avec l'<strong>Honor Ball</strong> (50% de capture sur boss). Les autres BowfBalls (Poké, Super, Hyper, Master) ne fonctionnent que <strong>hors boss</strong>.</p>`},
+  {cat:'songe',q:"Quelles sont les récompenses ?",a:`<ul><li><a class="ilink" onclick="go('monnaies')">Reflets Oniriques</a> à chaque étage</li><li>Palier de <a class="ilink" onclick="go('maitrise')">Maîtrise</a> tous les 5 étages vaincus</li><li><strong>+2%</strong> Force/Chance/Agilité/Intel tous les 5 étages</li></ul>`},
+  {cat:'capture',q:"C'est quoi les BowfBalls ?",a:`<p>Les BowfBalls sont des objets permettant de <strong>capturer des monstres en combat</strong>. Il en existe 5 types avec des taux de capture distincts. Voir la <a class="ilink" onclick="go('capture')">page Capture</a>.</p>`},
+  {cat:'capture',q:"Où obtenir des BowfBalls ?",a:`<ul><li><strong>Poké, Super, Hyper Ball</strong> : 10% sur tous les boss de donjon</li><li><strong>Master Ball</strong> : achat chez le Prêtre (Zaap Astrub) pour <strong>3 200 000 Kamas</strong></li><li><strong>Honor Ball</strong> : via l'<a class="ilink" onclick="go('alignement')">Alignement</a> — 1 ball par grade atteint</li></ul>`},
+  {cat:'capture',q:"Les monstres capturés utilisent-ils mes invocations ?",a:`<p><strong>Non.</strong> Les invocations issues des BowfBalls sont <strong>indépendantes</strong> de votre total d'invocations habituel.</p>`},
+  {cat:'alignement',q:"Comment choisir son alignement ?",a:`<p>Tapez <span class="cmd">.bonta</span>, <span class="cmd">.brak</span> ou <span class="cmd">.mercenaire</span> en jeu pour rejoindre votre camp. Voir la <a class="ilink" onclick="go('alignement')">page Alignement</a>.</p>`},
+  {cat:'alignement',q:"Comment obtenir des Honor Balls ?",a:`<p>À chaque grade d'alignement atteint, vous recevez un nombre d'<strong>Honor Balls</strong> égal à votre numéro de grade. Par exemple, atteindre le grade 5 vous donne <strong>5 Honor Balls</strong>.</p><div class="faq-tip">💡 Montez vos grades en accumulant des points d'honneur en tuant des monstres et des boss.</div>`},
+  {cat:'alignement',q:"L'Honor Ball peut-elle capturer un boss ?",a:`<p><strong>Oui</strong>, l'Honor Ball est la <strong>seule BowfBall capable de capturer un boss</strong>, avec un taux de <strong>50%</strong>. Les autres balls ne fonctionnent que sur les monstres normaux.</p>`},
 ];
 let faqCat='all',faqQ='';
 function buildFaqCats(){document.getElementById('faqCats').innerHTML=FAQ_CATS.map(c=>`<button class="faq-cat-btn${c.id==='all'?' active':''}" onclick="setFaqCat('${c.id}',this)"><span>${c.icon}</span>${c.label}</button>`).join('');}
@@ -987,8 +1360,8 @@ function filterFaq(){faqQ=document.getElementById('faqSearch').value.toLowerCase
 function renderFaq(){
   const c=document.getElementById('faqContainer');
   const f=FAQ.filter(x=>(faqCat==='all'||x.cat===faqCat)&&(!faqQ||x.q.toLowerCase().includes(faqQ)||x.a.toLowerCase().includes(faqQ)));
-  const TL={depart:'Débuter',stuff:'Équipement',sertis:'Sertissage',sorts:'Sorts',monnaie:'Monnaies',ombre:'Mode Ombre',maitrise:'Maîtrise',dofus:'Dofus',songe:'Songe Infini',capture:'Capture'};
-  const TI={depart:'🚀',stuff:'⚙',sertis:'💎',sorts:'📦',monnaie:'💰',ombre:'💀',maitrise:'👑',dofus:'💧',songe:'🌀',capture:'🎯'};
+  const TL={depart:'Débuter',stuff:'Équipement',sertis:'Sertissage',sorts:'Sorts',monnaie:'Monnaies',ombre:'Mode Ombre',maitrise:'Maîtrise',dofus:'Dofus',songe:'Songe Infini',capture:'Capture',alignement:'Alignement'};
+  const TI={depart:'🚀',stuff:'⚙',sertis:'💎',sorts:'📦',monnaie:'💰',ombre:'💀',maitrise:'👑',dofus:'💧',songe:'🌀',capture:'🎯',alignement:'⚖'};
   if(!f.length){c.innerHTML=`<div class="faq-empty"><div style="font-size:2rem;opacity:.3;margin-bottom:8px">🔍</div>Aucune question trouvée.</div>`;return;}
   if(faqCat==='all'&&!faqQ){
     const g={};f.forEach(x=>{if(!g[x.cat])g[x.cat]=[];g[x.cat].push(x);});
@@ -1000,7 +1373,7 @@ function faqHtml(f,uid,TL){return`<div class="faq-item" id="faq-${uid}"><div cla
 
 /* ══ DROPS ══ */
 const DROPS=[
-  {cat:'carte',item:'Carte de Boss',boss:'Tout les boss',rate:'1%',stats:[]},
+  {cat:'carte',item:'Carte de Boss',boss:'Tout les boss',rate:'1%',stats:['Utilisée chez Thalyion pour forger le Doternel','Collectez une carte par boss de donjon différent','Chaque boss de donjon a sa propre carte']},
   {cat:'dofus',item:'Kalyptus',boss:'Malléfisk',rate:'0.1%',stats:['56 à 90 prospection']},
   {cat:'dofus',item:'Dofus Émeraude (Rare)',boss:'Royalmouth',rate:'0.1%',stats:['200 vitalité','A la fin de tour, confère 100% du niveau du lanceur en points de bouclier pour chaque ennemie au contact.(Invocation exclu)']},
   {cat:'dofus',item:'Dom de Pin',boss:'Korriandre',rate:'0.1%',stats:['3 invocations','55 prospection','20 Retrait PA/PM']},
@@ -1044,16 +1417,16 @@ const DROPS=[
   {cat:'multi',item:'Fléau des puissants',boss:'Gourlo le Terrible',rate:'0.5%',stats:['25 puissance','5% force/intel/chance/agi']},
   {cat:'multi',item:'Force de la simplicité',boss:'Chêne Mou',rate:'0.5%',stats:['60 puissance','10% force/intel/chance/agi']},
   {cat:'multi',item:'Taeguk',boss:'Nileza',rate:'0.5%',stats:['85 puissance','15% force/intel/chance/agi']},
-  {cat:'gemme',item:'Ombrine Parfaite',boss:'Tout boss de donjon',rate:'2%',stats:['Gemme Horadrique','Sertissage : 26% à 50% de la Force de l\'item','Nécessite un objet boosté Tavernier','La statistique Force doit déjà exister sur l\'objet']},
-  {cat:'gemme',item:'Émeraude Parfaite',boss:'Tout boss de donjon',rate:'2%',stats:['Gemme Horadrique','Sertissage : 26% à 50% de l\'Agilité de l\'item','Nécessite un objet boosté Tavernier','La statistique Agilité doit déjà exister sur l\'objet']},
-  {cat:'gemme',item:'Saphir Parfait',boss:'Tout boss de donjon',rate:'2%',stats:['Gemme Horadrique','Sertissage : 26% à 50% de la Chance de l\'item','Nécessite un objet boosté Tavernier','La statistique Chance doit déjà exister sur l\'objet']},
-  {cat:'gemme',item:'Rubis Parfait',boss:'Tout boss de donjon',rate:'2%',stats:['Gemme Horadrique','Sertissage : 26% à 50% de l\'Intelligence de l\'item','Nécessite un objet boosté Tavernier','La statistique Intelligence doit déjà exister sur l\'objet']},
-  {cat:'etincelle',item:'Étincelle Sublimée',boss:'Archimonstres niv. 50+',rate:'2%',stats:['Double les effets de la Gemme Horadrique appliquée','10% de chance que le bonus soit triplé à la place','Utilisée en complément lors du sertissage (slot 3)']},
-  {cat:'ball',item:'Poké Ball',boss:'Tout boss de donjon',rate:'10%',stats:['BowfBall — Système de capture','25% de chance de capture (Hors Boss uniquement)','Équipable dans les slots BowfBall de l\'inventaire']},
-  {cat:'ball',item:'Super Ball',boss:'Tout boss de donjon',rate:'10%',stats:['BowfBall — Système de capture','50% de chance de capture (Hors Boss uniquement)','Équipable dans les slots BowfBall de l\'inventaire']},
-  {cat:'ball',item:'Hyper Ball',boss:'Tout boss de donjon',rate:'10%',stats:['BowfBall — Système de capture','75% de chance de capture (Hors Boss uniquement)','Équipable dans les slots BowfBall de l\'inventaire']},
-  {cat:'ball',item:'Master Ball',boss:'Obtention spécifique',rate:'—',stats:['BowfBall — Système de capture','100% de chance de capture (Hors Boss uniquement)','Équipable dans les slots BowfBall de l\'inventaire']},
-  {cat:'ball',item:'Honor Ball',boss:'Obtention spécifique',rate:'—',stats:['BowfBall — Système de capture','50% de chance de capture (Boss uniquement)','Équipable dans les slots BowfBall de l\'inventaire']},
+  {cat:'gemme',item:'Ombrine Parfaite',boss:'Tout boss de donjon',rate:'2%',stats:["Gemme Horadrique — Stat : Force","Sertissage : 26% à 50% de la Force de l'item","Nécessite un objet boosté Tavernier","La statistique Force doit déjà exister sur l'objet"]},
+  {cat:'gemme',item:'Émeraude Parfaite',boss:'Tout boss de donjon',rate:'2%',stats:["Gemme Horadrique — Stat : Agilité","Sertissage : 26% à 50% de l'Agilité de l'item","Nécessite un objet boosté Tavernier","La statistique Agilité doit déjà exister sur l'objet"]},
+  {cat:'gemme',item:'Saphir Parfait',boss:'Tout boss de donjon',rate:'2%',stats:["Gemme Horadrique — Stat : Chance","Sertissage : 26% à 50% de la Chance de l'item","Nécessite un objet boosté Tavernier","La statistique Chance doit déjà exister sur l'objet"]},
+  {cat:'gemme',item:'Rubis Parfait',boss:'Tout boss de donjon',rate:'2%',stats:["Gemme Horadrique — Stat : Intelligence","Sertissage : 26% à 50% de l'Intelligence de l'item","Nécessite un objet boosté Tavernier","La statistique Intelligence doit déjà exister sur l'objet"]},
+  {cat:'etincelle',item:'Étincelle Sublimée',boss:'Archimonstres niv. 50+',rate:'2%',stats:['Double les effets de la Gemme Horadrique appliquée','10% de chance que le bonus soit triplé à la place','Fusionnez-en 5 chez le Tavernier → Étincelle Sublimée Parfaite (triple garanti)']},
+  {cat:'ball',item:'Poké Ball',boss:'Tout boss de donjon',rate:'10%',stats:['BowfBall — 25% de capture (Hors Boss uniquement)','Équipable dans les slots BowfBall de l\'inventaire']},
+  {cat:'ball',item:'Super Ball',boss:'Tout boss de donjon',rate:'10%',stats:['BowfBall — 50% de capture (Hors Boss uniquement)','Équipable dans les slots BowfBall de l\'inventaire']},
+  {cat:'ball',item:'Hyper Ball',boss:'Tout boss de donjon',rate:'10%',stats:['BowfBall — 75% de capture (Hors Boss uniquement)','Équipable dans les slots BowfBall de l\'inventaire']},
+  {cat:'ball',item:'Master Ball',boss:'Prêtre — Zaap Astrub',rate:'3 200 000 Kamas',stats:['BowfBall — 100% de capture (Hors Boss uniquement)','Achat chez le Prêtre au Zaap d\'Astrub']},
+  {cat:'ball',item:'Honor Ball',boss:'Via Alignement',rate:'Grade requis',stats:['BowfBall — 50% de capture (Boss uniquement)','Obtenue via le système d\'Alignement','1 Honor Ball par grade atteint']},
 ];
 const CL={carte:'Carte',dofus:'Dofus',terre:'Artefact Terre',feu:'Artefact Feu',eau:'Artefact Eau',air:'Artefact Air',multi:'Artefact Multi',gemme:'Gemme',etincelle:'Étincelle',ball:'BowfBall'};
 const CC={carte:'elem-carte',dofus:'elem-dofus',terre:'elem-terre',feu:'elem-feu',eau:'elem-eau',air:'elem-air',multi:'elem-multi',gemme:'elem-gemme',etincelle:'elem-etincelle',ball:'elem-ball'};
@@ -1070,17 +1443,38 @@ function renderDrops(){
   document.getElementById('cnt-all').textContent=DROPS.length;
   if(!f.length){tb.innerHTML='';nr.style.display='block';return;}
   nr.style.display='none';
-  tb.innerHTML=f.map(d=>{const ht=d.cat!=='carte';return`<tr class="${ht?'has-tooltip':''}" data-i="${DROPS.indexOf(d)}"><td class="item-name">${d.item}</td><td><span class="elem-badge ${CC[d.cat]}">${CL[d.cat]}</span></td><td class="boss-name">${d.boss}</td><td class="rate">${d.rate}</td></tr>`;}).join('');
+  tb.innerHTML=f.map(d=>`<tr class="has-tooltip" data-i="${DROPS.indexOf(d)}"><td class="item-name">${d.item}</td><td><span class="elem-badge ${CC[d.cat]}">${CL[d.cat]}</span></td><td class="boss-name">${d.boss}</td><td class="rate">${d.rate}</td></tr>`).join('');
   tb.querySelectorAll('tr.has-tooltip').forEach(r=>{const d=DROPS[+r.dataset.i];r.addEventListener('mouseenter',e=>showDrop(e,d));r.addEventListener('mouseleave',hideTooltip);});
 }
 function filterDrops(){renderDrops();}
 function setDropTab(t,b){curDropTab=t;document.querySelectorAll('#dropTabs .tab-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderDrops();}
+
+/* ══ RECETTES tooltip Doternel ══ */
+document.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('tr[data-tt-title]').forEach(r=>{
+    const title=r.dataset.ttTitle;
+    const stats=JSON.parse(r.dataset.ttStats||'[]');
+    r.addEventListener('mouseenter',e=>{
+      dTitle.textContent=title;
+      dBody.innerHTML=stats.map(s=>`<div class="tt-stat">${s}</div>`).join('');
+      dTip.classList.add('visible');moveDrop(e);
+    });
+    r.addEventListener('mouseleave',hideTooltip);
+  });
+});
 
 /* ══ MAÎTRISE ══ */
 const MAITRISE={dps:[{lvl:20,bonus:'5% Stats All (hors Sag/Vit)',cumul:['5% Stats All (hors Sag/Vit)']},{lvl:40,bonus:'10 Dommages',cumul:['5% Stats All (hors Sag/Vit)','10 Dommages']},{lvl:60,bonus:'5% Coups Critiques',cumul:['5% Stats All (hors Sag/Vit)','10 Dommages','5% Coups Critiques']},{lvl:80,bonus:'100 Puissance',cumul:['5% Stats All (hors Sag/Vit)','10 Dommages','5% Coups Critiques','100 Puissance']},{lvl:100,bonus:'10% Dommages Finaux',cumul:['5% Stats All (hors Sag/Vit)','10 Dommages','5% Coups Critiques','100 Puissance','10% Dommages Finaux']},{lvl:120,bonus:'+10% Stats All (hors Sag/Vit)',cumul:['15% Stats All (hors Sag/Vit)','10 Dommages','5% Coups Critiques','100 Puissance','10% Dommages Finaux']},{lvl:140,bonus:'20 Dommages',cumul:['15% Stats All (hors Sag/Vit)','30 Dommages','5% Coups Critiques','100 Puissance','10% Dommages Finaux']},{lvl:160,bonus:'10% Coups Critiques',cumul:['15% Stats All (hors Sag/Vit)','30 Dommages','15% Coups Critiques','100 Puissance','10% Dommages Finaux']},{lvl:180,bonus:'200 Puissance',cumul:['15% Stats All (hors Sag/Vit)','30 Dommages','15% Coups Critiques','300 Puissance','10% Dommages Finaux']},{lvl:200,bonus:'25% Stats All (hors Sag/Vit)',cumul:['40% Stats All (hors Sag/Vit)','30 Dommages','15% Coups Critiques','300 Puissance','10% Dommages Finaux']},{lvl:201,bonus:'5% Do Mêlée/Distance/Sorts',cumul:['40% Stats All (hors Sag/Vit)','30 Dommages','15% Coups Critiques','300 Puissance','10% Dommages Finaux','5% Do Mêlée/Distance/Sorts'],highlight:true}],soutien:[{lvl:20,bonus:'5% Stats All (hors Sag/Vit)',cumul:['5% Stats All (hors Sag/Vit)']},{lvl:40,bonus:'1 Invocation',cumul:['5% Stats All (hors Sag/Vit)','1 Invocation']},{lvl:60,bonus:'10 Soin',cumul:['5% Stats All (hors Sag/Vit)','1 Invocation','10 Soin']},{lvl:80,bonus:'100 Prospection',cumul:['5% Stats All (hors Sag/Vit)','1 Invocation','10 Soin','100 Prospection']},{lvl:100,bonus:'10% Sort',cumul:['5% Stats All (hors Sag/Vit)','1 Invocation','10 Soin','100 Prospection','10% Sort']},{lvl:120,bonus:'+10% Stats All (hors Sag/Vit)',cumul:['15% Stats All (hors Sag/Vit)','1 Invocation','10 Soin','100 Prospection','10% Sort']},{lvl:140,bonus:'2 Invocations',cumul:['15% Stats All (hors Sag/Vit)','3 Invocations','10 Soin','100 Prospection','10% Sort']},{lvl:160,bonus:'20 Soin',cumul:['15% Stats All (hors Sag/Vit)','3 Invocations','30 Soin','100 Prospection','10% Sort']},{lvl:180,bonus:'200 Prospection',cumul:['15% Stats All (hors Sag/Vit)','3 Invocations','30 Soin','300 Prospection','10% Sort']},{lvl:200,bonus:'15% Stats All (hors Sag/Vit)',cumul:['30% Stats All (hors Sag/Vit)','3 Invocations','30 Soin','300 Prospection','10% Sort']},{lvl:201,bonus:'5% Do Mêlée/Distance/Sorts',cumul:['30% Stats All (hors Sag/Vit)','3 Invocations','30 Soin','300 Prospection','10% Sort','5% Do Mêlée/Distance/Sorts'],highlight:true}],tank:[{lvl:20,bonus:'5% Stats All (hors Sag/Vit)',cumul:['5% Stats All (hors Sag/Vit)']},{lvl:40,bonus:'100 PV',cumul:['5% Stats All (hors Sag/Vit)','100 PV']},{lvl:60,bonus:'15 Résistances Fixes',cumul:['5% Stats All (hors Sag/Vit)','100 PV','15 Résistances Fixes']},{lvl:80,bonus:'100 Renvoie de Dommage',cumul:['5% Stats All (hors Sag/Vit)','100 PV','15 Résistances Fixes','100 Renvoie de Dommage']},{lvl:100,bonus:'10% Rés. Mêlée/Distance',cumul:['5% Stats All (hors Sag/Vit)','100 PV','15 Résistances Fixes','100 Renvoie de Dommage','10% Rés. Mêlée/Distance']},{lvl:120,bonus:'+10% Stats All (hors Sag/Vit)',cumul:['15% Stats All (hors Sag/Vit)','100 PV','15 Résistances Fixes','100 Renvoie de Dommage','10% Rés. Mêlée/Distance']},{lvl:140,bonus:'200 PV',cumul:['15% Stats All (hors Sag/Vit)','300 PV','15 Résistances Fixes','100 Renvoie de Dommage','10% Rés. Mêlée/Distance']},{lvl:160,bonus:'30 Résistances Fixes',cumul:['15% Stats All (hors Sag/Vit)','300 PV','45 Résistances Fixes','100 Renvoie de Dommage','10% Rés. Mêlée/Distance']},{lvl:180,bonus:'200 Renvoie de Dommage',cumul:['15% Stats All (hors Sag/Vit)','300 PV','45 Résistances Fixes','300 Renvoie de Dommage','10% Rés. Mêlée/Distance']},{lvl:200,bonus:'20% Vitalité',cumul:['15% Stats All (hors Sag/Vit)','300 PV','45 Résistances Fixes','300 Renvoie de Dommage','10% Rés. Mêlée/Distance','20% Vitalité']},{lvl:201,bonus:'5% Do Mêlée/Distance/Sorts',cumul:['15% Stats All (hors Sag/Vit)','300 PV','45 Résistances Fixes','300 Renvoie de Dommage','10% Rés. Mêlée/Distance','20% Vitalité','5% Do Mêlée/Distance/Sorts'],highlight:true}]};
 let curMtype='dps';
 function renderMaitrise(){const d=MAITRISE[curMtype];document.getElementById('maitriseGrid').innerHTML=d.map(p=>{const h=p.highlight?'highlight':'',s=p.highlight?'<span class="mc-star">★</span>':'';return`<div class="maitrise-card ${h}"><div class="mc-header"><span class="mc-lvl">Niveau ${p.lvl}</span>${s}</div><div class="mc-bonus-label">Bonus du palier</div><div class="mc-bonus-val">${p.bonus}</div><div class="mc-cumul-label">Total cumulé</div><ul class="mc-cumul-list">${p.cumul.map(c=>`<li>${c}</li>`).join('')}</ul></div>`;}).join('');}
 function setMaitriseType(t,b){curMtype=t;document.querySelectorAll('#maitriseTabBar .tab-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderMaitrise();}
+
+/* ══ ALIGNEMENT — table des grades ══ */
+function renderGrades(){
+  const nb=20;let cumul=0;
+  const tb=document.getElementById('gradeTableBody');
+  tb.innerHTML=Array.from({length:nb},(_,i)=>{const g=i+1;cumul+=g;return`<tr><td><span class="grade-num">Grade ${g}</span></td><td><span class="honor-balls">+${g} Honor Ball${g>1?'s':''}</span></td><td style="color:var(--text-muted)">${cumul} ball${cumul>1?'s':''} au total</td></tr>`;}).join('');
+}
 
 /* ══ NAVIGATION ══ */
 function go(id){
@@ -1094,11 +1488,34 @@ function go(id){
   if(id==='drops')renderDrops();
   if(id==='maitrise')renderMaitrise();
   if(id==='faq'){buildFaqCats();renderFaq();}
+  if(id==='alignement')renderGrades();
+  if(id==='recettes'){
+    // Attach Doternel tooltip after render
+    setTimeout(()=>{
+      document.querySelectorAll('tr[data-tt-title]').forEach(r=>{
+        if(r._ttBound)return;r._ttBound=true;
+        const title=r.dataset.ttTitle;
+        const stats=JSON.parse(r.dataset.ttStats||'[]');
+        r.addEventListener('mouseenter',e=>{dTitle.textContent=title;dBody.innerHTML=stats.map(s=>`<div class="tt-stat">${s}</div>`).join('');dTip.classList.add('visible');moveDrop(e);});
+        r.addEventListener('mouseleave',hideTooltip);
+      });
+    },50);
+  }
 }
 
 /* Init */
-renderDrops();renderMaitrise();buildFaqCats();renderFaq();
-['accueil','tuto','songe','sorts','stuff','monnaies','dofus','capture'].forEach(buildToc);
+renderDrops();renderMaitrise();buildFaqCats();renderFaq();renderGrades();
+['accueil','tuto','songe','sorts','stuff','monnaies','dofus','capture','recettes','alignement'].forEach(buildToc);
+// Init Doternel tooltip
+setTimeout(()=>{
+  document.querySelectorAll('tr[data-tt-title]').forEach(r=>{
+    if(r._ttBound)return;r._ttBound=true;
+    const title=r.dataset.ttTitle;
+    const stats=JSON.parse(r.dataset.ttStats||'[]');
+    r.addEventListener('mouseenter',e=>{dTitle.textContent=title;dBody.innerHTML=stats.map(s=>`<div class="tt-stat">${s}</div>`).join('');dTip.classList.add('visible');moveDrop(e);});
+    r.addEventListener('mouseleave',hideTooltip);
+  });
+},100);
 </script>
 </body>
 </html>
