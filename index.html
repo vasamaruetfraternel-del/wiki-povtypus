@@ -944,6 +944,7 @@ tr.has-tooltip{cursor:help}
   </div>
   <div class="toc-wrap" id="toc-songe"></div>
   <div class="alert alert-info">Pour accéder au Songe Infini, appuyez sur <b>T</b> puis parlez au PNJ <b>L'Ultime Défi</b>.</div>
+
   <div class="card" id="s-songe-1" data-s="Avant de se lancer">
     <div class="card-title"><span class="ct-icon">💡</span>Détails importants</div>
     <div class="alert alert-warning"><b>Niveau 100 minimum recommandé.</b></div>
@@ -952,17 +953,41 @@ tr.has-tooltip{cursor:help}
       <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Tous les 5 étages vaincus, votre <a class="ilink" onclick="go('maitrise')">Maîtrise</a> sera améliorée.</li>
       <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Pas de limite d'étage — la difficulté augmente progressivement.</li>
       <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Le <a class="ilink" onclick="go('ombre')">mode Ombre</a> est inactif ici — pas de perte en cas de défaite ou d'abandon.</li>
+      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span><b>3 groupes sont générés sur la carte</b> — faites votre propre choix de combat !</li>
     </ul>
   </div>
-  <div class="card" id="s-songe-2" data-s="Génération des monstres">
+
+  <div class="card" id="s-songe-2" data-s="Sélection du boss">
+    <div class="card-title"><span class="ct-icon">👑</span>Sélection du boss</div>
+    <p style="color:var(--text-muted);font-size:.9rem;margin-bottom:14px">Le boss est sélectionné en premier, dans une fourchette de niveaux autour du joueur :</p>
+    <div class="grid">
+      <div class="mini-card gold-accent">
+        <div class="mini-card-label">Joueur niveau ≤ 189</div>
+        <div class="mini-card-value">Fourchette de <b>60 niveaux</b> autour du joueur<br><span style="color:var(--text-muted);font-size:.8rem">( −30 jusqu'à +30 )</span></div>
+      </div>
+      <div class="mini-card gold-accent">
+        <div class="mini-card-label">Joueur niveau ≥ 190</div>
+        <div class="mini-card-value">Fourchette de <b>80 niveaux</b> autour du joueur<br><span style="color:var(--text-muted);font-size:.8rem">( −50 jusqu'à +30 )</span></div>
+      </div>
+    </div>
+    <div class="alert alert-info" style="margin-top:14px">
+      <b>Exemples :</b><br>
+      Joueur <b>niveau 150</b> → boss entre <b>120 et 180</b><br>
+      Joueur <b>niveau 200</b> → boss entre <b>150 et 230</b>
+    </div>
+  </div>
+
+  <div class="card" id="s-songe-3" data-s="Génération des monstres">
     <div class="card-title"><span class="ct-icon">⚙</span>Comment sont générés les monstres ?</div>
     <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:8px">
-      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>5 monstres par combat (toujours un boss parmi eux), accessible jusqu'à 8 joueurs.</li>
-      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Un malus de stats de <b>15%</b> est appliqué au monstre par palier de 20 niveaux d'écart en sa faveur, plafonné à <b>90%</b> pour 120 niveaux ou plus.</li>
-      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Les stats du monstre sont ensuite multipliées par un facteur lié à l'étage.</li>
+      <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>Les monstres accompagnant le boss sont <b>maximum 20 niveaux en dessous</b> et <b>maximum 10 niveaux au-dessus</b> du boss.</li>
       <li style="padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--gold)">◆</span>La génération est aléatoire à chaque tentative — retentez si le groupe est trop difficile.</li>
     </ul>
+    <div class="alert alert-gold" style="margin-top:14px">
+      <b>Exemple :</b> Boss <b>Kimbo niveau 160</b> → les monstres qui l'accompagnent sont entre <b>niveau 140 et 170</b>
+    </div>
   </div>
+
   <div class="related-bar"><div class="related-lbl">Voir aussi</div><div class="related-links">
     <div class="rel-link" onclick="go('maitrise')">👑 Maîtrise</div>
     <div class="rel-link" onclick="go('monnaies')">💰 Monnaies</div>
