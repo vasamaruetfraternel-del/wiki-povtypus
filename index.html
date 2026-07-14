@@ -286,7 +286,7 @@ tr.has-tooltip{cursor:help}
 .grade-table tr:hover td{background:rgba(212,160,23,0.08)}
 .grade-num{color:#f59e0b;font-weight:700}
 .honor-balls{color:#c084fc;font-weight:700}
-@media(max-width:900px){.logo-sub{display:none}.nav-item span:not(.nav-icon){display:none}.nav-item{padding:0 12px}.main{padding:24px 20px}}
+@media(max-width:900px){.logo-sub{display:none}.nav-item{padding:0 12px}.main{padding:24px 20px}}
 @media(max-width:640px){.grid,.passive-grid,.maitrise-grid{grid-template-columns:1fr 1fr}.main{padding:18px 12px}.page-header h1{font-size:1.3rem}.logo-title{font-size:.9rem}.toc-wrap{display:none!important}}
 </style>
 </head>
@@ -1127,7 +1127,17 @@ tr.has-tooltip{cursor:help}
 
 </main>
 
-<script>/**
+<script>
+window.onerror=function(msg,url,line,col,err){
+  try{
+    var d=document.createElement('div');
+    d.style.cssText='position:fixed;top:0;left:0;right:0;background:#c0392b;color:#fff;z-index:999999;padding:10px;font-size:12px;font-family:monospace;white-space:pre-wrap;text-align:left';
+    d.textContent='JS ERROR: '+msg+'  (line '+line+', col '+col+')';
+    document.body.insertBefore(d,document.body.firstChild);
+  }catch(e2){}
+  return false;
+};
+/**
  * core-js 3.49.0
  * © 2013–2025 Denis Pushkarev (zloirock.ru), 2025–2026 CoreJS Company (core-js.io). All rights reserved.
  * license: https://github.com/zloirock/core-js/blob/v3.49.0/LICENSE
